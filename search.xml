@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[SpringBoot配置https访问]]></title>
+    <url>%2F2019%2F07%2F12%2FSpringBoot%E9%85%8D%E7%BD%AEhttps%E8%AE%BF%E9%97%AE%2F</url>
+    <content type="text"><![CDATA[获取ssl证书方式： 通过keytool生成 通过证书授权机构购买 https相关配置1234567server: port: 8443 httpport: 8080 ssl: key-store: classpath:keystore.p12 key-password: 123456 key-store-password: 123456 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152package com.linjian.https;import org.apache.catalina.Context;import org.apache.catalina.connector.Connector;import org.apache.tomcat.util.descriptor.web.SecurityCollection;import org.apache.tomcat.util.descriptor.web.SecurityConstraint;import org.springframework.beans.factory.annotation.Value;import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;import org.springframework.boot.web.servlet.server.ServletWebServerFactory;import org.springframework.context.annotation.Bean;@SpringBootApplicationpublic class HttpsApplication &#123; @Value("$&#123;server.port&#125;") Integer httpsPort; @Value("$&#123;server.httpport&#125;") Integer httpPort; public static void main(String[] args) &#123; SpringApplication.run(HttpsApplication.class, args); &#125; @Bean public ServletWebServerFactory servletContainer() &#123; TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() &#123; @Override protected void postProcessContext(Context context) &#123; SecurityConstraint securityConstraint = new SecurityConstraint(); securityConstraint.setUserConstraint("CONFIDENTIAL"); SecurityCollection collection = new SecurityCollection(); collection.addPattern("/*"); securityConstraint.addCollection(collection); context.addConstraint(securityConstraint); &#125; &#125;; tomcat.addAdditionalTomcatConnectors(initiateHttpConnector()); return tomcat; &#125; private Connector initiateHttpConnector() &#123; Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol"); connector.setScheme("http"); connector.setPort(httpPort); connector.setSecure(false); connector.setRedirectPort(httpsPort); return connector; &#125;&#125; pom.xml 12345&lt;dependency&gt; &lt;groupId&gt;org.apache.tomcat.embed&lt;/groupId&gt; &lt;artifactId&gt;tomcat-embed-core&lt;/artifactId&gt; &lt;version&gt;9.0.19&lt;/version&gt;&lt;/dependency&gt;]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[瑞士旅行准备]]></title>
+    <url>%2F2019%2F07%2F11%2F%E7%91%9E%E5%A3%AB%E6%97%85%E8%A1%8C%E5%87%86%E5%A4%87%2F</url>
+    <content type="text"><![CDATA[雨伞 高倍数防晒霜 转换插头 通讯（WIFI/电话卡） 牙膏/牙刷/毛巾 登山鞋/冲锋衣/登山杖]]></content>
+      <categories>
+        <category>Travel</category>
+      </categories>
+      <tags>
+        <tag>Travel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Idea中sonar插件使用]]></title>
     <url>%2F2019%2F07%2F10%2FIdea%E4%B8%ADsonar%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8%2F</url>
     <content type="text"><![CDATA[安装在Idea Plugins中搜索sonar 选择SonarLint进行install 配置 配置General Settings 添加SonarQube Servers，输入URL，User,Password这些 配置Project Settings 绑定server，它会提醒你要update binding在general settings中 选中在sonar服务上已经存在的project，事实上本地的一切代码都能在Issues窗口预览到规则下的改动]]></content>
@@ -60,10 +82,10 @@
     <url>%2F2019%2F06%2F16%2F%E7%AD%BE%E8%AF%81%E5%87%86%E5%A4%87%2F</url>
     <content type="text"><![CDATA[[x] 签证申请表复印件 [x] 护照（原件和复印件） [x] 2寸免冠近照（2张） [x] 医疗保险（原件和复印件） [x] 往返机票（复印件） [x] 住宿证明（复印件） [ ] 详细的行程单（复印件） [ ] 近3个月银行卡流水 [x] 户口本（复印件） [x] 工作单位证明 [x] 公司营业执照盖章（复印件） http://www.vfsglobal.ch/switzerland/china/ KMSW3230503404]]></content>
       <categories>
-        <category>Other</category>
+        <category>Travel</category>
       </categories>
       <tags>
-        <tag>Other</tag>
+        <tag>Travel</tag>
       </tags>
   </entry>
   <entry>
@@ -1147,8 +1169,11 @@
     <url>%2F2019%2F05%2F20%2F%E9%80%89%E6%8B%A9%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E5%8D%8F%E8%AE%AE%2F</url>
     <content type="text"><![CDATA[选择一个开源软件协议http://choosealicense.online/]]></content>
       <categories>
-        <category>Other</category>
+        <category>Travel</category>
       </categories>
+      <tags>
+        <tag>Travel</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Git把本地代码推送到远程仓库]]></title>
