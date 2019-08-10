@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Jlin&#39;Blog">
 <meta property="og:description" content="每次从博客分享文章给别人都很苦恼，Hexo 默认生成的链接太长了，而且一旦文章名字改变，链接也跟着改变。有没有什么方法让地址尽量短小精悍，同时永久化呢？ 感谢 rozbo/hexo-abbrlink，完美解决此痛点。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-10T04:00:03.460Z">
+<meta property="og:updated_time" content="2019-08-10T10:18:08.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo短地址">
 <meta name="twitter:description" content="每次从博客分享文章给别人都很苦恼，Hexo 默认生成的链接太长了，而且一旦文章名字改变，链接也跟着改变。有没有什么方法让地址尽量短小精悍，同时永久化呢？ 感谢 rozbo/hexo-abbrlink，完美解决此痛点。">
@@ -432,7 +432,7 @@
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在博客主目录下执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
 <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>在  <code>_config.yml</code>  配置文件写入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># abbrlink config</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc16 #support crc16(default) and crc32</span><br><span class="line">  rep: hex    #support dec(default) and hex</span><br><span class="line"></span><br><span class="line"># 更改 permalink 值</span><br><span class="line">permalink: p/:abbrlink.html</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># abbrlink config</span><br><span class="line">abbrlink:</span><br><span class="line">  alg: crc16 #support crc16(default) and crc32</span><br><span class="line">  rep: hex    #support dec(default) and hex</span><br><span class="line"></span><br><span class="line"># 更改 permalink 值</span><br><span class="line">permalink: posts/:abbrlink.html</span><br></pre></td></tr></table></figure>
 
       
     </div>
