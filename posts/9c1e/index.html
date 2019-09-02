@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="Maven3.X 里支持了多线程编译, 分析项目的依赖关系图, 并行构建各个模块: 123mvn -T 4 clean install      #指定起4个线程编译   mvn -T 1C clean install     #每个CPU核心起1个线程mvn -T 1.5C clean install     #每个CPU核心起1.5个线程">
+<meta name="description" content="Maven3.X 里支持了多线程编译, 分析项目的依赖关系图, 并行构建各个模块: 12345mvn -T 4 clean install      #指定起4个线程编译   mvn -T 1C clean install     #每个CPU核心起1个线程mvn -T 1.5C clean install     #每个CPU核心起1.5个线程mvn clean package -T 1C -D">
 <meta name="keywords" content="Idea,Maven">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Idea 中Maven 多线程编译">
 <meta property="og:url" content="http://yoursite.com/posts/9c1e/index.html">
 <meta property="og:site_name" content="Jlin&#39;Blog">
-<meta property="og:description" content="Maven3.X 里支持了多线程编译, 分析项目的依赖关系图, 并行构建各个模块: 123mvn -T 4 clean install      #指定起4个线程编译   mvn -T 1C clean install     #每个CPU核心起1个线程mvn -T 1.5C clean install     #每个CPU核心起1.5个线程">
+<meta property="og:description" content="Maven3.X 里支持了多线程编译, 分析项目的依赖关系图, 并行构建各个模块: 12345mvn -T 4 clean install      #指定起4个线程编译   mvn -T 1C clean install     #每个CPU核心起1个线程mvn -T 1.5C clean install     #每个CPU核心起1.5个线程mvn clean package -T 1C -D">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/07/24/5d381a4d47ec370686.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/07/24/5d381c3a9702624222.jpg">
-<meta property="og:updated_time" content="2019-08-10T03:53:53.390Z">
+<meta property="og:updated_time" content="2019-09-02T07:37:34.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Idea 中Maven 多线程编译">
-<meta name="twitter:description" content="Maven3.X 里支持了多线程编译, 分析项目的依赖关系图, 并行构建各个模块: 123mvn -T 4 clean install      #指定起4个线程编译   mvn -T 1C clean install     #每个CPU核心起1个线程mvn -T 1.5C clean install     #每个CPU核心起1.5个线程">
+<meta name="twitter:description" content="Maven3.X 里支持了多线程编译, 分析项目的依赖关系图, 并行构建各个模块: 12345mvn -T 4 clean install      #指定起4个线程编译   mvn -T 1C clean install     #每个CPU核心起1个线程mvn -T 1.5C clean install     #每个CPU核心起1.5个线程mvn clean package -T 1C -D">
 <meta name="twitter:image" content="https://i.loli.net/2019/07/24/5d381a4d47ec370686.jpg">
 
 
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  257 字
+                  269 字
                 </span>
               
 
@@ -430,7 +430,7 @@
 
       
         <p>Maven3.X 里支持了<a href="https://cwiki.apache.org/confluence/display/MAVEN/Parallel+builds+in+Maven+3" target="_blank" rel="noopener">多线程编译</a>, 分析项目的依赖关系图, 并行构建各个模块:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn -T 4 clean install      <span class="comment">#指定起4个线程编译   </span></span><br><span class="line">mvn -T 1C clean install     <span class="comment">#每个CPU核心起1个线程</span></span><br><span class="line">mvn -T 1.5C clean install     <span class="comment">#每个CPU核心起1.5个线程</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mvn -T 4 clean install      <span class="comment">#指定起4个线程编译   </span></span><br><span class="line">mvn -T 1C clean install     <span class="comment">#每个CPU核心起1个线程</span></span><br><span class="line">mvn -T 1.5C clean install     <span class="comment">#每个CPU核心起1.5个线程</span></span><br><span class="line"></span><br><span class="line">mvn clean package -T 1C -Dmaven.test.skip=<span class="literal">true</span>  -Dmaven.compile.fork=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h3 id="到底能提升多少编译的速度"><a href="#到底能提升多少编译的速度" class="headerlink" title="到底能提升多少编译的速度:"></a>到底能提升多少编译的速度:</h3><p>这很大程度上取决于项目的具体模块结构, 但官方的说法是: 速度能普遍提高20 - 50 %.</p>
 <h3 id="那么如何在IDEA里开启这个功能"><a href="#那么如何在IDEA里开启这个功能" class="headerlink" title="那么如何在IDEA里开启这个功能:"></a>那么如何在IDEA里开启这个功能:</h3><p><img src="https://i.loli.net/2019/07/24/5d381a4d47ec370686.jpg" alt="5d381a4d47ec370686"></p>

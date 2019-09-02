@@ -2091,7 +2091,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  257 字
+                  269 字
                 </span>
               
 
@@ -2130,7 +2130,7 @@
       
         
           <p>Maven3.X 里支持了<a href="https://cwiki.apache.org/confluence/display/MAVEN/Parallel+builds+in+Maven+3" target="_blank" rel="noopener">多线程编译</a>, 分析项目的依赖关系图, 并行构建各个模块:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn -T 4 clean install      <span class="comment">#指定起4个线程编译   </span></span><br><span class="line">mvn -T 1C clean install     <span class="comment">#每个CPU核心起1个线程</span></span><br><span class="line">mvn -T 1.5C clean install     <span class="comment">#每个CPU核心起1.5个线程</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mvn -T 4 clean install      <span class="comment">#指定起4个线程编译   </span></span><br><span class="line">mvn -T 1C clean install     <span class="comment">#每个CPU核心起1个线程</span></span><br><span class="line">mvn -T 1.5C clean install     <span class="comment">#每个CPU核心起1.5个线程</span></span><br><span class="line"></span><br><span class="line">mvn clean package -T 1C -Dmaven.test.skip=<span class="literal">true</span>  -Dmaven.compile.fork=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/posts/9c1e/#more" rel="contents">
