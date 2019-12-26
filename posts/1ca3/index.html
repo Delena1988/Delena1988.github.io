@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="需求每天凌晨一点执行一次脚本 1.systemd.timer定时器可以放在/usr/lib/systemd/system目录下，方便管理。 mytimer.service123456[Unit]Description=备份tomcat前一天的log[Service]Type=simpleExecStart=/root/sliceCatalina.sh mytimer.timer123456789[">
+<meta name="description" content="需求每天凌晨一点执行一次脚本">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux定时任务">
 <meta property="og:url" content="http://yoursite.com/posts/1ca3/index.html">
 <meta property="og:site_name" content="Jlin&#39;Blog">
-<meta property="og:description" content="需求每天凌晨一点执行一次脚本 1.systemd.timer定时器可以放在/usr/lib/systemd/system目录下，方便管理。 mytimer.service123456[Unit]Description=备份tomcat前一天的log[Service]Type=simpleExecStart=/root/sliceCatalina.sh mytimer.timer123456789[">
+<meta property="og:description" content="需求每天凌晨一点执行一次脚本">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-26T08:17:10.452Z">
+<meta property="og:updated_time" content="2019-12-26T08:47:07.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux定时任务">
-<meta name="twitter:description" content="需求每天凌晨一点执行一次脚本 1.systemd.timer定时器可以放在/usr/lib/systemd/system目录下，方便管理。 mytimer.service123456[Unit]Description=备份tomcat前一天的log[Service]Type=simpleExecStart=/root/sliceCatalina.sh mytimer.timer123456789[">
+<meta name="twitter:description" content="需求每天凌晨一点执行一次脚本">
 
 
 
@@ -427,6 +427,7 @@
 
       
         <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>每天凌晨一点执行一次脚本</p>
+<a id="more"></a>
 <h1 id="1-systemd-timer"><a href="#1-systemd-timer" class="headerlink" title="1.systemd.timer"></a>1.systemd.timer</h1><p>定时器可以放在/usr/lib/systemd/system目录下，方便管理。</p>
 <h3 id="mytimer-service"><a href="#mytimer-service" class="headerlink" title="mytimer.service"></a>mytimer.service</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=备份tomcat前一天的<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/root/sliceCatalina.sh</span><br></pre></td></tr></table></figure>
 <h3 id="mytimer-timer"><a href="#mytimer-timer" class="headerlink" title="mytimer.timer"></a>mytimer.timer</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=每天凌晨一点备份tomcat前一天的<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line">[Timer]</span><br><span class="line">OnCalendar=*-*-* 01:00:00</span><br><span class="line">Unit=mytimer.service</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
