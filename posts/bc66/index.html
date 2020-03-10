@@ -88,7 +88,8 @@
 <meta property="og:description" content="Linux是目前应用最广泛的服务器操作系统，基于Unix，开源免费，由于系统的稳定性和安全性，市场占有率很高，几乎成为程序代码运行的最佳系统环境。linux不仅可以长时间的运行我们编写的程序代码，还可以安装在各种计算机硬件设备中，如手机、路由器等，Android程序最底层就是运行在linux系统上的。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/08/06/hvmxfG1MIVnRwDH.png">
-<meta property="og:updated_time" content="2019-08-10T03:53:53.710Z">
+<meta property="og:image" content="https://i.loli.net/2020/03/10/CYoXLiqPJG8cfjd.png">
+<meta property="og:updated_time" content="2020-03-10T02:16:01.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
 <meta name="twitter:description" content="Linux是目前应用最广泛的服务器操作系统，基于Unix，开源免费，由于系统的稳定性和安全性，市场占有率很高，几乎成为程序代码运行的最佳系统环境。linux不仅可以长时间的运行我们编写的程序代码，还可以安装在各种计算机硬件设备中，如手机、路由器等，Android程序最底层就是运行在linux系统上的。">
@@ -391,7 +392,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.4k 字
+                  2.6k 字
                 </span>
               
 
@@ -407,7 +408,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9 分钟
+                  10 分钟
                 </span>
               
             </div>
@@ -978,6 +979,11 @@
 </tr>
 </tbody>
 </table>
+<h1 id="查看物理内存大小"><a href="#查看物理内存大小" class="headerlink" title="查看物理内存大小"></a>查看物理内存大小</h1><p>这是因为free 命令看到的内存为可供kernel分配的物理内存，非全部物理内存，系统启动后，物理内存会保留一部分给BIOS，linux内核本身也要占用一部分，所以进行系统后可供分配的物理内存就少了一点</p>
+<p>想看到全部物理内存可以用dmidecode命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmidecode -t memory | grep Size: | grep -v <span class="string">"No Module Installed"</span></span><br></pre></td></tr></table></figure>
+<p>通过这个命令，不但能得到服务器总的内存大小，还可以知道服务器上具体插了几个内存条以及每条内存的大小，很好用</p>
+<p><img src="https://i.loli.net/2020/03/10/CYoXLiqPJG8cfjd.png" alt="image.png"></p>
 <h1 id="vim编辑器"><a href="#vim编辑器" class="headerlink" title="vim编辑器"></a>vim编辑器</h1><p>vi / vim是Linux上最常用的文本编辑器而且功能非常强大。</p>
 <h3 id="修改文本"><a href="#修改文本" class="headerlink" title="修改文本"></a>修改文本</h3><table>
 <thead>
@@ -1252,7 +1258,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">207</span>
+                  <span class="site-state-item-count">217</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1263,7 +1269,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1319,7 +1325,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux的目录结构"><span class="nav-number">1.</span> <span class="nav-text">linux的目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux常用命令"><span class="nav-number">2.</span> <span class="nav-text">linux常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作文件及目录"><span class="nav-number">2.0.1.</span> <span class="nav-text">操作文件及目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统常用命令"><span class="nav-number">2.0.2.</span> <span class="nav-text">系统常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压缩解压缩"><span class="nav-number">2.0.3.</span> <span class="nav-text">压缩解压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SCP"><span class="nav-number">2.0.4.</span> <span class="nav-text">SCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件权限操作"><span class="nav-number">2.0.5.</span> <span class="nav-text">文件权限操作</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#linux系统常用快捷键及符号命令"><span class="nav-number">3.</span> <span class="nav-text">linux系统常用快捷键及符号命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vim编辑器"><span class="nav-number">4.</span> <span class="nav-text">vim编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改文本"><span class="nav-number">4.0.1.</span> <span class="nav-text">修改文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定位命令"><span class="nav-number">4.0.2.</span> <span class="nav-text">定位命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换和取消命令"><span class="nav-number">4.0.3.</span> <span class="nav-text">替换和取消命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除命令"><span class="nav-number">4.0.4.</span> <span class="nav-text">删除命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用快捷键"><span class="nav-number">4.0.5.</span> <span class="nav-text">常用快捷键</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux的目录结构"><span class="nav-number">1.</span> <span class="nav-text">linux的目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux常用命令"><span class="nav-number">2.</span> <span class="nav-text">linux常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作文件及目录"><span class="nav-number">2.0.1.</span> <span class="nav-text">操作文件及目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统常用命令"><span class="nav-number">2.0.2.</span> <span class="nav-text">系统常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压缩解压缩"><span class="nav-number">2.0.3.</span> <span class="nav-text">压缩解压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SCP"><span class="nav-number">2.0.4.</span> <span class="nav-text">SCP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件权限操作"><span class="nav-number">2.0.5.</span> <span class="nav-text">文件权限操作</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#linux系统常用快捷键及符号命令"><span class="nav-number">3.</span> <span class="nav-text">linux系统常用快捷键及符号命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看物理内存大小"><span class="nav-number">4.</span> <span class="nav-text">查看物理内存大小</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vim编辑器"><span class="nav-number">5.</span> <span class="nav-text">vim编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改文本"><span class="nav-number">5.0.1.</span> <span class="nav-text">修改文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定位命令"><span class="nav-number">5.0.2.</span> <span class="nav-text">定位命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换和取消命令"><span class="nav-number">5.0.3.</span> <span class="nav-text">替换和取消命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除命令"><span class="nav-number">5.0.4.</span> <span class="nav-text">删除命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用快捷键"><span class="nav-number">5.0.5.</span> <span class="nav-text">常用快捷键</span></a></li></ol></li></div>
             
 
           </div>

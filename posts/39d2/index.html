@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="Jlin&#39;Blog">
 <meta property="og:description" content="查看版本1select @@version">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-08T06:32:57.285Z">
+<meta property="og:image" content="https://i.loli.net/2020/03/10/91LMwijZVtx4zdS.png">
+<meta property="og:updated_time" content="2020-03-10T02:54:17.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql常用命令">
 <meta name="twitter:description" content="查看版本1select @@version">
+<meta name="twitter:image" content="https://i.loli.net/2020/03/10/91LMwijZVtx4zdS.png">
 
 
 
@@ -389,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  45 字
+                  274 字
                 </span>
               
 
@@ -426,11 +428,27 @@
       
 
       
-        <h3 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @@<span class="keyword">version</span></span><br></pre></td></tr></table></figure>
+        <h1 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @@<span class="keyword">version</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="查看所有自定义函数"><a href="#查看所有自定义函数" class="headerlink" title="查看所有自定义函数"></a>查看所有自定义函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">function</span> <span class="keyword">status</span></span><br></pre></td></tr></table></figure>
-<h3 id="查看所有自定义存储过程"><a href="#查看所有自定义存储过程" class="headerlink" title="查看所有自定义存储过程"></a>查看所有自定义存储过程</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">procedure</span> <span class="keyword">status</span></span><br></pre></td></tr></table></figure>
-<h3 id="显示用户正在运行的线程"><a href="#显示用户正在运行的线程" class="headerlink" title="显示用户正在运行的线程"></a>显示用户正在运行的线程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show processlist</span><br></pre></td></tr></table></figure>
+<h1 id="查看所有自定义函数"><a href="#查看所有自定义函数" class="headerlink" title="查看所有自定义函数"></a>查看所有自定义函数</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">function</span> <span class="keyword">status</span></span><br></pre></td></tr></table></figure>
+<h1 id="查看所有自定义存储过程"><a href="#查看所有自定义存储过程" class="headerlink" title="查看所有自定义存储过程"></a>查看所有自定义存储过程</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">procedure</span> <span class="keyword">status</span></span><br></pre></td></tr></table></figure>
+<h1 id="显示用户正在运行的线程"><a href="#显示用户正在运行的线程" class="headerlink" title="显示用户正在运行的线程"></a>显示用户正在运行的线程</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">processlist</span></span><br></pre></td></tr></table></figure>
+<h1 id="查询数据库当前设置的最大连接数"><a href="#查询数据库当前设置的最大连接数" class="headerlink" title="查询数据库当前设置的最大连接数"></a>查询数据库当前设置的最大连接数</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'%max_connection%'</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="查看最大连接数"><a href="#查看最大连接数" class="headerlink" title="查看最大连接数"></a>查看最大连接数</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'Thread%'</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/03/10/91LMwijZVtx4zdS.png" alt="image.png"></p>
+<ul>
+<li><p>Threads_cached ：代表当前此时此刻线程缓存中有多少空闲线程。</p>
+</li>
+<li><p>Threads_connected ：代表当前已建立连接的数量，因为一个连接就需要一个线程，所以也可以看成当前被使用的线程数。</p>
+</li>
+<li><p>Threads_created ：代表从最近一次服务启动，已创建线程的数量。</p>
+</li>
+<li><p>Threads_running ：代表当前激活的（非睡眠状态）线程数。并不是代表正在使用的线程数，有时候连接已建立，但是连接处于sleep状态，这里相对应的线程也是sleep状态。</p>
+</li>
+</ul>
+<h1 id="查询最大连接数"><a href="#查询最大连接数" class="headerlink" title="查询最大连接数"></a>查询最大连接数</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'max_connections'</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="查询响应的连接数"><a href="#查询响应的连接数" class="headerlink" title="查询响应的连接数"></a>查询响应的连接数</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看响应的连接数：max_used_connections / max_connections * 100% （理想值≈ 85%）</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">global</span> <span class="keyword">status</span> <span class="keyword">like</span> <span class="string">'max_used_connections'</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="查询客户端连接线程缓存数"><a href="#查询客户端连接线程缓存数" class="headerlink" title="查询客户端连接线程缓存数"></a>查询客户端连接线程缓存数</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'thread_cache_size'</span>;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -550,7 +568,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">207</span>
+                  <span class="site-state-item-count">217</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -561,7 +579,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -617,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看版本"><span class="nav-number">1.</span> <span class="nav-text">查看版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看所有自定义函数"><span class="nav-number">2.</span> <span class="nav-text">查看所有自定义函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看所有自定义存储过程"><span class="nav-number">3.</span> <span class="nav-text">查看所有自定义存储过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示用户正在运行的线程"><span class="nav-number">4.</span> <span class="nav-text">显示用户正在运行的线程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#查看版本"><span class="nav-number">1.</span> <span class="nav-text">查看版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看所有自定义函数"><span class="nav-number">2.</span> <span class="nav-text">查看所有自定义函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看所有自定义存储过程"><span class="nav-number">3.</span> <span class="nav-text">查看所有自定义存储过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#显示用户正在运行的线程"><span class="nav-number">4.</span> <span class="nav-text">显示用户正在运行的线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询数据库当前设置的最大连接数"><span class="nav-number">5.</span> <span class="nav-text">查询数据库当前设置的最大连接数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看最大连接数"><span class="nav-number">6.</span> <span class="nav-text">查看最大连接数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询最大连接数"><span class="nav-number">7.</span> <span class="nav-text">查询最大连接数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询响应的连接数"><span class="nav-number">8.</span> <span class="nav-text">查询响应的连接数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询客户端连接线程缓存数"><span class="nav-number">9.</span> <span class="nav-text">查询客户端连接线程缓存数</span></a></li></ol></div>
             
 
           </div>

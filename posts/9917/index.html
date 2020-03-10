@@ -88,7 +88,7 @@
 <meta property="og:description" content="MySQL 从 5.0 开始自带了定时事件操作。 后台周期定时任务可以有多种解决方案，我所知道的大概有以下几种： (1). 后台框架自带定时任务。比如  Php  中的  Laravel  框架里有提供定时任务操作接口，其他的框架大家可以单独针对了解。 (2). 服务器操作系统层面的定时。通常我们的服务器主要基于两大平台，一个  Windows Server, 它的定时任务系统有提供的。Linux">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/08/06/NWewOr8ABKJTxRk.png">
-<meta property="og:updated_time" content="2019-08-10T03:53:53.450Z">
+<meta property="og:updated_time" content="2020-03-10T02:16:34.479Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql定时任务">
 <meta name="twitter:description" content="MySQL 从 5.0 开始自带了定时事件操作。 后台周期定时任务可以有多种解决方案，我所知道的大概有以下几种： (1). 后台框架自带定时任务。比如  Php  中的  Laravel  框架里有提供定时任务操作接口，其他的框架大家可以单独针对了解。 (2). 服务器操作系统层面的定时。通常我们的服务器主要基于两大平台，一个  Windows Server, 它的定时任务系统有提供的。Linux">
@@ -456,7 +456,7 @@
 <p>单位有：<strong>second, minute, hour, day, week(周), quarter(季度), month, year</strong>，如：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">on schedule every 1 second        //每秒执行1次</span><br><span class="line">on schedule every 2 minute        //每两分钟执行1次</span><br><span class="line">on schedule every 3 day            //每3天执行1次</span><br></pre></td></tr></table></figure>
 <p><strong>② 在具体某个时间执行 – 关键字 AT</strong>, 如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">on schedule at current_timestamp()+interval 5 day	// 5天后执行</span><br><span class="line">on schedule at current_timestamp()+interval 10 minute	// 10分钟后执行</span><br><span class="line">on schedule at '2016-10-01 21:50:00'		// 在2016年10月1日，晚上9点50执行</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">on schedule at current_timestamp()+interval 5 day    // 5天后执行</span><br><span class="line">on schedule at current_timestamp()+interval 10 minute    // 10分钟后执行</span><br><span class="line">on schedule at '2016-10-01 21:50:00'        // 在2016年10月1日，晚上9点50执行</span><br></pre></td></tr></table></figure>
 <p><strong>③ 在某个时间段执行 – 关键字 STARTS ENDS</strong>, 如：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">on schedule every 1 day starts current_timestamp()+interval 5 day ends current_timestamp()+interval 1 month // 5天后开始每天都执行执行到下个月底</span><br><span class="line">on schedule every 1 day ends current_timestamp()+interval 5 day //从现在起每天执行，执行5天</span><br></pre></td></tr></table></figure>
 
@@ -578,7 +578,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">207</span>
+                  <span class="site-state-item-count">217</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -589,7 +589,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
