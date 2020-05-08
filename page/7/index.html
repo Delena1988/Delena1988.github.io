@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/c44c/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/41c4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -313,7 +313,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/c44c/" itemprop="url">接口任务</a></h1>
+                <a class="post-title-link" href="/posts/41c4/" itemprop="url">MongoDB常用查询</a></h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-09T09:26:52+08:00">
-                2019-09-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-08T10:27:19+08:00">
+                2019-11-08
               </time>
             
 
@@ -348,8 +348,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jh/" itemprop="url" rel="index">
-                    <span itemprop="name">Jh</span>
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
                   </a>
                 </span>
 
@@ -365,7 +365,7 @@
 
           
           
-             <span id="/posts/c44c/" class="leancloud_visitors" data-flag-title="接口任务">
+             <span id="/posts/41c4/" class="leancloud_visitors" data-flag-title="MongoDB常用查询">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,7 +390,201 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  789 字
+                  87 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h1><p>mongoDB 支持正则表达式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.products.find( &#123; sku: &#123; <span class="variable">$regex</span>: /789$/ &#125; &#125; )</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> sku <span class="keyword">like</span> <span class="string">"%789"</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="variable">$sort</span>: &#123; &lt;field1&gt;: &lt;sort order&gt;, &lt;field2&gt;: &lt;sort order&gt; ... &#125; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>1</code> to specify ascending order. 顺序</li>
+<li><code>-1</code> to specify descending order. 倒序</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.aggregate(</span><br><span class="line">   [</span><br><span class="line">     &#123; <span class="variable">$sort</span> : &#123; age : -1, posts: 1 &#125; &#125;</span><br><span class="line">   ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h1 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.COLLECTION_NAME.find().<span class="built_in">limit</span>(NUMBER).skip()</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/ffc1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/ffc1/" itemprop="url">MongoDB Operators</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T20:47:39+08:00">
+                2019-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/ffc1/" class="leancloud_visitors" data-flag-title="MongoDB Operators">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  623 字
                 </span>
               
 
@@ -429,430 +623,239 @@
       
         
           
-            <h1 id="接口任务"><a href="#接口任务" class="headerlink" title="接口任务"></a>接口任务</h1><table>
+            <h1 id="Comparison-Query-Operators"><a href="#Comparison-Query-Operators" class="headerlink" title="Comparison Query Operators"></a>Comparison Query Operators</h1><table>
 <thead>
 <tr>
-<th>医院</th>
-<th>时间</th>
-<th>负责人</th>
-<th>备注</th>
+<th>Name</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>汕头大学医学院第一附属医院</td>
-<td>2019.9</td>
-<td>徐贤</td>
-<td>MQ</td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/eq/#op._S_eq" title="$eq" target="_blank" rel="noopener"><code>$eq</code></a></td>
+<td>Matches values that are equal to a specified value.</td>
 </tr>
 <tr>
-<td>余杭妇幼</td>
-<td>2019.9</td>
-<td>张成汉</td>
-<td>view</td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/gt/#op._S_gt" title="$gt" target="_blank" rel="noopener"><code>$gt</code></a></td>
+<td>Matches values that are greater than a specified value.</td>
 </tr>
 <tr>
-<td>如皋博爱</td>
-<td>2019.9</td>
-<td>张成汉</td>
-<td>view</td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/gte/#op._S_gte" title="$gte" target="_blank" rel="noopener"><code>$gte</code></a></td>
+<td>Matches values that are greater than or equal to a specified value.</td>
 </tr>
 <tr>
-<td>舟山妇幼</td>
-<td>2019.9</td>
-<td>张成汉</td>
-<td>http 微信接口</td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/in/#op._S_in" title="$in" target="_blank" rel="noopener"><code>$in</code></a></td>
+<td>Matches any of the values specified in an array.</td>
 </tr>
 <tr>
-<td>平阳人民医院</td>
-<td>2019.9</td>
-<td>徐贤</td>
-<td>webservice 预约挂号</td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/lt/#op._S_lt" title="$lt" target="_blank" rel="noopener"><code>$lt</code></a></td>
+<td>Matches values that are less than a specified value.</td>
 </tr>
 <tr>
-<td>重庆医科大学附属永川医院</td>
-<td>2019.10</td>
-<td>张成汉</td>
-<td>webservice</td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/lte/#op._S_lte" title="$lte" target="_blank" rel="noopener"><code>$lte</code></a></td>
+<td>Matches values that are less than or equal to a specified value.</td>
 </tr>
 <tr>
-<td>邵逸夫</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>webservice</td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/ne/#op._S_ne" title="$ne" target="_blank" rel="noopener"><code>$ne</code></a></td>
+<td>Matches all values that are not equal to a specified value.</td>
 </tr>
 <tr>
-<td>中山六院</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>高血压患者管理接口</td>
-</tr>
-<tr>
-<td>淄博妇幼门诊自助</td>
-<td>2019.10</td>
-<td>张成汉</td>
-<td>MQ</td>
-</tr>
-<tr>
-<td>安徽医科大学第一附属医院</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>MQ</td>
-</tr>
-<tr>
-<td>舟山市妇幼保健院</td>
-<td>2019.10</td>
-<td>张成汉</td>
-<td>webservice 预约挂号</td>
-</tr>
-<tr>
-<td>重庆市长寿区人民医院</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>视图，微信（http）</td>
-</tr>
-<tr>
-<td>鄞州人民医院</td>
-<td>2019.10</td>
-<td>张成汉</td>
-<td>webservice</td>
-</tr>
-<tr>
-<td>新附一</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>MQ（短信切换）</td>
-</tr>
-<tr>
-<td>锦欣医疗集团</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>http（短信切换）</td>
-</tr>
-<tr>
-<td>江苏省人民医院</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>view（表单自动填充）</td>
-</tr>
-<tr>
-<td>绍兴二院</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>view</td>
-</tr>
-<tr>
-<td>重庆市第十三人民医院</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>view<br>检查、检验、处方<br>医嘱、手术、诊断</td>
-</tr>
-<tr>
-<td>重庆医科大学附属永川医院</td>
-<td>2019.10</td>
-<td>张成汉</td>
-<td>webservice<br>微信</td>
-</tr>
-<tr>
-<td>福建省立医院</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>http<br>住院记录加字段</td>
-</tr>
-<tr>
-<td>东莞市第八人民医院</td>
-<td>2019.10</td>
-<td>张成汉</td>
-<td>MQ<br>基础接口</td>
-</tr>
-<tr>
-<td>江苏省人民医院</td>
-<td>2019.10</td>
-<td>徐贤</td>
-<td>hl7</td>
-</tr>
-<tr>
-<td>海南现代妇女儿童医院</td>
-<td>2019.10</td>
-<td>张成汉</td>
-<td>view</td>
-</tr>
-<tr>
-<td>如皋博爱</td>
-<td>2019.10</td>
-<td>张成汉</td>
-<td>患者管理</td>
-</tr>
-<tr>
-<td>三明市第一医院</td>
-<td>2019.10</td>
-<td></td>
-<td>基础接口</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/nin/#op._S_nin" title="$nin" target="_blank" rel="noopener"><code>$nin</code></a></td>
+<td>Matches none of the values specified in an array.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="2019-9"><a href="#2019-9" class="headerlink" title="2019.9"></a>2019.9</h3><table>
+<h1 id="Logical-Query-Operators"><a href="#Logical-Query-Operators" class="headerlink" title="Logical Query Operators"></a>Logical Query Operators</h1><table>
 <thead>
 <tr>
-<th>医院</th>
-<th>接口方式</th>
-<th>负责人</th>
-<th>接口数</th>
-<th>已完成</th>
-<th></th>
+<th>Name</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>汕头大学医学院第一附属医院</td>
-<td>MQ</td>
-<td>徐贤</td>
-<td>14</td>
-<td>6（10）</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/and/#op._S_and" title="$and" target="_blank" rel="noopener"><code>$and</code></a></td>
+<td>Joins query clauses with a logical <code>AND</code> returns all documents that match the conditions of both clauses.</td>
 </tr>
 <tr>
-<td>余杭妇幼</td>
-<td>视图</td>
-<td>张成汉</td>
-<td>8</td>
-<td>8</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/not/#op._S_not" title="$not" target="_blank" rel="noopener"><code>$not</code></a></td>
+<td>Inverts the effect of a query expression and returns documents that do <em>not</em> match the query expression.</td>
 </tr>
 <tr>
-<td>如皋博爱</td>
-<td>视图</td>
-<td>张成汉</td>
-<td>15</td>
-<td>15</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/nor/#op._S_nor" title="$nor" target="_blank" rel="noopener"><code>$nor</code></a></td>
+<td>Joins query clauses with a logical <code>NOR</code> returns all documents that fail to match both clauses.</td>
 </tr>
 <tr>
-<td>舟山妇幼（微信）</td>
-<td>http</td>
-<td>张成汉</td>
-<td>1</td>
-<td>1</td>
-<td></td>
-</tr>
-<tr>
-<td>郑州金水区总医院</td>
-<td>webservice</td>
-<td>张成汉</td>
-<td>10</td>
-<td>10</td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/or/#op._S_or" title="$or" target="_blank" rel="noopener"><code>$or</code></a></td>
+<td>Joins query clauses with a logical <code>OR</code> returns all documents that match the conditions of either clause.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="2019-10"><a href="#2019-10" class="headerlink" title="2019.10"></a>2019.10</h3><table>
+<h1 id="Element-Query-Operators"><a href="#Element-Query-Operators" class="headerlink" title="Element Query Operators"></a>Element Query Operators</h1><table>
 <thead>
 <tr>
-<th>医院</th>
-<th>接口方式</th>
-<th>负责人</th>
-<th>接口数</th>
-<th>已完成</th>
-<th></th>
+<th>Name</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>重庆医科大学附属永川医院</td>
-<td>webservice</td>
-<td>张成汉</td>
-<td>11</td>
-<td>10</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/exists/#op._S_exists" title="$exists" target="_blank" rel="noopener"><code>$exists</code></a></td>
+<td>Matches documents that have the specified field.</td>
 </tr>
 <tr>
-<td>邵逸夫</td>
-<td>webservice</td>
-<td>徐贤</td>
-<td>12</td>
-<td>12</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/type/#op._S_type" title="$type" target="_blank" rel="noopener"><code>$type</code></a></td>
+<td>Selects documents if a field is of the specified type.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Evaluation-Query-Operators"><a href="#Evaluation-Query-Operators" class="headerlink" title="Evaluation Query Operators"></a>Evaluation Query Operators</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/expr/#op._S_expr" title="$expr" target="_blank" rel="noopener"><code>$expr</code></a></td>
+<td>Allows use of aggregation expressions within the query language.</td>
 </tr>
 <tr>
-<td>中山六院</td>
-<td>患者管理</td>
-<td>徐贤</td>
-<td>2</td>
-<td>2</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/jsonSchema/#op._S_jsonSchema" title="$jsonSchema" target="_blank" rel="noopener"><code>$jsonSchema</code></a></td>
+<td>Validate documents against the given JSON Schema.</td>
 </tr>
 <tr>
-<td>淄博妇幼门诊自助（慢病）</td>
-<td>MQ</td>
-<td>张成汉</td>
-<td>2</td>
-<td>2</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/mod/#op._S_mod" title="$mod" target="_blank" rel="noopener"><code>$mod</code></a></td>
+<td>Performs a modulo operation on the value of a field and selects documents with a specified result.</td>
 </tr>
 <tr>
-<td>安徽医科大学第一附属医院</td>
-<td>MQ</td>
-<td>徐贤</td>
-<td>14</td>
-<td>11</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex" title="$regex" target="_blank" rel="noopener"><code>$regex</code></a></td>
+<td>Selects documents where values match a specified regular expression.</td>
 </tr>
 <tr>
-<td>舟山市妇幼保健院</td>
-<td>webservice</td>
-<td>张成汉</td>
-<td>5</td>
-<td></td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/text/#op._S_text" title="$text" target="_blank" rel="noopener"><code>$text</code></a></td>
+<td>Performs text search.</td>
 </tr>
 <tr>
-<td>平阳人民医院</td>
-<td>webservice</td>
-<td>徐贤</td>
-<td>6</td>
-<td>6</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/where/#op._S_where" title="$where" target="_blank" rel="noopener"><code>$where</code></a></td>
+<td>Matches documents that satisfy a JavaScript expression.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Geospatial-Query-Operators"><a href="#Geospatial-Query-Operators" class="headerlink" title="Geospatial Query Operators"></a>Geospatial Query Operators</h1><h3 id="Query-Selectors"><a href="#Query-Selectors" class="headerlink" title="Query Selectors"></a>Query Selectors</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/geoIntersects/#op._S_geoIntersects" title="$geoIntersects" target="_blank" rel="noopener"><code>$geoIntersects</code></a></td>
+<td>Selects geometries that intersect with a <a href="https://docs.mongodb.com/manual/reference/glossary/#term-geojson" target="_blank" rel="noopener">GeoJSON</a> geometry. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/geoIntersects/#op._S_geoIntersects" title="$geoIntersects" target="_blank" rel="noopener"><code>$geoIntersects</code></a>.</td>
 </tr>
 <tr>
-<td>重庆市长寿区人民医院（微信）</td>
-<td>http</td>
-<td>徐贤</td>
-<td>1</td>
-<td>1</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a></td>
+<td>Selects geometries within a bounding <a href="https://docs.mongodb.com/manual/reference/geojson/#geospatial-indexes-store-geojson" target="_blank" rel="noopener">GeoJSON geometry</a>. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a>.</td>
 </tr>
 <tr>
-<td>重庆市长寿区人民医院</td>
-<td>视图</td>
-<td>徐贤</td>
-<td>8</td>
-<td>7</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a></td>
+<td>Returns geospatial objects in proximity to a point. Requires a geospatial index. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a>.</td>
 </tr>
 <tr>
-<td>鄞州人民医院</td>
-<td>webservice</td>
-<td>张成汉</td>
-<td>8+10</td>
-<td>10</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a></td>
+<td>Returns geospatial objects in proximity to a point on a sphere. Requires a geospatial index. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Geometry-Specifiers"><a href="#Geometry-Specifiers" class="headerlink" title="Geometry Specifiers"></a>Geometry Specifiers</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/box/#op._S_box" title="$box" target="_blank" rel="noopener"><code>$box</code></a></td>
+<td>Specifies a rectangular box using legacy coordinate pairs for <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries. The <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/box/#op._S_box" title="$box" target="_blank" rel="noopener"><code>$box</code></a>.</td>
 </tr>
 <tr>
-<td>新附一</td>
-<td>MQ</td>
-<td>徐贤</td>
-<td>1</td>
-<td>1</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/center/#op._S_center" title="$center" target="_blank" rel="noopener"><code>$center</code></a></td>
+<td>Specifies a circle using legacy coordinate pairs to <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries when using planar geometry. The <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/center/#op._S_center" title="$center" target="_blank" rel="noopener"><code>$center</code></a>.</td>
 </tr>
 <tr>
-<td>锦欣医疗集团（短信切换）</td>
-<td>http</td>
-<td>徐贤</td>
-<td>1</td>
-<td>1</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/centerSphere/#op._S_centerSphere" title="$centerSphere" target="_blank" rel="noopener"><code>$centerSphere</code></a></td>
+<td>Specifies a circle using either legacy coordinate pairs or <a href="https://docs.mongodb.com/manual/reference/glossary/#term-geojson" target="_blank" rel="noopener">GeoJSON</a> format for <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries when using spherical geometry. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/centerSphere/#op._S_centerSphere" title="$centerSphere" target="_blank" rel="noopener"><code>$centerSphere</code></a>.</td>
 </tr>
 <tr>
-<td>江苏省人民医院</td>
-<td>view</td>
-<td>徐贤</td>
-<td>1</td>
-<td>1</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/geometry/#op._S_geometry" title="$geometry" target="_blank" rel="noopener"><code>$geometry</code></a></td>
+<td>Specifies a geometry in <a href="https://docs.mongodb.com/manual/reference/glossary/#term-geojson" target="_blank" rel="noopener">GeoJSON</a> format to geospatial query operators.</td>
 </tr>
 <tr>
-<td>绍兴二院</td>
-<td>view</td>
-<td>徐贤</td>
-<td>4</td>
-<td>4</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/maxDistance/#op._S_maxDistance" title="$maxDistance" target="_blank" rel="noopener"><code>$maxDistance</code></a></td>
+<td>Specifies a maximum distance to limit the results of <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a> and <a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a> queries. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/maxDistance/#op._S_maxDistance" title="$maxDistance" target="_blank" rel="noopener"><code>$maxDistance</code></a>.</td>
 </tr>
 <tr>
-<td>重庆市第十三人民医院</td>
-<td>view</td>
-<td>徐贤</td>
-<td>12</td>
-<td></td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/minDistance/#op._S_minDistance" title="$minDistance" target="_blank" rel="noopener"><code>$minDistance</code></a></td>
+<td>Specifies a minimum distance to limit the results of <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a> and <a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a> queries. For use with <code>2dsphere</code> index only.</td>
 </tr>
 <tr>
-<td>重庆医科大学附属永川医院</td>
-<td>webservice</td>
-<td>张成汉</td>
-<td>1</td>
-<td>1</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/polygon/#op._S_polygon" title="$polygon" target="_blank" rel="noopener"><code>$polygon</code></a></td>
+<td>Specifies a polygon to using legacy coordinate pairs for <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries. The <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/center/#op._S_center" title="$center" target="_blank" rel="noopener"><code>$center</code></a>.</td>
 </tr>
 <tr>
-<td>福建省立医院</td>
-<td>http</td>
-<td>徐贤</td>
-<td>1</td>
-<td>1</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/uniqueDocs/#op._S_uniqueDocs" title="$uniqueDocs" target="_blank" rel="noopener"><code>$uniqueDocs</code></a></td>
+<td>Deprecated. Modifies a <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> and <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a> queries to ensure that even if a document matches the query multiple times, the query returns the document once.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Array-Query-Operators"><a href="#Array-Query-Operators" class="headerlink" title="Array Query Operators"></a>Array Query Operators</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/all/#op._S_all" title="$all" target="_blank" rel="noopener"><code>$all</code></a></td>
+<td>Matches arrays that contain all elements specified in the query.</td>
 </tr>
 <tr>
-<td>东莞市第八人民医院</td>
-<td>MQ</td>
-<td>张成汉</td>
-<td>8</td>
-<td></td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/elemMatch/#op._S_elemMatch" title="$elemMatch" target="_blank" rel="noopener"><code>$elemMatch</code></a></td>
+<td>Selects documents if element in the array field matches all the specified <a href="https://docs.mongodb.com/manual/reference/operator/query/elemMatch/#op._S_elemMatch" title="$elemMatch" target="_blank" rel="noopener"><code>$elemMatch</code></a> conditions.</td>
 </tr>
 <tr>
-<td>江苏省人民医院</td>
-<td>hl7/view</td>
-<td>徐贤</td>
-<td>3</td>
-<td>3</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/size/#op._S_size" title="$size" target="_blank" rel="noopener"><code>$size</code></a></td>
+<td>Selects documents if the array field is a specified size.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Bitwise-Query-Operators"><a href="#Bitwise-Query-Operators" class="headerlink" title="Bitwise Query Operators"></a>Bitwise Query Operators</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAllClear/#op._S_bitsAllClear" title="$bitsAllClear" target="_blank" rel="noopener"><code>$bitsAllClear</code></a></td>
+<td>Matches numeric or binary values in which a set of bit positions <em>all</em> have a value of <code>0</code>.</td>
 </tr>
 <tr>
-<td>海南现代妇女儿童医院</td>
-<td>view</td>
-<td>张成汉</td>
-<td>8+1</td>
-<td>8</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAllSet/#op._S_bitsAllSet" title="$bitsAllSet" target="_blank" rel="noopener"><code>$bitsAllSet</code></a></td>
+<td>Matches numeric or binary values in which a set of bit positions <em>all</em> have a value of <code>1</code>.</td>
 </tr>
 <tr>
-<td>如皋博爱</td>
-<td>view</td>
-<td>张成汉</td>
-<td>3</td>
-<td>3</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAnyClear/#op._S_bitsAnyClear" title="$bitsAnyClear" target="_blank" rel="noopener"><code>$bitsAnyClear</code></a></td>
+<td>Matches numeric or binary values in which <em>any</em> bit from a set of bit positions has a value of <code>0</code>.</td>
 </tr>
 <tr>
-<td>三明市第一医院</td>
-<td>webservice</td>
-<td>徐贤</td>
-<td>8</td>
-<td></td>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAnySet/#op._S_bitsAnySet" title="$bitsAnySet" target="_blank" rel="noopener"><code>$bitsAnySet</code></a></td>
+<td>Matches numeric or binary values in which <em>any</em> bit from a set of bit positions has a value of <code>1</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -904,7 +907,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/5a60/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/ed60/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -923,7 +926,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/5a60/" itemprop="url">服务器</a></h1>
+                <a class="post-title-link" href="/posts/ed60/" itemprop="url">Windows Server 2016下tomcat执行缓慢</a></h1>
         
 
         <div class="post-meta">
@@ -935,8 +938,177 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-09T09:09:01+08:00">
-                2019-09-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T10:56:34+08:00">
+                2019-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/ed60/" class="leancloud_visitors" data-flag-title="Windows Server 2016下tomcat执行缓慢">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  115 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>Windows Server 2016 下以startup.bat 方式启动比在Windows Server 2012 下执行JAVA程序速度慢很多。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>将tomcat注册成为服务，到tomcat/bin路径下执行 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service.bat install tomcat7</span><br></pre></td></tr></table></figure>
+<p>在服务中启动tomcat，速度就明显上去了。</p>
+<p>环境变量：</p>
+<p><img src="https://i.loli.net/2019/11/07/7fnmdWL2ZFbMjVy.png" alt></p>
+<p>另外备注：而且点击tomcat控制台会让程序终端 中止，ctrl+c会让程序继续运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#从服务列表中移除</span></span><br><span class="line">service.bat remove tomcat7</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/828/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/828/" itemprop="url">微信对接</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-05T10:27:42+08:00">
+                2019-11-05
               </time>
             
 
@@ -975,7 +1147,7 @@
 
           
           
-             <span id="/posts/5a60/" class="leancloud_visitors" data-flag-title="服务器">
+             <span id="/posts/828/" class="leancloud_visitors" data-flag-title="微信对接">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1000,7 +1172,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  64 字
+                  42 字
                 </span>
               
 
@@ -1041,7 +1213,7 @@
           The article has been encrypted, please enter your password to view.<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/posts/5a60/#more" rel="contents">
+            <a class="btn" href="/posts/828/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1092,7 +1264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/3d69/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2623/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -1111,7 +1283,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/3d69/" itemprop="url">瑞士旅行-准备</a></h1>
+                <a class="post-title-link" href="/posts/2623/" itemprop="url">2019-11</a></h1>
         
 
         <div class="post-meta">
@@ -1123,8 +1295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T23:05:47+08:00">
-                2019-08-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-01T11:44:29+08:00">
+                2019-11-01
               </time>
             
 
@@ -1146,8 +1318,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/旅行/" itemprop="url" rel="index">
-                    <span itemprop="name">旅行</span>
+                  <a href="/categories/Daily/" itemprop="url" rel="index">
+                    <span itemprop="name">Daily</span>
                   </a>
                 </span>
 
@@ -1163,7 +1335,7 @@
 
           
           
-             <span id="/posts/3d69/" class="leancloud_visitors" data-flag-title="瑞士旅行-准备">
+             <span id="/posts/2623/" class="leancloud_visitors" data-flag-title="2019-11">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1188,7 +1360,195 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  116 字
+                  1.2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          The article has been encrypted, please enter your password to view.<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/2623/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/45a0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/45a0/" itemprop="url">Java并发Semaphore使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-01T09:47:14+08:00">
+                2019-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/45a0/" class="leancloud_visitors" data-flag-title="Java并发Semaphore使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  306 字
                 </span>
               
 
@@ -1227,12 +1587,14 @@
       
         
           
-            <h1 id="App"><a href="#App" class="headerlink" title="App"></a>App</h1><p>必备的就是Google Map和SBB的App（用于查询各种交通，火车、轮渡、缆车，全都可以搞定，一定要下载！）</p>
-<p>【Google Maps】不用多说，全世界除  中国  以外最好用的地图软件。</p>
-<p>【SBB Mobile】和【Rail Europe】可结合使用查询欧铁及 瑞士 交通信息。</p>
-<p>【Google Translate】谷歌翻译软件。酌情下载法语、英语和德语（  瑞士  三个官方语言）。</p>
-<p>【MeteoSwiss】瑞士天气预报</p>
-<p>【Booking】酒店预定</p>
+            <p>Semaphore 是 synchronized 的加强版，作用是控制线程的并发数量。</p>
+<p>示例：</p>
+<p>MyThread.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> SemaphoreService service;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyThread</span><span class="params">(String name, SemaphoreService service)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.service = service;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.service.doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SemaphoreService.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Semaphore;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SemaphoreService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SimpleDateFormat sf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss.SSS"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Semaphore semaphore = <span class="keyword">new</span> Semaphore(<span class="number">2</span>);<span class="comment">// 同步关键类，构造方法传入的数字是多少，则同一个时刻，只运行多少个进程同时运行制定代码</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 在 semaphore.acquire() 和 semaphore.release()之间的代码，同一时刻只允许制定个数的线程进入，</span></span><br><span class="line"><span class="comment">             * 因为semaphore的构造方法是1，则同一时刻只允许一个线程进入，其他线程只能等待。</span></span><br><span class="line"><span class="comment">             * */</span></span><br><span class="line">            semaphore.acquire();</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">":doSomething start-"</span> + getFormatTimeStr());</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">":doSomething end-"</span> + getFormatTimeStr());</span><br><span class="line">            semaphore.release();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getFormatTimeStr</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sf.format(<span class="keyword">new</span> Date());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SemaphoreTest.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SemaphoreTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        SemaphoreService service = <span class="keyword">new</span> SemaphoreService();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            MyThread t = <span class="keyword">new</span> MyThread(<span class="string">"thread"</span> + (i + <span class="number">1</span>), service);</span><br><span class="line">            t.start();<span class="comment">// 这里使用 t.run() 也可以运行，但是不是并发执行了</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1281,7 +1643,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2311/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/1082/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -1300,7 +1662,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/2311/" itemprop="url">瑞士旅行--Day9(2019.8.25)</a></h1>
+                <a class="post-title-link" href="/posts/1082/" itemprop="url">MySQL server has gone away</a></h1>
         
 
         <div class="post-meta">
@@ -1312,8 +1674,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T20:18:19+08:00">
-                2019-08-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-30T09:31:22+08:00">
+                2019-10-30
               </time>
             
 
@@ -1335,8 +1697,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/旅行/" itemprop="url" rel="index">
-                    <span itemprop="name">旅行</span>
+                  <a href="/categories/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
                   </a>
                 </span>
 
@@ -1352,7 +1714,7 @@
 
           
           
-             <span id="/posts/2311/" class="leancloud_visitors" data-flag-title="瑞士旅行--Day9(2019.8.25)">
+             <span id="/posts/1082/" class="leancloud_visitors" data-flag-title="MySQL server has gone away">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1377,7 +1739,196 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  29 字
+                  89 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>批量导入数据时，数据量大的话会报错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2006 - MySQL server has gone away</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/1082/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/b434/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/b434/" itemprop="url">单例模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-24T20:39:25+08:00">
+                2019-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/b434/" class="leancloud_visitors" data-flag-title="单例模式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  0 字
                 </span>
               
 
@@ -1416,18 +1967,7 @@
       
         
           
-            <h1 id="苏黎世–-gt-俄罗斯–-gt-上海"><a href="#苏黎世–-gt-俄罗斯–-gt-上海" class="headerlink" title="苏黎世–&gt;俄罗斯–&gt;上海"></a>苏黎世–&gt;俄罗斯–&gt;上海</h1><ol>
-<li><p>利马特河</p>
-</li>
-<li><p>班霍夫大街</p>
-</li>
-<li><p>苏黎世湖</p>
-</li>
-<li><p>林登霍夫公园</p>
-</li>
-</ol>
-<p><img src="https://i.loli.net/2019/08/16/z67Ot9yUJgPrvLC.png" alt></p>
-
+            
           
         
       
@@ -1475,7 +2015,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/e3d0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/65be/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -1494,7 +2034,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/e3d0/" itemprop="url">瑞士旅行--Day8(2019.8.24)</a></h1>
+                <a class="post-title-link" href="/posts/65be/" itemprop="url">UML中的类图及类图之间的关系</a></h1>
         
 
         <div class="post-meta">
@@ -1506,8 +2046,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T20:14:12+08:00">
-                2019-08-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-24T19:22:57+08:00">
+                2019-10-24
               </time>
             
 
@@ -1529,8 +2069,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/旅行/" itemprop="url" rel="index">
-                    <span itemprop="name">旅行</span>
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
 
@@ -1546,7 +2086,7 @@
 
           
           
-             <span id="/posts/e3d0/" class="leancloud_visitors" data-flag-title="瑞士旅行--Day8(2019.8.24)">
+             <span id="/posts/65be/" class="leancloud_visitors" data-flag-title="UML中的类图及类图之间的关系">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1571,7 +2111,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  35 字
+                  2.1k 字
                 </span>
               
 
@@ -1587,7 +2127,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -1609,22 +2149,17 @@
 
       
         
-          
-            <h1 id="采尔马特"><a href="#采尔马特" class="headerlink" title="采尔马特"></a>采尔马特</h1><ol>
-<li><p>采尔马特火车站</p>
-</li>
-<li><p>采尔马特</p>
-</li>
-</ol>
-<h1 id="采尔马特–-gt-苏黎世-3-3h"><a href="#采尔马特–-gt-苏黎世-3-3h" class="headerlink" title="采尔马特–&gt;苏黎世 3.3h"></a>采尔马特–&gt;苏黎世 3.3h</h1><ol>
-<li><p>苏黎世大教堂</p>
-</li>
-<li><p>玉特利山</p>
-</li>
-<li></li>
-</ol>
-
-          
+          <h2 id="统一建模语言简介"><a href="#统一建模语言简介" class="headerlink" title="统一建模语言简介"></a>统一建模语言简介</h2><p>统一建模语言（Unified Modeling Language，UML）是用来设计软件蓝图的可视化建模语言，1997 年被国际对象管理组织（OMG）采纳为面向对象的建模语言的国际标准。它的特点是简单、统一、图形化、能表达软件设计中的动态与静态信息。  </p>
+<p>统一建模语言能为软件开发的所有阶段提供模型化和可视化支持。而且融入了软件工程领域的新思想、新方法和新技术，使软件设计人员沟通更简明，进一步缩短了设计时间，减少开发成本。它的应用领域很宽，不仅适合于一般系统的开发，而且适合于并行与分布式系统的建模。  </p>
+<p>UML 从目标系统的不同角度出发，定义了用例图、类图、对象图、状态图、活动图、时序图、协作图、构件图、部署图等 9 种图。  </p>
+<p>本教程主要介绍软件<a href="http://c.biancheng.net/design_pattern/" target="_blank" rel="noopener">设计模式</a>中经常用到的类图，以及类之间的关系。另外，在实验部分将简单介绍 UML 建模工具的使用方法，当前业界使用最广泛的是 Rational Rose。使用 Umlet 的人也很多，它是一个轻量级的开源 UML 建模工具，简单实用，常用于小型软件系统的开发与设计。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/65be/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1671,7 +2206,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/e790/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/a055/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -1690,7 +2225,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/e790/" itemprop="url">瑞士旅行--Day7(2019.8.23)</a></h1>
+                <a class="post-title-link" href="/posts/a055/" itemprop="url">23 种设计模式的分类和功能</a></h1>
         
 
         <div class="post-meta">
@@ -1702,8 +2237,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T20:14:07+08:00">
-                2019-08-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-24T10:20:43+08:00">
+                2019-10-24
               </time>
             
 
@@ -1725,8 +2260,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/旅行/" itemprop="url" rel="index">
-                    <span itemprop="name">旅行</span>
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
 
@@ -1742,7 +2277,7 @@
 
           
           
-             <span id="/posts/e790/" class="leancloud_visitors" data-flag-title="瑞士旅行--Day7(2019.8.23)">
+             <span id="/posts/a055/" class="leancloud_visitors" data-flag-title="23 种设计模式的分类和功能">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1767,7 +2302,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  716 字
+                  1.5k 字
                 </span>
               
 
@@ -1783,7 +2318,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -1806,815 +2341,43 @@
       
         
           
-            <h1 id="蒙特勒–-gt-采尔马特2-5h"><a href="#蒙特勒–-gt-采尔马特2-5h" class="headerlink" title="蒙特勒–&gt;采尔马特2.5h"></a>蒙特勒–&gt;采尔马特2.5h</h1><p>蒙特勒 到 采尔马特 的交通路线概述：Montreux—→Visp——（换乘）—→Zermatt<br>另，再敲一次黑板——Visp到 采尔马特 的这段火车，和 瑞士 著名的“冰川快车”走的是同一段路，所以沿途的景色很不错，坐车的时候可以好好欣赏一下。不过要注意的是，这段车只是普通的火车，而“冰川快车”则是著名的豪华列车，有更便于观景的全景天窗，需要单独购买车票、不能使用Swiss Pass。如果想要乘坐冰川快车，可以从 蒙特勒 坐到Brig站（Visp后面一站）去换乘冰川快车，记得提前在网上预订。</p>
-<h1 id="马特洪峰"><a href="#马特洪峰" class="headerlink" title="马特洪峰"></a>马特洪峰</h1><p>1）    冰川天堂：可以上到海拔3883米的观景台，是 欧洲 最高的缆车站及观景台，可以最近距离欣赏马特洪峰的地方。因为了解到这个玩法最适合滑雪爱好者，而且观景台上看到的景色主要就是雪山，比较单一，所以我们最后没有选择它。<br>2）    Gornergrat Bahn齿轮小火车：终点站Gornergrat观景台的海拔是3089米，就在前面说过的3100酒店旁边，虽然没有冰川天堂的观景台高，但也是360度的全景视野。这条线路最经典的是倒数第二站Rotenboden下车后可以拍到马特洪峰在湖面的倒影。【2.5小时】<br>3）    五湖徒步路线：顾名思义就是一条沿途会经过五个湖的徒步路线。<br>a出发点是在名为Zermatt ZBAG-zsb的车站，注意不要找错了，会坐一段3分钟的斜道小火车到达海拔2288米的Sunnegga观景台<br>b从Sunnegga出发坐一段7分钟的缆车会到达Blauherd，这里就是五湖徒步的起点<br>c五湖徒步的路线为：Blauherd出发，依次抵达Stellisee（最美） - Grindjisee - Grünsee - Moosjiesee - Leisee 五个湖，直至走回Sunnegga，再从Sunnegga乘坐斜道小火车返回 采尔马特<br>这段路官网说全程9.3公里，需要花费2.5小时，事实证明只有健步如飞的矫健登山er才能做到这一点。根据我们之前看到的攻略，一般人3~4小时比较靠谱，而像我们这样四体不勤+疯狂拍照的风格，至少要留出5小时才比较安全…总结我们失败的五湖徒步之旅，有两点经验一定要请大家记住：<br>一定一定要提前弄清楚末班车的时间，并提早出发，给徒步留出足够宽裕的时间。<br>到底是走到Stellisee湖就往回走，还是要一口气走完五湖，一定要提前想好，切忌当场纠结犹豫，浪费时间。<br>冰川博物馆？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2751/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/2751/" itemprop="url">瑞士旅行--Day6(2019.8.22)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T20:14:05+08:00">
-                2019-08-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/旅行/" itemprop="url" rel="index">
-                    <span itemprop="name">旅行</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/2751/" class="leancloud_visitors" data-flag-title="瑞士旅行--Day6(2019.8.22)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  275 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="格林–-gt-蒙特勒"><a href="#格林–-gt-蒙特勒" class="headerlink" title="格林–&gt;蒙特勒"></a>格林–&gt;蒙特勒</h1><ol>
-<li><p>西庸城堡<strong>10:00-17:00</strong></p>
-<p>西庸城堡 最经典的拍摄角度，就在城堡前往火车站的路上就能发现！</p>
-<p>黄昏  西庸城堡还是建议下午四五点钟过来，一是人比较少，二是可以看莱芒湖的日落~西庸城堡外面的花园，以前也属于西庸城堡的一部分，是一个拍城堡人像很不错的点，之前看过有人在这里拍的婚纱照，也很有感觉~</p>
-</li>
-<li><p>拉沃葡萄园梯田</p>
-<p>坐车到Chexbres-Village，再到Rivaz的徒步路线，走走停停拍拍照，1~2小时足够了，最后在Rivaz坐火车<br>从Rivaz到 蒙特勒 乘S2火车非常方便，16分钟就可以到达，但这趟车1小时才有一班，所以需要注意一下时间安排。</p>
-</li>
-<li><p>尼永码头（尼永也漂亮）</p>
-<p>蒙特勒 到 伊瓦尔 的交通概述：Montreux—→Nyon—→（出站后步行至码头）—→Nyon（lac）—（坐船   ）→ Yvoire（lac）</p>
-</li>
-<li><p>伊瓦尔城堡【攻略下午游玩】</p>
-</li>
-<li><p>五感花园  jardin des cinq sens 12欧元</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2611/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/2611/" itemprop="url">瑞士旅行--Day5(2019.8.21)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T20:14:02+08:00">
-                2019-08-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/旅行/" itemprop="url" rel="index">
-                    <span itemprop="name">旅行</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/2611/" class="leancloud_visitors" data-flag-title="瑞士旅行--Day5(2019.8.21)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  447 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="格林–-gt-First–-gt-Bachalpsee–-gt-格林"><a href="#格林–-gt-First–-gt-Bachalpsee–-gt-格林" class="headerlink" title="格林–&gt;First–&gt;Bachalpsee–&gt;格林"></a>格林–&gt;First–&gt;Bachalpsee–&gt;格林</h1><p>菲尔斯特的缆车运营时间是<strong>8:30-17:00</strong></p>
-<p>步行至Grindewald BGF缆车站，买票上去菲尔斯特，瑞士通票打5折，缆车一共4个站：Grindelwald——Bort——Schreckfeld——First。坐缆车到达终点站，跟着指示牌的指引朝巴克普湖Bachalpsee的方向徒步（约1小时）。</p>
-<p>天梭菲斯特悬崖步道(First Cliff Walk Presented by Tissot) 在车站边上。</p>
-<p>这里介绍一下菲尔斯特（夏季）的游玩攻略：  </p>
-<p>缆车一共4个站：Grindelwald——Bort——Schreckfeld——First  </p>
+            <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><h3 id="根据目的来分"><a href="#根据目的来分" class="headerlink" title="根据目的来分"></a>根据目的来分</h3><p>根据模式是用来完成什么工作来划分，这种方式可分为创建型模式、结构型模式和行为型模式 3 种。</p>
 <ol>
-<li><p>·从Grindelwald坐缆车到First。  </p>
-</li>
-<li><p>徒步到巴克普湖（Bachalpsee）。  </p>
-</li>
-<li><p>返回First，走天梭菲斯特悬崖步道(First Cliff Walk Presented by Tissot)。  </p>
-</li>
-<li><p>在瞭望台处玩袋式蹦极(First Bagjump)。  </p>
-</li>
-<li><p>玩飞渡椅(First Flyer)或滑翔机(First Glider)到Schreckfeld站。  </p>
-</li>
-<li><p>玩山地卡丁车(First Mountain Cart)到Bort站。  </p>
-</li>
-<li><p>玩滑板自行车(First Trottibike)回到Grindelwald站。</p>
-</li>
+<li>创建型模式：用于描述“怎样创建对象”，它的主要特点是“将对象的创建与使用分离”。GoF 中提供了单例、原型、工厂方法、抽象工厂、建造者等 5 种创建型模式。</li>
+<li>结构型模式：用于描述如何将类或对象按某种布局组成更大的结构，GoF 中提供了代理、适配器、桥接、装饰、外观、享元、组合等 7 种结构型模式。</li>
+<li>行为型模式：用于描述类或对象之间怎样相互协作共同完成单个对象都无法单独完成的任务，以及怎样分配职责。GoF 中提供了模板方法、策略、命令、职责链、状态、观察者、中介者、迭代器、访问者、备忘录、解释器等 11 种行为型模式。</li>
 </ol>
-<p><img src="https://i.loli.net/2019/08/14/qKh7iCxkvwRSrEt.jpg" alt></p>
-<p>各游玩项目具体的价格和营业时间，点击官网查看：  </p>
-<p><a href="https://www.jungfrau.ch/en-gb/grindelwaldfirst/" target="_blank" rel="noopener">https://www.jungfrau.ch/en-gb/grindelwaldfirst/</a>  （右上角选中文）  </p>
-<p>缆车票和某些游玩项目票组合一起买套票会有折扣</p>
-<h1 id="格林–-gt-翁根Wengen–-gt-劳特布伦嫩Lauterbrunnen"><a href="#格林–-gt-翁根Wengen–-gt-劳特布伦嫩Lauterbrunnen" class="headerlink" title="格林–&gt;翁根Wengen–&gt;劳特布伦嫩Lauterbrunnen"></a>格林–&gt;翁根Wengen–&gt;劳特布伦嫩Lauterbrunnen</h1><p>格林德尔瓦尔德 到 翁根 的交通概述：Grindewald—→Zweilütschinen—→（换乘）—→Lauterbrunnen—→（换乘）—→Wengen</p>
-<p>全程只要跟着“Lauterbrunnen”的标识指示的方向走就可以了。 <a href="http://www.mafengwo.cn/travel-scenic-spot/mafengwo/83100.html" target="_blank" rel="noopener">翁根</a> 的海拔比劳特布伦嫩要高，所以从<a href="http://www.mafengwo.cn/travel-scenic-spot/mafengwo/83100.html" target="_blank" rel="noopener">翁根</a> 徒步过去比较轻松。</p>
-<p>当看到路牌上有显示Wengwald方向的路标时，可以先往Wengwald方向走一段，这一段会路过一个村庄和一个小农场，在一个高地上可以拍摄 <a href="http://www.mafengwo.cn/travel-scenic-spot/mafengwo/83579.html" target="_blank" rel="noopener">劳特布龙嫩</a> 全景。然后再返回到刚刚的路牌处，再沿着Lauterbrunnen方向下山。</p>
-<h1 id="门利兴"><a href="#门利兴" class="headerlink" title="门利兴"></a>门利兴</h1><h1 id="米伦小镇"><a href="#米伦小镇" class="headerlink" title="米伦小镇"></a>米伦小镇</h1>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/e6d0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/e6d0/" itemprop="url">瑞士旅行--Day4(2019.8.20)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T20:13:59+08:00">
-                2019-08-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/旅行/" itemprop="url" rel="index">
-                    <span itemprop="name">旅行</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/e6d0/" class="leancloud_visitors" data-flag-title="瑞士旅行--Day4(2019.8.20)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  159 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="格林德瓦–-gt-因特拉肯–-gt-施皮茨"><a href="#格林德瓦–-gt-因特拉肯–-gt-施皮茨" class="headerlink" title="格林德瓦–&gt;因特拉肯–&gt;施皮茨"></a>格林德瓦–&gt;因特拉肯–&gt;施皮茨</h1><ol>
-<li><p>施皮茨城堡（上午去，下午船少）</p>
-</li>
-<li><p>图恩湖（廊桥）</p>
-</li>
-<li><p>因特拉肯小镇</p>
-</li>
-<li><p>因特拉肯城堡</p>
-<p>Harder Kulm观景台登山列车本身的用时很短，只需要10分钟，但这趟车30分钟才有一趟，所以需要注意下时间安排。使用Swiss Pass不能免费，我们每人付了16瑞朗（往返价格）。</p>
-</li>
-<li><p>funky chocolate club</p>
-</li>
-<li><p>梦幻山坡</p>
-<p>Grindelwald Grund西南侧背靠门利兴山的一片山坡，从门利兴出发的这趟缆车正好可以让我们尽情饱览梦幻山坡的美景。</p>
-</li>
-</ol>
-<p><img src="https://i.loli.net/2019/08/14/dYosyGecfZqFLwD.jpg" alt></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2491/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/2491/" itemprop="url">瑞士旅行--Day3(2019.8.19)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T20:13:52+08:00">
-                2019-08-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/旅行/" itemprop="url" rel="index">
-                    <span itemprop="name">旅行</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/2491/" class="leancloud_visitors" data-flag-title="瑞士旅行--Day3(2019.8.19)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  418 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="卢塞恩–-gt-皮拉图斯山"><a href="#卢塞恩–-gt-皮拉图斯山" class="headerlink" title="卢塞恩–&gt;皮拉图斯山"></a>卢塞恩–&gt;皮拉图斯山</h1><p>皮拉图斯金色环游详细：从 卢塞恩 码头Luzern Bahnhofquai坐船到达Alpnachstad（游船途中可以选择在Hergiswill小镇下船参观玻璃工厂和博物馆），约50到90分钟，因为船的班次不多，所以记得提前计划好，也可以选择从 卢塞恩 火车站坐火车前往，但金色环游一般是选择坐船的。然后坐登山火车（世界上最大坡度48°的山壁齿轮铁道列车）到皮拉图斯山顶Pilatus Kulm，约40分钟。然后在山顶乘坐缆车到山底的Kriens站。然后步行10分钟到1号巴士站Bus Station NO.1，乘坐巴士回到 卢塞恩 火车站，约15分钟  缆车和火山打折不免费。</p>
-<p>有两种方式可以登上皮拉图斯山，一种是从Kriens乘坐缆车，另一种是在Alpnachstad搭乘世界上最陡的登山齿轨铁道</p>
-<p>1、到达卢塞恩的Kriens：在火车站乘坐Kriens方向的1路公交车在Linde/Pilatus站下车（乘坐约15分钟），接着步行5分钟抵达Kriens缆车站</p>
-<p>2、到达Alpnachstad搭乘世界上最陡的登山齿轨铁道：乘列车抵达Alpnachstad，出站后，寻找写有Pilatus的指示牌；或者从卢塞恩码头（2号码头）坐船抵达Alpnachstad(约60-90分钟)</p>
-<p><img src="https://i.loli.net/2019/08/14/u6F19YchiBbWONP.jpg" alt></p>
-<h1 id="卢塞恩–-gt-龙疆–-gt-格林德瓦-1-5h"><a href="#卢塞恩–-gt-龙疆–-gt-格林德瓦-1-5h" class="headerlink" title="卢塞恩–&gt;龙疆–&gt;格林德瓦 1.5h"></a>卢塞恩–&gt;龙疆–&gt;格林德瓦 1.5h</h1><p>坐火车前进方向<strong>右边</strong></p>
+<h3 id="根据作用范围来分"><a href="#根据作用范围来分" class="headerlink" title="根据作用范围来分"></a>根据作用范围来分</h3><p>根据模式是主要用于类上还是主要用于对象上来分，这种方式可分为类模式和对象模式两种。</p>
 <ol>
-<li><p>龙疆湖</p>
-</li>
-<li><p>布里恩茨湖【蒂芙尼蓝色】  伊瑟尔特瓦尔德</p>
-</li>
-<li><p>布里恩茨码头 因特拉肯到布里恩茨会停靠5个地方 单程历时1小时13分</p>
-</li>
+<li>类模式：用于处理类与子类之间的关系，这些关系通过继承来建立，是静态的，在编译时刻便确定下来了。GoF中的工厂方法、（类）适配器、模板方法、解释器属于该模式。</li>
+<li>对象模式：用于处理对象之间的关系，这些关系可以通过组合或聚合来实现，在运行时刻是可以变化的，更具动态性。GoF 中除了以上 4 种，其他的都是对象模式。</li>
 </ol>
+<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ol>
+<li>单例（Singleton）模式：某个类只能生成一个实例，该类提供了一个全局访问点供外部获取该实例，其拓展是有限多例模式。</li>
+<li>原型（Prototype）模式：将一个对象作为原型，通过对其进行复制而克隆出多个和原型类似的新实例。</li>
+<li>工厂方法（Factory Method）模式：定义一个用于创建产品的接口，由子类决定生产什么产品。</li>
+<li>抽象工厂（AbstractFactory）模式：提供一个创建产品族的接口，其每个子类可以生产一系列相关的产品。</li>
+<li>建造者（Builder）模式：将一个复杂对象分解成多个相对简单的部分，然后根据不同需要分别创建它们，最后构建成该复杂对象。</li>
+<li>代理（Proxy）模式：为某对象提供一种代理以控制对该对象的访问。即客户端通过代理间接地访问该对象，从而限制、增强或修改该对象的一些特性。</li>
+<li>适配器（Adapter）模式：将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。</li>
+<li>桥接（Bridge）模式：将抽象与实现分离，使它们可以独立变化。它是用组合关系代替继承关系来实现，从而降低了抽象和实现这两个可变维度的耦合度。</li>
+<li>装饰（Decorator）模式：动态的给对象增加一些职责，即增加其额外的功能。</li>
+<li>外观（Facade）模式：为多个复杂的子系统提供一个一致的接口，使这些子系统更加容易被访问。</li>
+<li>享元（Flyweight）模式：运用共享技术来有效地支持大量细粒度对象的复用。</li>
+<li>组合（Composite）模式：将对象组合成树状层次结构，使用户对单个对象和组合对象具有一致的访问性。</li>
+<li>模板方法（TemplateMethod）模式：定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤。</li>
+<li>策略（Strategy）模式：定义了一系列算法，并将每个算法封装起来，使它们可以相互替换，且算法的改变不会影响使用算法的客户。</li>
+<li>命令（Command）模式：将一个请求封装为一个对象，使发出请求的责任和执行请求的责任分割开。</li>
+<li>职责链（Chain of Responsibility）模式：把请求从链中的一个对象传到下一个对象，直到请求被响应为止。通过这种方式去除对象之间的耦合。</li>
+<li>状态（State）模式：允许一个对象在其内部状态发生改变时改变其行为能力。</li>
+<li>观察者（Observer）模式：多个对象间存在一对多关系，当一个对象发生改变时，把这种改变通知给其他多个对象，从而影响其他对象的行为。</li>
+<li>中介者（Mediator）模式：定义一个中介对象来简化原有对象之间的交互关系，降低系统中对象间的耦合度，使原有对象之间不必相互了解。</li>
+<li>迭代器（Iterator）模式：提供一种方法来顺序访问聚合对象中的一系列数据，而不暴露聚合对象的内部表示。</li>
+<li>访问者（Visitor）模式：在不改变集合元素的前提下，为一个集合中的每个元素提供多种访问方式，即每个元素有多个访问者对象访问。</li>
+<li>备忘录（Memento）模式：在不破坏封装性的前提下，获取并保存一个对象的内部状态，以便以后恢复它。</li>
+<li>解释器（Interpreter）模式：提供如何定义语言的文法，以及对语言句子的解释方法，即解释器。</li>
+</ol>
+<p>必须指出，这 23 种设计模式不是孤立存在的，很多模式之间存在一定的关联关系，在大的系统开发中常常同时使用多种设计模式，希望读者认真学好它们。</p>
 
           
         
@@ -2654,7 +2417,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2700,7 +2463,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">217</span>
+                  <span class="site-state-item-count">237</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

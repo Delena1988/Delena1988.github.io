@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/41c4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/943f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -313,7 +313,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/41c4/" itemprop="url">MongoDB常用查询</a></h1>
+                <a class="post-title-link" href="/posts/943f/" itemprop="url">LeetCode 整数反转</a></h1>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-08T10:27:19+08:00">
-                2019-11-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-26T15:59:41+08:00">
+                2019-12-26
               </time>
             
 
@@ -348,8 +348,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
-                    <span itemprop="name">MongoDB</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -365,7 +365,7 @@
 
           
           
-             <span id="/posts/41c4/" class="leancloud_visitors" data-flag-title="MongoDB常用查询">
+             <span id="/posts/943f/" class="leancloud_visitors" data-flag-title="LeetCode 整数反转">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -390,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  87 字
+                  557 字
                 </span>
               
 
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -428,20 +428,14 @@
 
       
         
-          
-            <h1 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h1><p>mongoDB 支持正则表达式</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.products.find( &#123; sku: &#123; <span class="variable">$regex</span>: /789$/ &#125; &#125; )</span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> sku <span class="keyword">like</span> <span class="string">"%789"</span>;</span><br></pre></td></tr></table></figure>
-<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="variable">$sort</span>: &#123; &lt;field1&gt;: &lt;sort order&gt;, &lt;field2&gt;: &lt;sort order&gt; ... &#125; &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>1</code> to specify ascending order. 顺序</li>
-<li><code>-1</code> to specify descending order. 倒序</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.aggregate(</span><br><span class="line">   [</span><br><span class="line">     &#123; <span class="variable">$sort</span> : &#123; age : -1, posts: 1 &#125; &#125;</span><br><span class="line">   ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h1 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.COLLECTION_NAME.find().<span class="built_in">limit</span>(NUMBER).skip()</span><br></pre></td></tr></table></figure>
-
-          
+          <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/943f/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -488,7 +482,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/ffc1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/9ba5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -507,7 +501,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/ffc1/" itemprop="url">MongoDB Operators</a></h1>
+                <a class="post-title-link" href="/posts/9ba5/" itemprop="url">凌晨自动发送问题处理</a></h1>
         
 
         <div class="post-meta">
@@ -519,596 +513,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T20:47:39+08:00">
-                2019-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
-                    <span itemprop="name">MongoDB</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/ffc1/" class="leancloud_visitors" data-flag-title="MongoDB Operators">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  623 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Comparison-Query-Operators"><a href="#Comparison-Query-Operators" class="headerlink" title="Comparison Query Operators"></a>Comparison Query Operators</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/eq/#op._S_eq" title="$eq" target="_blank" rel="noopener"><code>$eq</code></a></td>
-<td>Matches values that are equal to a specified value.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/gt/#op._S_gt" title="$gt" target="_blank" rel="noopener"><code>$gt</code></a></td>
-<td>Matches values that are greater than a specified value.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/gte/#op._S_gte" title="$gte" target="_blank" rel="noopener"><code>$gte</code></a></td>
-<td>Matches values that are greater than or equal to a specified value.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/in/#op._S_in" title="$in" target="_blank" rel="noopener"><code>$in</code></a></td>
-<td>Matches any of the values specified in an array.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/lt/#op._S_lt" title="$lt" target="_blank" rel="noopener"><code>$lt</code></a></td>
-<td>Matches values that are less than a specified value.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/lte/#op._S_lte" title="$lte" target="_blank" rel="noopener"><code>$lte</code></a></td>
-<td>Matches values that are less than or equal to a specified value.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/ne/#op._S_ne" title="$ne" target="_blank" rel="noopener"><code>$ne</code></a></td>
-<td>Matches all values that are not equal to a specified value.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/nin/#op._S_nin" title="$nin" target="_blank" rel="noopener"><code>$nin</code></a></td>
-<td>Matches none of the values specified in an array.</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Logical-Query-Operators"><a href="#Logical-Query-Operators" class="headerlink" title="Logical Query Operators"></a>Logical Query Operators</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/and/#op._S_and" title="$and" target="_blank" rel="noopener"><code>$and</code></a></td>
-<td>Joins query clauses with a logical <code>AND</code> returns all documents that match the conditions of both clauses.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/not/#op._S_not" title="$not" target="_blank" rel="noopener"><code>$not</code></a></td>
-<td>Inverts the effect of a query expression and returns documents that do <em>not</em> match the query expression.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/nor/#op._S_nor" title="$nor" target="_blank" rel="noopener"><code>$nor</code></a></td>
-<td>Joins query clauses with a logical <code>NOR</code> returns all documents that fail to match both clauses.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/or/#op._S_or" title="$or" target="_blank" rel="noopener"><code>$or</code></a></td>
-<td>Joins query clauses with a logical <code>OR</code> returns all documents that match the conditions of either clause.</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Element-Query-Operators"><a href="#Element-Query-Operators" class="headerlink" title="Element Query Operators"></a>Element Query Operators</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/exists/#op._S_exists" title="$exists" target="_blank" rel="noopener"><code>$exists</code></a></td>
-<td>Matches documents that have the specified field.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/type/#op._S_type" title="$type" target="_blank" rel="noopener"><code>$type</code></a></td>
-<td>Selects documents if a field is of the specified type.</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Evaluation-Query-Operators"><a href="#Evaluation-Query-Operators" class="headerlink" title="Evaluation Query Operators"></a>Evaluation Query Operators</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/expr/#op._S_expr" title="$expr" target="_blank" rel="noopener"><code>$expr</code></a></td>
-<td>Allows use of aggregation expressions within the query language.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/jsonSchema/#op._S_jsonSchema" title="$jsonSchema" target="_blank" rel="noopener"><code>$jsonSchema</code></a></td>
-<td>Validate documents against the given JSON Schema.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/mod/#op._S_mod" title="$mod" target="_blank" rel="noopener"><code>$mod</code></a></td>
-<td>Performs a modulo operation on the value of a field and selects documents with a specified result.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex" title="$regex" target="_blank" rel="noopener"><code>$regex</code></a></td>
-<td>Selects documents where values match a specified regular expression.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/text/#op._S_text" title="$text" target="_blank" rel="noopener"><code>$text</code></a></td>
-<td>Performs text search.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/where/#op._S_where" title="$where" target="_blank" rel="noopener"><code>$where</code></a></td>
-<td>Matches documents that satisfy a JavaScript expression.</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Geospatial-Query-Operators"><a href="#Geospatial-Query-Operators" class="headerlink" title="Geospatial Query Operators"></a>Geospatial Query Operators</h1><h3 id="Query-Selectors"><a href="#Query-Selectors" class="headerlink" title="Query Selectors"></a>Query Selectors</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/geoIntersects/#op._S_geoIntersects" title="$geoIntersects" target="_blank" rel="noopener"><code>$geoIntersects</code></a></td>
-<td>Selects geometries that intersect with a <a href="https://docs.mongodb.com/manual/reference/glossary/#term-geojson" target="_blank" rel="noopener">GeoJSON</a> geometry. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/geoIntersects/#op._S_geoIntersects" title="$geoIntersects" target="_blank" rel="noopener"><code>$geoIntersects</code></a>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a></td>
-<td>Selects geometries within a bounding <a href="https://docs.mongodb.com/manual/reference/geojson/#geospatial-indexes-store-geojson" target="_blank" rel="noopener">GeoJSON geometry</a>. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a></td>
-<td>Returns geospatial objects in proximity to a point. Requires a geospatial index. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a></td>
-<td>Returns geospatial objects in proximity to a point on a sphere. Requires a geospatial index. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a>.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Geometry-Specifiers"><a href="#Geometry-Specifiers" class="headerlink" title="Geometry Specifiers"></a>Geometry Specifiers</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/box/#op._S_box" title="$box" target="_blank" rel="noopener"><code>$box</code></a></td>
-<td>Specifies a rectangular box using legacy coordinate pairs for <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries. The <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/box/#op._S_box" title="$box" target="_blank" rel="noopener"><code>$box</code></a>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/center/#op._S_center" title="$center" target="_blank" rel="noopener"><code>$center</code></a></td>
-<td>Specifies a circle using legacy coordinate pairs to <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries when using planar geometry. The <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/center/#op._S_center" title="$center" target="_blank" rel="noopener"><code>$center</code></a>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/centerSphere/#op._S_centerSphere" title="$centerSphere" target="_blank" rel="noopener"><code>$centerSphere</code></a></td>
-<td>Specifies a circle using either legacy coordinate pairs or <a href="https://docs.mongodb.com/manual/reference/glossary/#term-geojson" target="_blank" rel="noopener">GeoJSON</a> format for <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries when using spherical geometry. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/centerSphere/#op._S_centerSphere" title="$centerSphere" target="_blank" rel="noopener"><code>$centerSphere</code></a>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/geometry/#op._S_geometry" title="$geometry" target="_blank" rel="noopener"><code>$geometry</code></a></td>
-<td>Specifies a geometry in <a href="https://docs.mongodb.com/manual/reference/glossary/#term-geojson" target="_blank" rel="noopener">GeoJSON</a> format to geospatial query operators.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/maxDistance/#op._S_maxDistance" title="$maxDistance" target="_blank" rel="noopener"><code>$maxDistance</code></a></td>
-<td>Specifies a maximum distance to limit the results of <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a> and <a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a> queries. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/maxDistance/#op._S_maxDistance" title="$maxDistance" target="_blank" rel="noopener"><code>$maxDistance</code></a>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/minDistance/#op._S_minDistance" title="$minDistance" target="_blank" rel="noopener"><code>$minDistance</code></a></td>
-<td>Specifies a minimum distance to limit the results of <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a> and <a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a> queries. For use with <code>2dsphere</code> index only.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/polygon/#op._S_polygon" title="$polygon" target="_blank" rel="noopener"><code>$polygon</code></a></td>
-<td>Specifies a polygon to using legacy coordinate pairs for <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries. The <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/center/#op._S_center" title="$center" target="_blank" rel="noopener"><code>$center</code></a>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/uniqueDocs/#op._S_uniqueDocs" title="$uniqueDocs" target="_blank" rel="noopener"><code>$uniqueDocs</code></a></td>
-<td>Deprecated. Modifies a <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> and <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a> queries to ensure that even if a document matches the query multiple times, the query returns the document once.</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Array-Query-Operators"><a href="#Array-Query-Operators" class="headerlink" title="Array Query Operators"></a>Array Query Operators</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/all/#op._S_all" title="$all" target="_blank" rel="noopener"><code>$all</code></a></td>
-<td>Matches arrays that contain all elements specified in the query.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/elemMatch/#op._S_elemMatch" title="$elemMatch" target="_blank" rel="noopener"><code>$elemMatch</code></a></td>
-<td>Selects documents if element in the array field matches all the specified <a href="https://docs.mongodb.com/manual/reference/operator/query/elemMatch/#op._S_elemMatch" title="$elemMatch" target="_blank" rel="noopener"><code>$elemMatch</code></a> conditions.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/size/#op._S_size" title="$size" target="_blank" rel="noopener"><code>$size</code></a></td>
-<td>Selects documents if the array field is a specified size.</td>
-</tr>
-</tbody>
-</table>
-<h1 id="Bitwise-Query-Operators"><a href="#Bitwise-Query-Operators" class="headerlink" title="Bitwise Query Operators"></a>Bitwise Query Operators</h1><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAllClear/#op._S_bitsAllClear" title="$bitsAllClear" target="_blank" rel="noopener"><code>$bitsAllClear</code></a></td>
-<td>Matches numeric or binary values in which a set of bit positions <em>all</em> have a value of <code>0</code>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAllSet/#op._S_bitsAllSet" title="$bitsAllSet" target="_blank" rel="noopener"><code>$bitsAllSet</code></a></td>
-<td>Matches numeric or binary values in which a set of bit positions <em>all</em> have a value of <code>1</code>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAnyClear/#op._S_bitsAnyClear" title="$bitsAnyClear" target="_blank" rel="noopener"><code>$bitsAnyClear</code></a></td>
-<td>Matches numeric or binary values in which <em>any</em> bit from a set of bit positions has a value of <code>0</code>.</td>
-</tr>
-<tr>
-<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAnySet/#op._S_bitsAnySet" title="$bitsAnySet" target="_blank" rel="noopener"><code>$bitsAnySet</code></a></td>
-<td>Matches numeric or binary values in which <em>any</em> bit from a set of bit positions has a value of <code>1</code>.</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/ed60/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/ed60/" itemprop="url">Windows Server 2016下tomcat执行缓慢</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T10:56:34+08:00">
-                2019-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/ed60/" class="leancloud_visitors" data-flag-title="Windows Server 2016下tomcat执行缓慢">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  115 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>Windows Server 2016 下以startup.bat 方式启动比在Windows Server 2012 下执行JAVA程序速度慢很多。</p>
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>将tomcat注册成为服务，到tomcat/bin路径下执行 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service.bat install tomcat7</span><br></pre></td></tr></table></figure>
-<p>在服务中启动tomcat，速度就明显上去了。</p>
-<p>环境变量：</p>
-<p><img src="https://i.loli.net/2019/11/07/7fnmdWL2ZFbMjVy.png" alt></p>
-<p>另外备注：而且点击tomcat控制台会让程序终端 中止，ctrl+c会让程序继续运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#从服务列表中移除</span></span><br><span class="line">service.bat remove tomcat7</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/828/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/828/" itemprop="url">微信对接</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-05T10:27:42+08:00">
-                2019-11-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-26T14:05:49+08:00">
+                2019-12-26
               </time>
             
 
@@ -1147,7 +553,7 @@
 
           
           
-             <span id="/posts/828/" class="leancloud_visitors" data-flag-title="微信对接">
+             <span id="/posts/9ba5/" class="leancloud_visitors" data-flag-title="凌晨自动发送问题处理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1172,7 +578,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  29 字
+                  56 字
                 </span>
               
 
@@ -1210,10 +616,199 @@
 
       
         
-          The article has been encrypted, please enter your password to view.<br>
+          
+            <h1 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h1><p>更新随访系统至最新版本</p>
+<h1 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h1><p>找到配置文件quartz.xml，路径为<code>/⁨resources⁩/⁨spring/quartz.xml⁩</code></p>
+<p>将</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cronExpression"</span> <span class="attr">value</span>=<span class="string">"0 50 * * * ?"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>替换为</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cronExpression"</span> <span class="attr">value</span>=<span class="string">"0 50 6-22 * * ?"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/1ca3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/1ca3/" itemprop="url">Linux定时任务</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T13:43:56+08:00">
+                2019-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/1ca3/" class="leancloud_visitors" data-flag-title="Linux定时任务">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  669 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>每天凌晨一点执行一次脚本</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/posts/828/#more" rel="contents">
+            <a class="btn" href="/posts/1ca3/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1264,7 +859,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2623/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/f655/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -1283,7 +878,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/2623/" itemprop="url">2019-11</a></h1>
+                <a class="post-title-link" href="/posts/f655/" itemprop="url">RAP2安装和部署</a></h1>
         
 
         <div class="post-meta">
@@ -1295,8 +890,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-01T11:44:29+08:00">
-                2019-11-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-24T13:51:00+08:00">
+                2019-12-24
               </time>
             
 
@@ -1318,8 +913,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Daily/" itemprop="url" rel="index">
-                    <span itemprop="name">Daily</span>
+                  <a href="/categories/Rap2/" itemprop="url" rel="index">
+                    <span itemprop="name">Rap2</span>
                   </a>
                 </span>
 
@@ -1335,7 +930,7 @@
 
           
           
-             <span id="/posts/2623/" class="leancloud_visitors" data-flag-title="2019-11">
+             <span id="/posts/f655/" class="leancloud_visitors" data-flag-title="RAP2安装和部署">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1360,7 +955,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k 字
+                  1.6k 字
                 </span>
               
 
@@ -1398,10 +993,14 @@
 
       
         
-          The article has been encrypted, please enter your password to view.<br>
+          <h2 id="一-RAP2"><a href="#一-RAP2" class="headerlink" title="一 RAP2"></a>一 RAP2</h2><p>RAP2是在RAP1基础上重做的新项目，它包含两个组件(对应两个Github Repository)。</p>
+<ul>
+<li>rap2-delos: 后端数据API服务器，基于Koa + MySQLlink</li>
+<li>rap2-dolores: 前端静态资源，基于React link</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/posts/2623/#more" rel="contents">
+            <a class="btn" href="/posts/f655/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1452,7 +1051,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/45a0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/4ccc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -1471,7 +1070,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/45a0/" itemprop="url">Java并发Semaphore使用</a></h1>
+                <a class="post-title-link" href="/posts/4ccc/" itemprop="url">装修预算</a></h1>
         
 
         <div class="post-meta">
@@ -1483,8 +1082,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-01T09:47:14+08:00">
-                2019-11-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-24T11:59:20+08:00">
+                2019-12-24
               </time>
             
 
@@ -1494,28 +1093,6 @@
           </span>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -1523,7 +1100,7 @@
 
           
           
-             <span id="/posts/45a0/" class="leancloud_visitors" data-flag-title="Java并发Semaphore使用">
+             <span id="/posts/4ccc/" class="leancloud_visitors" data-flag-title="装修预算">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1548,7 +1125,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  306 字
+                  32 字
                 </span>
               
 
@@ -1587,14 +1164,70 @@
       
         
           
-            <p>Semaphore 是 synchronized 的加强版，作用是控制线程的并发数量。</p>
-<p>示例：</p>
-<p>MyThread.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> SemaphoreService service;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyThread</span><span class="params">(String name, SemaphoreService service)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.service = service;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.service.doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>SemaphoreService.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Semaphore;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SemaphoreService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SimpleDateFormat sf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss.SSS"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Semaphore semaphore = <span class="keyword">new</span> Semaphore(<span class="number">2</span>);<span class="comment">// 同步关键类，构造方法传入的数字是多少，则同一个时刻，只运行多少个进程同时运行制定代码</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 在 semaphore.acquire() 和 semaphore.release()之间的代码，同一时刻只允许制定个数的线程进入，</span></span><br><span class="line"><span class="comment">             * 因为semaphore的构造方法是1，则同一时刻只允许一个线程进入，其他线程只能等待。</span></span><br><span class="line"><span class="comment">             * */</span></span><br><span class="line">            semaphore.acquire();</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">":doSomething start-"</span> + getFormatTimeStr());</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">":doSomething end-"</span> + getFormatTimeStr());</span><br><span class="line">            semaphore.release();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getFormatTimeStr</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> sf.format(<span class="keyword">new</span> Date());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>SemaphoreTest.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SemaphoreTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</span><br><span class="line">        SemaphoreService service = <span class="keyword">new</span> SemaphoreService();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            MyThread t = <span class="keyword">new</span> MyThread(<span class="string">"thread"</span> + (i + <span class="number">1</span>), service);</span><br><span class="line">            t.start();<span class="comment">// 这里使用 t.run() 也可以运行，但是不是并发执行了</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h1 id="家电"><a href="#家电" class="headerlink" title="家电"></a>家电</h1><table>
+<thead>
+<tr>
+<th>电器</th>
+<th>品牌</th>
+<th>型号</th>
+<th>价格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冰箱</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>洗衣机</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>烘干机</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="软装"><a href="#软装" class="headerlink" title="软装"></a>软装</h1><table>
+<thead>
+<tr>
+<th>品类</th>
+<th>品牌</th>
+<th>型号</th>
+<th>价格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>柜子</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>窗帘</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
           
         
@@ -1643,7 +1276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/1082/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/d67e/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -1662,7 +1295,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/1082/" itemprop="url">MySQL server has gone away</a></h1>
+                <a class="post-title-link" href="/posts/d67e/" itemprop="url">PM2 Quick Start</a></h1>
         
 
         <div class="post-meta">
@@ -1674,8 +1307,669 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-30T09:31:22+08:00">
-                2019-10-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-24T11:55:11+08:00">
+                2019-12-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PM2/" itemprop="url" rel="index">
+                    <span itemprop="name">PM2</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/d67e/" class="leancloud_visitors" data-flag-title="PM2 Quick Start">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  949 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Welcome to the PM2 Quick Start!</p>
+<p>PM2 is a daemon process manager that will help you manage and keep your application online. Getting started with PM2 is straightforward, it is offered as a simple and intuitive CLI, installable via NPM.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/d67e/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/566f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/566f/" itemprop="url">常用医嘱缩写含义</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-21T09:16:43+08:00">
+                2019-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/566f/" class="leancloud_visitors" data-flag-title="常用医嘱缩写含义">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="常用缩写"><a href="#常用缩写" class="headerlink" title="常用缩写"></a>常用缩写</h1><table>
+<thead>
+<tr>
+<th>缩写</th>
+<th></th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qd</td>
+<td>quaque die/every day</td>
+<td>每日一次</td>
+</tr>
+<tr>
+<td>bid</td>
+<td>bis in die/twice day</td>
+<td>每日两次</td>
+</tr>
+<tr>
+<td>tid</td>
+<td>ter in die/three times a day</td>
+<td>每日三次</td>
+</tr>
+<tr>
+<td>qid</td>
+<td>quarter in die/four times a day</td>
+<td>每日四次</td>
+</tr>
+<tr>
+<td>qh</td>
+<td>quaque hora/every hour</td>
+<td>每小时一次</td>
+</tr>
+<tr>
+<td>q2h</td>
+<td>quaque 2 hora/every 2 hous</td>
+<td>每两小时一次</td>
+</tr>
+<tr>
+<td>q4h</td>
+<td>quaque 4 hora/every 4 hous</td>
+<td>每四小时一次</td>
+</tr>
+<tr>
+<td>q6h</td>
+<td>quaque 6 hora/every 6 hous</td>
+<td>每六小时一次</td>
+</tr>
+<tr>
+<td>qn</td>
+<td></td>
+<td>每晚一次</td>
+</tr>
+<tr>
+<td>qod</td>
+<td>quaque omni die/every other day</td>
+<td>隔日一次</td>
+</tr>
+<tr>
+<td>biw</td>
+<td></td>
+<td>每周两次</td>
+</tr>
+<tr>
+<td>hs</td>
+<td></td>
+<td>临睡前</td>
+</tr>
+<tr>
+<td>am</td>
+<td>ante meridiem/before noon</td>
+<td>上午</td>
+</tr>
+<tr>
+<td>pm</td>
+<td>post meridiem/after noon</td>
+<td>下午</td>
+</tr>
+<tr>
+<td>St</td>
+<td>statim/immediately</td>
+<td>立即</td>
+</tr>
+<tr>
+<td>DC</td>
+<td>——/discontinue</td>
+<td>停止 、取消</td>
+</tr>
+<tr>
+<td>prn</td>
+<td>pro re nata/as necessary</td>
+<td>需要时（长期医嘱）</td>
+</tr>
+<tr>
+<td>sos</td>
+<td>si opus sit/one dose if necessary</td>
+<td>需要时（限用一次，12 小时内有效）</td>
+</tr>
+<tr>
+<td>ac</td>
+<td>ante cibum/before meals</td>
+<td>饭前</td>
+</tr>
+<tr>
+<td>pc</td>
+<td></td>
+<td>饭后</td>
+</tr>
+<tr>
+<td>12n</td>
+<td>——/12 clock at noon</td>
+<td>中午 12 点</td>
+</tr>
+<tr>
+<td>12mn</td>
+<td></td>
+<td>午夜 12 点</td>
+</tr>
+<tr>
+<td>gtt</td>
+<td></td>
+<td>滴</td>
+</tr>
+<tr>
+<td>ID</td>
+<td></td>
+<td>皮内注射</td>
+</tr>
+<tr>
+<td>H</td>
+<td></td>
+<td>皮下注射</td>
+</tr>
+<tr>
+<td>IM</td>
+<td></td>
+<td>肌肉注射</td>
+</tr>
+<tr>
+<td>IV</td>
+<td></td>
+<td>静脉注射</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/566f/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/d217/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/d217/" itemprop="url">统计分析基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-20T10:35:00+08:00">
+                2019-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/d217/" class="leancloud_visitors" data-flag-title="统计分析基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="t检验"><a href="#t检验" class="headerlink" title="t检验"></a>t检验</h1>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/cc8a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/cc8a/" itemprop="url">Mysql备份数据库，不同方式大小不一致</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-11T15:51:57+08:00">
+                2019-12-11
               </time>
             
 
@@ -1714,7 +2008,7 @@
 
           
           
-             <span id="/posts/1082/" class="leancloud_visitors" data-flag-title="MySQL server has gone away">
+             <span id="/posts/cc8a/" class="leancloud_visitors" data-flag-title="Mysql备份数据库，不同方式大小不一致">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1739,196 +2033,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  89 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>批量导入数据时，数据量大的话会报错</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2006 - MySQL server has gone away</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/1082/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/b434/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/b434/" itemprop="url">单例模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-24T20:39:25+08:00">
-                2019-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/b434/" class="leancloud_visitors" data-flag-title="单例模式">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  0 字
+                  70 字
                 </span>
               
 
@@ -1967,7 +2072,9 @@
       
         
           
-            
+            <h1 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h1><p>使用mysqldump命令和用navicat备份出来的数据库大小不一样。</p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>navicat 备份的会写完整的语句，包括列名都写进去。另外navicat还会增加换行，比如 insert into 后就加了换行，而 dump 的就不加。</p>
+
           
         
       
@@ -2015,7 +2122,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/65be/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/4093/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="jlin">
@@ -2034,7 +2141,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/posts/65be/" itemprop="url">UML中的类图及类图之间的关系</a></h1>
+                <a class="post-title-link" href="/posts/4093/" itemprop="url">Mysql的表碎片处理</a></h1>
         
 
         <div class="post-meta">
@@ -2046,8 +2153,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-24T19:22:57+08:00">
-                2019-10-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-04T11:31:49+08:00">
+                2019-12-04
               </time>
             
 
@@ -2069,8 +2176,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
+                  <a href="/categories/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
                   </a>
                 </span>
 
@@ -2086,7 +2193,7 @@
 
           
           
-             <span id="/posts/65be/" class="leancloud_visitors" data-flag-title="UML中的类图及类图之间的关系">
+             <span id="/posts/4093/" class="leancloud_visitors" data-flag-title="Mysql的表碎片处理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2111,198 +2218,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.1k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="统一建模语言简介"><a href="#统一建模语言简介" class="headerlink" title="统一建模语言简介"></a>统一建模语言简介</h2><p>统一建模语言（Unified Modeling Language，UML）是用来设计软件蓝图的可视化建模语言，1997 年被国际对象管理组织（OMG）采纳为面向对象的建模语言的国际标准。它的特点是简单、统一、图形化、能表达软件设计中的动态与静态信息。  </p>
-<p>统一建模语言能为软件开发的所有阶段提供模型化和可视化支持。而且融入了软件工程领域的新思想、新方法和新技术，使软件设计人员沟通更简明，进一步缩短了设计时间，减少开发成本。它的应用领域很宽，不仅适合于一般系统的开发，而且适合于并行与分布式系统的建模。  </p>
-<p>UML 从目标系统的不同角度出发，定义了用例图、类图、对象图、状态图、活动图、时序图、协作图、构件图、部署图等 9 种图。  </p>
-<p>本教程主要介绍软件<a href="http://c.biancheng.net/design_pattern/" target="_blank" rel="noopener">设计模式</a>中经常用到的类图，以及类之间的关系。另外，在实验部分将简单介绍 UML 建模工具的使用方法，当前业界使用最广泛的是 Rational Rose。使用 Umlet 的人也很多，它是一个轻量级的开源 UML 建模工具，简单实用，常用于小型软件系统的开发与设计。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/65be/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/a055/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/a055/" itemprop="url">23 种设计模式的分类和功能</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-24T10:20:43+08:00">
-                2019-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/a055/" class="leancloud_visitors" data-flag-title="23 种设计模式的分类和功能">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.5k 字
+                  1.4k 字
                 </span>
               
 
@@ -2341,43 +2257,20 @@
       
         
           
-            <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><h3 id="根据目的来分"><a href="#根据目的来分" class="headerlink" title="根据目的来分"></a>根据目的来分</h3><p>根据模式是用来完成什么工作来划分，这种方式可分为创建型模式、结构型模式和行为型模式 3 种。</p>
-<ol>
-<li>创建型模式：用于描述“怎样创建对象”，它的主要特点是“将对象的创建与使用分离”。GoF 中提供了单例、原型、工厂方法、抽象工厂、建造者等 5 种创建型模式。</li>
-<li>结构型模式：用于描述如何将类或对象按某种布局组成更大的结构，GoF 中提供了代理、适配器、桥接、装饰、外观、享元、组合等 7 种结构型模式。</li>
-<li>行为型模式：用于描述类或对象之间怎样相互协作共同完成单个对象都无法单独完成的任务，以及怎样分配职责。GoF 中提供了模板方法、策略、命令、职责链、状态、观察者、中介者、迭代器、访问者、备忘录、解释器等 11 种行为型模式。</li>
-</ol>
-<h3 id="根据作用范围来分"><a href="#根据作用范围来分" class="headerlink" title="根据作用范围来分"></a>根据作用范围来分</h3><p>根据模式是主要用于类上还是主要用于对象上来分，这种方式可分为类模式和对象模式两种。</p>
-<ol>
-<li>类模式：用于处理类与子类之间的关系，这些关系通过继承来建立，是静态的，在编译时刻便确定下来了。GoF中的工厂方法、（类）适配器、模板方法、解释器属于该模式。</li>
-<li>对象模式：用于处理对象之间的关系，这些关系可以通过组合或聚合来实现，在运行时刻是可以变化的，更具动态性。GoF 中除了以上 4 种，其他的都是对象模式。</li>
-</ol>
-<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ol>
-<li>单例（Singleton）模式：某个类只能生成一个实例，该类提供了一个全局访问点供外部获取该实例，其拓展是有限多例模式。</li>
-<li>原型（Prototype）模式：将一个对象作为原型，通过对其进行复制而克隆出多个和原型类似的新实例。</li>
-<li>工厂方法（Factory Method）模式：定义一个用于创建产品的接口，由子类决定生产什么产品。</li>
-<li>抽象工厂（AbstractFactory）模式：提供一个创建产品族的接口，其每个子类可以生产一系列相关的产品。</li>
-<li>建造者（Builder）模式：将一个复杂对象分解成多个相对简单的部分，然后根据不同需要分别创建它们，最后构建成该复杂对象。</li>
-<li>代理（Proxy）模式：为某对象提供一种代理以控制对该对象的访问。即客户端通过代理间接地访问该对象，从而限制、增强或修改该对象的一些特性。</li>
-<li>适配器（Adapter）模式：将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。</li>
-<li>桥接（Bridge）模式：将抽象与实现分离，使它们可以独立变化。它是用组合关系代替继承关系来实现，从而降低了抽象和实现这两个可变维度的耦合度。</li>
-<li>装饰（Decorator）模式：动态的给对象增加一些职责，即增加其额外的功能。</li>
-<li>外观（Facade）模式：为多个复杂的子系统提供一个一致的接口，使这些子系统更加容易被访问。</li>
-<li>享元（Flyweight）模式：运用共享技术来有效地支持大量细粒度对象的复用。</li>
-<li>组合（Composite）模式：将对象组合成树状层次结构，使用户对单个对象和组合对象具有一致的访问性。</li>
-<li>模板方法（TemplateMethod）模式：定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤。</li>
-<li>策略（Strategy）模式：定义了一系列算法，并将每个算法封装起来，使它们可以相互替换，且算法的改变不会影响使用算法的客户。</li>
-<li>命令（Command）模式：将一个请求封装为一个对象，使发出请求的责任和执行请求的责任分割开。</li>
-<li>职责链（Chain of Responsibility）模式：把请求从链中的一个对象传到下一个对象，直到请求被响应为止。通过这种方式去除对象之间的耦合。</li>
-<li>状态（State）模式：允许一个对象在其内部状态发生改变时改变其行为能力。</li>
-<li>观察者（Observer）模式：多个对象间存在一对多关系，当一个对象发生改变时，把这种改变通知给其他多个对象，从而影响其他对象的行为。</li>
-<li>中介者（Mediator）模式：定义一个中介对象来简化原有对象之间的交互关系，降低系统中对象间的耦合度，使原有对象之间不必相互了解。</li>
-<li>迭代器（Iterator）模式：提供一种方法来顺序访问聚合对象中的一系列数据，而不暴露聚合对象的内部表示。</li>
-<li>访问者（Visitor）模式：在不改变集合元素的前提下，为一个集合中的每个元素提供多种访问方式，即每个元素有多个访问者对象访问。</li>
-<li>备忘录（Memento）模式：在不破坏封装性的前提下，获取并保存一个对象的内部状态，以便以后恢复它。</li>
-<li>解释器（Interpreter）模式：提供如何定义语言的文法，以及对语言句子的解释方法，即解释器。</li>
-</ol>
-<p>必须指出，这 23 种设计模式不是孤立存在的，很多模式之间存在一定的关联关系，在大的系统开发中常常同时使用多种设计模式，希望读者认真学好它们。</p>
+            <h1 id="一、表碎片的产生"><a href="#一、表碎片的产生" class="headerlink" title="一、表碎片的产生"></a>一、表碎片的产生</h1><p>对于mysql表数据，当你delete掉很多数据时，这些数据占用的磁盘空间可能并不会立刻被回收；比如一张表有10G的数据，delete掉1G数据后，再查看表ibd文件会发现文件大小可能还是10G；如果这个表有insert操作的话，那么mysql就会优先考虑能不能将新数据存储到空白空间上，容易出现这样的情况：某个空白空间的大小是2MB，新插入一条数据大小是1.5MB并存储到该空白空间上，这时就会产生更小的空白空间，而这种更小的空白空间更难被利用，如果像这种碎片非常多，就会比较浪费资源而且降低表磁盘I/O性能。<br>对于频繁地update操作，也很容易产生碎片问题。比如对于可变长字段，如varchar、text、blob等字段，如果update操作将数据大小改小，那么也会产生碎片问题。<br>mysql目前比较常用的引擎是innodb和myisam，这两种引擎下都有可能产生碎片，碎片的产生和消除都是随机的，而碎片越多会给查询扫描工作带来越大的影响。</p>
+<h1 id="二、查看表碎片的方式"><a href="#二、查看表碎片的方式" class="headerlink" title="二、查看表碎片的方式"></a>二、查看表碎片的方式</h1><h1 id="1、data-length-index-length与ibd文件大小的比较"><a href="#1、data-length-index-length与ibd文件大小的比较" class="headerlink" title="1、data_length+index_length与ibd文件大小的比较"></a>1、data_length+index_length与ibd文件大小的比较</h1><p>mysql5.5默认是共享表空间，从5.6开始默认是独立表空间，每张表有自己的文件空间。查看方式就是看数据文件大小和表数据量大小的差异：可以先在数据库中通过系统表information_schema.tables或者“show table status like ‘tb’ ”语句计算出data_length+index_length的值，再到操作系统上查看对应表的ibd文件(或者myd、myi文件)的物理大小。如果ibd文件比data_length+index_length值大很多，说明表存在碎片。<br>例如查看test库下student表的碎片空间情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select table_name,(data_length+index_length)/1024/1024 length,engine,data_free    </span><br><span class="line">    -&gt; from information_schema.tables    </span><br><span class="line">    -&gt; <span class="built_in">where</span> table_name=<span class="string">'student'</span>;</span><br><span class="line">+------------+-------------+--------+-----------+</span><br><span class="line">| table_name | length      | engine | data_free |</span><br><span class="line">+------------+-------------+--------+-----------+</span><br><span class="line">| student    | 72.14062500 | InnoDB |   4194304 |</span><br><span class="line">+------------+-------------+--------+-----------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.01 sec)</span><br><span class="line">[root@cos7-jiang <span class="built_in">test</span>]<span class="comment"># ll -h student.ibd</span></span><br><span class="line">-rw-rw----. 1 mysql mysql 76M Dec 12 13:53 student.ibd</span><br></pre></td></tr></table></figure>
+<p>根据系统表计算出student表数据为72MB，查看ibd文件大小为76MB，碎片空间大概有4MB左右，不算太多。</p>
+<h1 id="2、通过系统表tables的data-free字段看表碎片"><a href="#2、通过系统表tables的data-free字段看表碎片" class="headerlink" title="2、通过系统表tables的data_free字段看表碎片"></a>2、通过系统表tables的data_free字段看表碎片</h1><p>mysql的系统表information_schema.tables中记录着每张表的数据、索引大小，行数等重要信息，主要字段信息如下：<br>table_schema：表所在数据库名<br>table_name：表名<br>engine：表的存储引擎<br>tables_rows：表数据行数<br>data_length：数据长度，即表数据大小，单位字节<br>index_length：索引长度，即表索引大小，单位字节<br>data_free：已分配但未使用的空间大小，单位字节，可以认为是碎片空间<br>通过data_free字段可以查出数据库中有哪些表产生了碎片，data_length+index_length值就是表数据量总大小(拿这个求和值与表数据文件大小比较，得到的差值往往与data_free值不一样，不知道为什么)。<br>可以用下面的SQL来统计数据库中有哪些表产生了碎片空间：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select table_name,table_schema,engine,table_rows,data_length+index_length length,data_free    </span><br><span class="line">    -&gt; from information_schema.tables    </span><br><span class="line">    -&gt; <span class="built_in">where</span> data_free !=0</span><br><span class="line">    -&gt; and table_schema not <span class="keyword">in</span>(<span class="string">'information_schema'</span>,<span class="string">'mysql'</span>,<span class="string">'performance_schema'</span>);</span><br><span class="line">+------------+--------------+--------+------------+----------+----------+</span><br><span class="line">| table_name | table_schema | engine | table_rows | length   | data_free|</span><br><span class="line">+------------+--------------+--------+------------+----------+----------+</span><br><span class="line">| student    | <span class="built_in">test</span>         | InnoDB |    1075752 | 75644928 |   4194304|</span><br><span class="line">+------------+--------------+--------+------------+----------+----------+</span><br></pre></td></tr></table></figure>
+<p>data_free值可以反映出表的碎片空间大小。上面student表data_free显示4M，与上一个方式计算出的碎片大小近似吻合。</p>
+<h1 id="三、清理表碎片"><a href="#三、清理表碎片" class="headerlink" title="三、清理表碎片"></a>三、清理表碎片</h1><p>一般通过optimize命令清理碎片，不过optimize命令对共享表空间不起作用。<br>对于mysql5.6，如果执行optimize table tb_name优化innodb表可能会报如下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; optimize table jiang;</span><br><span class="line">+------------+----------+----------+-------------------------------------------------------------------+</span><br><span class="line">| Table      | Op       | Msg_type | Msg_text                                                          |</span><br><span class="line">+------------+----------+----------+-------------------------------------------------------------------+</span><br><span class="line">| test.jiang | optimize | note     | Table does not support optimize, doing recreate + analyze instead |</span><br><span class="line">| test.jiang | optimize | status   | OK                                                                |</span><br><span class="line">+------------+----------+----------+-------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>对于innodb表的优化，可以用alter table tb_name engine=innodb的形式优化，对于myisam表的优化可以直接使用optimize。</p>
+<h1 id="四、optimize操作介绍"><a href="#四、optimize操作介绍" class="headerlink" title="四、optimize操作介绍"></a>四、optimize操作介绍</h1><p>mysql5.6的官方文档在13.7.2.4小节对optimize操作有详细的介绍。optimize table命令的作用是重新组织表数据和关联索引数据的物理存储，以减小存储空间并提高访问表时的I/O效率；命令主要作用于innodb、myisam和archive引擎表，而命令对表所做的实际更改取决于该表使用的存储引擎。<br><strong>·innodb引擎下的optimize操作</strong><br>对于innodb表，optimize table操作实际映射为alter table … force操作，当对innodb表执行optimize操作时可能会出现下面的提示信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; optimize table jiang;</span><br><span class="line">+------------+----------+----------+-------------------------------------------------------------------+</span><br><span class="line">| Table      | Op       | Msg_type | Msg_text                                                          |</span><br><span class="line">+------------+----------+----------+-------------------------------------------------------------------+</span><br><span class="line">| test.jiang | optimize | note     | Table does not support optimize, doing recreate + analyze instead |</span><br><span class="line">| test.jiang | optimize | status   | OK                                                                |</span><br><span class="line">+------------+----------+----------+-------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>这实际上已经对表做了优化，第一步是提示optimize操作不适用该类型表，第二步是映射为alter table操作执行并成功。<br>在mysql5.6.17之前，optimize操作没有使用online DDL，因此整个操作期间会锁表，表上不允许有DML操作；<br>从mysql5.6.17开始，对于常规的和分区的innodb表，optimize操作使用online DDL，这样只会在操作的准备阶段和提交阶段锁住DML操作，大大提高了并发性。</p>
+<p>说明：<br>1、对于写比较频繁的表，容易产生碎片问题，但也不用经常进行清理，一般每周或者每月一次就可以了；<br>2、OPTIMIZE TABLE只对MyISAM，BDB和InnoDB表起作用，尤其是MyISAM表的作用最为明显。此外，并不是所有表都需要进行碎片整理，一般只需要对包含可变长度的文本数据类型的表进行整理即可。</p>
 
           
         
@@ -2417,7 +2310,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2463,7 +2356,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">217</span>
+                  <span class="site-state-item-count">237</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
