@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Producer消息和数据的生产者，向Kafka的一个topic发布消息的进程/代码/服务 Consumer消息和数据的消费者，订阅数据topic并且处理其发布的消息的进程/代码/服务">
+<meta name="description" content="Topic提供一串流式的记录。 Topic 就是数据主题，是数据记录发布的地方,可以用来区分业务系统。Kafka中的Topics总是多订阅者模式，一个topic可以拥有一个或者多个消费者来订阅它的数据。">
 <meta name="keywords" content="Kafka">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kafka基本概念">
 <meta property="og:url" content="http://yoursite.com/posts/6dd5/index.html">
 <meta property="og:site_name" content="Jlin&#39;Blog">
-<meta property="og:description" content="Producer消息和数据的生产者，向Kafka的一个topic发布消息的进程/代码/服务 Consumer消息和数据的消费者，订阅数据topic并且处理其发布的消息的进程/代码/服务">
+<meta property="og:description" content="Topic提供一串流式的记录。 Topic 就是数据主题，是数据记录发布的地方,可以用来区分业务系统。Kafka中的Topics总是多订阅者模式，一个topic可以拥有一个或者多个消费者来订阅它的数据。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-10T03:53:53.410Z">
+<meta property="og:updated_time" content="2020-05-11T08:11:16.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka基本概念">
-<meta name="twitter:description" content="Producer消息和数据的生产者，向Kafka的一个topic发布消息的进程/代码/服务 Consumer消息和数据的消费者，订阅数据topic并且处理其发布的消息的进程/代码/服务">
+<meta name="twitter:description" content="Topic提供一串流式的记录。 Topic 就是数据主题，是数据记录发布的地方,可以用来区分业务系统。Kafka中的Topics总是多订阅者模式，一个topic可以拥有一个或者多个消费者来订阅它的数据。">
 
 
 
@@ -389,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  407 字
+                  1.3k 字
                 </span>
               
 
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -426,19 +426,64 @@
       
 
       
-        <h3 id="Producer"><a href="#Producer" class="headerlink" title="Producer"></a>Producer</h3><p>消息和数据的生产者，向Kafka的一个topic发布消息的进程/代码/服务</p>
-<h3 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h3><p>消息和数据的消费者，订阅数据topic并且处理其发布的消息的进程/代码/服务</p>
+        <h1 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h1><p>提供一串流式的记录。</p>
+<p>Topic 就是数据主题，是数据记录发布的地方,可以用来区分业务系统。Kafka中的Topics总是多订阅者模式，一个topic可以拥有一个或者多个消费者来订阅它的数据。</p>
 <a id="more"></a>
-<h3 id="ConsumerGroup"><a href="#ConsumerGroup" class="headerlink" title="ConsumerGroup"></a>ConsumerGroup</h3><p>逻辑概念，对于同一个topic，会广播给不同的group，一个group中，只有一个consumer可以消费该消息</p>
-<h3 id="Broker"><a href="#Broker" class="headerlink" title="Broker"></a>Broker</h3><p>物理概念，Kafka集群中的每个Kafka节点</p>
-<h3 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h3><p>逻辑概念，Kafka消息的类别，对数据进行区分、隔离</p>
-<h3 id="Partition"><a href="#Partition" class="headerlink" title="Partition"></a>Partition</h3><p>物理概念，Kafka下数据存储的基本单元。一个Topic数据，会被分散存储到多个Partition，每一个Partition是有序的</p>
+<h1 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h1><p>日志的分区partition （分布）在Kafka集群的服务器上。每个服务器在处理数据和请求时，共享这些分区。每一个分区都会在已配置的服务器上进行备份，确保容错性.</p>
+<p>每个分区都有一台 server 作为 “leader”，零台或者多台server作为 follwers 。leader server 处理一切对 partition （分区）的读写请求，而follwers只需被动的同步leader上的数据。当leader宕机了，followers 中的一台服务器会自动成为新的 leader。每台 server 都会成为某些分区的 leader 和某些分区的 follower，因此集群的负载是平衡的。</p>
+<h1 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h1><p>生产者可以将数据发布到所选择的topic（主题）中。生产者负责将记录分配到topic的哪一个 partition（分区）中。可以使用循环的方式来简单地实现负载均衡，也可以根据某些语义分区函数(例如：记录中的key)来完成。下面会介绍更多关于分区的使用。</p>
+<h1 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h1><p>消费者使用一个 <em>消费组</em> 名称来进行标识，发布到topic中的每条记录被分配给订阅消费组中的一个消费者实例.消费者实例可以分布在多个进程中或者多个机器上。</p>
+<p>如果所有的消费者实例在同一消费组中，消息记录会负载平衡到每一个消费者实例.</p>
+<p>如果所有的消费者实例在不同的消费组中，每条消息记录会广播到所有的消费者进程.</p>
+<h1 id="分区Partition"><a href="#分区Partition" class="headerlink" title="分区Partition"></a>分区Partition</h1><p>物理概念，Kafka下数据存储的基本单元。一个Topic数据，会被分散存储到多个Partition，每一个Partition是有序的</p>
 <ul>
 <li>每一个Topic被切分为多个Partitions</li>
 <li>消费者数目少于或等于Partition的数目</li>
 <li>Broker Group中的每一个Broker保存Topic的一个或多个Partitions</li>
 <li>Consumer Group中的仅有一个Consumer读取Topic的一个或多个Partitions，并且是唯一的Consumer</li>
 </ul>
+<h1 id="消息的分发策略"><a href="#消息的分发策略" class="headerlink" title="消息的分发策略"></a>消息的分发策略</h1><p>消息是kafka中最基本数据单元。一条消息由Key、Value两部分构成，其中，key可以指定也可以不指定。默认情况下，kafka 采用的是 hash 取模算法决定消息存储到哪个分区。如果Key 为 null，则会随机分配一个分区。</p>
+<h1 id="消息的消费策略"><a href="#消息的消费策略" class="headerlink" title="消息的消费策略"></a>消息的消费策略</h1><p>一个consumer group-0 里有3个consumer时，他们一起消费topic.test，这个test下有3个分区，怎么协调？</p>
+<p>c1消费p0,c2消费p1,c3消费p2</p>
+<p>kafka的策略是：一个分区只能由一个消费者消费。</p>
+<p><strong>分区分配策略</strong>：</p>
+<ul>
+<li><p>范围分区(Range strategy 默认)</p>
+<p>范围分区策略先对一个主题里面的分区按照序号排序，并对消费者按字母顺序排序。对于如上3个分区，3个消费者，排序后：</p>
+<blockquote>
+<p>分区序列:0,1,2</p>
+<p>消费者序列:C1-0,C2-0,C3-0</p>
+</blockquote>
+<p>然后将<em>分区数 / 消费者数</em> 决定每个消费线程消费几个分区,最终</p>
+<blockquote>
+<p>C1-0 : p0</p>
+<p>C2-0：p1</p>
+<p>C3-0：p2</p>
+</blockquote>
+<p><strong>如果2个主题，每个主题10个分区，group-0下的3个消费者怎么协调呢？</strong></p>
+<p>C1-0 将消费 T1 主题的 0, 1, 2, 3 分区以及 T2 主题的 0,1, 2, 3 分区</p>
+<p>C2-0 将消费 T1 主题的 4, 5, 6 分区以及 T2 主题的 4, 5, 6 分区 </p>
+<p>C3-0 将消费 T1 主题的 7, 8, 9 分区以及 T2 主题的 7, 8, 9分区</p>
+</li>
+<li><p>轮询分配</p>
+<p>轮询分区策略是把所有 partition 和所有 consumer 线程都列出来，按照 hashcode 进行排序。然后将所有分区依次轮流分配给所有consumer。</p>
+</li>
+</ul>
+<h5 id="5-什么时候触发消费分配策略？"><a href="#5-什么时候触发消费分配策略？" class="headerlink" title="5. 什么时候触发消费分配策略？"></a>5. 什么时候触发消费分配策略？</h5><p>消费者分区分配策略又叫 consumer rebalance。当：</p>
+<ul>
+<li><p>一个consumer group里新增消费者</p>
+</li>
+<li><p>有消费者离开当前的consumer group</p>
+</li>
+<li><p>topic新增分区</p>
+</li>
+</ul>
+<p>消费者 &lt;= 分区数，若大于分区数，就会有闲置的消费者</p>
+<p>partition最好是consumer的整数倍</p>
+<h3 id="ConsumerGroup"><a href="#ConsumerGroup" class="headerlink" title="ConsumerGroup"></a>ConsumerGroup</h3><p>逻辑概念，对于同一个topic，会广播给不同的group，一个group中，只有一个consumer可以消费该消息</p>
+<h3 id="Broker"><a href="#Broker" class="headerlink" title="Broker"></a>Broker</h3><p>物理概念，Kafka集群中的每个Kafka节点</p>
+<p>### </p>
+<p># </p>
 <h3 id="Replication"><a href="#Replication" class="headerlink" title="Replication"></a>Replication</h3><p>同一个Partition可能会有多个Replica，多个Replica之间数据是一样的</p>
 <ul>
 <li>当集群中有Broker挂掉的情况，系统可以主动地使用Replicas提供服务</li>
@@ -569,7 +614,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">237</span>
+                  <span class="site-state-item-count">245</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -580,7 +625,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -591,7 +636,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -636,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Producer"><span class="nav-number">1.</span> <span class="nav-text">Producer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consumer"><span class="nav-number">2.</span> <span class="nav-text">Consumer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConsumerGroup"><span class="nav-number">3.</span> <span class="nav-text">ConsumerGroup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Broker"><span class="nav-number">4.</span> <span class="nav-text">Broker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic"><span class="nav-number">5.</span> <span class="nav-text">Topic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition"><span class="nav-number">6.</span> <span class="nav-text">Partition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replication"><span class="nav-number">7.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replication-Leader"><span class="nav-number">8.</span> <span class="nav-text">Replication Leader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReplicaManager"><span class="nav-number">9.</span> <span class="nav-text">ReplicaManager</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Topic"><span class="nav-number">1.</span> <span class="nav-text">Topic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式"><span class="nav-number">2.</span> <span class="nav-text">分布式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生产者"><span class="nav-number">3.</span> <span class="nav-text">生产者</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#消费者"><span class="nav-number">4.</span> <span class="nav-text">消费者</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分区Partition"><span class="nav-number">5.</span> <span class="nav-text">分区Partition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#消息的分发策略"><span class="nav-number">6.</span> <span class="nav-text">消息的分发策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#消息的消费策略"><span class="nav-number">7.</span> <span class="nav-text">消息的消费策略</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-什么时候触发消费分配策略？"><span class="nav-number">7.0.0.0.1.</span> <span class="nav-text">5. 什么时候触发消费分配策略？</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#ConsumerGroup"><span class="nav-number">7.0.1.</span> <span class="nav-text">ConsumerGroup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Broker"><span class="nav-number">7.0.2.</span> <span class="nav-text">Broker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replication"><span class="nav-number">7.0.3.</span> <span class="nav-text">Replication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replication-Leader"><span class="nav-number">7.0.4.</span> <span class="nav-text">Replication Leader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReplicaManager"><span class="nav-number">7.0.5.</span> <span class="nav-text">ReplicaManager</span></a></li></div>
             
 
           </div>
