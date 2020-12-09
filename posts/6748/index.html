@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="疑惑 一个 while 死循环，会不会引起 CPU 使用率飚升？ 频繁 Young GC 会不会引起 CPU 使用率飚升？ 线程数很高的应用，CPU 使用率一定高么？ CPU 使用率高的应用，线程数一定高么？ BLOCKED 状态的线程会不会引起 CPU 使用率飚升？ 分时操作系统 CPU 是耗费 us ？ 还是耗费 sy ？  思考1、CPU 使用率怎么计算？ CPU% = 1 - idleTi">
+<meta name="description" content="疑惑 一个 while 死循环，会不会引起 CPU 使用率飚升？ 频繁 Young GC 会不会引起 CPU 使用率飚升？ 线程数很高的应用，CPU 使用率一定高么？ CPU 使用率高的应用，线程数一定高么？ BLOCKED 状态的线程会不会引起 CPU 使用率飚升？ 分时操作系统 CPU 是耗费 us ？ 还是耗费 sy ？">
 <meta name="keywords" content="Problem">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分析java应用cpu使用率飙升">
 <meta property="og:url" content="http://yoursite.com/posts/6748/index.html">
 <meta property="og:site_name" content="Jlin&#39;Blog">
-<meta property="og:description" content="疑惑 一个 while 死循环，会不会引起 CPU 使用率飚升？ 频繁 Young GC 会不会引起 CPU 使用率飚升？ 线程数很高的应用，CPU 使用率一定高么？ CPU 使用率高的应用，线程数一定高么？ BLOCKED 状态的线程会不会引起 CPU 使用率飚升？ 分时操作系统 CPU 是耗费 us ？ 还是耗费 sy ？  思考1、CPU 使用率怎么计算？ CPU% = 1 - idleTi">
+<meta property="og:description" content="疑惑 一个 while 死循环，会不会引起 CPU 使用率飚升？ 频繁 Young GC 会不会引起 CPU 使用率飚升？ 线程数很高的应用，CPU 使用率一定高么？ CPU 使用率高的应用，线程数一定高么？ BLOCKED 状态的线程会不会引起 CPU 使用率飚升？ 分时操作系统 CPU 是耗费 us ？ 还是耗费 sy ？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://www.pianshen.com/images/656/b9a045178b67f683c8f2dba797a481d0.JPEG">
 <meta property="og:image" content="https://www.pianshen.com/images/909/b433e06f8d2a11b040e0d84e2018d925.JPEG">
 <meta property="og:image" content="https://www.pianshen.com/images/453/4a4795af002747efa2f31fc2b03182f5.JPEG">
-<meta property="og:updated_time" content="2020-11-24T09:17:45.508Z">
+<meta property="og:updated_time" content="2020-12-09T12:33:37.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分析java应用cpu使用率飙升">
-<meta name="twitter:description" content="疑惑 一个 while 死循环，会不会引起 CPU 使用率飚升？ 频繁 Young GC 会不会引起 CPU 使用率飚升？ 线程数很高的应用，CPU 使用率一定高么？ CPU 使用率高的应用，线程数一定高么？ BLOCKED 状态的线程会不会引起 CPU 使用率飚升？ 分时操作系统 CPU 是耗费 us ？ 还是耗费 sy ？  思考1、CPU 使用率怎么计算？ CPU% = 1 - idleTi">
+<meta name="twitter:description" content="疑惑 一个 while 死循环，会不会引起 CPU 使用率飚升？ 频繁 Young GC 会不会引起 CPU 使用率飚升？ 线程数很高的应用，CPU 使用率一定高么？ CPU 使用率高的应用，线程数一定高么？ BLOCKED 状态的线程会不会引起 CPU 使用率飚升？ 分时操作系统 CPU 是耗费 us ？ 还是耗费 sy ？">
 <meta name="twitter:image" content="https://www.pianshen.com/images/656/b9a045178b67f683c8f2dba797a481d0.JPEG">
 
 
@@ -438,6 +438,7 @@
 <li>BLOCKED 状态的线程会不会引起 CPU 使用率飚升？</li>
 <li>分时操作系统 CPU 是耗费 us ？ 还是耗费 sy ？</li>
 </ul>
+<a id="more"></a>
 <h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a><strong>思考</strong></h1><p><strong>1、CPU 使用率怎么计算？</strong></p>
 <p>CPU% = 1 - idleTime / sysTime * 100</p>
 <ul>
@@ -614,7 +615,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">274</span>
+                  <span class="site-state-item-count">275</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
