@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="VisualVM 是Netbeans的profile子项目，已在JDK6.0 update 7 中自带(java启动时不需要特定参数，监控工具在bin/jvisualvm.exe)。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jvisualvm 工具使用">
+<meta property="og:url" content="http://yoursite.com/posts/950d/index.html">
+<meta property="og:site_name" content="Jlin&#39;Blog">
+<meta property="og:description" content="VisualVM 是Netbeans的profile子项目，已在JDK6.0 update 7 中自带(java启动时不需要特定参数，监控工具在bin/jvisualvm.exe)。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/430613/201712/430613-20171222122710975-1342520301.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/430613/201712/430613-20171222122710975-1342520301.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022120335144773.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022120335144773.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022128212336982.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022128212336982.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022128423589095.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022128423589095.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022129346864342.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022129346864342.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022129483114746.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022129483114746.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022130152955868.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022130152955868.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022130429057334.png">
+<meta property="og:image" content="https://images0.cnblogs.com/blog/430613/201412/022130429057334.png">
+<meta property="og:image" content="https://images0.cnblogs.com/i/430613/201403/301044399697231.jpg">
+<meta property="og:image" content="https://images0.cnblogs.com/i/430613/201403/301044399697231.jpg">
+<meta property="og:image" content="https://images0.cnblogs.com/i/430613/201403/301047340786772.jpg">
+<meta property="og:image" content="https://images0.cnblogs.com/i/430613/201403/301047340786772.jpg">
+<meta property="og:image" content="https://images0.cnblogs.com/i/430613/201403/301051182507920.jpg">
+<meta property="og:image" content="https://images0.cnblogs.com/i/430613/201403/301051182507920.jpg">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M01/22/4A/wKiom1MZtKTTJ5K3AABJbkv4_d4875.jpg " 图片7.jp">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M00/22/4B/wKioL1MZtKaiSdicAAB6rwX6AqE541.jpg " 图片8.jpg">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M02/22/4A/wKiom1MZtSiQgvHBAAF6Dw_4JBI844.jpg " 图片11.jp">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M01/22/4B/wKioL1MZtQLDKyaOAAO9bvzBju0083.jpg " 图片9.jpg">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M00/22/4A/wKiom1MZtSixQ5WVAAGs96BTilg611.jpg " 图片10.jpg">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M01/22/4B/wKioL1MZtlHREhrhAAMFKXoTEMw761.jpg " 图片13.jpg">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M01/22/4A/wKiom1MZtrWRVGIQAAMV1WiIwr0717.jpg " 图片12.jpg">
+<meta property="og:image" content="http://s3.51cto.com/wyfs02/M01/22/4A/wKiom1MZuOfBZE4hAAJS5vcnocE082.jpg " 图片14.jpg">
+<meta property="og:updated_time" content="2019-08-10T03:53:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jvisualvm 工具使用">
+<meta name="twitter:description" content="VisualVM 是Netbeans的profile子项目，已在JDK6.0 update 7 中自带(java启动时不需要特定参数，监控工具在bin/jvisualvm.exe)。">
+<meta name="twitter:image" content="https://images2017.cnblogs.com/blog/430613/201712/430613-20171222122710975-1342520301.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/posts/950d/">
+
+
+
+
+
+  <title>jvisualvm 工具使用 | Jlin'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/Delena1988" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jlin'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/950d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">jvisualvm 工具使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-20T09:18:11+08:00">
+                2019-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/950d/" class="leancloud_visitors" data-flag-title="jvisualvm 工具使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>VisualVM 是Netbeans的profile子项目，已在JDK6.0 update 7 中自带(java启动时不需要特定参数，监控工具在bin/jvisualvm.exe)。</p>
+<a id="more"></a>
+<h2 id="https-visualvm-dev-java-net"><a href="#https-visualvm-dev-java-net" class="headerlink" title="https://visualvm.dev.java.net/"></a><a href="https://visualvm.dev.java.net/" target="_blank" rel="noopener">https://visualvm.dev.java.net/</a></h2><h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>VisualVM，能够监控线程，内存情况，查看方法的CPU时间和内存中的对 象，已被GC的对象，反向查看分配的堆栈(如100个String对象分别由哪几个对象分配出来的).</p>
+<p>从界面上看还是比较简洁的，左边是树形结构，自动显示当前本机所运行的Java程序，还可以添加远程的Java VM，其中括号里面的PID指的是进程ID。OverView界面显示VM启动参数以及该VM对应的一些属性。Monitor界面则是监控Java堆大小，Permgen大小，Classes和线程数量。jdk不同版本中界面会不太一致，如有的含cpu监控，有的则不含（jdk1.6.0_10未包含）。</p>
+<p>官网上关于jvisualvm的用法介绍</p>
+<p><a href="http://docs.oracle.com/javase/6/docs/technotes/tools/share/jvisualvm.html" target="_blank" rel="noopener">http://docs.oracle.com/javase/6/docs/technotes/tools/share/jvisualvm.html</a></p>
+<p>作用：JVM和监控的应用程序运行在不同的服务器上，减轻应用程序的负担，特别是HeapDump的时候，应用常能够续负担很大。</p>
+<p>VisualVM使用简单，几乎0配置，功能还是比较丰富的，几乎囊括了其它JDK自带命令的所有功能。</p>
+<ul>
+<li>内存信息</li>
+<li>线程信息</li>
+<li>Dump堆（本地进程）</li>
+<li>Dump线程（本地进程）</li>
+<li>打开堆Dump。堆Dump可以用jmap来生成。</li>
+<li>打开线程Dump</li>
+<li>生成应用快照（包含内存信息、线程信息等等）</li>
+<li>性能分析。 :idea: CPU分析（各个方法调用时间，检查哪些方法耗时多），内存分析（各类对象占用的内存，检查哪些类占用内存多）</li>
+<li>……</li>
+</ul>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>本地监控不需要配置，只要打开某个JAVA程序就会自动的加入到本地监控中。</p>
+<p>远程监控： 本机的VisualVM就必须和远程的JVM要进行通信, Visualvm目前支持两种remote connection方式，分别是jstatd和JMX方式。</p>
+<p>远程监控某个中间件时，需要修改中间件的启动文件，添加上关于jmx等的信息。</p>
+<p>1、远程监控tomcat，jmx方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">服务器 上的 tomcat 配置 jvm 启动参数。</span><br><span class="line">在 tomcat 的 catalina.bat 中添 加如下参数: </span><br><span class="line">JAVA_OPTS=&quot;$JAVA_OPTS -Djava.rmi.server.hostname=192.168.0.237    </span><br><span class="line">                      -Dcom.sun.management.jmxremote.port=18999</span><br><span class="line">                      -Dcom.sun.management.jmxremote.ssl=false </span><br><span class="line">                      -Dcom.sun.management.jmxremote.authenticate=false&quot;</span><br><span class="line"></span><br><span class="line">上述参数未设用户名与密码登录。</span><br><span class="line">  客户端VisualVM配置 (我客户端用的是WinXP).</span><br><span class="line">     a.直接反键点击Remote，选择Add Remote Host...</span><br><span class="line">     b.在弹出的界面中输入远程机器的IP地址(192.168.0.237)，这个IP地址会加入到Remote节点下.</span><br><span class="line">     c.反键点击这个IP地址，选择Add JMX Connection, 在弹出的界面中输入刚配置的端口号(18999), 这个连接会加入到该IP节点下.</span><br><span class="line">     d.反键点击这个连接，选择Open.</span><br></pre></td></tr></table></figure>
+<p>此处参数设置与jconsole工具远程监控tomcat相同。</p>
+<p>2、监视websphere服务器JVM的配置</p>
+<p><a href="http://xjsunjie.blog.51cto.com/999372/1331880" target="_blank" rel="noopener">http://xjsunjie.blog.51cto.com/999372/1331880</a></p>
+<p><a href="http://www.cnblogs.com/sideny/p/3517814.html" target="_blank" rel="noopener">jconsole &amp; jvisualvm远程监视websphere服务器JVM的配置案</a></p>
+<p>在启动文件里配置。</p>
+<p>3、jstatd 配置。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p><a href="http://zhouanya.blog.51cto.com/4944792/1370017" target="_blank" rel="noopener">http://zhouanya.blog.51cto.com/4944792/1370017</a></p>
+<p><strong>visualVM 插件</strong></p>
+<p><a href="https://github.com/irockel/tda" target="_blank" rel="noopener">https://github.com/irockel/tda</a></p>
+<p>visualVM还可通过扩展增加功能。启动页面时有“<a href="https://visualvm.github.io/plugins.html" target="_blank" rel="noopener">visualVM 扩展入门指南</a>”，如果需要哪些插件可看下这里的介绍。</p>
+<p>在“工具”-》“插件”-》可用插件项中列出。</p>
+<p><img src="https://images2017.cnblogs.com/blog/430613/201712/430613-20171222122710975-1342520301.png" alt><img src="https://images2017.cnblogs.com/blog/430613/201712/430613-20171222122710975-1342520301.png" alt></p>
+<p>除这些可用插件外，还可以增加第三方的插件扩展功能。</p>
+<p>Third Party Plugins:</p>
+<p><strong>BTrace Plugin:</strong> support for creating, deploying and saving BTrace scripts directly from the VisualVM. <a href="https://github.com/btraceio/btrace" target="_blank" rel="noopener">Home »</a></p>
+<p><strong>Coherence Plugin:</strong> summarized statistics and information for a JMX enabled Coherence cluster. <a href="http://coherence-community.github.io/coherence-incubator/12.1.0/jvisualvm/index.html" target="_blank" rel="noopener">Home »</a></p>
+<p><strong>CRaSH Plugin:</strong> support for the CRaSH open source shell for the Java Platform in VisualVM. <a href="https://github.com/crashub/visualvm" target="_blank" rel="noopener">Home »</a></p>
+<p><strong>OSGi Plugin:</strong> basic management of OSGi platforms via JMX. <a href="http://wiki.chameleon.ow2.org/xwiki/bin/view/Main/AdminTools" target="_blank" rel="noopener">Home »</a></p>
+<p><strong>TDA Plugin:</strong> Thread Dump Analyzer is a GUI for analyzing thread dumps generated by the Java VM. <a href="https://github.com/irockel/tda" target="_blank" rel="noopener">Home »</a></p>
+<p>其他插件里：</p>
+<p><strong>Buffer Monitor:</strong> monitoring usage of direct buffers created by <code>ByteBuffer.allocateDirect</code> and mapped buffers created by <code>FileChannel.map</code>.</p>
+<p>Buffer Pools和MBeans Browser可以通过GUI的方式查看DirectMemory的即时使用情况。</p>
+<p>如果是JDK 7及以上版本，可以用jconsole或者jvisualvm的MBean窗口查看java.nio.BufferPool.direct属性。参考：<a href="https://www.zhihu.com/question/55033583" target="_blank" rel="noopener">https://www.zhihu.com/question/55033583</a></p>
+<h1 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h1><h2 id="1、插件“Visual-GC”使用。"><a href="#1、插件“Visual-GC”使用。" class="headerlink" title="1、插件“Visual GC”使用。"></a>1、插件“Visual GC”使用。</h2><p>转自：<a href="http://supercharles888.blog.51cto.com/609344/1179790" target="_blank" rel="noopener">http://supercharles888.blog.51cto.com/609344/1179790</a></p>
+<p>安装 ”Visual GC”插件:</p>
+<p>这个插件是jvisualvm的插件，它非常强大，可以动态的对指定的进程进行监控，并且来通过统计面板来分类显示出各项任务/事件的总时间开销：</p>
+<p>安装方法： Tool-&gt;Plugin-&gt;Available Plugins:</p>
+<p><img src="https://images0.cnblogs.com/blog/430613/201412/022120335144773.png" alt><img src="https://images0.cnblogs.com/blog/430613/201412/022120335144773.png" alt></p>
+<p>重启Visual VM 之后，就可以看到这个”Visual GC”已经被正确的显示了。</p>
+<p><strong>实战： 用Visual VM和Visual GC来优化我们的Eclipse启动：</strong></p>
+<p>首先，我们启动eclipse:</p>
+<p>在ps -ef|grep eclipse（windows则是任务管理器）中，我们可以从看到这个进程id为32561</p>
+<p>我们从Visual VM中找到对应的process id:</p>
+<p><img src="https://images0.cnblogs.com/blog/430613/201412/022128212336982.png" alt><img src="https://images0.cnblogs.com/blog/430613/201412/022128212336982.png" alt></p>
+<p>我们切换到 “Visual GC”标签页，它会显示启动eclipse的所有测量数据：</p>
+<p><img src="https://images0.cnblogs.com/blog/430613/201412/022128423589095.png" alt><img src="https://images0.cnblogs.com/blog/430613/201412/022128423589095.png" alt></p>
+<p>分析：</p>
+<p>从上图中我们可以很明显的看出来，主要的时间开销在以下2方面：</p>
+<p>(1)编译时间有点长，用了3.794秒，这个时间主要是用来校验eclipse平台本身的字节码了，所以我们需要关闭字节码校验，让启动时候不会去校验平台本身（也是java写的）的字节码，为了达到这个目的，我们只需要在eclipse启动参数中加上-Xverify:none</p>
+<p>如下所示，因为我们用的是Spring Source Tool Suite,所以我们在STS.ini中增加这一行。</p>
+<p><img src="https://images0.cnblogs.com/blog/430613/201412/022129346864342.png" alt><img src="https://images0.cnblogs.com/blog/430613/201412/022129346864342.png" alt></p>
+<p><img src="https://images0.cnblogs.com/blog/430613/201412/022129483114746.png" alt><img src="https://images0.cnblogs.com/blog/430613/201412/022129483114746.png" alt></p>
+<p>(2)另外一个大问题就是类加载时间，它有2部分组成，因为类有2部分组成，一是eclipse平台自带的类，二是它所使用的插件的类文件，我们可以在eclipse启动的时候关闭不必要的插件加载来减少类加载时间，方法是Preference-&gt;General-&gt;Startup and Shutdown</p>
+<p><img src="https://images0.cnblogs.com/blog/430613/201412/022130152955868.png" alt><img src="https://images0.cnblogs.com/blog/430613/201412/022130152955868.png" alt></p>
+<p>校验结果：</p>
+<p>现在我们把eclipse关闭并且重新打开，这会启动一个新的进程，id为32696,我们把这次Visual GC的测量图和原来的进行比较：</p>
+<p><img src="https://images0.cnblogs.com/blog/430613/201412/022130429057334.png" alt><img src="https://images0.cnblogs.com/blog/430613/201412/022130429057334.png" alt></p>
+<p>从这里可以看出来，时间被明显的缩短了，编译时间从3.794秒缩短到2.155秒，提升百分比为43.1%。而类加载时间从18.424秒缩短到10.208秒，提升百分比为44.6%。</p>
+<p>额外步骤：</p>
+<p>对于一些其他的启动参数，比如初始内存，最大内存，Gem,Perm的参数。</p>
+<p><strong>2、将堆dump的文件，使用其进行查看。</strong></p>
+<p>1）堆dump文件。</p>
+<p><img src="https://images0.cnblogs.com/i/430613/201403/301044399697231.jpg" alt><img src="https://images0.cnblogs.com/i/430613/201403/301044399697231.jpg" alt></p>
+<p>2）将dump文件传至jvisualvm本机，点击”文件“-》”装入“，选择第一步生成的dump文件。</p>
+<p>a.摘要标签</p>
+<p><img src="https://images0.cnblogs.com/i/430613/201403/301047340786772.jpg" alt><img src="https://images0.cnblogs.com/i/430613/201403/301047340786772.jpg" alt></p>
+<p>可查看dump的各项信息。</p>
+<p>文件-&gt;装入-&gt;堆Dump－&gt;<strong>检查</strong> -&gt; <strong>查找20保留大小最大的对象</strong>，就会触发保留大小的计算，然后就可以类视图里浏览，按保留大小排序了。</p>
+<p>对象的大小有两种统计方式：</p>
+<ul>
+<li>本身大小(Shallow Size)：对象本来的大小。</li>
+<li>保留大小(Retained Size)： 当前对象大小 + 当前对象直接或间接引用到的对象的大小总和。</li>
+</ul>
+<p>看本身大小时，占大头的都是char[] ,byte[]之类的，没什么意思（用jmap -histo:live pid 看的也是本身大小）。所以需要关心的是保留大小比较大的对象，看谁在引用这些char[], byte[]。</p>
+<p>b.类 标签</p>
+<p><img src="https://images0.cnblogs.com/i/430613/201403/301051182507920.jpg" alt><img src="https://images0.cnblogs.com/i/430613/201403/301051182507920.jpg" alt></p>
+<p>双击某个类，点击实例视图。</p>
+<p>c.实例试图</p>
+<h1 id="远程监控内存泄露、解决内存溢出问题"><a href="#远程监控内存泄露、解决内存溢出问题" class="headerlink" title="远程监控内存泄露、解决内存溢出问题"></a>远程监控内存泄露、解决内存溢出问题</h1><p>1)内存泄露、溢出的异同</p>
+<p>同：都会导致应用程序运行出现问题，性能下降或挂起。</p>
+<p>异：</p>
+<p>v内存泄露是导致内存溢出的原因之一；内存泄露积累起来将导致内存溢出。</p>
+<p>v内存泄露可以通过完善代码来避免；内存溢出可以通过调整配置来减少发生频率，但无法彻底避免。</p>
+<p>2)监测内存泄漏</p>
+<p>·内存泄漏是指程序中间动态分配了内存，但在程序结束时没有释放这部分内存，从而造成那部分内存不可用的情况，重启计算机可以解决，但也有可能再次发生内存泄露，内存泄露和硬件没有关系，它是由软件设计缺陷引起的。</p>
+<p>·内存泄漏可以分为4类：</p>
+<p>a. 常发性内存泄漏。发生内存泄漏的代码会被多次执行到，每次被执行的时候都会导致一块内存泄漏。</p>
+<p>b.偶发性内存泄漏。发生内存泄漏的代码只有在某些特定环境或操作过程下才会发生。常发性和偶发性是相对的。对于特定的环境，偶发性的也许就变成了常发性的。所以测试环境和测试方法对检测内存泄漏至关重要。</p>
+<p>c.一次性内存泄漏。发生内存泄漏的代码只会被执行一次，或者由于算法上的缺陷，导致总会有一块仅且一块内存发生泄漏。比如，在类的构造函数中分配内存，在析构函数中却没有释放该内存，所以内存泄漏只会发生一次。</p>
+<p>d.隐式内存泄漏。程序在运行过程中不停的分配内存，但是直到结束的时候才释放内存。严格的说这里并没有发生内存泄漏，因为最终程序释放了所有申请的内存。但是对于一个服务器程序，需要运行几天，几周甚至几个月，不及时释放内存也可能导致最终耗尽系统的所有内存。所以，我们称这类内存泄漏为隐式内存泄漏。</p>
+<p>3)Heap dump 分析</p>
+<p>每隔一段时间给所检测的java应用做一次heap dump：</p>
+<p><a href="http://s3.51cto.com/wyfs02/M01/22/4A/wKiom1MZtKTTJ5K3AABJbkv4_d4875.jpg" target="_blank" rel="noopener"><img src="http://s3.51cto.com/wyfs02/M01/22/4A/wKiom1MZtKTTJ5K3AABJbkv4_d4875.jpg &quot;图片7.jp" alt="wKiom1MZtKTTJ5K3AABJbkv4_d4875.jpg"></a></p>
+<p>（或者在响应应用pid上鼠标右键heap dump）弹出以下提示框：</p>
+<p><a href="http://s3.51cto.com/wyfs02/M00/22/4B/wKioL1MZtKaiSdicAAB6rwX6AqE541.jpg" target="_blank" rel="noopener"><img src="http://s3.51cto.com/wyfs02/M00/22/4B/wKioL1MZtKaiSdicAAB6rwX6AqE541.jpg &quot;图片8.jpg" alt="wKioL1MZtKaiSdicAAB6rwX6AqE541.jpg"></a></p>
+<p>在应用服务器将此文件下载到jvisual vm所在的机器上，file–load打开此文件，如下面三图所示：</p>
+<p><a href="http://s3.51cto.com/wyfs02/M02/22/4A/wKiom1MZtSiQgvHBAAF6Dw_4JBI844.jpg" target="_blank" rel="noopener"><img src="http://s3.51cto.com/wyfs02/M02/22/4A/wKiom1MZtSiQgvHBAAF6Dw_4JBI844.jpg &quot;图片11.jp" alt="wKiom1MZtSiQgvHBAAF6Dw_4JBI844.jpg"></a></p>
+<p><a href="http://s3.51cto.com/wyfs02/M01/22/4B/wKioL1MZtQLDKyaOAAO9bvzBju0083.jpg" target="_blank" rel="noopener"><img src="http://s3.51cto.com/wyfs02/M01/22/4B/wKioL1MZtQLDKyaOAAO9bvzBju0083.jpg &quot;图片9.jpg" alt="wKioL1MZtQLDKyaOAAO9bvzBju0083.jpg"></a></p>
+<p><a href="http://s3.51cto.com/wyfs02/M00/22/4A/wKiom1MZtSixQ5WVAAGs96BTilg611.jpg" target="_blank" rel="noopener"><img src="http://s3.51cto.com/wyfs02/M00/22/4A/wKiom1MZtSixQ5WVAAGs96BTilg611.jpg &quot;图片10.jpg" alt="wKiom1MZtSixQ5WVAAGs96BTilg611.jpg"></a></p>
+<p>对比上面三个截图，发现似乎有个东西在急速飙升，仔细一看是这个对象：org.eclipse.swt.graphics.Image 在第一章图中这个还没排的上，第二次dump已经上升到5181个，第三次就是7845个了。涨速相当快，而且和任务管理器里面看到的GDI数量增涨一致，就是它了。</p>
+<p>问题到这儿就比较清楚了，回到代码里面仔细一看可以发现，是某个地方反复的用图片来创建Image对象导致的，改掉以后搞定问题。</p>
+<p>到这里其实我想说的是，Java使用起来其实要比C++更容易导致内存泄漏。对于C++来说，每一个申请的对象都必须明确释放，任何没有释放的对象都会导致memleak，这是不可饶恕的，而且这类问题已经有很多工具和方法来解决。但是到了Java里面情况就不同了，对于Java程序员来说对象都是不需要也无法主动销毁的，所以一般的思路是：随用随new，用完即丢。很多对象具体的生命周期可能连写代码的人自己也不清楚，或者不需要清楚，只知道某个时刻垃圾收集器会去做的，不用管。但很可能某个对象在“用完即丢”的时候在另一个不容易发现的地方被保存了一个引用，那么这个对象就永远不会被回收。更加糟糕的是整个程序从设计之初就没有考虑过对象回收的问题，对于C++程序员来说memleak必然是一个设计错误，但是对Java程序员来说这只是一个疏忽，而且似乎没有什么好的办法来避免。今天看到的这个问题是因为GDI泄漏会造成严重后果才被重视，但如果仅仅是造成内存泄漏，那这个程序可能得连续跑上个十天半个月才会发现问题。最后就是，对于c++，错误的代码在测试阶段就可以快速的侦测出哪怕一个byte的memleak并加以改正，但是对于java程序，理论上没有哪个工具能够知道是不是有泄漏，因为除了作者自己以外没有人能够知道一个被引用的对象是不是应该被销毁，只有通过大量的，长期的压力测试才能发现问题，这是很危险的一件事情。</p>
+<p>4)解决内存溢出问题</p>
+<p>1、java.lang.OutOfMemoryError: PermGen space</p>
+<p>JVM管理两种类型的内存，堆和非堆。堆是在JVM启动时创建；非堆是留给JVM自己用的，用来存放类的信息的。它和堆不同，运行期内GC不会释放空间。如果web app用了大量的第三方jar或者应用有太多的class文件而恰好MaxPermSize设置较小，超出了也会导致这块内存的占用过多造成溢出，或者tomcat热部署时侯不会清理前面加载的环境，只会将context更改为新部署的，非堆存的内容就会越来越多。</p>
+<p>PermGen space的全称是Permanent Generation space，是指内存的永久保存区域，这块内存主要是被JVM存放Class和Meta信息的，Class在被Loader时就会被放到PermGen space中，它和存放类实例(Instance)的Heap区域不同，GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的应用中有很CLASS的话，就很可能出现PermGen space错误，这种错误常见在web服务器对JSP进行pre compile的时候。如果你的WEB APP下都用了大量的第三方jar, 其大小超过了jvm默认的大小(4M)那么就会产生此错误信息了。</p>
+<p><a href="http://s3.51cto.com/wyfs02/M01/22/4B/wKioL1MZtlHREhrhAAMFKXoTEMw761.jpg" target="_blank" rel="noopener"><img src="http://s3.51cto.com/wyfs02/M01/22/4B/wKioL1MZtlHREhrhAAMFKXoTEMw761.jpg &quot;图片13.jpg" alt="wKioL1MZtlHREhrhAAMFKXoTEMw761.jpg"></a></p>
+<p>如上图所示，PermGen在程序运行一段时间后超出了我们指定的128MB，通过Classes视图看到，Java在运行的同时加载了大量的类到内存中。PermGen会存储Jar或者Class的描述信息；所以在class大量增加的同时PermGen超出了我们指定的范围。为了让应用稳定，我们需要探寻新的PermGen范围。检测时段时候后（如下图）发现PermGen在145MB左右稳定，那么我们就得到了稳定的新参数；这样PermGen内存溢出的问题得到解决。</p>
+<p><a href="http://s3.51cto.com/wyfs02/M01/22/4A/wKiom1MZtrWRVGIQAAMV1WiIwr0717.jpg" target="_blank" rel="noopener"><img src="http://s3.51cto.com/wyfs02/M01/22/4A/wKiom1MZtrWRVGIQAAMV1WiIwr0717.jpg &quot;图片12.jpg" alt="wKiom1MZtrWRVGIQAAMV1WiIwr0717.jpg"></a></p>
+<p>2、java.lang.OutOfMemoryError: Java heap space</p>
+<p>第一种情况是个补充，主要存在问题就是出现在这个情况中。其默认空间(即-Xms)是物理内存的1/64，最大空间(-Xmx)是物理内存的1/4。如果内存剩余不到40％，JVM就会增大堆到Xmx设置的值，内存剩余超过70％，JVM就会减小堆到Xms设置的值。所以服务器的Xmx和Xms设置一般应该设置相同避免每次GC后都要调整虚拟机堆的大小。假设物理内存无限大，那么JVM内存的最大值跟操作系统有关，一般32位机是1.5g到3g之间，而64位的就不会有限制了。</p>
+<p>注意：如果Xms超过了Xmx值，或者堆最大值和非堆最大值的总和超过了物理内存或者操作系统的最大限制都会引起服务器启动不起来。</p>
+<p>垃圾回收GC的角色，JVM调用GC的频度还是很高的，主要两种情况下进行垃圾回收：</p>
+<p>一个是当应用程序线程空闲；另一个是java内存堆不足时，会不断调用GC，若连续回收都解决不了内存堆不足的问题时，就会报out of memory错误。因为这个异常根据系统运行环境决定，所以无法预期它何时出现。</p>
+<p>根据GC的机制，程序的运行会引起系统运行环境的变化，增加GC的触发机会。</p>
+<p>为了避免这些问题，程序的设计和编写就应避免垃圾对象的内存占用和GC的开销。显示调用System.GC()只能建议JVM需要在内存中对垃圾对象进行回收，但不是必须马上回收。一个是并不能解决内存资源耗空的局面，另外也会增加GC的消耗。</p>
+<p><a href="http://s3.51cto.com/wyfs02/M01/22/4A/wKiom1MZuOfBZE4hAAJS5vcnocE082.jpg" target="_blank" rel="noopener"><img src="http://s3.51cto.com/wyfs02/M01/22/4A/wKiom1MZuOfBZE4hAAJS5vcnocE082.jpg &quot;图片14.jpg" alt="wKiom1MZuOfBZE4hAAJS5vcnocE082.jpg"></a></p>
+<h2 id="如何避免内存泄漏、溢出"><a href="#如何避免内存泄漏、溢出" class="headerlink" title="如何避免内存泄漏、溢出"></a>如何避免内存泄漏、溢出</h2><p>1)尽早释放无用对象的引用。</p>
+<p>好的办法是使用临时变量的时候，让引用变量在退出活动域后自动设置为null，暗示垃圾收集器来收集该对象，防止发生内存泄露。</p>
+<ol start="3">
+<li>程序进行字符串处理时，尽量避免使用String，而应使用StringBuffer。</li>
+</ol>
+<p>因为每一个String对象都会独立占用内存一块区域，如：</p>
+<p>1.String str = “aaa”;</p>
+<p>2.String str2 = “bbb”;</p>
+<p>3.String str3 = str + str2;</p>
+<p>4.// 假如执行此次之后str , str2再不被调用，那么它们就会在内存中等待GC回收；</p>
+<p>5.// 假如程序中存在过多的类似情况就会出现内存错误；</p>
+<ol start="4">
+<li>尽量少用静态变量。</li>
+</ol>
+<p>因为静态变量是全局的，GC不会回收。</p>
+<ol start="5">
+<li>避免集中创建对象尤其是大对象，如果可以的话尽量使用流操作。</li>
+</ol>
+<p>JVM会突然需要大量内存，这时会触发GC优化系统内存环境； 一个案例如下：</p>
+<p>1.// 使用jspsmartUpload作文件上传，运行过程中经常出现java.outofMemoryError的错误，</p>
+<p>2.// 检查之后发现问题：组件里的代码</p>
+<p>3.m_totalBytes = m_request.getContentLength();</p>
+<p>4.m_binArray = new byte[m_totalBytes];</p>
+<p>5.// totalBytes这个变量得到的数极大，导致该数组分配了很多内存空间，而且该数组不能及时释放。</p>
+<p>6.// 解决办法只能换一种更合适的办法，至少是不会引发outofMemoryError的方式解决。</p>
+<p>7.// 参考：<a href="http://bbs.xml.org.cn/blog/more.asp?name=hongrui&amp;id=3747" target="_blank" rel="noopener">http://bbs.xml.org.cn/blog/more.asp?name=hongrui&amp;id=3747</a></p>
+<ol start="6">
+<li>尽量运用对象池技术以提高系统性能。</li>
+</ol>
+<p>生命周期长的对象拥有生命周期短的对象时容易引发内存泄漏，例如大集合对象拥有大数据量的业务对象的时候，可以考虑分块进行处理，然后解决一块释放一块的策略。</p>
+<ol start="7">
+<li>不要在经常调用的方法中创建对象，尤其是忌讳在循环中创建对象。</li>
+</ol>
+<p>可以适当的使用hashtable，vector 创建一组对象容器，然后从容器中去取那些对象，而不用每次new之后又丢弃。</p>
+<ol start="8">
+<li>优化配置。</li>
+</ol>
+<p>a.设置-Xms、-Xmx相等；</p>
+<p>b.设置NewSize、MaxNewSize相等；</p>
+<p>c.设置Heap size, PermGen space:</p>
+<h1 id="使用过程中遇到的一些问题与疑问"><a href="#使用过程中遇到的一些问题与疑问" class="headerlink" title="使用过程中遇到的一些问题与疑问"></a>使用过程中遇到的一些问题与疑问</h1><p>问题1：从服务器dump堆内存后文件比较大（3.5G左右），加载文件、查看实例对象都很慢，还提示配置xmx大小。在windows上如何配置xmx大小？</p>
+<p>表明给VisualVM分配的堆内存不够，找到${visualvm}/etc/visualvm.conf （如：C:\Program Files\Java\jdk1.6.0_10\lib\visualvm\etc）这个文件，修改</p>
+<p>default_options=”-J-Xms24m -J-Xmx192m“</p>
+<p>为</p>
+<p>default_options=”-J-Xms24m -J-Xmx1024m”（</p>
+<p>再重启VisualVM就行了。</p>
+<p>对于“堆 dump”来说，在远程监控jvm的时候，VisualVM是没有这个功能的，只有本地监控的时候才有。另外，就算是本地监控，它在dump和得到实例的 速度那是相当的慢的。所以鉴于这几个原因，不建议用VisualVM，而是用jmap加上Mat来分析内存情况。</p>
+<p>问题2：</p>
+<p>参考资料：</p>
+<p>1、<a href="http://www.kankanews.com/ICkengine/archives/106440.shtml" target="_blank" rel="noopener">http://www.kankanews.com/ICkengine/archives/106440.shtml</a></p>
+<p>2、<a href="http://freewind.me/blog/20111023/479.html" target="_blank" rel="noopener">http://freewind.me/blog/20111023/479.html</a></p>
+<p>3、<a href="http://supercharles888.blog.51cto.com/609344/1179790" target="_blank" rel="noopener">http://supercharles888.blog.51cto.com/609344/1179790</a></p>
+<p>4、<a href="http://zhouanya.blog.51cto.com/4944792/1370017" target="_blank" rel="noopener">http://zhouanya.blog.51cto.com/4944792/1370017</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/d721/" rel="next" title="JDK升级">
+                <i class="fa fa-chevron-left"></i> JDK升级
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/5275/" rel="prev" title="OKHttpUtil">
+                OKHttpUtil <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">jlin</p>
+              <p class="site-description motion-element" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">305</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Delena1988" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <!--
+ <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=17746129&auto=1&height=66"></iframe>
+-->
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#https-visualvm-dev-java-net"><span class="nav-number">1.</span> <span class="nav-text">https://visualvm.dev.java.net/</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number"></span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number"></span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number"></span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用实例"><span class="nav-number"></span> <span class="nav-text">使用实例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、插件“Visual-GC”使用。"><span class="nav-number">1.</span> <span class="nav-text">1、插件“Visual GC”使用。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#远程监控内存泄露、解决内存溢出问题"><span class="nav-number"></span> <span class="nav-text">远程监控内存泄露、解决内存溢出问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何避免内存泄漏、溢出"><span class="nav-number">1.</span> <span class="nav-text">如何避免内存泄漏、溢出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用过程中遇到的一些问题与疑问"><span class="nav-number"></span> <span class="nav-text">使用过程中遇到的一些问题与疑问</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jlin</span>
+
+  
+</div>
+
+<!-- 
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("2St4VI7jM52zNshKs53hAmwv-MdYXbMMI", "D1Ojv96bxL0R4uFTWUc6HFT9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
