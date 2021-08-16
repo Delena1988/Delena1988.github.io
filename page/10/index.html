@@ -294,6 +294,395 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/1b25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/1b25/" itemprop="url">Mysql自定义排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-11T10:36:17+08:00">
+                2020-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/1b25/" class="leancloud_visitors" data-flag-title="Mysql自定义排序">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  692 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在 SQL 查询中可能有时需要使用 ASC 或 DESC 或使用特殊排序字段才能完成的特定顺序. MySQL 有一个 ORDER BY FIELD 函数可以用来做这个.  </p>
+<h1 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h1><p>本文中的示例数据使用我的示例 <a href="https://www.electrictoolbox.com/mysql-example-table/" target="_blank" rel="noopener">fruit</a> 表. 这是一个有点简单的表, 但它可以用来很好地说明这篇文章中的观点.</p>
+<h1 id="按特定字段值排序"><a href="#按特定字段值排序" class="headerlink" title="按特定字段值排序"></a>按特定字段值排序</h1><p>fruit 表有一个 name 字段, 具有以下特定的值: 苹果(Apple), 香蕉(Banana), 橘子(Orange), 梨(Pear). 每个特定的值都有一系列的品种.</p>
+<p>比方说, 为了论证的缘故, 我们要按香蕉, 苹果, 梨, 橘子等特定的顺序排列数据, 然后再按品种排序. 使用普通的 ORDER BY 子句不可能这样做, 因为这个字段的升序或降序排序不起作用. 我们要么需要某种形式的排序列或进行其他选择.</p>
+<p>在 ORDER BY 子句中使用 FIELD 函数可以实现这一点. 它的工作方式是指定要排序的列, 然后按顺序排序它们的值. 例如:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> fruit</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">FIELD</span>(<span class="keyword">name</span>, <span class="string">'Banana'</span>, <span class="string">'Apple'</span>, <span class="string">'Pear'</span>, <span class="string">'Orange'</span>), variety;</span><br></pre></td></tr></table></figure>
+<p>来自示例表的结果数据如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">+----------+--------+---------------------+</span><br><span class="line">| fruit_id | name   | variety             |</span><br><span class="line">+----------+--------+---------------------+</span><br><span class="line">|       11 | Banana | Burro               |</span><br><span class="line">|       12 | Banana | Cavendish           |</span><br><span class="line">|       10 | Banana | Plantain            |</span><br><span class="line">|        6 | Apple  | Cox&apos;s Orange Pippin |</span><br><span class="line">|        7 | Apple  | Granny Smith        |</span><br><span class="line">|        1 | Apple  | Red Delicious       |</span><br><span class="line">|        8 | Pear   | Anjou               |</span><br><span class="line">|        4 | Pear   | Bartlett            |</span><br><span class="line">|        2 | Pear   | Comice              |</span><br><span class="line">|        5 | Orange | Blood               |</span><br><span class="line">|        3 | Orange | Navel               |</span><br><span class="line">|        9 | Orange | Valencia            |</span><br><span class="line">+----------+--------+---------------------+</span><br></pre></td></tr></table></figure>
+<h1 id="疑难杂症"><a href="#疑难杂症" class="headerlink" title="疑难杂症"></a>疑难杂症</h1><p>使用此功能时有一个小小的疑难杂症. 列中不在 FIELD 函数中的任何值将在指定的值之前或多或少随机出现. 例如, 只指定苹果和香蕉:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> fruit</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">FIELD</span>(<span class="keyword">name</span>, <span class="string">'Banana'</span>, <span class="string">'Apple'</span>) <span class="keyword">DESC</span>, variety;</span><br></pre></td></tr></table></figure>
+<p>这导致:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">+----------+--------+---------------------+</span><br><span class="line">| fruit_id | name   | variety             |</span><br><span class="line">+----------+--------+---------------------+</span><br><span class="line">|        6 | Apple  | Cox&apos;s Orange Pippin |</span><br><span class="line">|        7 | Apple  | Granny Smith        |</span><br><span class="line">|        1 | Apple  | Red Delicious       |</span><br><span class="line">|       11 | Banana | Burro               |</span><br><span class="line">|       12 | Banana | Cavendish           |</span><br><span class="line">|       10 | Banana | Plantain            |</span><br><span class="line">|        8 | Pear   | Anjou               |</span><br><span class="line">|        4 | Pear   | Bartlett            |</span><br><span class="line">|        5 | Orange | Blood               |</span><br><span class="line">|        2 | Pear   | Comice              |</span><br><span class="line">|        3 | Orange | Navel               |</span><br><span class="line">|        9 | Orange | Valencia            |</span><br><span class="line">+----------+--------+---------------------+</span><br></pre></td></tr></table></figure>
+<h1 id="解决问题的方法"><a href="#解决问题的方法" class="headerlink" title="解决问题的方法"></a>解决问题的方法</h1><p>虽然通常只有在确切的列已知的情况下才使用此函数, 但解决方法是颠倒指定字段的顺序并按降序对其排序, 然后在同一个字段上进行第二次排序.</p>
+<p>下面的例子, 不管它看起来如何，实际上按照香蕉, 苹果, 然后按照升序排列:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> fruit</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">FIELD</span>(<span class="keyword">name</span>, <span class="string">'Apple'</span>, <span class="string">'Banana'</span>) <span class="keyword">DESC</span>, <span class="keyword">name</span>, variety;</span><br></pre></td></tr></table></figure>
+<p>这导致:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">+----------+--------+---------------------+</span><br><span class="line">| fruit_id | name   | variety             |</span><br><span class="line">+----------+--------+---------------------+</span><br><span class="line">|       11 | Banana | Burro               |</span><br><span class="line">|       12 | Banana | Cavendish           |</span><br><span class="line">|       10 | Banana | Plantain            |</span><br><span class="line">|        6 | Apple  | Cox&apos;s Orange Pippin |</span><br><span class="line">|        7 | Apple  | Granny Smith        |</span><br><span class="line">|        1 | Apple  | Red Delicious       |</span><br><span class="line">|        5 | Orange | Blood               |</span><br><span class="line">|        3 | Orange | Navel               |</span><br><span class="line">|        9 | Orange | Valencia            |</span><br><span class="line">|        8 | Pear   | Anjou               |</span><br><span class="line">|        4 | Pear   | Bartlett            |</span><br><span class="line">|        2 | Pear   | Comice              |</span><br><span class="line">+----------+--------+---------------------+</span><br></pre></td></tr></table></figure>
+<p>如果一组特定的行需要显示在结果集中的其他行之前, 这可能是一个有用的解决方案, 但是当使用 ASC 或 DESC 排序顺序时, 通常不会出现在第一行.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/11e7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/11e7/" itemprop="url">Tomcat的HTTPS配置及HTTP自动跳转配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-10T15:59:03+08:00">
+                2020-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tomcat/" itemprop="url" rel="index">
+                    <span itemprop="name">Tomcat</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/11e7/" class="leancloud_visitors" data-flag-title="Tomcat的HTTPS配置及HTTP自动跳转配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  419 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h1><h3 id="在jdk的安装目录-bin-keytool-exe下打开keytool-exe"><a href="#在jdk的安装目录-bin-keytool-exe下打开keytool-exe" class="headerlink" title="在jdk的安装目录\bin\keytool.exe下打开keytool.exe"></a>在jdk的安装目录\bin\keytool.exe下打开keytool.exe</h3><p><img src="https://i.loli.net/2020/03/10/2UqTcAbXYkwHROB.png" alt="image.png"></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/11e7/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/202e/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -390,7 +779,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  168 字
+                  169 字
                 </span>
               
 
@@ -578,7 +967,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.7k 字
+                  1.6k 字
                 </span>
               
 
@@ -2122,7 +2511,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  742 字
+                  727 字
                 </span>
               
 
@@ -2168,358 +2557,6 @@
             </a>
           </div>
           <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/e611/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/e611/" itemprop="url">新冠感染评估表结构设计</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-03T20:05:32+08:00">
-                2020-02-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jh/" itemprop="url" rel="index">
-                    <span itemprop="name">jh</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/e611/" class="leancloud_visitors" data-flag-title="新冠感染评估表结构设计">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  287 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          The article has been encrypted, please enter your password to view.<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/e611/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/6c99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/6c99/" itemprop="url">CRT跳板机配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-08T17:38:32+08:00">
-                2020-01-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/6c99/" class="leancloud_visitors" data-flag-title="CRT跳板机配置">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  15 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记录下如何通过跳板机登陆服务器</p>
-<p><img src="https://i.loli.net/2020/09/03/1fIGauN4r5zUodm.png" alt="image-20200903083633383"></p>
-<p><img src="/Users/linjian/Library/Application Support/typora-user-images/image-20200903083557353.png" alt="image-20200903083557353"></p>
-
-          
         
       
     </div>
@@ -2603,7 +2640,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">305</span>
+                  <span class="site-state-item-count">307</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2614,7 +2651,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2625,7 +2662,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
