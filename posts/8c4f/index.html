@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="名词   简称 全称 释义     VoIP Voice over IP 承载于IP网上的语音通信   SIP Session Initiation Protocol 会话初始协议   PSTN Public Switched Telephone Network 公共交换电话网">
+<meta name="description" content="名词   简称 全称 释义      VoIP Voice over IP 承载于IP网上的语音通信    SIP Session Initiation Protocol 会话初始协议 IP电话信令协议   PSTN Public Switched Telephone Network 公共交换电话网 我们日常打电话所使用的电话网络   PCM Pulse Code Modulation 脉冲编码调">
 <meta name="keywords" content="FreeSWITCH">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FreeSWITCH权威指南">
 <meta property="og:url" content="http://yoursite.com/posts/8c4f/index.html">
 <meta property="og:site_name" content="Jlin&#39;Blog">
-<meta property="og:description" content="名词   简称 全称 释义     VoIP Voice over IP 承载于IP网上的语音通信   SIP Session Initiation Protocol 会话初始协议   PSTN Public Switched Telephone Network 公共交换电话网">
+<meta property="og:description" content="名词   简称 全称 释义      VoIP Voice over IP 承载于IP网上的语音通信    SIP Session Initiation Protocol 会话初始协议 IP电话信令协议   PSTN Public Switched Telephone Network 公共交换电话网 我们日常打电话所使用的电话网络   PCM Pulse Code Modulation 脉冲编码调">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-08-11T03:44:12.709Z">
+<meta property="og:updated_time" content="2021-08-16T09:08:18.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FreeSWITCH权威指南">
-<meta name="twitter:description" content="名词   简称 全称 释义     VoIP Voice over IP 承载于IP网上的语音通信   SIP Session Initiation Protocol 会话初始协议   PSTN Public Switched Telephone Network 公共交换电话网">
+<meta name="twitter:description" content="名词   简称 全称 释义      VoIP Voice over IP 承载于IP网上的语音通信    SIP Session Initiation Protocol 会话初始协议 IP电话信令协议   PSTN Public Switched Telephone Network 公共交换电话网 我们日常打电话所使用的电话网络   PCM Pulse Code Modulation 脉冲编码调">
 
 
 
@@ -389,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  45 字
+                  326 字
                 </span>
               
 
@@ -432,6 +432,7 @@
 <th>简称</th>
 <th>全称</th>
 <th>释义</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
@@ -439,20 +440,68 @@
 <td>VoIP</td>
 <td>Voice over IP</td>
 <td>承载于IP网上的语音通信</td>
+<td></td>
 </tr>
 <tr>
 <td>SIP</td>
 <td>Session Initiation Protocol</td>
 <td>会话初始协议</td>
+<td>IP电话信令协议</td>
 </tr>
 <tr>
 <td>PSTN</td>
 <td>Public Switched Telephone Network</td>
 <td>公共交换电话网</td>
+<td>我们日常打电话所使用的电话网络</td>
 </tr>
 <tr>
+<td>PCM</td>
+<td>Pulse Code Modulation</td>
+<td>脉冲编码调制</td>
+<td>是一种通用的将模拟信号转换成以0，1表示的数字信号方法</td>
+</tr>
+<tr>
+<td>RTP</td>
+<td>Real-time Transport Protocol</td>
+<td>实时传输协议</td>
 <td></td>
-<td></td>
+</tr>
+<tr>
+<td>IMS</td>
+<td>IP Multimedia Subsystem</td>
+<td>IP多媒体子系统</td>
+<td>基于IP网提供语音及多媒体业务的网络体系架构</td>
+</tr>
+</tbody>
+</table>
+<h3 id="模拟信号与数字信号的区别"><a href="#模拟信号与数字信号的区别" class="headerlink" title="模拟信号与数字信号的区别"></a>模拟信号与数字信号的区别</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>模拟信号</th>
+<th>数字信号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>时间连续性</td>
+<td>连续的</td>
+<td>离散的</td>
+</tr>
+<tr>
+<td>幅度变化</td>
+<td>幅度的取值是连续的，幅值可由无限个数值表示</td>
+<td>幅度的取值是离散的，幅值表示被限制在有限个数值之内</td>
+</tr>
+<tr>
+<td>信号传输方式</td>
+<td>用模拟量的电压或电流来表示的电视信号</td>
+<td>通过0和1的数字串所构成的数字流来传输的</td>
+</tr>
+<tr>
+<td>特点</td>
+<td>分辨率精确，在理想情况下，它具有无穷大的分辨率，当达到相同的效果，模拟信号处理比数字信号处理更简单</td>
+<td>抗干扰能力强，无噪声积累</td>
 </tr>
 </tbody>
 </table>
@@ -638,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#名词"><span class="nav-number">1.</span> <span class="nav-text">名词</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#名词"><span class="nav-number">1.</span> <span class="nav-text">名词</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟信号与数字信号的区别"><span class="nav-number">1.0.1.</span> <span class="nav-text">模拟信号与数字信号的区别</span></a></li></ol></li></ol></div>
             
 
           </div>
