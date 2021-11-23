@@ -294,467 +294,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/69f2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/69f2/" itemprop="url">Linux安装Elasticsearch</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-26T17:47:29+08:00">
-                2020-10-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index">
-                    <span itemprop="name">Elasticsearch</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/69f2/" class="leancloud_visitors" data-flag-title="Linux安装Elasticsearch">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="安装命令"><a href="#安装命令" class="headerlink" title="安装命令"></a>安装命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.9.3-x86_64.rpm</span><br><span class="line">wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.9.3-x86_64.rpm.sha512</span><br><span class="line">shasum -a 512 -c elasticsearch-7.9.3-x86_64.rpm.sha512 </span><br><span class="line">sudo rpm --install elasticsearch-7.9.3-x86_64.rpm</span><br></pre></td></tr></table></figure>
-<p>需要先安装wget</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
-<p>安装目录<strong>/usr/share/elasticsearch</strong></p>
-<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd elasticsearch-&lt;version&gt;</span><br><span class="line">./bin/elasticsearch</span><br></pre></td></tr></table></figure>
-<p> 如果你想把 Elasticsearch 作为一个守护进程在后台运行，那么可以在后面添加参数 <code>-d</code> </p>
-<h3 id="启动报错"><a href="#启动报错" class="headerlink" title="启动报错"></a>启动报错</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">future versions of Elasticsearch will require Java 11; your Java version from [/usr/local/jdk1.8.0_191/jre] does not meet this requirement</span><br><span class="line">future versions of Elasticsearch will require Java 11; your Java version from [/usr/local/jdk1.8.0_191/jre] does not meet this requirement</span><br><span class="line">[2020-10-26T17:51:37,275][ERROR][o.e.b.ElasticsearchUncaughtExceptionHandler] [localhost.localdomain] uncaught exception in thread [main]</span><br><span class="line">org.elasticsearch.bootstrap.StartupException: java.lang.RuntimeException: can not run elasticsearch as root</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:174) ~[elasticsearch-7.9.3.jar:7.9.3]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:161) ~[elasticsearch-7.9.3.jar:7.9.3]</span><br><span class="line">	at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:86) ~[elasticsearch-7.9.3.jar:7.9.3]</span><br><span class="line">	at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:127) ~[elasticsearch-cli-7.9.3.jar:7.9.3]</span><br><span class="line">	at org.elasticsearch.cli.Command.main(Command.java:90) ~[elasticsearch-cli-7.9.3.jar:7.9.3]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:126) ~[elasticsearch-7.9.3.jar:7.9.3]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:92) ~[elasticsearch-7.9.3.jar:7.9.3]</span><br><span class="line">Caused by: java.lang.RuntimeException: can not run elasticsearch as root</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:111) ~[elasticsearch-7.9.3.jar:7.9.3]</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:178) ~[elasticsearch-7.9.3.jar:7.9.3]</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:393) ~[elasticsearch-7.9.3.jar:7.9.3]</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:170) ~[elasticsearch-7.9.3.jar:7.9.3]</span><br><span class="line">	... 6 more</span><br><span class="line">uncaught exception in thread [main]</span><br><span class="line">java.lang.RuntimeException: can not run elasticsearch as root</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:111)</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:178)</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:393)</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:170)</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:161)</span><br><span class="line">	at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:86)</span><br><span class="line">	at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:127)</span><br><span class="line">	at org.elasticsearch.cli.Command.main(Command.java:90)</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:126)</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:92)</span><br><span class="line">For complete error details, refer to the log at /var/log/elasticsearch/elasticsearch.log</span><br><span class="line">2020-10-26 09:51:37,598820 UTC [5212] ERROR CLogger.cc@310 Cannot log to named pipe /tmp/elasticsearch-8630107584639609731/controller_log_5047 as it could not be opened for writing</span><br></pre></td></tr></table></figure>
-<h5 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h5><p>　　为了安全不允许使用root用户启动</p>
-<h5 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h5><p>　　es5之后的都不能使用添加启动参数或者修改配置文件等方法启动了，必须要创建用户</p>
-<p>创建用户：elasticsearch.    <code>adduser elasticsearch</code></p>
-<p>创建用户密码，需要输入两次.   <code>passwd elasticsearch</code></p>
-<p>将对应的文件夹权限赋给该用户.    <code>chown -R elasticsearch /usr/share/elasticsearch</code></p>
-<p>切换至elasticsearch用户.   <code>su elasticsearch</code></p>
-<h3 id="切换用户报错"><a href="#切换用户报错" class="headerlink" title="切换用户报错"></a>切换用户报错</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This account is currently not available</span><br></pre></td></tr></table></figure>
-<h5 id="原因：-1"><a href="#原因：-1" class="headerlink" title="原因："></a>原因：</h5><p>​        用户的shell禁止登录</p>
-<h5 id="解决：-1"><a href="#解决：-1" class="headerlink" title="解决："></a>解决：</h5><p>​        用cat看看 elasticsearch`的帐号信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd | grep elasticsearch</span><br></pre></td></tr></table></figure>
-<p>发现它的shell是“/sbin /nologin”，需要改成“/bin/bash”</p>
-<h3 id="再次启动报错"><a href="#再次启动报错" class="headerlink" title="再次启动报错"></a>再次启动报错</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/log/elasticsearch/elasticsearch_server.json (权限不够)</span><br></pre></td></tr></table></figure>
-<h5 id="解决：-2"><a href="#解决：-2" class="headerlink" title="解决："></a>解决：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown elasticsearch /var/log -R</span><br></pre></td></tr></table></figure>
-<h3 id="再次启动报错-1"><a href="#再次启动报错-1" class="headerlink" title="再次启动报错"></a>再次启动报错</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">uncaught exception in thread [main]</span><br><span class="line">java.lang.IllegalStateException: failed to obtain node locks, tried [[/var/lib/elasticsearch]] with lock id [0]; maybe these locations are not writable or multiple nodes were started without increasing [node.max_local_storage_nodes] (was [1])?</span><br><span class="line">	at org.elasticsearch.env.NodeEnvironment.&lt;init&gt;(NodeEnvironment.java:301)</span><br><span class="line">	at org.elasticsearch.node.Node.&lt;init&gt;(Node.java:344)</span><br><span class="line">	at org.elasticsearch.node.Node.&lt;init&gt;(Node.java:277)</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap$5.&lt;init&gt;(Bootstrap.java:227)</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:227)</span><br><span class="line">	at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:393)</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:170)</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:161)</span><br><span class="line">	at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:86)</span><br><span class="line">	at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:127)</span><br><span class="line">	at org.elasticsearch.cli.Command.main(Command.java:90)</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:126)</span><br><span class="line">	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:92)</span><br><span class="line">For complete error details, refer to the log at /var/log/elasticsearch/elasticsearch.log</span><br></pre></td></tr></table></figure>
-<h5 id="原因：-2"><a href="#原因：-2" class="headerlink" title="原因："></a>原因：</h5><p>​        可能是因为之前运行的es还没有正常关闭</p>
-<h5 id="解决：-3"><a href="#解决：-3" class="headerlink" title="解决："></a>解决：</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -ef|grep elastic</span><br><span class="line">kill -9 xxx</span><br></pre></td></tr></table></figure>
-<h3 id="验证是否启动成功"><a href="#验证是否启动成功" class="headerlink" title="验证是否启动成功"></a>验证是否启动成功</h3><p>打开另一个终端，执行以下操作</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl 'http://localhost:9200/?pretty'</span><br></pre></td></tr></table></figure>
-<p>以下响应表示成功，意味着你现在已经启动并运行一个 Elasticsearch 节点了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "name" : "localhost.localdomain",</span><br><span class="line">  "cluster_name" : "elasticsearch",</span><br><span class="line">  "cluster_uuid" : "w_tfyzSiSIy3ArcZ4_MwFw",</span><br><span class="line">  "version" : &#123;</span><br><span class="line">    "number" : "7.9.3",</span><br><span class="line">    "build_flavor" : "default",</span><br><span class="line">    "build_type" : "rpm",</span><br><span class="line">    "build_hash" : "c4138e51121ef06a6404866cddc601906fe5c868",</span><br><span class="line">    "build_date" : "2020-10-16T10:36:16.141335Z",</span><br><span class="line">    "build_snapshot" : false,</span><br><span class="line">    "lucene_version" : "8.6.2",</span><br><span class="line">    "minimum_wire_compatibility_version" : "6.8.0",</span><br><span class="line">    "minimum_index_compatibility_version" : "6.0.0-beta1"</span><br><span class="line">  &#125;,</span><br><span class="line">  "tagline" : "You Know, for Search"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/37a8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/37a8/" itemprop="url">随访表结构说明</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-22T13:47:48+08:00">
-                2020-10-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/37a8/" class="leancloud_visitors" data-flag-title="随访表结构说明">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  106 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <table>
-<thead>
-<tr>
-<th>前缀</th>
-<th>模块</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>t_cab_*</td>
-<td>驾驶舱</td>
-</tr>
-<tr>
-<td>t_cdr_*</td>
-<td>cdr数据中心</td>
-</tr>
-<tr>
-<td>t_chronic_*</td>
-<td>慢病</td>
-</tr>
-<tr>
-<td>t_complaints_praise_*</td>
-<td>投诉表扬</td>
-</tr>
-<tr>
-<td>t_crm_*</td>
-<td>患者管理</td>
-</tr>
-<tr>
-<td>t_day_surgery_*</td>
-<td>日间手术</td>
-</tr>
-<tr>
-<td>t_dict_*</td>
-<td>字典</td>
-</tr>
-<tr>
-<td>t_education_*</td>
-<td>宣教</td>
-</tr>
-<tr>
-<td>t_empi_*</td>
-<td>主索引</td>
-</tr>
-<tr>
-<td>t_en_followup_*</td>
-<td>子宫内膜增生</td>
-</tr>
-<tr>
-<td>t_form_auto_fill_*</td>
-<td>表单自动填充</td>
-</tr>
-<tr>
-<td>t_hospital_followup_*</td>
-<td>病区护士随访/客服中心随访</td>
-</tr>
-<tr>
-<td>t_manage_*</td>
-<td>系统管理</td>
-</tr>
-<tr>
-<td>t_patient_*</td>
-<td>患者相关</td>
-</tr>
-<tr>
-<td>t_referral_*</td>
-<td>复诊提醒</td>
-</tr>
-<tr>
-<td>t_repository_*</td>
-<td>知识库</td>
-</tr>
-<tr>
-<td>t_rule_*</td>
-<td>知识库规则</td>
-</tr>
-<tr>
-<td>t_satisfaction_*</td>
-<td>满意度</td>
-</tr>
-<tr>
-<td>t_sl_followup_*</td>
-<td>科室专病</td>
-</tr>
-<tr>
-<td>t_sms_*</td>
-<td>短信</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/7aa5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -851,7 +390,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  520 字
+                  546 字
                 </span>
               
 
@@ -2254,6 +1793,359 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/57ba/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/57ba/" itemprop="url">Nginx代理后,获取request的ip</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-24T17:02:25+08:00">
+                2020-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/57ba/" class="leancloud_visitors" data-flag-title="Nginx代理后,获取request的ip">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  357 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>应用程序部署上线,一般都会用nginx之类的来进行反向代理,而不是直接访问tomcat之类的容器.</p>
+<p>这时候如果用平时的获取ip的代码,就只会获取到nginx所在服务器的ip, 就失去了本身的意义.</p>
+<p>今天就来配置下 nginx+tomcat 后,  程序获取ip和 tomcat的访问日志localhost_access_log 获取ip. </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/57ba/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/6264/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/6264/" itemprop="url">孕妇在选择化妆品时应注意哪些问题？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-08T17:29:01+08:00">
+                2020-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/6264/" class="leancloud_visitors" data-flag-title="孕妇在选择化妆品时应注意哪些问题？">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  916 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​        孕妇作为一个特殊的群体，在选择化妆品时，除应考虑化妆品对自身的影响外，尤其要保证腹中胎儿的健康，因此，在化妆品的选用方面要格外谨慎。<br>​        根据各类化妆品的不同特点及其对孕妇以及胎儿可能产生的不良影响，孕妇最好避免接触和使用以下几类化妆品：<br>　　（1）染发产品<br>　　染发产品不但会对孕妇产生不良影响，容易致敏，甚至有致癌的风险，而且还有可能导致胎儿畸形。所以，孕妇在妊娠期间不宜染发。<br>　　（2）冷烫精<br>　　烫发所用的冷烫精会影响孕妇体内胎儿的正常生长发育，也会导致孕妇脱发，个别人群可能还会出现过敏反应。<br>　　（3）口红<br>　　口红是由各种油脂蜡类原料、颜料和香精等成分组成，其中的油脂蜡类原料覆盖在口唇表面，极易吸附空气中飞扬的尘埃、细菌和病毒，经过口腔进入体内，此时一旦孕妇的抵抗力下降就会染病。其中的有毒、有害物质以及细菌和病毒还能够通过胎盘对胎儿造成威胁。同时，口红中的颜料也可能会引起胎儿畸形。<br>　　（4）指甲油<br>　　目前市场上销售的指甲油大多是以硝化纤维素作为成膜材料，配以丙酮、乙酸乙酯、乙酸丁酯、苯二甲酸等化学溶剂、增塑剂及各色染料而制成。这些化学物质对人体有一定的毒害作用，日积月累，对胎儿的健康也会产生影响，容易引起孕妇流产及胎儿畸形。<br>　　（5）芳香类产品<br>　　包括香水、精油等，其中散发香气的香料成分有可能会导致孕妇流产。<br>　　（6）美白祛斑类产品<br>　　孕妇在妊娠期间会出现面部色斑加深的现象，一般情况下，这是正常的生理现象而非病理现象，孕妇此时切不可选用美白祛斑产品，否则，不但达不到理想的祛斑效果，还会影响自己和胎儿的健康。有些祛斑霜中含有的铅、汞等重金属，甚至是违法添加的某些激素等有害物质，不但会对孕妇自身健康产生影响，还会影响胎儿的生长发育，甚至有可能出现畸形胎儿的风险。<br>　　（7）脱毛霜<br>　　化学性脱毛霜中的脱毛成分会影响胎儿的生长发育。另外，孕妇在选择化妆品时，应关注化妆品成分表中的成分，避免选用含维甲酸类、激素类成分的化妆品，这两类成分都有可能对胎儿的发育造成不良的影响，甚至会导致胎儿畸形。同时，尽量选择不含或少含香精及防腐剂的产品，以降低对胎儿产生不良影响的风险。一般情况下，孕妇在妊娠期间不宜化妆，以清洁、护肤为主要护理方式，而且目前市面上有专门为孕妇提供的一类化妆品，但都是基础护理类产品，产品质量安全，均可放心选择使用。如果在孕前已经使用一些基础护理化妆品，如洗面奶、化妆水和乳液等，只要符合上述提到的注意事项，也可继续使用。</p>
+<p>艾维诺、嫩芙、珂润、fancl、松山油脂天然</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2304,7 +2196,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">313</span>
+                  <span class="site-state-item-count">311</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
