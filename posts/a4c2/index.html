@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="通过示例和方法说明了解根本原因分析要理解根本原因分析，最简单的方法是考虑常见问题。如果我们生病了并在工作时呕吐，我们会去看医生，让医生找出病根。如果我们的汽车抛锚了，我们会让汽修师找出问题的根本原因。如果我们的业务在某个地区的业绩超出或低于预期，我们会尝试找出原因。 在以上每个例子中，我们都可以通过简单的方法来应付表面的问题。如果不想在上班时呕吐，我们可以待在家中并准备好痰盂。如果要在私家车无法启">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RCA示例">
+<meta property="og:url" content="http://yoursite.com/posts/a4c2/index.html">
+<meta property="og:site_name" content="Jlin&#39;Blog">
+<meta property="og:description" content="通过示例和方法说明了解根本原因分析要理解根本原因分析，最简单的方法是考虑常见问题。如果我们生病了并在工作时呕吐，我们会去看医生，让医生找出病根。如果我们的汽车抛锚了，我们会让汽修师找出问题的根本原因。如果我们的业务在某个地区的业绩超出或低于预期，我们会尝试找出原因。 在以上每个例子中，我们都可以通过简单的方法来应付表面的问题。如果不想在上班时呕吐，我们可以待在家中并准备好痰盂。如果要在私家车无法启">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-12-30T12:06:20.072Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RCA示例">
+<meta name="twitter:description" content="通过示例和方法说明了解根本原因分析要理解根本原因分析，最简单的方法是考虑常见问题。如果我们生病了并在工作时呕吐，我们会去看医生，让医生找出病根。如果我们的汽车抛锚了，我们会让汽修师找出问题的根本原因。如果我们的业务在某个地区的业绩超出或低于预期，我们会尝试找出原因。 在以上每个例子中，我们都可以通过简单的方法来应付表面的问题。如果不想在上班时呕吐，我们可以待在家中并准备好痰盂。如果要在私家车无法启">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/posts/a4c2/">
+
+
+
+
+
+  <title>RCA示例 | Jlin'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/Delena1988" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jlin'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/a4c2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">RCA示例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-11-26T14:00:26+08:00">
+                2021-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/a4c2/" class="leancloud_visitors" data-flag-title="RCA示例">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.3k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="通过示例和方法说明了解根本原因分析"><a href="#通过示例和方法说明了解根本原因分析" class="headerlink" title="通过示例和方法说明了解根本原因分析"></a>通过示例和方法说明了解根本原因分析</h1><p>要理解根本原因分析，最简单的方法是考虑常见问题。如果我们生病了并在工作时呕吐，我们会去看医生，让医生找出病根。如果我们的汽车抛锚了，我们会让汽修师找出问题的根本原因。如果我们的业务在某个地区的业绩超出或低于预期，我们会尝试找出原因。</p>
+<p>在以上每个例子中，我们都可以通过简单的方法来应付表面的问题。如果不想在上班时呕吐，我们可以待在家中并准备好痰盂。如果要在私家车无法启动时外出，我们可以坐公交车，把坏车留在家中。但这些办法治标而不治本 — 需要治疗的肠胃感染或者需要维修的交流发电机得不到处理。要解决或分析一个问题，我们必须进行根本原因分析，找出确切的原因以及解决方法。</p>
+<p>本文将定义根本原因分析，简要介绍常用技巧，演示模板方法，并提供一些示例。</p>
+<h2 id="好的。那什么是根本原因分析呢？"><a href="#好的。那什么是根本原因分析呢？" class="headerlink" title="好的。那什么是根本原因分析呢？"></a>好的。那什么是根本原因分析呢？</h2><p>根本原因分析 (RCA) 指为了确定适合的解决方案而探查问题根本原因的过程。RCA 认为，与解决临时问题和被动应对相比，以系统化方式防范和解决基础问题可以让效果得到显著改善。</p>
+<p>根本原因分析可以综合运用一系列原理、技巧和方法来找出某个事件或趋势的根本原因。RCA 可以透过表层的因果关系，显示流程或系统最初在哪个环节出现故障或造成问题。</p>
+<h3 id="目标和优势"><a href="#目标和优势" class="headerlink" title="目标和优势"></a>目标和优势</h3><p>根本原因分析的<strong>第一个目标</strong>是发现问题或事件的根本原因。</p>
+<p><strong>第二个目标</strong>是全面了解如何修复、弥补根本原因内的深层问题，以及如何吸取教训。</p>
+<p><strong>第三个目标</strong>是将从分析中获得的见解应用到实践中，从而以系统化方式预防各种问题，或者再次运用成功的做法。</p>
+<p>分析的价值只能通过应用来体现，因此 RCA 的第三个目标十分重要。我们还可以通过 RCA 来修改核心流程或解决系统问题，从而避免将来可能出现的事故。举例来说，在橄榄球运动员出现脑震荡时，我们不仅仅要治疗症状，还可以通过根本原因分析来建议运动员佩戴头盔，减少再次出现脑震荡的风险。</p>
+<p>对症治疗看起来非常有效。解决大量的问题会让人获得成就感。但如果不切实诊断出问题的根本原因，我们就可能一而再，再而三地遇到相同的问题。新闻编辑不仅仅要将每一个缺失的逗号补上，还需要对新闻作者进行培训，让他们知道如何在日后的新闻稿件中正确使用逗号，从而防止类似的问题。</p>
+<h3 id="核心原则"><a href="#核心原则" class="headerlink" title="核心原则"></a>核心原则</h3><p>要有效进行根本原因分析，我们必须遵循几条核心原则，其中的一些原则是显而易见的。这些原则不仅有助于确保分析质量，还可以帮助分析师获得利益相关者、客户或患者的信任和支持。</p>
+<ul>
+<li>您的重点应该是针对根本原因进行纠正和弥补，而不是仅仅消除症状。</li>
+<li>但对症治疗可以在短期内缓解症状，您不应该忽视其重要性。</li>
+<li>您需要认识到，问题可能有多个根本原因，这种情况经常出现。</li>
+<li>专注于事情如何发生以及为何发生，而不是应该归咎于谁。</li>
+<li>应该讲究策略，找出实实在在的因果证据来支持自己的根本原因结论。</li>
+<li>提供充足的信息作为更正措施的依据。</li>
+<li>考虑如何在日后防范（或复制）根本原因。</li>
+</ul>
+<p>以上原则表明：分析深层次的问题或原因时，我们必须采用从整体出发，采取全面的策略。我们不但要发现根本原因，还应该努力提供相关背景和信息，以便制定决策或行动方案。记住：高质量的分析是可以付诸行动的分析。</p>
+<h2 id="如何进行有效的根本原因分析：技巧和方法"><a href="#如何进行有效的根本原因分析：技巧和方法" class="headerlink" title="如何进行有效的根本原因分析：技巧和方法"></a>如何进行有效的根本原因分析：技巧和方法</h2><p>我们可以在进行根本原因分析时选用大量的技巧和策略，下文并未列出所有技巧和策略。但我们将介绍一些最常用、适用范围最广泛的技巧。</p>
+<h3 id="5-个为什么"><a href="#5-个为什么" class="headerlink" title="5 个为什么"></a>5 个为什么</h3><p>进行根本原因分析时，一种较为常见的技巧是 <a href="https://zh.wikipedia.org/wiki/5_Whys" target="_blank" rel="noopener">5 问法</a>。我们也可以将这种方法视为顽皮宝宝的方法。得到每个问题（“为什么”）的答案后，继续提出更深入的问题（“好，那为什么”）。儿童能够有效地进行根本原因分析，这让很多人感到惊讶。根据常识，我们可以通过大约五个“为什么”找到最根本的原因 — 但有时只需要问两次，有时需要问 50 次。</p>
+<p><strong>示例：</strong>我们回到刚才的橄榄球运动员脑震荡示例。首先，我们的运动员会反映一个问题：为什么我的头痛这么严重？这是第一个“为什么”。<br>第一个答案：因为我视物模糊。<br><strong>第二个“为什么”：</strong>为什么您视物模糊？<br>第二个答案：因为我的头撞到了地面。<br><strong>第三个“为什么”：</strong>为什么您的头撞到了地面？<br>第三个答案：我在对手的阻截下倒地，头重重地撞到地面。<br><strong>第四个“为什么”：</strong>为什么撞到地面后会这么痛？<br>第四个答案：因为我没有佩戴头盔。<br><strong>第五个“为什么”：</strong>为什么您没有佩戴头盔？<br>第五个“为什么”：因为更衣室没有足够多的头盔。</p>
+<p>啊哈。通过这五个问题，我们发现脑震荡的根本原因最有可能是头盔数量不足。今后，为了防止此类脑震荡的风险，我们可以确保每名橄榄球运动员都有一顶头盔。（当然，佩戴头盔也不能保证脑震荡一定不会发生。因此要多加小心！）</p>
+<p>这 5 个问题所起的作用是避免我们进行无根据的假设。针对递进式问题探寻详细的答复，答案会在每一轮变得更加明确、更加精炼。在理想情况下，最后一个问题会揭示出某个失败的过程，此时我们就能够对此过程采取更正措施。</p>
+<h3 id="变更分析-事件分析"><a href="#变更分析-事件分析" class="headerlink" title="变更分析/事件分析"></a>变更分析/事件分析</h3><p>在进行根本原因分析时，另一个有用的方法是仔细分析事件发生之前的各种变更。<br>如果存在大量可能的原因，这种方法会非常管用。我们的调查不应该局限于出现问题的具体日期或时刻，而是应该覆盖一个更长的时期，以便获得历史背景。</p>
+<p><strong>1.</strong>首先，我们列出可能导致某个事件发生的所有潜在原因。这应该包括所有有害、有益及良性变更。</p>
+<p><strong>示例：</strong>我们假设，要分析的事件是我们在纽约市的销售额在某一天出奇地高，我们想知道这个销售额背后的原因，以便重现这样的事件。首先，我们列出每个主要客户的每个接触点、每个事件、每个可能相关的变更。</p>
+<p><strong>2.</strong>接下来，我们根据自己对每个变更或事件的影响力对其进行分类。我们的类别可以是“内部/外部”、“自有/非自有”等等。</p>
+<p><strong>示例：</strong>在我们的“日销售额超高”示例中，我们开始梳理出一些事情，例如“销售代表进行了关于社会影响的新幻灯片演示”（内部），“季度最后一天”（外部）或“春季第一天”（外部）等。</p>
+<p><strong>3.</strong>第三步，我们逐个分析每个事件，确定该事件是无关因素、相关因素、促成因素，还是可能的根本原因。大部分分析工作都集中在这个阶段，我们也可以在此阶段使用其他方法，例如“5 问法”。</p>
+<p><strong>示例：</strong>我们在分析中发现，那些制作精美的新销售幻灯片其实是无关因素，而那个时间节点（季度最后一天）肯定是一个促成因素。但可能性最大的根本原因却是另一个因素：该地区的销售主管搬到了车程更近的新住所，因此从该季度的最后一个星期开始，她与客户会面的时间比以往早了 10 分钟。</p>
+<p><strong>4.</strong>第四步，我们研究怎样才能复制根本原因或者对其采取纠正措施。</p>
+<p><strong>示例：</strong>让每个人都搬家不太现实，但我们的组织决定：如果销售代表能够在季度的最后一星期每天提前十分钟与客户会面，他们就有可能复制这个根本原因并取得成功。</p>
+<h3 id="因果鱼骨图"><a href="#因果鱼骨图" class="headerlink" title="因果鱼骨图"></a>因果鱼骨图</h3><p>另一种常见的方法是创建<a href="https://en.wikipedia.org/wiki/Ishikawa_diagram" target="_blank" rel="noopener">鱼骨图（又称 Ishikawa 图）</a>来对因果关系进行可视化呈现。这种方法有助于发现问题的可能原因；根据此方法，我们沿着类别分支路径找到各种潜在原因并最终确定根本原因。它与 5 问法类似但直观程度远高于 5 问法。</p>
+<p>通常，我们先把问题放在图形中部（鱼的脊柱），然后通过头脑风暴找出几个类别的原因，将这些原因放到从主线散发出的分支（鱼骨架的肋骨）上。这些类别非常宽泛，可能包括“人”或者“环境”等。划分类别后，我们将其细分为更小的群组。举例来说，在“人”下方，我们可以考虑“领导”、“职员”或“培训”等潜在的根本原因。</p>
+<p>我们越来越深入地分析潜在的原因和次级原因，对每个分支提出问题，并在这个过程中越来越接近问题的来源。通过这种方法，我们可以去除无关类别，确定相关因素，并且可能找到根本原因。为简明起见，请在创建图表前仔细考虑要使用的类别。</p>
+<p><strong>创建鱼骨图时可以考虑的常见类别：</strong></p>
+<ul>
+<li>机器（设备，技术）</li>
+<li>方法（流程）</li>
+<li>物料（包括原料、消耗品和信息）</li>
+<li>人/智力（体力或脑力劳动）</li>
+<li>测量（检查）</li>
+<li>任务（目的，预期）</li>
+<li>管理/财力（领导）</li>
+<li>维护</li>
+<li>产品（或服务）</li>
+<li>价格</li>
+<li>推广（营销）</li>
+<li>流程（系统）</li>
+<li>人员（员工）</li>
+<li>实物证据</li>
+<li>绩效</li>
+<li>场所（地点，环境）</li>
+<li>供应方</li>
+<li>技能</li>
+</ul>
+<h3 id="关于如何有效进行根本原因分析的提示"><a href="#关于如何有效进行根本原因分析的提示" class="headerlink" title="关于如何有效进行根本原因分析的提示"></a>关于如何有效进行根本原因分析的提示</h3><p>通过提问来澄清信息并接近答案。越是针对每个可能的原因提出深入的问题，我们就越容易找到根本原因。一旦认为自己找到了问题的根本原因（而不仅仅是另一种表面现象），我们可以提出更多问题：为什么说这个原因（而非其他原因）是根本原因？我们如何解决根本原因，防止问题再次发生？使用简单的问题，例如“为什么？”“如何？”以及“那意味着什么”来寻找理解问题的途径。</p>
+<h3 id="进行团队合作并寻求新颖的观点"><a href="#进行团队合作并寻求新颖的观点" class="headerlink" title="进行团队合作并寻求新颖的观点"></a>进行团队合作并寻求新颖的观点</h3><p>无论是单个合作伙伴还是由同事组成的整个团队，不同的视角总是有助于我们更快地找到解决方案，还可以打消我们的偏见。获取其他人的意见也有助于发掘更多的观点，帮助我们验证自己的假设。</p>
+<h3 id="为将来的根本原因分析制定计划"><a href="#为将来的根本原因分析制定计划" class="headerlink" title="为将来的根本原因分析制定计划"></a>为将来的根本原因分析制定计划</h3><p>进行根本原因分析的时候，我们必须注意流程本身。做好笔记。提出关于分析流程本身的问题。根据您的具体业务需求和环境，确定是否存在某种最适合您的技术或方法。</p>
+<h3 id="别忘了也对成功事件进行根本原因分析"><a href="#别忘了也对成功事件进行根本原因分析" class="headerlink" title="别忘了也对成功事件进行根本原因分析"></a>别忘了也对成功事件进行根本原因分析</h3><p>根本原因分析是确定故障环节的好方法。我们常常使用根本原因分析来诊断问题，但它在确定成功的根本原因方面同样有效。在成功实现目标、超额或者提前完成任务时，查找成功的根本原因往往是有益的做法。这种分析有助于我们提升关键因素的优先级并主动采取保护措施，进而有可能将一个领域的成功复制到另一个领域。 </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/3107/" rel="next" title="RCA根本原因分析">
+                <i class="fa fa-chevron-left"></i> RCA根本原因分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/59af/" rel="prev" title="cmd执行程序时容易卡住以及解决方式">
+                cmd执行程序时容易卡住以及解决方式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">jlin</p>
+              <p class="site-description motion-element" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">317</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Delena1988" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          <!--
+ <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=17746129&auto=1&height=66"></iframe>
+-->
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通过示例和方法说明了解根本原因分析"><span class="nav-number">1.</span> <span class="nav-text">通过示例和方法说明了解根本原因分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#好的。那什么是根本原因分析呢？"><span class="nav-number">1.1.</span> <span class="nav-text">好的。那什么是根本原因分析呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目标和优势"><span class="nav-number">1.1.1.</span> <span class="nav-text">目标和优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心原则"><span class="nav-number">1.1.2.</span> <span class="nav-text">核心原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何进行有效的根本原因分析：技巧和方法"><span class="nav-number">1.2.</span> <span class="nav-text">如何进行有效的根本原因分析：技巧和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-个为什么"><span class="nav-number">1.2.1.</span> <span class="nav-text">5 个为什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变更分析-事件分析"><span class="nav-number">1.2.2.</span> <span class="nav-text">变更分析/事件分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#因果鱼骨图"><span class="nav-number">1.2.3.</span> <span class="nav-text">因果鱼骨图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于如何有效进行根本原因分析的提示"><span class="nav-number">1.2.4.</span> <span class="nav-text">关于如何有效进行根本原因分析的提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进行团队合作并寻求新颖的观点"><span class="nav-number">1.2.5.</span> <span class="nav-text">进行团队合作并寻求新颖的观点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为将来的根本原因分析制定计划"><span class="nav-number">1.2.6.</span> <span class="nav-text">为将来的根本原因分析制定计划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#别忘了也对成功事件进行根本原因分析"><span class="nav-number">1.2.7.</span> <span class="nav-text">别忘了也对成功事件进行根本原因分析</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jlin</span>
+
+  
+</div>
+
+<!-- 
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+-->
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("2St4VI7jM52zNshKs53hAmwv-MdYXbMMI", "D1Ojv96bxL0R4uFTWUc6HFT9");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

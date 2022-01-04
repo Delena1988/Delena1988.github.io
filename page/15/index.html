@@ -294,6 +294,1201 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/41c4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/41c4/" itemprop="url">MongoDB常用查询</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-08T10:27:19+08:00">
+                2019-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/41c4/" class="leancloud_visitors" data-flag-title="MongoDB常用查询">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  87 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h1><p>mongoDB 支持正则表达式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.products.find( &#123; sku: &#123; <span class="variable">$regex</span>: /789$/ &#125; &#125; )</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> products <span class="keyword">WHERE</span> sku <span class="keyword">like</span> <span class="string">"%789"</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="variable">$sort</span>: &#123; &lt;field1&gt;: &lt;sort order&gt;, &lt;field2&gt;: &lt;sort order&gt; ... &#125; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>1</code> to specify ascending order. 顺序</li>
+<li><code>-1</code> to specify descending order. 倒序</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.aggregate(</span><br><span class="line">   [</span><br><span class="line">     &#123; <span class="variable">$sort</span> : &#123; age : -1, posts: 1 &#125; &#125;</span><br><span class="line">   ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h1 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.COLLECTION_NAME.find().<span class="built_in">limit</span>(NUMBER).skip()</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/ffc1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/ffc1/" itemprop="url">MongoDB Operators</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T20:47:39+08:00">
+                2019-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongoDB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/ffc1/" class="leancloud_visitors" data-flag-title="MongoDB Operators">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  623 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Comparison-Query-Operators"><a href="#Comparison-Query-Operators" class="headerlink" title="Comparison Query Operators"></a>Comparison Query Operators</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/eq/#op._S_eq" title="$eq" target="_blank" rel="noopener"><code>$eq</code></a></td>
+<td>Matches values that are equal to a specified value.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/gt/#op._S_gt" title="$gt" target="_blank" rel="noopener"><code>$gt</code></a></td>
+<td>Matches values that are greater than a specified value.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/gte/#op._S_gte" title="$gte" target="_blank" rel="noopener"><code>$gte</code></a></td>
+<td>Matches values that are greater than or equal to a specified value.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/in/#op._S_in" title="$in" target="_blank" rel="noopener"><code>$in</code></a></td>
+<td>Matches any of the values specified in an array.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/lt/#op._S_lt" title="$lt" target="_blank" rel="noopener"><code>$lt</code></a></td>
+<td>Matches values that are less than a specified value.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/lte/#op._S_lte" title="$lte" target="_blank" rel="noopener"><code>$lte</code></a></td>
+<td>Matches values that are less than or equal to a specified value.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/ne/#op._S_ne" title="$ne" target="_blank" rel="noopener"><code>$ne</code></a></td>
+<td>Matches all values that are not equal to a specified value.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/nin/#op._S_nin" title="$nin" target="_blank" rel="noopener"><code>$nin</code></a></td>
+<td>Matches none of the values specified in an array.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Logical-Query-Operators"><a href="#Logical-Query-Operators" class="headerlink" title="Logical Query Operators"></a>Logical Query Operators</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/and/#op._S_and" title="$and" target="_blank" rel="noopener"><code>$and</code></a></td>
+<td>Joins query clauses with a logical <code>AND</code> returns all documents that match the conditions of both clauses.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/not/#op._S_not" title="$not" target="_blank" rel="noopener"><code>$not</code></a></td>
+<td>Inverts the effect of a query expression and returns documents that do <em>not</em> match the query expression.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/nor/#op._S_nor" title="$nor" target="_blank" rel="noopener"><code>$nor</code></a></td>
+<td>Joins query clauses with a logical <code>NOR</code> returns all documents that fail to match both clauses.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/or/#op._S_or" title="$or" target="_blank" rel="noopener"><code>$or</code></a></td>
+<td>Joins query clauses with a logical <code>OR</code> returns all documents that match the conditions of either clause.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Element-Query-Operators"><a href="#Element-Query-Operators" class="headerlink" title="Element Query Operators"></a>Element Query Operators</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/exists/#op._S_exists" title="$exists" target="_blank" rel="noopener"><code>$exists</code></a></td>
+<td>Matches documents that have the specified field.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/type/#op._S_type" title="$type" target="_blank" rel="noopener"><code>$type</code></a></td>
+<td>Selects documents if a field is of the specified type.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Evaluation-Query-Operators"><a href="#Evaluation-Query-Operators" class="headerlink" title="Evaluation Query Operators"></a>Evaluation Query Operators</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/expr/#op._S_expr" title="$expr" target="_blank" rel="noopener"><code>$expr</code></a></td>
+<td>Allows use of aggregation expressions within the query language.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/jsonSchema/#op._S_jsonSchema" title="$jsonSchema" target="_blank" rel="noopener"><code>$jsonSchema</code></a></td>
+<td>Validate documents against the given JSON Schema.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/mod/#op._S_mod" title="$mod" target="_blank" rel="noopener"><code>$mod</code></a></td>
+<td>Performs a modulo operation on the value of a field and selects documents with a specified result.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/regex/#op._S_regex" title="$regex" target="_blank" rel="noopener"><code>$regex</code></a></td>
+<td>Selects documents where values match a specified regular expression.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/text/#op._S_text" title="$text" target="_blank" rel="noopener"><code>$text</code></a></td>
+<td>Performs text search.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/where/#op._S_where" title="$where" target="_blank" rel="noopener"><code>$where</code></a></td>
+<td>Matches documents that satisfy a JavaScript expression.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Geospatial-Query-Operators"><a href="#Geospatial-Query-Operators" class="headerlink" title="Geospatial Query Operators"></a>Geospatial Query Operators</h1><h3 id="Query-Selectors"><a href="#Query-Selectors" class="headerlink" title="Query Selectors"></a>Query Selectors</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/geoIntersects/#op._S_geoIntersects" title="$geoIntersects" target="_blank" rel="noopener"><code>$geoIntersects</code></a></td>
+<td>Selects geometries that intersect with a <a href="https://docs.mongodb.com/manual/reference/glossary/#term-geojson" target="_blank" rel="noopener">GeoJSON</a> geometry. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/geoIntersects/#op._S_geoIntersects" title="$geoIntersects" target="_blank" rel="noopener"><code>$geoIntersects</code></a>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a></td>
+<td>Selects geometries within a bounding <a href="https://docs.mongodb.com/manual/reference/geojson/#geospatial-indexes-store-geojson" target="_blank" rel="noopener">GeoJSON geometry</a>. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a></td>
+<td>Returns geospatial objects in proximity to a point. Requires a geospatial index. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a></td>
+<td>Returns geospatial objects in proximity to a point on a sphere. Requires a geospatial index. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Geometry-Specifiers"><a href="#Geometry-Specifiers" class="headerlink" title="Geometry Specifiers"></a>Geometry Specifiers</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/box/#op._S_box" title="$box" target="_blank" rel="noopener"><code>$box</code></a></td>
+<td>Specifies a rectangular box using legacy coordinate pairs for <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries. The <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/box/#op._S_box" title="$box" target="_blank" rel="noopener"><code>$box</code></a>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/center/#op._S_center" title="$center" target="_blank" rel="noopener"><code>$center</code></a></td>
+<td>Specifies a circle using legacy coordinate pairs to <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries when using planar geometry. The <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/center/#op._S_center" title="$center" target="_blank" rel="noopener"><code>$center</code></a>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/centerSphere/#op._S_centerSphere" title="$centerSphere" target="_blank" rel="noopener"><code>$centerSphere</code></a></td>
+<td>Specifies a circle using either legacy coordinate pairs or <a href="https://docs.mongodb.com/manual/reference/glossary/#term-geojson" target="_blank" rel="noopener">GeoJSON</a> format for <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries when using spherical geometry. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/centerSphere/#op._S_centerSphere" title="$centerSphere" target="_blank" rel="noopener"><code>$centerSphere</code></a>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/geometry/#op._S_geometry" title="$geometry" target="_blank" rel="noopener"><code>$geometry</code></a></td>
+<td>Specifies a geometry in <a href="https://docs.mongodb.com/manual/reference/glossary/#term-geojson" target="_blank" rel="noopener">GeoJSON</a> format to geospatial query operators.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/maxDistance/#op._S_maxDistance" title="$maxDistance" target="_blank" rel="noopener"><code>$maxDistance</code></a></td>
+<td>Specifies a maximum distance to limit the results of <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a> and <a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a> queries. The <a href="https://docs.mongodb.com/manual/core/2dsphere/" target="_blank" rel="noopener">2dsphere</a> and <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> indexes support <a href="https://docs.mongodb.com/manual/reference/operator/query/maxDistance/#op._S_maxDistance" title="$maxDistance" target="_blank" rel="noopener"><code>$maxDistance</code></a>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/minDistance/#op._S_minDistance" title="$minDistance" target="_blank" rel="noopener"><code>$minDistance</code></a></td>
+<td>Specifies a minimum distance to limit the results of <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a> and <a href="https://docs.mongodb.com/manual/reference/operator/query/nearSphere/#op._S_nearSphere" title="$nearSphere" target="_blank" rel="noopener"><code>$nearSphere</code></a> queries. For use with <code>2dsphere</code> index only.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/polygon/#op._S_polygon" title="$polygon" target="_blank" rel="noopener"><code>$polygon</code></a></td>
+<td>Specifies a polygon to using legacy coordinate pairs for <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> queries. The <a href="https://docs.mongodb.com/manual/core/2d/" target="_blank" rel="noopener">2d</a> index supports <a href="https://docs.mongodb.com/manual/reference/operator/query/center/#op._S_center" title="$center" target="_blank" rel="noopener"><code>$center</code></a>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/uniqueDocs/#op._S_uniqueDocs" title="$uniqueDocs" target="_blank" rel="noopener"><code>$uniqueDocs</code></a></td>
+<td>Deprecated. Modifies a <a href="https://docs.mongodb.com/manual/reference/operator/query/geoWithin/#op._S_geoWithin" title="$geoWithin" target="_blank" rel="noopener"><code>$geoWithin</code></a> and <a href="https://docs.mongodb.com/manual/reference/operator/query/near/#op._S_near" title="$near" target="_blank" rel="noopener"><code>$near</code></a> queries to ensure that even if a document matches the query multiple times, the query returns the document once.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Array-Query-Operators"><a href="#Array-Query-Operators" class="headerlink" title="Array Query Operators"></a>Array Query Operators</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/all/#op._S_all" title="$all" target="_blank" rel="noopener"><code>$all</code></a></td>
+<td>Matches arrays that contain all elements specified in the query.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/elemMatch/#op._S_elemMatch" title="$elemMatch" target="_blank" rel="noopener"><code>$elemMatch</code></a></td>
+<td>Selects documents if element in the array field matches all the specified <a href="https://docs.mongodb.com/manual/reference/operator/query/elemMatch/#op._S_elemMatch" title="$elemMatch" target="_blank" rel="noopener"><code>$elemMatch</code></a> conditions.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/size/#op._S_size" title="$size" target="_blank" rel="noopener"><code>$size</code></a></td>
+<td>Selects documents if the array field is a specified size.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Bitwise-Query-Operators"><a href="#Bitwise-Query-Operators" class="headerlink" title="Bitwise Query Operators"></a>Bitwise Query Operators</h1><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAllClear/#op._S_bitsAllClear" title="$bitsAllClear" target="_blank" rel="noopener"><code>$bitsAllClear</code></a></td>
+<td>Matches numeric or binary values in which a set of bit positions <em>all</em> have a value of <code>0</code>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAllSet/#op._S_bitsAllSet" title="$bitsAllSet" target="_blank" rel="noopener"><code>$bitsAllSet</code></a></td>
+<td>Matches numeric or binary values in which a set of bit positions <em>all</em> have a value of <code>1</code>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAnyClear/#op._S_bitsAnyClear" title="$bitsAnyClear" target="_blank" rel="noopener"><code>$bitsAnyClear</code></a></td>
+<td>Matches numeric or binary values in which <em>any</em> bit from a set of bit positions has a value of <code>0</code>.</td>
+</tr>
+<tr>
+<td><a href="https://docs.mongodb.com/manual/reference/operator/query/bitsAnySet/#op._S_bitsAnySet" title="$bitsAnySet" target="_blank" rel="noopener"><code>$bitsAnySet</code></a></td>
+<td>Matches numeric or binary values in which <em>any</em> bit from a set of bit positions has a value of <code>1</code>.</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/ed60/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/ed60/" itemprop="url">Windows Server 2016下tomcat执行缓慢</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T10:56:34+08:00">
+                2019-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Problem/" itemprop="url" rel="index">
+                    <span itemprop="name">Problem</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Problem/Tomcat/" itemprop="url" rel="index">
+                    <span itemprop="name">Tomcat</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/ed60/" class="leancloud_visitors" data-flag-title="Windows Server 2016下tomcat执行缓慢">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  126 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>Windows Server 2016 下以startup.bat 方式启动比在Windows Server 2012 下执行JAVA程序速度慢很多。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>将tomcat注册成为服务，到tomcat/bin路径下执行 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service.bat install tomcat7</span><br></pre></td></tr></table></figure>
+<p>在服务中启动tomcat，速度就明显上去了。</p>
+<p>环境变量：</p>
+<p><img src="https://i.loli.net/2020/07/24/ayeCuAZ9TsvOxhH.png" alt="ayeCuAZ9TsvOxhH"></p>
+<p>另外备注：而且点击tomcat控制台会让程序终端 中止，ctrl+c会让程序继续运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#从服务列表中移除</span></span><br><span class="line">service.bat remove tomcat7</span><br></pre></td></tr></table></figure>
+<p>启动、停用tomcat</p>
+<p><img src="https://i.loli.net/2020/07/24/3kCIWZvYsl6SaG7.png" alt="3kCIWZvYsl6SaG7"></p>
+<p>stdout.log日志暴增</p>
+<p><img src="https://i.loli.net/2020/12/17/qo7CGA6mwuOXZFs.jpg" alt="qo7CGA6mwuOXZFs"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/828/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/828/" itemprop="url">微信对接</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-05T10:27:42+08:00">
+                2019-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jh/" itemprop="url" rel="index">
+                    <span itemprop="name">Jh</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/828/" class="leancloud_visitors" data-flag-title="微信对接">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  36 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          The article has been encrypted, please enter your password to view.<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/828/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/2623/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jlin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/2623/" itemprop="url">2019-11</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-01T11:44:29+08:00">
+                2019-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Daily/" itemprop="url" rel="index">
+                    <span itemprop="name">Daily</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/2623/" class="leancloud_visitors" data-flag-title="2019-11">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          The article has been encrypted, please enter your password to view.<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/2623/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/45a0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1255,949 +2450,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/7c2c/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/7c2c/" itemprop="url">设计模式概述</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-24T10:10:26+08:00">
-                2019-10-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/7c2c/" class="leancloud_visitors" data-flag-title="设计模式概述">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  926 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="软件设计模式的概念"><a href="#软件设计模式的概念" class="headerlink" title="软件设计模式的概念"></a>软件设计模式的概念</h1><p>软件设计模式（Software Design Pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。它描述了在软件设计过程中的一些不断重复发生的问题，以及该问题的解决方案。也就是说，它是解决特定问题的一系列套路，是前辈们的代码设计经验的总结，具有一定的普遍性，可以反复使用。其目的是为了提高代码的可重用性、代码的可读性和代码的可靠性。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/7c2c/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/1403/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/1403/" itemprop="url">Java 8 中的 Streams API 详解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-23T15:56:35+08:00">
-                2019-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/1403/" class="leancloud_visitors" data-flag-title="Java 8 中的 Streams API 详解">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  6k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  25 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="为什么需要-Stream"><a href="#为什么需要-Stream" class="headerlink" title="为什么需要 Stream"></a>为什么需要 Stream</h1><p>Stream 作为 Java 8 的一大亮点，它与 java.io 包里的 InputStream 和 OutputStream 是完全不同的概念。它也不同于 StAX 对 XML 解析的 Stream，也不是 Amazon Kinesis 对大数据实时处理的 Stream。Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性。同时它提供串行和并行两种模式进行汇聚操作，并发模式能够充分利用多核处理器的优势，使用 fork/join 并行方式来拆分任务和加速处理过程。通常编写并行代码很难而且容易出错, 但使用 Stream API 无需编写一行多线程的代码，就可以很方便地写出高性能的并发程序。所以说，Java 8 中首次出现的 java.util.stream 是一个函数式语言+多核时代综合影响的产物。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/1403/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/12e4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/12e4/" itemprop="url">MongoDB常用命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-09T10:36:40+08:00">
-                2019-10-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
-                    <span itemprop="name">MongoDB</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/12e4/" class="leancloud_visitors" data-flag-title="MongoDB常用命令">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.7k 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  7 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h1><p><a href="https://docs.mongodb.com/manual/crud/" target="_blank" rel="noopener">https://docs.mongodb.com/manual/crud/</a></p>
-<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h3 id="新建数据库"><a href="#新建数据库" class="headerlink" title="新建数据库"></a>新建数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#如果数据库不存在，则创建数据库，否则切换到指定数据库。</span></span><br><span class="line"><span class="keyword">use</span> DATABASE_NAME</span><br></pre></td></tr></table></figure>
-<h3 id="查看所有数据库"><a href="#查看所有数据库" class="headerlink" title="查看所有数据库"></a>查看所有数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> dbs</span><br></pre></td></tr></table></figure>
-<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.dropDatabase()</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/12e4/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/1d4c/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/1d4c/" itemprop="url">MongoDB启动命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T08:57:23+08:00">
-                2019-10-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
-                    <span itemprop="name">MongoDB</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/1d4c/" class="leancloud_visitors" data-flag-title="MongoDB启动命令">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  82 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="前台启动"><a href="#前台启动" class="headerlink" title="前台启动"></a>前台启动</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#到/usr/local/bin目录下执行下面命令启动mongodb</span></span><br><span class="line">$ ./mongod</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/1d4c/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/posts/dce8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jlin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/dce8/" itemprop="url">Mac安装MongoDB</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-30T10:21:01+08:00">
-                2019-09-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MongoDB/" itemprop="url" rel="index">
-                    <span itemprop="name">MongoDB</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/dce8/" class="leancloud_visitors" data-flag-title="Mac安装MongoDB">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  304 字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Mac-OSX-平台安装-MongoDB"><a href="#Mac-OSX-平台安装-MongoDB" class="headerlink" title="Mac OSX 平台安装 MongoDB"></a>Mac OSX 平台安装 MongoDB</h1><p>MongoDB 提供了 OSX 平台上 64 位的安装包，你可以在官网下载安装包。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/dce8/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2248,7 +2500,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">312</span>
+                  <span class="site-state-item-count">317</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2270,7 +2522,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2319,7 +2571,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
