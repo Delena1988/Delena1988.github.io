@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这是最近读到的讲关于 JDBC 的超时问题最透彻的文章，原文是http:&#x2F;&#x2F;www.cubrid.org&#x2F;blog&#x2F;understanding-jdbc-internals-and-timeout-configuration ，网上现有的翻译感觉磕磕绊绊的，很多上下文信息丢失了，这里用我的理解重新翻译一下。 应用程序中配置恰当的 JDBC 超时时间能减少服务失败的时间，这篇文章我们将讨论不同种类的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JDBC超时">
+<meta property="og:url" content="http://example.com/posts/f7b3/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="这是最近读到的讲关于 JDBC 的超时问题最透彻的文章，原文是http:&#x2F;&#x2F;www.cubrid.org&#x2F;blog&#x2F;understanding-jdbc-internals-and-timeout-configuration ，网上现有的翻译感觉磕磕绊绊的，很多上下文信息丢失了，这里用我的理解重新翻译一下。 应用程序中配置恰当的 JDBC 超时时间能减少服务失败的时间，这篇文章我们将讨论不同种类的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2019/05/15/5cdb707cb9a1932056.png">
+<meta property="og:image" content="https://i.loli.net/2019/05/15/5cdb728387e9286374.png">
+<meta property="og:image" content="https://i.loli.net/2019/05/15/5cdb72dd6cb7316696.png">
+<meta property="og:image" content="https://i.loli.net/2019/05/15/5cdb7157f22e991517.png">
+<meta property="og:image" content="https://i.loli.net/2019/05/15/5cdb716d63f5476687.png">
+<meta property="og:image" content="https://i.loli.net/2019/05/15/5cdb7178b0c3765318.png">
+<meta property="og:image" content="https://i.loli.net/2019/05/15/5cdb720ba42ec26973.png">
+<meta property="article:published_time" content="2019-05-15T01:48:49.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:29:33.722Z">
+<meta property="article:author" content="林剑">
+<meta property="article:tag" content="JDBC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/15/5cdb707cb9a1932056.png">
+
+<link rel="canonical" href="http://example.com/posts/f7b3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>深入理解JDBC超时 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/f7b3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          深入理解JDBC超时
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-15 09:48:49" itemprop="dateCreated datePublished" datetime="2019-05-15T09:48:49+08:00">2019-05-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JDBC/" itemprop="url" rel="index"><span itemprop="name">JDBC</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这是最近读到的讲关于 JDBC 的超时问题最透彻的文章，原文是<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://www.cubrid.org/blog/understanding-jdbc-internals-and-timeout-configuration">http://www.cubrid.org/blog/understanding-jdbc-internals-and-timeout-configuration</a> ，网上现有的翻译感觉磕磕绊绊的，很多上下文信息丢失了，这里用我的理解重新翻译一下。</p>
+<p>应用程序中配置恰当的 JDBC 超时时间能减少服务失败的时间，这篇文章我们将讨论不同种类的超时和推荐的配置。</p>
+<span id="more"></span>
+
+<h3 id="Web-应用服务器在-DDoS-攻击后变得无响应"><a href="#Web-应用服务器在-DDoS-攻击后变得无响应" class="headerlink" title="Web 应用服务器在 DDoS 攻击后变得无响应"></a>Web 应用服务器在 DDoS 攻击后变得无响应</h3><p>(这是一个真实案例的发生过程复述)</p>
+<p>在 DDoS 攻击之后，整个服务都不能正常工作了，因为第四层交换机不能工作，网络连接断开了，这也导致 WAS （<strong>可以将 WAS 理解为作者公司的应用程序</strong>）不能正常工作。攻击发生后不久，安全团队拦截了所有 DDoS 攻击，然后网络恢复正常，但 WAS 还是不能工作。</p>
+<p>通过分析系统的 dump 日志发现，业务系统停在了 JDBC API 的调用上。20分钟后系统仍处于等待状态无法响应，大概过了30分钟，系统突然发生异常，然后服务恢复正常。</p>
+<blockquote>
+<p>为什么已经将查询超时时间设置成3秒， WAS 却等待了30分钟？为什么30分钟后 WAS 又开始工作了？</p>
+</blockquote>
+<p>如果理解了 JDBC 的超时机制就能找到答案。</p>
+<h3 id="为什么我们需要知道-JDBC-驱动"><a href="#为什么我们需要知道-JDBC-驱动" class="headerlink" title="为什么我们需要知道 JDBC 驱动"></a>为什么我们需要知道 JDBC 驱动</h3><p>当有性能问题或系统级错误时，WAS 和数据库是我们关注的两个重要层面。在我公司 WAS 和数据库通常由不同的部门负责，因此每个部门聚焦在各自负责的领域来设法弄清楚状况。此时 WAS 和数据库之间的部分会因为得不到足够的关注而产生盲区。对于 Java 应用，这个盲区在数据库连接池和 JDBC 之间，本文我们将重点讨论 JDBC。</p>
+<h3 id="什么是-JDBC-驱动"><a href="#什么是-JDBC-驱动" class="headerlink" title="什么是 JDBC 驱动"></a>什么是 JDBC 驱动</h3><p>JDBC 是 Java 应用程序中用于访问数据库的一套标准 API，Sun 公司定义了<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fce9ac03a250">4种类型的 JDBC 驱动</a>。我公司主要用的是第4种，该类型驱动由纯 Java 语言编写，在 Java 应用中通过 socket 与数据库通信。</p>
+<p><img src="https://i.loli.net/2019/05/15/5cdb707cb9a1932056.png" alt="5cdb707cb9a1932056"></p>
+<p>图1: 类型4驱动</p>
+<p>类型4驱动是通过 socket 来处理字节流的，它的基本操作和 HttpClient 这种网络操作类库相同。同其他网络类库一样，也会在发生超时的时候占用大量的 CPU 资源从而失去响应。如果你之前用过 HttpClient ，肯定遇到过因为没有设置超时导致的错误。如果 socket 超时设置不合适，类型4驱动也可能有同样的错误（连接被阻塞）。</p>
+<p>下面让我们了解如何配置 JDBC 驱动的 socket 超时，以及设置时需考虑哪些问题。</p>
+<h1 id="WAS-与数据库间的设置超时的层次"><a href="#WAS-与数据库间的设置超时的层次" class="headerlink" title="WAS 与数据库间的设置超时的层次"></a>WAS 与数据库间的设置超时的层次</h1><p><img src="https://i.loli.net/2019/05/15/5cdb728387e9286374.png" alt="5cdb728387e9286374"></p>
+<p>图2: 超时的层次</p>
+<p>图2展示了简化的 WAS 和数据库通信时的超时层次。</p>
+<p>更上层的超时依赖于下层的超时，只有当较低层的超时机制正常工作，上层的超时才会正常。如果 JDBC 驱动程序的 socket 超时工作不正常，那么更上层的超时比如 Statement 超时和事务超时都不会正常工作。</p>
+<p>我们收到很多评论说：</p>
+<blockquote>
+<p>即使配置了 Statement 超时，应用程序还是不能从故障中恢复，因为 Statement 超时在网络故障时不起作用。</p>
+</blockquote>
+<p><strong>Statement 超时在网络故障时不起作用</strong>。它只能做到：限制一次Statement 执行的时间，处理超时以防网络故障必须由 JDBC 驱动来做。</p>
+<p>JDBC 驱动的 socket 超时还会受操作系统的 socket 超时配置的影响。这解释了为什么案例中的 JDBC 连接在网络故障后阻塞了30分钟才恢复，即使没配置 JDBC 驱动的 socket 超时。</p>
+<p>DBCP 连接池位于图2的左边。你会发现各种层面的超时与 DBCP 是分开的。DBCP 负责数据库连接（即本文中说到的<strong>Connection</strong>）的创建和管理，并不涉及超时的处理。当在 DBCP 中创建了一个数据库连接或发送了一条查询校验的 sql 语句用于检查连接有效性时，socket 超时会影响这些过程的处理，但并不直接影响应用程序。</p>
+<p>然而在应用程序中调用 DBCP 的 getConnection() 方法时，你能指定应用程序获取数据库连接的超时时间，但这和 JDBC 的连接超时无关。</p>
+<p><img src="https://i.loli.net/2019/05/15/5cdb72dd6cb7316696.png" alt="5cdb72dd6cb7316696"></p>
+<p>图3: 每一层级的超时</p>
+<h1 id="什么是事务超时"><a href="#什么是事务超时" class="headerlink" title="什么是事务超时"></a>什么是事务超时</h1><p><strong>事务超时</strong>是在框架（Spring、EJB容器）或应用程序层面上才有效的超时。</p>
+<p>事务超时可能是个不常见的概念。简单讲，事务超时等于** Statement 超时 * N（需要执行的 Statement 的数量） + 其它（垃圾回收等其他时间）**。事务超时被用来限制执行一个事务之内所有 Statement 执行的总时长。</p>
+<p>比如，假设执行一次 Statement 执行需0.1秒，那执行几次 Statement<br>并不是什么问题，但如果是执行十万次则需要一万秒（大约7个小时），这就可以用上事务超时了。</p>
+<p>EJB 的声明式事务管理 (容器管理事务) 就是一种典型的使用场景，但声明式事务管理只是定义了相应的规范，容器内事务的处理过程和具体实现由容器的开发者负责。我们公司并没有用 EJB，用的是最常见的 Spring 框架，所以事务超时的配置也由 Spring 来管理。在 Spring 中，事务超时可以在 XML 文件显式配置或在 Java 代码中用 Transactional 注解来配置。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;tx:attributes&gt;</span><br><span class="line">        &lt;tx:<span class="keyword">method</span> <span class="title function_">name</span>=&quot;…&quot; <span class="title function_">timeout</span>=&quot;3&quot;/&gt;</span><br><span class="line">&lt;/<span class="title function_">tx</span>:attributes&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Spring 提供的事务超时的配置非常简单，它会记录每个事务的开始时间和消耗时间，当特定的事件发生时会对已消耗掉的时间做校验，如果超出了配置将抛出异常。</p>
+<p>Spring 中数据库连接被保存在线程本地变量（ThreadLocal）中，这被称作事务同步（Transaction Synchronization）。当数据库连接被保存到 ThreadLocal 时，同时会记录事务的开始时间和超时时间。所以通过数据库连接的代理创建的 Statement 在执行时就会校验这个时间。</p>
+<p>EJB 的声明式事务管理的实现也是类似，实现的思路非常简单。如果事务超时非常重要，但你所使用的容器或框架不提供此功能，你也可以选择自己实现，关于事务超时并没有制定标准的 API。</p>
+<p>Lucy 框架的1.5和1.6版不支持事务超时，但你可以通过 Spring 的事务管理达到相同的效果。</p>
+<p>假设一个事务里有5条 Statement ，每条 Statement 执行时间是200毫秒，其它业务逻辑或框架操作的执行时间是100毫秒，那事务允许的超时时间至少应该1100毫秒（200 * 5 + 100）。</p>
+<h1 id="什么是-Statement-超时"><a href="#什么是-Statement-超时" class="headerlink" title="什么是 Statement 超时"></a>什么是 Statement 超时</h1><p>Statement 超时是用来限制 Statement 的执行时间的，它的具体值是通过 JDBC API 来设置的。JDBC 驱动程序基于这个值进行 Statement 执行时的超时处理。Statement 超时是通过 JDBC API 中java.sql.Statement 类的 setQueryTimeout(int timeout) 方法配置的。不过现在的开发者已经很少直接在代码中配置它了，更多是通过框架来进行设置。</p>
+<p>以 iBatis 为例，可以通过 SqlMapConfig.xml 中的 setting 属性defaultStatementTimeout 来设置全局的 statement 超时缺省值。你也可以通过在具体的 sql 映射文件中的 select insert update 标签的 statement 属性来覆盖。</p>
+<p>当你用 Lucy 1.5或1.6版时，可以通过设置 queryTimeout 属性在数据源层面设置 Statement 超时。</p>
+<p>Statement 超时的具体数值需要根据每个应用自身的情况而定，并没有推荐的配置。</p>
+<h1 id="JDBC-驱动中的-Statement-超时处理过程"><a href="#JDBC-驱动中的-Statement-超时处理过程" class="headerlink" title="JDBC 驱动中的 Statement 超时处理过程"></a>JDBC 驱动中的 Statement 超时处理过程</h1><p>每个数据库和驱动程序的 Statement 超时的处理也是不同的。Oracle 和 SQLServer 的工作方式比较像，MySQL 和 CUBRID 比较像。</p>
+<h1 id="Oracle-中的-Statement-超时处理"><a href="#Oracle-中的-Statement-超时处理" class="headerlink" title="Oracle 中的 Statement 超时处理"></a>Oracle 中的 Statement 超时处理</h1><ol>
+<li>调用 Connection 的 createStatement() 方法创建一个 Statement 对象</li>
+<li>调用 Statement 的 executeQuery() 方法</li>
+<li>Statement 通过内部绑定的 Connection 对象将查询命令发送到 Oracle 数据库</li>
+<li>Statement 向 Oracle 的超时处理线程 <strong>OracleTimeoutPollingThread</strong>（每个类加载器一个该线程）注册一个 Statement 用于处理超时</li>
+<li>发生超时</li>
+<li>Oracle 的 OracleTimeoutPollingThread 调用 OracleStatement 的 cancel() 方法</li>
+<li>通过 Statement 的 Connection 发送一条消息取消还在执行的查询</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/15/5cdb7157f22e991517.png" alt="5cdb7157f22e991517"></p>
+<p>图4 Oracle 的 Statement 超时执行过程</p>
+<h1 id="JTDS-MS-SQLServer-中的-Statement-超时处理"><a href="#JTDS-MS-SQLServer-中的-Statement-超时处理" class="headerlink" title="JTDS (MS SQLServer) 中的 Statement 超时处理"></a>JTDS (MS SQLServer) 中的 Statement 超时处理</h1><p>1.调用 Connection 的 createStatement() 方法创建一个 Statement 对象</p>
+<ol start="2">
+<li>调用 Statement 的 executeQuery() 方法</li>
+<li>Statement 通过内部的 Connection 将查询命令发送到 MS SqlServer 数据库</li>
+<li>Statement 向 MS SQLServer 的 <strong>TimerThread</strong> 线程注册一个 Statement 用于处理超时</li>
+<li>发生超时</li>
+<li>TimerThread 调用 JtdsStatement 内部的 TsdCore.cancel()方法</li>
+<li>通过 ConnectionJDBC 发送一条消息取消还在执行的查询</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/15/5cdb716d63f5476687.png" alt="5cdb716d63f5476687"></p>
+<p>图5 MS SQLServer 的 Statement 超时执行过程</p>
+<h1 id="MySQL-5-0-8-中的-Statement-超时处理"><a href="#MySQL-5-0-8-中的-Statement-超时处理" class="headerlink" title="MySQL (5.0.8) 中的 Statement 超时处理"></a>MySQL (5.0.8) 中的 Statement 超时处理</h1><ol>
+<li>调用 Connection 的 createStatement() 方法创建一个 Statement 对象</li>
+<li>调用 Statement 的 executeQuery() 方法</li>
+<li>Statement 通过内部的 Connection 将查询命令传输到 MySqlServer 数据库</li>
+<li>Statement 创建一个新的超时执行线程(<strong>timeout-execution</strong>)来处理超时</li>
+<li>5.1以上版本改为每个连接分配一个线程</li>
+<li>向 timeout-execution 线程注册当前的 Statement</li>
+<li>发生超时</li>
+<li>timeout-execution 线程创建一个相同配置的 Connection</li>
+<li>用新创建的 Connection 发送取消查询的命令</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/15/5cdb7178b0c3765318.png" alt="5cdb7178b0c3765318"></p>
+<p> 图6 MySQL 的 Statement 超时执行过程</p>
+<h1 id="CUBRID中的-Statement-超时处理"><a href="#CUBRID中的-Statement-超时处理" class="headerlink" title="CUBRID中的 Statement 超时处理"></a>CUBRID中的 Statement 超时处理</h1><ol>
+<li>调用 Connection 的 createStatement() 方法创建一个 Statement 对象</li>
+<li>调用 Statement 的 executeQuery() 方法</li>
+<li>Statement 通过内部的 Connection 将查询命令发送到 CUBRID 数据库</li>
+<li>Statement 创建一个新的超时执行线程(<strong>timeout-execution</strong>)来处理超时</li>
+<li>向 timeout-execution 线程注册当前的 Statement</li>
+<li>发生超时</li>
+<li>timeout-execution 线程创建一个相同配置的Connection</li>
+<li>用新创建的 Connection 发送取消查询的命令</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/15/5cdb720ba42ec26973.png" alt="5cdb720ba42ec26973"></p>
+<p>图7 CUBRID 的 Statement 超时执行过程</p>
+<h1 id="什么是-Socket-超时"><a href="#什么是-Socket-超时" class="headerlink" title="什么是 Socket 超时"></a>什么是 Socket 超时</h1><p>类型4的 JDBC 驱动是用 Socket 方式与数据库连接的，应用程序和数据库之间的连接超时并不是由数据库处理的。</p>
+<p>当数据库突然宕掉或发生网络错误（设备故障等）时，JDBC 驱动的 Socket 超时的值是必须的。由于 TCP&#x2F;IP 的结构，Socket 没有办法检测到网络错误，因此应用不能检测到与数据库到连接断开了。如果没有设置 Socket 超时，应用程序会一直等待数据库返回结果。（这个连接也被叫做“死连接”） 为了避免死连接，Socket 必须要设置超时时间。Socket 超时可以通过 JDBC 驱动程序配置。通过设置 Socket 超时，可以防止出现网络错误时一直等待的情况并缩短故障时间。</p>
+<p>不推荐使用 Socket 超时来限制一个 Statement 的执行时间，因此Socket 超时的值必须要高于 Statement 的超时时间，否则 Socket 超时将会先生效，这样 Statement 超时就没有意义，也无法生效。</p>
+<p>下面展示了 Socket 超时设置的连个选项，其配置因不同的驱动而异。</p>
+<ul>
+<li>Socket 连接时的超时：通过 Socket 对象的 connect(SocketAddress endpoint, int timeout) 方法来配置</li>
+<li>Socket 读写时的超时：通过 Socket 对象的 setSoTimeout(int timeout) 方法来配置</li>
+</ul>
+<p>通过查看CUBRID，MySQL，MS SQL Server (JTDS) 和 Oracle 的JDBC 驱动源码，我们确认以上所有驱动都是使用上面的2个 API 来设置socket 超时的。</p>
+<p>下面列出了如何配置 Socket 超时</p>
+<table>
+<thead>
+<tr>
+<th>JDBC 驱动</th>
+<th>连接超时配置</th>
+<th>Socket 超时配置</th>
+<th>JDBC Url 格式</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MySQL</td>
+<td>connectTimeout（默认值：0，单位：毫秒）</td>
+<td>socketTimeout（默认值：0，单位：ms）</td>
+<td>jdbc:mysql:&#x2F;&#x2F;[[host:port],[host:port]…&#x2F;[database]]<br/>[?propertyName1][&#x3D;propertyValue1][&amp;propertyName2][&#x3D;propertyValue2]…</td>
+<td>jdbc:[mysql:&#x2F;&#x2F;xxx.xx.xxx.xxx:3306&#x2F;database?connectTimeout&#x3D;60000&amp;socketTimeout&#x3D;60000]</td>
+</tr>
+<tr>
+<td>MS-SQL , jTDS</td>
+<td>loginTimeout（默认值：0，单位：秒）</td>
+<td>socketTimeout（默认值：0，单位：s）</td>
+<td>jdbc:jtds:&lt;server_type&gt;:&#x2F;&#x2F;&lt;server&gt;[:&lt;port&gt;][&#x2F;&lt;database&gt;][;&lt;property&gt;&#x3D;&lt;value&gt;[;…]]</td>
+<td>jdbc:jtds:sqlserver:&#x2F;&#x2F;server:port&#x2F;database;loginTimeout&#x3D;60;socketTimeout&#x3D;60</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>oracle.net.CONNECT_TIMEOUT （默认值：0，单位：毫秒）</td>
+<td>oracle.jdbc.ReadTimeout（默认值：0，单位：毫秒）</td>
+<td>不支持通过url配置，只能通过OracleDatasource.setConnectionProperties() API设置，使用DBCP时可以调用BasicDatasource.setConnectionProperties()或BasicDatasource.addConnectionProperties()进行设置</td>
+<td></td>
+</tr>
+<tr>
+<td>CUBRID</td>
+<td>无单独配置项（默认值：5,000，单位：毫秒）</td>
+<td>无单独配置项（默认值：5,000，单位：毫秒）</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>connectTimeout 和 socketTimeout 的默认值是 0 ，这意味着不会发生超时。</li>
+<li>你也可以通过属性进行配置，而无需直接使用 DBCP 的 API 。</li>
+</ul>
+<p>通过属性进行配置时，需要传入的 key 为 “connectionProperties”，其 value 的格式为” [propertyName&#x3D;property;]*”。下面是 iBatis 中通过 xml 文件配置属性的例子。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;com.nhncorp.lucy.db.DbcpDSFactory&quot;</span>&gt;</span></span><br><span class="line">     ....</span><br><span class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connectionProperties&quot;</span> <span class="attr">value</span>=<span class="string">&quot;oracle.net.CONNECT_TIMEOUT=6000;oracle.jdbc.ReadTimeout=6000&quot;</span>/&gt;</span> </span><br><span class="line">  <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="操作系统层面的-Socket-超时配置"><a href="#操作系统层面的-Socket-超时配置" class="headerlink" title="操作系统层面的 Socket 超时配置"></a>操作系统层面的 Socket 超时配置</h1><p>如果没设置 Socket 超时或连接超时，应用程序多数情况下无法检测到网络错误。此时，应用程序将一直等待下去，直到连接上数据库或能读取到数据。然而，如果查看实际服务遇到的实际情况会发现问题常常在在应用程序（WAS）在30分钟后尝试重新连接到网络后被解决了。这是因为操作系统也配置了 Socket 超时时间。我公司使用的 Linux 服务器将 Socket 超时时间设置为30分钟。它将在操作系统层面对网络连接做校验。因为公司的 Linux 服务器的 KeepAlive 检查周期为30分钟，因此即使应用程序里将 Socket 超时设置为0，由网络原因引起的数据库网络连接问题也不会超过30分钟。</p>
+<p>通常，应用程序会在调用 Socket 的 read() 方法时由于网络问题而阻塞住。然而很少在调用 Socket 的 write() 方法时处于等待状态，这取决于网络构成和错误类型。当应用程序调用 Socket 的 write() 方法时，数据被记录到操作系统的内核缓冲区，然后将控制权立即交还给应用程序。因此，一旦数据已经写入内核缓冲区，write() 的调用始终是成功。但是，如果操作系统内核缓冲区由于特殊的网络错误而满了的话，write() 方法也会进入等待状态。这种情况下，操作系统会尝试重新发送数据包一段时间，并在达到超时限制时产生错误。 在公司的 Linux服务器上这种情况的超时时间设置为15分钟。</p>
+<p>至此，我已经解释了 JDBC 的内部操作，希望这将帮助你正确的超时配置超时时间从而减少错误。</p>
+<p>至此，我已经对JDBC的内部操作做了讲解，希望能够让大家学会如何正确的配置超时时间，从而减少错误的发生。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JDBC/" rel="tag"># JDBC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/6e0f/" rel="prev" title="Docker创建镜像">
+      <i class="fa fa-chevron-left"></i> Docker创建镜像
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/3e37/" rel="next" title="Dockerfile相关命令介绍">
+      Dockerfile相关命令介绍 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9C%A8-DDoS-%E6%94%BB%E5%87%BB%E5%90%8E%E5%8F%98%E5%BE%97%E6%97%A0%E5%93%8D%E5%BA%94"><span class="nav-number">1.</span> <span class="nav-text">Web 应用服务器在 DDoS 攻击后变得无响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93-JDBC-%E9%A9%B1%E5%8A%A8"><span class="nav-number">2.</span> <span class="nav-text">为什么我们需要知道 JDBC 驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-JDBC-%E9%A9%B1%E5%8A%A8"><span class="nav-number">3.</span> <span class="nav-text">什么是 JDBC 驱动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WAS-%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E9%97%B4%E7%9A%84%E8%AE%BE%E7%BD%AE%E8%B6%85%E6%97%B6%E7%9A%84%E5%B1%82%E6%AC%A1"><span class="nav-number"></span> <span class="nav-text">WAS 与数据库间的设置超时的层次</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1%E8%B6%85%E6%97%B6"><span class="nav-number"></span> <span class="nav-text">什么是事务超时</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Statement-%E8%B6%85%E6%97%B6"><span class="nav-number"></span> <span class="nav-text">什么是 Statement 超时</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JDBC-%E9%A9%B1%E5%8A%A8%E4%B8%AD%E7%9A%84-Statement-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B"><span class="nav-number"></span> <span class="nav-text">JDBC 驱动中的 Statement 超时处理过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Oracle-%E4%B8%AD%E7%9A%84-Statement-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86"><span class="nav-number"></span> <span class="nav-text">Oracle 中的 Statement 超时处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JTDS-MS-SQLServer-%E4%B8%AD%E7%9A%84-Statement-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86"><span class="nav-number"></span> <span class="nav-text">JTDS (MS SQLServer) 中的 Statement 超时处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL-5-0-8-%E4%B8%AD%E7%9A%84-Statement-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86"><span class="nav-number"></span> <span class="nav-text">MySQL (5.0.8) 中的 Statement 超时处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUBRID%E4%B8%AD%E7%9A%84-Statement-%E8%B6%85%E6%97%B6%E5%A4%84%E7%90%86"><span class="nav-number"></span> <span class="nav-text">CUBRID中的 Statement 超时处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Socket-%E8%B6%85%E6%97%B6"><span class="nav-number"></span> <span class="nav-text">什么是 Socket 超时</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B1%82%E9%9D%A2%E7%9A%84-Socket-%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE"><span class="nav-number"></span> <span class="nav-text">操作系统层面的 Socket 超时配置</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">407</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">265k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

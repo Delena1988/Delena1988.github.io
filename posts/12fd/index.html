@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="OLAP和OLTPOLTP（On-Line Transaction Processing）:联机事务处理，典型代表是关系型数据库(mysql)，它的数据存储在服务器本地的文件里 OLAP（On-Line Analytical Processing）:联机分析处理，OLAP型数据库的典型代表是分布式文件系统(hive)，它的数据存储在HDFS集群里 它们的主要区别入下图： 数据从何而来？ 企业日常的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OLTP和OLAP有何区别">
+<meta property="og:url" content="http://example.com/posts/12fd/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="OLAP和OLTPOLTP（On-Line Transaction Processing）:联机事务处理，典型代表是关系型数据库(mysql)，它的数据存储在服务器本地的文件里 OLAP（On-Line Analytical Processing）:联机分析处理，OLAP型数据库的典型代表是分布式文件系统(hive)，它的数据存储在HDFS集群里 它们的主要区别入下图： 数据从何而来？ 企业日常的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/07/07/HqfhZO4oJxD3SAk.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/07/07/LA7uFQn1vzIeqyV.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/07/G8eC4NMrE2P9Qyb.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/07/vMQ2tlUPhSeVGpj.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/07/JCjfIQWtcxiDglS.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/07/h5SVzyC42c8PNex.png">
+<meta property="og:image" content="https://s2.loli.net/2022/07/07/BnwlePiF9a4XqdJ.png">
+<meta property="article:published_time" content="2022-07-07T07:50:44.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:29:33.691Z">
+<meta property="article:author" content="林剑">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/07/07/HqfhZO4oJxD3SAk.jpg">
+
+<link rel="canonical" href="http://example.com/posts/12fd/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>OLTP和OLAP有何区别 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/12fd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OLTP和OLAP有何区别
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-07 15:50:44" itemprop="dateCreated datePublished" datetime="2022-07-07T15:50:44+08:00">2022-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="OLAP和OLTP"><a href="#OLAP和OLTP" class="headerlink" title="OLAP和OLTP"></a>OLAP和OLTP</h1><p>OLTP（On-Line Transaction Processing）:联机事务处理，典型代表是关系型数据库(mysql)，它的数据存储在服务器本地的文件里</p>
+<p>OLAP（On-Line Analytical Processing）:联机分析处理，OLAP型数据库的典型代表是分布式文件系统(hive)，它的数据存储在HDFS集群里</p>
+<p>它们的主要区别入下图：<br><img src="https://s2.loli.net/2022/07/07/HqfhZO4oJxD3SAk.jpg"></p>
+<p>数据从何而来？</p>
+<p>企业日常的各个环节都会产生数据，一个企业从小到大的过程中，最初建设IT系统的时刻是一个分隔点。</p>
+<p>在此之前，数据零散分布在邮箱、发票、单据、APP等各种地方。</p>
+<p><img src="https://s2.loli.net/2022/07/07/LA7uFQn1vzIeqyV.png"></p>
+<p>零散的数据分布</p>
+<p>企业规模达到一定程度时则必须要建设IT系统，此时，数据开始在各种系统（ERP、CRM、MES等）中积累。</p>
+<p><img src="https://s2.loli.net/2022/07/07/G8eC4NMrE2P9Qyb.png"></p>
+<p>IT系统中的数据分布</p>
+<p>数据价值随着其体量不断的累积也在一直增加。</p>
+<p>获取其中的知识，能够帮助企业发现问题与机遇并进行正确的决策，以达到赢得市场之目的。</p>
+<p>数据分析则是实现以上目标的重要手段之一。</p>
+<p>数据分析体系的建设往往是在初次进行信息化建设后某个时间开始。</p>
+<p><img src="https://s2.loli.net/2022/07/07/vMQ2tlUPhSeVGpj.png"></p>
+<p>信息化之后数据分析体系的建立</p>
+<p>数据分析体系与其他业务类系统有着显著的不同。</p>
+<p>业务类系统主要供基层人员使用，进行一线业务操作，通常被称为OLTP（On-Line Transaction Processing，联机事务处理）。</p>
+<p>数据分析的目标则是探索并挖掘数据价值，作为企业高层进行决策的参考，通常被称为OLAP（On-Line Analytical Processing，联机分析处理）。</p>
+<p>从功能角度来看，OLTP负责基本业务的正常运转，而业务数据积累时所产生的价值信息则被OLAP不断呈现，企业高层通过参考这些信息会不断调整经营方针，也会促进基础业务的不断优化，这是OLTP与OLAP最根本的区别（其他OLTP与OLAP的差别各位可以自行网上搜索，这里不再啰嗦）。</p>
+<p><img src="https://s2.loli.net/2022/07/07/JCjfIQWtcxiDglS.png"></p>
+<p>OLTP与OLAP</p>
+<p>OLAP不应该对OLTP产生任何影响，（理想情况下）OLTP应该完全感觉不到OLAP的存在。</p>
+<h1 id="OLAP核心概念"><a href="#OLAP核心概念" class="headerlink" title="OLAP核心概念"></a>OLAP核心概念</h1><p>基本概念<br>1） 维<br>维(Dimension)：人们观察事物的视角，如时间、地理位置、年龄和性别等，是单一角度概念。<br>维的层次(Lever of Dimension)：表示维度概念基础上进一步的细分，如时间可以细分为年、季度、月三个层次。<br>维成员(Member of Dimension)：表示维不可再细分的原子取值，如时间维的成员可以是2019年1月10日。<br>度量(Measure)：表示在这个维成员上的取值。</p>
+<p>2）操作<br>下探(Drill down)：维度是有层次的，下探表示进入维度的下一层，将汇总数据拆分到下一层所在细节数据信息，如下图从第二季度下探到看4、5、6月的明细数据。<br>上钻(Drill up)： 下探的反向操作，回到更高汇聚层的汇总数据。<br>切片(Slice)：切片可以理解成把立体按某一个维度进行切分，就可以看两维数据，如图中按电子产品切分，看到的是时间和地理位置关系的二维数据。<br>切块(Dice)：相对于切片是按一个点切分，切块就是按一个范围(区间)来做切分。<br>旋转(Pivot)：维的行列位置交换，换一个视角分析数据。<br><img src="https://s2.loli.net/2022/07/07/h5SVzyC42c8PNex.png"></p>
+<h1 id="OLAP分类"><a href="#OLAP分类" class="headerlink" title="OLAP分类"></a>OLAP分类</h1><p>OLAP按存储器的数据存储格式分为ROLAP、MOLAP和HOLAP。</p>
+<p>MOLAP（Multi-dimensional OLAP）<br>以多维数组（Multi-dimensional Array）存储模型的OLAP，是OLAP发源最初的形态，某些方面也等同于OLAP。它的特点是数据需要预计算（pre-computaion），然后把预计算之后的结果（cube）存在多维数组里。</p>
+<p>优点：<br>cube包含所有维度的聚合结果，所以查询速度非常快。<br>计算结果数据占用的磁盘空间相对关系型数据库更小<br>缺点：<br>空间和时间开销大。update cube的时间跟计算维度（degree）相关，随着维度增加计算时间大幅增加，此外预计算还会造成数据库占用急剧膨胀。<br>查询灵活度比较低。需要提前设计维度模型，查询分析的内容仅限于这些指定维度，增加维度需要重新计算。</p>
+<p>ROLAP（Relational OLAP）<br>基于关系模型存放数据，一般要求事实表（fact table）和维度表（dimensition table）按一定关系设计，它不需要预计算，使用标准SQL就可以根据需要即时查询不同维度数据。</p>
+<p>优点<br>扩展性强，适用于维度数量多的模型，MOLAP对于维度多的模型预计算慢，空间占用大。<br>更适合处理non-aggregate事实，例如文本描述<br>基于row数据更容易做权限管理<br>缺点<br>因为是即时计算，查询响应时间一般比预计算的MOLAP长。</p>
+<p>HOLAP<br>业界还没有一致的定义，它是MOLAP和ROLAP类型的混合运用，细节的数据以ROLAP的形式存放，更加方便灵活，而高度聚合的数据以MOLAP的形式展现，更适合于高效的分析处理。公司使用HOLAP的目的是根据不同场景来利用不同OLAP的特性。</p>
+<p>OLAP业界产品<br>MOLAP 产品有 Cognos Powerplay, Oracle Database OLAP Option, MicroStrategy, Microsoft Analysis Services, Essbase, TM1, Jedox ,icCube和kylin等。<br>ROLAP产品有Vertica、Amazon Redshift、Google Dremel、Hulu Nesto、Presto、Druid、Impala、Greenplum、HAWQ和Doris等。<br><img src="https://s2.loli.net/2022/07/07/BnwlePiF9a4XqdJ.png"></p>
+<h1 id="OLAP场景的关键特征"><a href="#OLAP场景的关键特征" class="headerlink" title="OLAP场景的关键特征"></a>OLAP场景的关键特征</h1><ul>
+<li><p>绝大多数是读请求</p>
+</li>
+<li><p>数据以相当大的批次(&gt; 1000行)更新，而不是单行更新;或者根本没有更新。</p>
+</li>
+<li><p>已添加到数据库的数据不能修改。</p>
+</li>
+<li><p>对于读取，从数据库中提取相当多的行，但只提取列的一小部分。</p>
+</li>
+<li><p>宽表，即每个表包含着大量的列</p>
+</li>
+<li><p>查询相对较少(通常每台服务器每秒查询数百次或更少)</p>
+</li>
+<li><p>对于简单查询，允许延迟大约50毫秒</p>
+</li>
+<li><p>列中的数据相对较小：数字和短字符串(例如，每个URL 60个字节)</p>
+</li>
+<li><p>处理单个查询时需要高吞吐量(每台服务器每秒可达数十亿行)</p>
+</li>
+<li><p>事务不是必须的</p>
+</li>
+<li><p>对数据一致性要求低</p>
+</li>
+<li><p>每个查询有一个大表。除了他以外，其他的都很小。</p>
+</li>
+<li><p>查询结果明显小于源数据。换句话说，数据经过过滤或聚合，因此结果适合于单个服务器的RAM中</p>
+</li>
+</ul>
+<p>很容易可以看出，OLAP场景与其他通常业务场景(例如,OLTP或K&#x2F;V)有很大的不同， 因此想要使用OLTP或Key-Value数据库去高效的处理分析查询场景，并不是非常完美的适用方案。例如，使用OLAP数据库去处理分析请求通常要优于使用MongoDB或Redis去处理分析请求。</p>
+<p>- </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/682a/" rel="prev" title="Nacos保护阈值">
+      <i class="fa fa-chevron-left"></i> Nacos保护阈值
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/9949/" rel="next" title="位（bit）、字节（byte）、字符之间的关系">
+      位（bit）、字节（byte）、字符之间的关系 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OLAP%E5%92%8COLTP"><span class="nav-number">1.</span> <span class="nav-text">OLAP和OLTP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OLAP%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">OLAP核心概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OLAP%E5%88%86%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">OLAP分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OLAP%E5%9C%BA%E6%99%AF%E7%9A%84%E5%85%B3%E9%94%AE%E7%89%B9%E5%BE%81"><span class="nav-number">4.</span> <span class="nav-text">OLAP场景的关键特征</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">407</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">265k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="使用docker build命令或使用Docker Hub的自动构建功能构建Docker镜像时，都需要一个Dockerfile文件。Dockerfile文件是一个由一系列构建指令组成的文本文件，docker build命令会根据这些构建指令完成Docker镜像的构建。本文将会介绍Dockerfile文件，及其中使用的构建指令。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dockerfile相关命令介绍">
+<meta property="og:url" content="http://example.com/posts/3e37/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="使用docker build命令或使用Docker Hub的自动构建功能构建Docker镜像时，都需要一个Dockerfile文件。Dockerfile文件是一个由一系列构建指令组成的文本文件，docker build命令会根据这些构建指令完成Docker镜像的构建。本文将会介绍Dockerfile文件，及其中使用的构建指令。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-05-15T02:08:08.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:29:33.677Z">
+<meta property="article:author" content="林剑">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/3e37/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Dockerfile相关命令介绍 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/3e37/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Dockerfile相关命令介绍
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-15 10:08:08" itemprop="dateCreated datePublished" datetime="2019-05-15T10:08:08+08:00">2019-05-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>使用<code>docker build</code>命令或使用<code>Docker Hub</code>的自动构建功能构建Docker镜像时，都需要一个<code>Dockerfile</code>文件。<code>Dockerfile</code>文件是一个由一系列构建指令组成的文本文件，<code>docker build</code>命令会根据这些构建指令完成Docker镜像的构建。本文将会介绍<code>Dockerfile</code>文件，及其中使用的构建指令。</p>
+<span id="more"></span>
+
+<h3 id="Dockerfile文件使用"><a href="#Dockerfile文件使用" class="headerlink" title="Dockerfile文件使用"></a>Dockerfile文件使用</h3><p><code>docker build</code>命令会根据<code>Dockerfile</code>文件及上下文构建新Docker镜像。构建上下文是指<code>Dockerfile</code>所在的本地路径或一个<code>URL</code>（<code>Git</code>仓库地址）。构建上下文环境会被递归处理，所以，构建所指定的路径还包括了子目录，而<code>URL</code>还包括了其中指定的子模块。</p>
+<p><strong>构建镜像</strong></p>
+<p>将当前目录做为构建上下文时，可以像下面这样使用<code>docker build</code>命令构建镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker build .</span><br><span class="line">Sending build context to Docker daemon  6.51 MB</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><em>说明：</em>构建会在Docker后台守护进程（daemon）中执行，而不是<code>CLI</code>中。构建前，构建进程会将全部内容（递归）发送到守护进程。大多情况下，应该将一个空目录作为构建上下文环境，并将<code>Dockerfile</code>文件放在该目录下。</p>
+<p>在构建上下文中使用的<code>Dockerfile</code>文件，是一个构建指令文件。为了提高构建性能，可以通过<code>.dockerignore</code>文件排除上下文目录下，不需要的文件和目录。</p>
+<p><code>Dockerfile</code>一般位于构建上下文的根目录下，也可以通过<code>-f</code>指定该文件的位置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -f /path/to/a/Dockerfile .</span><br></pre></td></tr></table></figure>
+
+<p>构建时，还可以通过<code>-t</code>参数指定构建成后，镜像的<em>仓库</em>、<em>标签</em>等：</p>
+<p><strong>镜像标签</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t shykes/myapp \.</span><br></pre></td></tr></table></figure>
+
+<p>如果存在多个仓库下，或使用多个镜像标签，就可以使用多个<code>-t</code>参数：</p>
+<p>$ docker build -t shykes&#x2F;myapp:1.0.2 -t shykes&#x2F;myapp:latest .</p>
+<p>在Docker守护进程执行<code>Dockerfile</code>中的指令前，首先会对<code>Dockerfile</code>进行语法检查，有语法错误时会返回：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t <span class="built_in">test</span>/myapp \.</span><br><span class="line">Sending build context to Docker daemon 2.048 kB</span><br><span class="line">Error response from daemon: Unknown instruction: RUNCMD</span><br></pre></td></tr></table></figure>
+
+<p><strong>缓存</strong></p>
+<p>Docker 守护进程会一条一条的执行<code>Dockerfile</code>中的指令，而且会在每一步提交并生成一个新镜像，最后会输出最终镜像的ID。生成完成后，Docker 守护进程会自动清理你发送的上下文。</p>
+<p><code>Dockerfile</code>文件中的每条指令会被独立执行，并会创建一个新镜像，<code>RUN cd /tmp</code>等命令不会对下条指令产生影响。</p>
+<p>Docker 会重用已生成的中间镜像，以加速<code>docker build</code>的构建速度。以下是一个使用了缓存镜像的执行过程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t svendowideit/ambassador \.</span><br><span class="line">Sending build context to Docker daemon 15.36 kB</span><br><span class="line">Step 1/4 : FROM alpine:3.2</span><br><span class="line"> ---&gt; 31f630c65071</span><br><span class="line"></span><br><span class="line">Step 2/4 : MAINTAINER SvenDowideit@home.org.au</span><br><span class="line"> ---&gt; Using cache</span><br><span class="line"> ---&gt; 2a1c91448f5f</span><br><span class="line">Step 3/4 : RUN apk update &amp;&amp; apk add socat &amp;&amp; <span class="built_in">rm</span> -r /var/cache/</span><br><span class="line"> ---&gt; Using cache</span><br><span class="line"> ---&gt; 21ed6e7fbb73</span><br><span class="line">Step 4/4 : CMD <span class="built_in">env</span> | grep _TCP= | (sed <span class="string">&#x27;s/.*_PORT_\([0-9]*\)_TCP=tcp:\/\/\(.*\):\(.*\)/socat -t 100000000 TCP4-LISTEN:\1,fork,reuseaddr TCP4:\2:\3 \&amp;/&#x27;</span> &amp;&amp; <span class="built_in">echo</span> <span class="built_in">wait</span>) | sh</span><br><span class="line"> ---&gt; Using cache</span><br><span class="line"> ---&gt; 7ea8aef582cc</span><br><span class="line">Successfully built 7ea8aef582cc</span><br></pre></td></tr></table></figure>
+
+<p>构建缓存仅会使用本地父生成链上的镜像。如果不想使用本地缓存的镜像，也可以通过<code>--cache-from</code>指定缓存。指定后将再不使用本地生成的镜像链，而是从镜像仓库中下载。</p>
+<h3 id="Dockerfile文件格式"><a href="#Dockerfile文件格式" class="headerlink" title="Dockerfile文件格式"></a>Dockerfile文件格式</h3><p><code>Dockerfile</code>文件格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Comment</span></span><br><span class="line">INSTRUCTION arguments</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注释</span></span><br><span class="line">指令 参数</span><br></pre></td></tr></table></figure>
+
+<p><code>Dockerfile</code>文件中指令不区分大小写，但为了更易区分，约定使用<code>大写</code>形式。</p>
+<p>Docker 会依次执行<code>Dockerfile</code>中的指令，文件中的第一条指令必须是<code>FROM</code>，<code>FROM</code>指令用于指定一个基础镜像。</p>
+<p>以<code>#</code>开头的行，Docker会认为是注释。但<code>#</code>出现在指令参数中时，则不是注释。如：</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  Comment</span></span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">&#x27;we are running some # of cool things&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Dockerfile中使用指令"><a href="#Dockerfile中使用指令" class="headerlink" title="Dockerfile中使用指令"></a>Dockerfile中使用指令</h3><h4 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h4><p><code>FROM</code>指令用于指定其后构建新镜像所使用的基础镜像。<code>FROM</code>指令必是<code>Dockerfile</code>文件中的首条命令，启动构建流程后，Docker将会基于该镜像构建新镜像，<code>FROM</code>后的命令也会基于这个基础镜像。</p>
+<p><code>FROM</code>语法格式为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FROM &lt;image&gt;</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FROM &lt;image&gt;:&lt;tag&gt;</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FROM &lt;image&gt;:&lt;digest&gt;</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>FROM</code>指定的镜像，可以是任何有效的基础镜像。<code>FROM</code>有以下限制：</p>
+<ul>
+<li><code>FROM</code>必须是<code>Dockerfile</code>中第一条非注释命令</li>
+<li>在一个<code>Dockerfile</code>文件中创建多个镜像时，<code>FROM</code>可以多次出现。只需在每个新命令<code>FROM</code>之前，记录提交上次的镜像ID。</li>
+<li><code>tag</code>或<code>digest</code>是可选的，如果不使用这两个值时，会使用<code>latest</code>版本的基础镜像</li>
+</ul>
+<h4 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h4><p><code>RUN</code>用于在镜像容器中执行命令，其有以下两种命令执行方式：</p>
+<p><strong><code>shell</code>执行</strong></p>
+<p>在这种方式会在<code>shell</code>中执行命令，Linux下默认使用<code>/bin/sh -c</code>，Windows下使用<code>cmd /S /C</code>。</p>
+<p><em>注意：</em>通过<a target="_blank" rel="noopener" href="https://itbilu.com/linux/docker/VyhM5wPuz.html#cmd-shell"><code>SHELL</code></a>命令修改<code>RUN</code>所使用的默认<code>shell</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN &lt;<span class="built_in">command</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>exec</code>执行</strong></p>
+<p>RUN [“executable”, “param1”, “param2”]</p>
+<p><code>RUN</code>可以执行任何命令，然后在当前镜像上创建一个新层并提交。提交后的结果镜像将会用在<code>Dockerfile</code>文件的下一步。</p>
+<p>通过<code>RUN</code>执行多条命令时，可以通过<code>\</code>换行执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RUN /bin/bash -c <span class="string">&#x27;source $HOME/.bashrc; \</span></span><br><span class="line"><span class="string">echo $HOME&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以在同一行中，通过分号分隔命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN /bin/bash -c <span class="string">&#x27;source $HOME/.bashrc; echo $HOME&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>RUN</code>指令创建的中间镜像会被缓存，并会在下次构建中使用。如果不想使用这些缓存镜像，可以在构建时指定<code>--no-cache</code>参数，如：<code>docker build --no-cache</code>。</p>
+<h4 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h4><p><code>CMD</code>用于指定在容器启动时所要执行的命令。<code>CMD</code>有以下三种格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CMD [<span class="string">&quot;executable&quot;</span>,<span class="string">&quot;param1&quot;</span>,<span class="string">&quot;param2&quot;</span>]</span><br><span class="line">CMD [<span class="string">&quot;param1&quot;</span>,<span class="string">&quot;param2&quot;</span>]</span><br><span class="line">CMD <span class="built_in">command</span> param1 param2</span><br></pre></td></tr></table></figure>
+
+<p><code>CMD</code>不同于<code>RUN</code>，<code>CMD</code>用于指定在容器启动时所要执行的命令，而<code>RUN</code>用于指定镜像构建时所要执行的命令。</p>
+<p><code>CMD</code>与<code>RUN</code>在功能实现上也有相似之处。如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -i itbilu/static_web_server /bin/true</span><br></pre></td></tr></table></figure>
+
+<p>等价于：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd [<span class="string">&quot;/bin/true&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><code>CMD</code>在<code>Dockerfile</code>文件中仅可指定一次，指定多次时，会覆盖前的指令。</p>
+<p>另外，<code>docker run</code>命令也会覆盖<code>Dockerfile</code>中<code>CMD</code>命令。如果<code>docker run</code>运行容器时，使用了<code>Dockerfile</code>中<code>CMD</code>相同的命令，就会覆盖<code>Dockerfile</code>中的<code>CMD</code>命令。</p>
+<p>如，我们在构建镜像的<code>Dockerfile</code>文件中使用了如下指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD [<span class="string">&quot;/bin/bash&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>docker build</code>构建一个新镜像，镜像名为<code>itbilu/test</code>。构建完成后，使用这个镜像运行一个新容器，运行效果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -i -t itbilu/test</span><br><span class="line">root@e3597c81aef4:/<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p>在使用<code>docker run</code>运行容器时，我们并没有在命令结尾指定会在容器中执行的命令，这时Docker就会执行在<code>Dockerfile</code>的<code>CMD</code>中指定的命令。</p>
+<p>如果不想使用<code>CMD</code>中指定的命令，就可以在<code>docker run</code>命令的结尾指定所要运行的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -i -t itbilu/test /bin/ps</span><br><span class="line"> PID TTY TIME CMD</span><br><span class="line"> 1 ? 00:00:00 ps</span><br></pre></td></tr></table></figure>
+
+<p>这时，<code>docker run</code>结尾指定的<code>/bin/ps</code>命令覆盖了<code>Dockerfile</code>的<code>CMD</code>中指定的命令。</p>
+<h4 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h4><p><code>ENTRYPOINT</code>用于给容器配置一个可执行程序。也就是说，每次使用镜像创建容器时，通过<code>ENTRYPOINT</code>指定的程序都会被设置为默认程序。<code>ENTRYPOINT</code>有以下两种形式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [<span class="string">&quot;executable&quot;</span>, <span class="string">&quot;param1&quot;</span>, <span class="string">&quot;param2&quot;</span>]</span><br><span class="line">ENTRYPOINT <span class="built_in">command</span> param1 param2</span><br></pre></td></tr></table></figure>
+
+<p><code>ENTRYPOINT</code>与<code>CMD</code>非常类似，不同的是通过<code>docker run</code>执行的命令不会覆盖<code>ENTRYPOINT</code>，而<code>docker run</code>命令中指定的任何参数，都会被当做参数再次传递给<code>ENTRYPOINT</code>。<code>Dockerfile</code>中只允许有一个<code>ENTRYPOINT</code>命令，多指定时会覆盖前面的设置，而只执行最后的<code>ENTRYPOINT</code>指令。</p>
+<p><code>docker run</code>运行容器时指定的参数都会被传递给<code>ENTRYPOINT</code>，且会覆盖<code>CMD</code>命令指定的参数。如，执行<code>docker run &lt;image&gt; -d</code>时，<code>-d</code>参数将被传递给入口点。</p>
+<p>也可以通过<code>docker run --entrypoint</code>重写<code>ENTRYPOINT</code>入口点。</p>
+<p>如：可以像下面这样指定一个容器执行程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [<span class="string">&quot;/usr/bin/nginx&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>完整构建代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Version: 0.0.3</span></span><br><span class="line">FROM ubuntu:16.04</span><br><span class="line">MAINTAINER 何民三 <span class="string">&quot;cn.liuht@gmail.com&quot;</span></span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get install -y nginx</span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">&#x27;Hello World, 我是个容器&#x27;</span> \ </span><br><span class="line">   &gt; /var/www/html/index.html</span><br><span class="line">ENTRYPOINT [<span class="string">&quot;/usr/sbin/nginx&quot;</span>]</span><br><span class="line">EXPOSE 80</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>docker build</code>构建镜像，并将镜像指定为<code>itbilu/test</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker build -t=<span class="string">&quot;itbilu/test&quot;</span> .</span><br></pre></td></tr></table></figure>
+
+<p>构建完成后，使用<code>itbilu/test</code>启动一个容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -i -t itbilu/test -g <span class="string">&quot;daemon off;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>在运行容器时，我们使用了<code>-g &quot;daemon off;&quot;</code>，这个参数将会被传递给<code>ENTRYPOINT</code>，最终在容器中执行的命令为<code>/usr/sbin/nginx -g &quot;daemon off;&quot;</code>。</p>
+<h4 id="LABEL"><a href="#LABEL" class="headerlink" title="LABEL"></a><code>LABEL</code></h4><p><code>LABEL</code>用于为镜像添加元数据，元数以键值对的形式指定：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LABEL &lt;key&gt;=&lt;value&gt; &lt;key&gt;=&lt;value&gt; &lt;key&gt;=&lt;value&gt; ...</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>LABEL</code>指定元数据时，一条<code>LABEL</code>指定可以指定一或多条元数据，指定多条元数据时不同元数据之间通过空格分隔。推荐将所有的元数据通过一条<code>LABEL</code>指令指定，以免生成过多的中间镜像。</p>
+<p>如，通过<code>LABEL</code>指定一些元数据：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LABEL version=<span class="string">&quot;1.0&quot;</span> description=<span class="string">&quot;这是一个Web服务器&quot;</span> by=<span class="string">&quot;IT笔录&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>指定后可以通过<code>docker inspect</code>查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sudo</span> docker inspect itbilu/test</span><br><span class="line"><span class="string">&quot;Labels&quot;</span>: &#123;</span><br><span class="line"> <span class="string">&quot;version&quot;</span>: <span class="string">&quot;1.0&quot;</span>,</span><br><span class="line"> <span class="string">&quot;description&quot;</span>: <span class="string">&quot;这是一个Web服务器&quot;</span>,</span><br><span class="line"> <span class="string">&quot;by&quot;</span>: <span class="string">&quot;IT笔录&quot;</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p><em>注意；</em><code>Dockerfile</code>中还有个<code>MAINTAINER</code>命令，该命令用于指定镜像作者。但<code>MAINTAINER</code>并不推荐使用，更推荐使用<code>LABEL</code>来指定镜像作者。如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LABEL maintainer=<span class="string">&quot;itbilu.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a><code>EXPOSE</code></h4><p><code>EXPOSE</code>用于指定容器在运行时监听的端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPOSE &lt;port&gt; [&lt;port&gt;...]</span><br></pre></td></tr></table></figure>
+
+<p><code>EXPOSE</code>并不会让容器的端口访问到主机。要使其可访问，需要在<code>docker run</code>运行容器时通过<code>-p</code>来发布这些端口，或通过<code>-P</code>参数来发布<code>EXPOSE</code>导出的所有端口。</p>
+<h4 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a><code>ENV</code></h4><p><code>ENV</code>用于设置环境变量，其有以下两种设置形式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ENV &lt;key&gt; &lt;value&gt;</span><br><span class="line">ENV &lt;key&gt;=&lt;value&gt; ...</span><br></pre></td></tr></table></figure>
+
+<p>如，通过<code>ENV</code>设置一个环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENV ITBILU_PATH /home/itbilu/</span><br></pre></td></tr></table></figure>
+
+<p>设置后，这个环境变量在<code>ENV</code>命令后都可以使用。如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WORKERDIR <span class="variable">$ITBILU_PATH</span></span><br></pre></td></tr></table></figure>
+
+<p>这些环境变量不仅可以构建镜像过程使用，使用该镜像创建的容器中也可以使用。如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -i -t itbilu/test</span><br><span class="line"> root@196ca123c0c3:/<span class="comment"># cd $ITBILU_PATH</span></span><br><span class="line">root@196ca123c0c3:/home/itbilu<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h4><p><code>ADD</code>用于复制构建环境中的文件或目录到镜像中。其有以下两种使用方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ADD &lt;src&gt;... &lt;dest&gt;</span><br><span class="line">ADD [<span class="string">&quot;&lt;src&gt;&quot;</span>,... <span class="string">&quot;&lt;dest&gt;&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>ADD</code>复制文件时，需要通过<src>指定源文件位置，并通过<code>&lt;dest&gt;</code>来指定目标位置。<src>可以是一个构建上下文中的文件或目录，也可以是一个<code>URL</code>，但不能访问构建上下文之外的文件或目录。</p>
+<p>如，通过<code>ADD</code>复制一个网络文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ADD http://wordpress.org/latest.zip <span class="variable">$ITBILU_PATH</span></span><br></pre></td></tr></table></figure>
+
+<p>在上例中，<code>$ITBILU_PATH</code>是我们使用<code>ENV</code>指定的一个环境变量。</p>
+<p>另外，如果使用的是本地归档文件（<code>gzip</code>、<code>bzip2</code>、<code>xz</code>）时，Docker会自动进行解包操作，类似使用<code>tar -x</code>。</p>
+<h4 id="COPY"><a href="#COPY" class="headerlink" title="COPY"></a>COPY</h4><p><code>COPY</code>同样用于复制构建环境中的文件或目录到镜像中。其有以下两种使用方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">COPY &lt;src&gt;... &lt;dest&gt;</span><br><span class="line">COPY [<span class="string">&quot;&lt;src&gt;&quot;</span>,... <span class="string">&quot;&lt;dest&gt;&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><code>COPY</code>指令非常类似于<code>ADD</code>，不同点在于<code>COPY</code>只会复制构建目录下的文件，不能使用<code>URL</code>也不会进行解压操作。</p>
+<h4 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a><code>VOLUME</code></h4><p><code>VOLUME</code>用于创建挂载点，即向基于所构建镜像创始的容器添加卷：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VOLUME [<span class="string">&quot;/data&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>一个卷可以存在于一个或多个容器的指定目录，该目录可以绕过联合文件系统，并具有以下功能：</p>
+<ul>
+<li>卷可以容器间共享和重用</li>
+<li>容器并不一定要和其它容器共享卷</li>
+<li>修改卷后会立即生效</li>
+<li>对卷的修改不会对镜像产生影响</li>
+<li>卷会一直存在，直到没有任何容器在使用它</li>
+</ul>
+<p><code>VOLUME</code>让我们可以将源代码、数据或其它内容添加到镜像中，而又不并提交到镜像中，并使我们可以多个容器间共享这些内容。</p>
+<p>如，通过<code>VOLUME</code>创建一个挂载点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ENV ITBILU_PATH /home/itbilu/</span><br><span class="line">VOLUME [<span class="variable">$ITBILU_PATH</span>]</span><br></pre></td></tr></table></figure>
+
+<p>构建的镜像，并指定镜像名为<code>itbilu/test</code>。构建镜像后，使用新构建的运行一个容器。运行容器时，需<code>-v</code>参将能本地目录绑定到容器的卷（挂载点）上，以使容器可以访问宿主机的数据。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run -i -t -v ~/code/itbilu:/home/itbilu/ itbilu/test</span><br><span class="line"> root@31b0fac536c4:/<span class="comment"># cd /home/itbilu/</span></span><br><span class="line">root@31b0fac536c4:/home/itbilu<span class="comment"># ls</span></span><br><span class="line">README.md app.js bin config.js controller db demo document lib minify.js node_modules package.json public routes <span class="built_in">test</span> views</span><br></pre></td></tr></table></figure>
+
+<p>如上所示，我们已经可以容器的<code>/home/itbilu/</code>目录下访问到宿主机<code>~/code/itbilu</code>目录下的数据了。</p>
+<h4 id="USER"><a href="#USER" class="headerlink" title="USER"></a><code>USER</code></h4><p><code>USER</code>用于指定运行镜像所使用的用户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USER daemon</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>USER</code>指定用户时，可以使用用户名、<code>UID</code>或<code>GID</code>，或是两者的组合。以下都是合法的指定试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">USER user</span><br><span class="line">USER user:group</span><br><span class="line">USER uid</span><br><span class="line">USER uid:gid</span><br><span class="line">USER user:gid</span><br><span class="line">USER uid:group</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>USER</code>指定用户后，<code>Dockerfile</code>中其后的命令<code>RUN</code>、<code>CMD</code>、<code>ENTRYPOINT</code>都将使用该用户。镜像构建完成后，通过<code>docker run</code>运行容器时，可以通过<code>-u</code>参数来覆盖所指定的用户。</p>
+<h4 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h4><p><code>WORKDIR</code>用于在容器内设置一个工作目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WORKDIR /path/to/workdir</span><br></pre></td></tr></table></figure>
+
+<p>通过<code>WORKDIR</code>设置工作目录后，<code>Dockerfile</code>中其后的命令<code>RUN</code>、<code>CMD</code>、<code>ENTRYPOINT</code>、<code>ADD</code>、<code>COPY</code>等命令都会在该目录下执行。</p>
+<p>如，使用<code>WORKDIR</code>设置工作目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WORKDIR /a</span><br><span class="line">WORKDIR b</span><br><span class="line">WORKDIR c</span><br><span class="line">RUN <span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+
+<p>在以上示例中，<code>pwd</code>最终将会在<code>/a/b/c</code>目录中执行。</p>
+<p>在使用<code>docker run</code>运行容器时，可以通过<code>-w</code>参数覆盖构建时所设置的工作目录。</p>
+<h4 id="ARG"><a href="#ARG" class="headerlink" title="ARG"></a><code>ARG</code></h4><p><code>ARG</code>用于指定传递给构建运行时的变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ARG &lt;name&gt;[=&lt;default value&gt;]</span><br></pre></td></tr></table></figure>
+
+<p>如，通过<code>ARG</code>指定两个变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ARG site</span><br><span class="line">ARG build_user=IT笔录</span><br></pre></td></tr></table></figure>
+
+<p>以上我们指定了<code>site</code>和<code>build_user</code>两个变量，其中<code>build_user</code>指定了默认值。在使用<code>docker build</code>构建镜像时，可以通过<code>--build-arg &lt;varname&gt;=&lt;value&gt;</code>参数来指定或重设置这些变量的值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker build --build-arg site=itiblu.com -t itbilu/test .</span><br></pre></td></tr></table></figure>
+
+<p>这样我们构建了<code>itbilu/test</code>镜像，其中<code>site</code>会被设置为<code>itbilu.com</code>，由于没有指定<code>build_user</code>，其值将是默认值<code>IT笔录</code>。</p>
+<h4 id="ONBUILD"><a href="#ONBUILD" class="headerlink" title="ONBUILD"></a>ONBUILD</h4><p><code>ONBUILD</code>用于设置镜像触发器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ONBUILD [INSTRUCTION]</span><br></pre></td></tr></table></figure>
+
+<p>当所构建的镜像被用做其它镜像的基础镜像，该镜像中的触发器将会被钥触发。</p>
+<p>如，当镜像被使用时，可能需要做一些处理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[...]</span><br><span class="line">ONBUILD ADD . /app/src</span><br><span class="line">ONBUILD RUN /usr/local/bin/python-build --<span class="built_in">dir</span> /app/src</span><br><span class="line">[...]</span><br></pre></td></tr></table></figure>
+
+<h4 id="STOPSIGNAL"><a href="#STOPSIGNAL" class="headerlink" title="STOPSIGNAL"></a>STOPSIGNAL</h4><p><code>STOPSIGNAL</code>用于设置停止容器所要发送的系统调用信号：</p>
+<p>STOPSIGNAL signal</p>
+<p>所使用的信号必须是内核系统调用表中的合法的值，如：<code>9</code>、<code>SIGKILL</code>。</p>
+<h4 id="SHELL"><a href="#SHELL" class="headerlink" title="SHELL"></a><code>SHELL</code></h4><p><code>SHELL</code>用于设置执行命令（<code>shell</code>式）所使用的的默认<code>shell</code>类型：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHELL [<span class="string">&quot;executable&quot;</span>, <span class="string">&quot;parameters&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><code>SHELL</code>在Windows环境下比较有用，Windows下通常会有<code>cmd</code>和<code>powershell</code>两种<code>shell</code>，可能还会有<code>sh</code>。这时就可以通过<code>SHELL</code>来指定所使用的<code>shell</code>类型：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FROM microsoft/windowsservercore</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">FROM microsoft/windowsservercore</span><br><span class="line"></span><br><span class="line"><span class="comment"># Executed as cmd /S /C echo default</span></span><br><span class="line">RUN <span class="built_in">echo</span> default</span><br><span class="line"></span><br><span class="line"><span class="comment"># Executed as cmd /S /C powershell -command Write-Host default</span></span><br><span class="line">RUN powershell -<span class="built_in">command</span> Write-Host default</span><br><span class="line"></span><br><span class="line"><span class="comment"># Executed as powershell -command Write-Host hello</span></span><br><span class="line">SHELL [<span class="string">&quot;powershell&quot;</span>, <span class="string">&quot;-command&quot;</span>]</span><br><span class="line">RUN Write-Host hello</span><br><span class="line"></span><br><span class="line"><span class="comment"># Executed as cmd /S /C echo hello</span></span><br><span class="line">SHELL [<span class="string">&quot;cmd&quot;</span>, <span class="string">&quot;/S&quot;</span><span class="string">&quot;, &quot;</span>/C<span class="string">&quot;]</span></span><br><span class="line"><span class="string">RUN echo helloD</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/f7b3/" rel="prev" title="深入理解JDBC超时">
+      <i class="fa fa-chevron-left"></i> 深入理解JDBC超时
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/671a/" rel="next" title="Cloud Toolkit之Command编写指南">
+      Cloud Toolkit之Command编写指南 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile%E6%96%87%E4%BB%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">Dockerfile文件使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">Dockerfile文件格式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number"></span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">Dockerfile中使用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FROM"><span class="nav-number">1.1.</span> <span class="nav-text">FROM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RUN"><span class="nav-number">1.2.</span> <span class="nav-text">RUN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMD"><span class="nav-number">1.3.</span> <span class="nav-text">CMD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ENTRYPOINT"><span class="nav-number">1.4.</span> <span class="nav-text">ENTRYPOINT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LABEL"><span class="nav-number">1.5.</span> <span class="nav-text">LABEL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EXPOSE"><span class="nav-number">1.6.</span> <span class="nav-text">EXPOSE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ENV"><span class="nav-number">1.7.</span> <span class="nav-text">ENV</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ADD"><span class="nav-number">1.8.</span> <span class="nav-text">ADD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#COPY"><span class="nav-number">1.9.</span> <span class="nav-text">COPY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VOLUME"><span class="nav-number">1.10.</span> <span class="nav-text">VOLUME</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#USER"><span class="nav-number">1.11.</span> <span class="nav-text">USER</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WORKDIR"><span class="nav-number">1.12.</span> <span class="nav-text">WORKDIR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ARG"><span class="nav-number">1.13.</span> <span class="nav-text">ARG</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ONBUILD"><span class="nav-number">1.14.</span> <span class="nav-text">ONBUILD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#STOPSIGNAL"><span class="nav-number">1.15.</span> <span class="nav-text">STOPSIGNAL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SHELL"><span class="nav-number">1.16.</span> <span class="nav-text">SHELL</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">407</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">265k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

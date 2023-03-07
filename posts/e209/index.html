@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="当前大数据发展有三大趋势： 数据仓库往数据湖方向发展、批处理往流式处理发展、本地部署往云模式发展。数据湖作为最近两年兴起的热点概念，各大互联网公司都在对其研究和探索。本文参考了阿里、腾讯和网易等公司的一些资料，将告诉你数据湖到底是什么？有什么用？ https:&#x2F;&#x2F;xie.infoq.cn&#x2F;article&#x2F;7f01991ac2f3b6ef0423be513">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据湖到底是什么？有什么用？">
+<meta property="og:url" content="http://example.com/posts/e209/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="当前大数据发展有三大趋势： 数据仓库往数据湖方向发展、批处理往流式处理发展、本地部署往云模式发展。数据湖作为最近两年兴起的热点概念，各大互联网公司都在对其研究和探索。本文参考了阿里、腾讯和网易等公司的一些资料，将告诉你数据湖到底是什么？有什么用？ https:&#x2F;&#x2F;xie.infoq.cn&#x2F;article&#x2F;7f01991ac2f3b6ef0423be513">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/02/14/rZJCzRIKjkgYiAX.png">
+<meta property="og:image" content="https://s2.loli.net/2022/02/14/y7YQVpkI3OfJnFR.png">
+<meta property="og:image" content="https://s2.loli.net/2022/02/14/fc1j6O4YpSxAEn9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/02/14/q27BbfrYwhJ8eSn.png">
+<meta property="og:image" content="https://s2.loli.net/2022/02/14/yAlFqZhXgvKrI8o.png">
+<meta property="og:image" content="https://s2.loli.net/2022/02/14/amRoKSdwhZ3VYr9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/02/14/27nryxNY6svbzBH.png">
+<meta property="og:image" content="https://s2.loli.net/2022/02/14/gfHLidDwZqjIkSa.png">
+<meta property="og:image" content="https://s2.loli.net/2022/02/14/DLuOFgZKzHRQcEq.png">
+<meta property="article:published_time" content="2022-02-14T07:29:20.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:29:33.721Z">
+<meta property="article:author" content="林剑">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/02/14/rZJCzRIKjkgYiAX.png">
+
+<link rel="canonical" href="http://example.com/posts/e209/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据湖到底是什么？有什么用？ | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e209/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据湖到底是什么？有什么用？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-14 15:29:20" itemprop="dateCreated datePublished" datetime="2022-02-14T15:29:20+08:00">2022-02-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>当前大数据发展有三大趋势： 数据仓库往数据湖方向发展、批处理往流式处理发展、本地部署往云模式发展。数据湖作为最近两年兴起的热点概念，各大互联网公司都在对其研究和探索。本文参考了阿里、腾讯和网易等公司的一些资料，将告诉你数据湖到底是什么？有什么用？</p>
+<p><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/7f01991ac2f3b6ef0423be513">https://xie.infoq.cn/article/7f01991ac2f3b6ef0423be513</a></p>
+<span id="more"></span>
+
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>当前大数据发展有三大趋势： 数据仓库往<strong>数据湖</strong>方向发展、批处理往<strong>流式处理</strong>发展、本地部署往<strong>云模式</strong>发展。数据湖作为最近两年兴起的热点概念，各大互联网公司都在对其研究和探索。本文参考了阿里、腾讯和网易等公司的一些资料，将告诉你数据湖到底是什么？有什么用？</p>
+<h2 id="一、数据湖与数据仓库"><a href="#一、数据湖与数据仓库" class="headerlink" title="一、数据湖与数据仓库"></a>一、数据湖与数据仓库</h2><p>数据湖与数据库、数据仓库一样，都是一种对数据组织方式的描述（无关具体技术实现）。</p>
+<h3 id="1-数据湖到底是什么"><a href="#1-数据湖到底是什么" class="headerlink" title="1.数据湖到底是什么"></a>1.数据湖到底是什么</h3><p>数据湖作为近年新造的一个概念词汇，并没有一个完全标准化的定义。我们来看看业界的主流定义：</p>
+<h4 id="维基百科的定义"><a href="#维基百科的定义" class="headerlink" title="维基百科的定义"></a>维基百科的定义</h4><p>数据湖（Data Lake）是<strong>指使用大型二进制对象或文件这样的自然格式储存数据的系统</strong>。它通常把所有的企业数据统一存储，既包括源系统中的原始副本，也包括转换后的数据，比如那些用于报表,可视化, 数据分析和机器学习的数据。数据湖可以包括关系数据库的结构化数据(行与列)、半结构化的数据(CSV，日志，XML,JSON)，非结构化数据 (电子邮件、文件、PDF)和 二进制数据(图像、音频、视频)。</p>
+<h4 id="AWS-的定义"><a href="#AWS-的定义" class="headerlink" title="AWS 的定义"></a>AWS 的定义</h4><p>A data lake is <strong>a centralized repository that allows you to store all your structured and unstructured data at any scale</strong>. You can store your data as-is, without having to first structure the data, and run different types of analytics—from dashboards and visualizations to big data processing, real-time analytics, and machine learning to guide better decisions.</p>
+<h4 id="阿里云的定义"><a href="#阿里云的定义" class="headerlink" title="阿里云的定义"></a>阿里云的定义</h4><p>数据湖是<strong>统一存储池</strong>，可对接多种数据输入方式，您可以存储任意规模的结构化、半结构化、非结构化数据。数据湖可无缝对接多种计算分析平台，直接进行数据处理与分析，打破孤岛，洞察业务价值。同时，数据湖提供冷热分层转换能力，覆盖数据全生命周期。</p>
+<p><img src="https://s2.loli.net/2022/02/14/rZJCzRIKjkgYiAX.png" alt="img"></p>
+<p>上面的定义还是比较抽象，这里有个更形象贴切的定义：<strong>数据湖就是自然状态下的巨大水体，汇聚不同数据源的溪流并存储，根据不同需求输出有价值的数据</strong>。既可以存储结构化数据，也可以存储非结构化数据；既可以接入离线批数据，也可以接入实时流数据；既可以支持流&#x2F;批计算引擎，也可以支持交互式分析引擎和机器学习引擎。</p>
+<h3 id="2-数据湖的特点"><a href="#2-数据湖的特点" class="headerlink" title="2.数据湖的特点"></a>2.数据湖的特点</h3><p>一般而言，数据湖技术需要具备以下几项特点[1]：</p>
+<ul>
+<li>支持多种计算引擎、同时支持流批处理</li>
+<li>支持多种存储引擎</li>
+<li>支持数据更新</li>
+<li>支持事务（ACID）</li>
+<li>可扩展的元数据</li>
+<li>数据质量保障</li>
+</ul>
+<p>上面并没有列出支持非结构化数据这一特点（HDFS 本身就已可以实现），业界对于数据湖的关注点更多是在结构化和半结构化数据的存储和计算上，例如如何通过数据湖技术将实时数仓和离线数仓融合。</p>
+<h3 id="3-数据湖与数据仓库的区别"><a href="#3-数据湖与数据仓库的区别" class="headerlink" title="3.数据湖与数据仓库的区别"></a>3.数据湖与数据仓库的区别</h3><p>数据仓库和数据湖在各个维度上的区别对比[2]：</p>
+<p><img src="https://s2.loli.net/2022/02/14/y7YQVpkI3OfJnFR.png" alt="img"></p>
+<p>上面的对比看看就好，数据湖在实际应用中，并不需要与数据仓库完全对立开来，通常与数据仓库结合起来形成所谓“<strong>湖仓一体</strong>”[3]。</p>
+<h2 id="二、开源数据湖方案介绍"><a href="#二、开源数据湖方案介绍" class="headerlink" title="二、开源数据湖方案介绍"></a>二、开源数据湖方案介绍</h2><p>目前并没有针对数据湖的比较成熟的解决方案，几个大厂在开发相关技术来解决内部遇到的一些痛点后，开源了几个项目，比较著名的有 Databrics 的 Dalta Lake，Uber 开源的 Hudi，Netflix 开源的 Iceberg，俗称“<strong>数据湖三剑客</strong>”。</p>
+<h3 id="1-数据湖三剑客"><a href="#1-数据湖三剑客" class="headerlink" title="1.数据湖三剑客"></a>1.数据湖三剑客</h3><p><img src="https://s2.loli.net/2022/02/14/fc1j6O4YpSxAEn9.png" alt="img"></p>
+<p>需要注意的一点是，目前各个数据湖技术仍在处在初期快速迭代阶段，最新版本都还是 0.X 版本（截止发文时 21 年 3 月）：</p>
+<ul>
+<li>Delta Lake 0.8.0</li>
+<li>Hudi 0.7.0</li>
+<li>iceberg-0.11.0</li>
+</ul>
+<h3 id="2-Iceberg-介绍"><a href="#2-Iceberg-介绍" class="headerlink" title="2.Iceberg 介绍"></a>2.Iceberg 介绍</h3><p>Iceberg 的设计之初就并未绑定于某一特定引擎，它实现了通用的数据组织格式，利用此格式可以方便地与不同引擎（如 Flink、Hive、Spark）对接。</p>
+<p>Iceberg 本质上是一种专为海量分析设计的表格式标准，可为主流计算引擎提供高性能的读写和元数据管理能力。（来自<a target="_blank" rel="noopener" href="https://iceberg.apache.org/">Iceberg官网</a>的定义是：Apache Iceberg is an open table format for huge analytic datasets.）</p>
+<p>所谓的 table format，其实就是 Hadoop 中的 Metastore 所扮演的角色。功能包含表 schema 定义、表中文件的组织形式、表相关统计信息、索引信息以及表的读写 API 实现[4]。</p>
+<p><img src="https://s2.loli.net/2022/02/14/q27BbfrYwhJ8eSn.png" alt="img"></p>
+<p><strong>Iceberg 相对于 Metastore 的优势</strong>：</p>
+<ul>
+<li>新 partition 模式：分区作为一个字段存储而不是文件夹，避免了查询时多次调用 namenode 的 list 方法，降低 namenode 压力，提升查询性能</li>
+<li>新 metadata 模式：文件级别列统计信息可以用来根据 where 字段进行文件过滤，很多场景下可以大大减少扫描文件数，提升查询性能</li>
+<li>新 API 模式：实现存储批流一体</li>
+</ul>
+<p><strong>Iceberg 读写 API 的实现</strong>：</p>
+<p><img src="https://s2.loli.net/2022/02/14/yAlFqZhXgvKrI8o.png" alt="img"></p>
+<p>上层业务写好一批文件，调用 iceberg 的 commit 接口提交本次的写入形成一个新的 snapshot 快照。这种提交方式保证了表的 ACID 语义。同时基于 snapshot 快照提交可以实现增量拉取实现。</p>
+<p>数据湖写入流数据时，实际都是将流数据转换为微批（minibatch）进行处理，所以实时性会比真正的流式计算差些，延迟可能达到分钟级。</p>
+<p>（更多介绍可另参考：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/776257">网易：Flink + Iceberg 数据湖探索与实践</a>[4]）</p>
+<h3 id="3-Hudi-介绍"><a href="#3-Hudi-介绍" class="headerlink" title="3.Hudi 介绍"></a>3.Hudi 介绍</h3><p><a target="_blank" rel="noopener" href="https://hudi.apache.org/">Hudi官网</a>：Apache Hudi ingests &amp; manages storage of large analytical datasets over DFS (hdfs or cloud stores).</p>
+<p><img src="https://s2.loli.net/2022/02/14/amRoKSdwhZ3VYr9.png" alt="img"></p>
+<p>Hudi 设计之初是与 Spark 引擎强耦合的，在去年下半年进行了与 Spark 解耦，最新的 Hudi0.70 已经增加了对 Flink 的支持[5]。</p>
+<p>Hudi 提供了两种原语，使得除了经典的批处理之外，还可以在数据湖上进行流处理。这两种原语分别是：</p>
+<ul>
+<li>Update&#x2F;Delete 记录：Hudi 使用细粒度的文件&#x2F;记录级别索引来支持 Update&#x2F;Delete 记录，同时还提供写操作的事务保证。查询会处理最后一个提交的快照，并基于此输出结果。</li>
+<li>变更时间轴：Hudi 对获取数据变更提供了一流的支持：可以从给定的时间点获取给定表中已 updated&#x2F;inserted&#x2F;deleted 的所有记录的增量流，并解锁新的查询类别。</li>
+</ul>
+<p>（更多介绍可另参考：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/KbKKclT3oaNEnU--OI3f4Q">Apache Hudi 设计与架构最强解读</a>[6]）</p>
+<h3 id="4-Delta-Lake-介绍"><a href="#4-Delta-Lake-介绍" class="headerlink" title="4.Delta Lake 介绍"></a>4.Delta Lake 介绍</h3><p><a target="_blank" rel="noopener" href="https://delta.io/">Delta Lake 官网</a>：Delta Lake is an open-source storage layer that brings ACID transactions to Apache Spark™ and big data workloads.</p>
+<p><img src="https://s2.loli.net/2022/02/14/27nryxNY6svbzBH.png" alt="img"></p>
+<p>Delta Lake 是 Spark 计算框架和存储系统之间带有 Schema 信息的存储中间层。（可以看到 DeltaLake 是与 Spark 强耦合的）</p>
+<p>它有一些重要的特性：</p>
+<ul>
+<li>设计了基于 HDFS 存储的元数据系统，解决 metastore 不堪重负的问题；</li>
+<li>支持更多种类的更新模式，比如 Merge &#x2F; Update &#x2F; Delete 等操作，配合流式写入或者读取的支持，让实时数据湖变得水到渠成；</li>
+<li>流批操作可以共享同一张表；</li>
+<li>版本概念，可以随时回溯，避免一次误操作或者代码逻辑而无法恢复的灾难性后果。</li>
+</ul>
+<p>Delta Lake 是基于 Parquet 的存储层，所有的数据都是使用 Parquet 来存储，能够利用 parquet 原生高效的压缩和编码方案。</p>
+<p>Delta Lake 在多并发写入之间提供 ACID 事务保证。每次写入都是一个事务，并且在事务日志中记录了写入的序列顺序。</p>
+<p>事务日志跟踪文件级别的写入并使用乐观并发控制，这非常适合数据湖，因为多次写入&#x2F;修改相同的文件很少发生。在存在冲突的情况下，Delta Lake 会抛出并发修改异常以便用户能够处理它们并重试其作业。[2]</p>
+<h2 id="三、数据湖应用场景探索"><a href="#三、数据湖应用场景探索" class="headerlink" title="三、数据湖应用场景探索"></a>三、数据湖应用场景探索</h2><h3 id="1-构建流批一体的实时数仓"><a href="#1-构建流批一体的实时数仓" class="headerlink" title="1.构建流批一体的实时数仓"></a>1.构建流批一体的实时数仓</h3><p>上文中可以看到，“流批一体的存储”是数据湖技术都重点关注的一个特性。利用这个特性，可以将目前实时数仓常用的 Lambda 改造为 Kappa 架构，解决实时数仓的诸多问题。</p>
+<h4 id="Lambda-数仓架构"><a href="#Lambda-数仓架构" class="headerlink" title="Lambda 数仓架构"></a>Lambda 数仓架构</h4><p><img src="https://s2.loli.net/2022/02/14/gfHLidDwZqjIkSa.png" alt="img"></p>
+<p>基于 Lambda 架构建设的实时数仓存在较多的问题。如上图的这个架构图，第一条链路是基于 kafka 中转的一条实时链路（秒级），另一条是离线链路（天级），甚至有些公司会有第三条准实时链路（15 分钟～1 小时）。</p>
+<ul>
+<li>两条链路对应两份数据，很多时候实时链路的处理结果和离线链路的处理结果对不上。</li>
+<li>Kafka 无法存储海量数据， 无法基于当前的 OLAP 分析引擎高效查询 Kafka 中的数据。</li>
+<li>Lambda 维护成本高。代码、数据血缘、Schema 等都需要两套。运维、监控等成本都非常高。</li>
+</ul>
+<h4 id="Kappa-数仓架构"><a href="#Kappa-数仓架构" class="headerlink" title="Kappa 数仓架构"></a>Kappa 数仓架构</h4><p><img src="https://s2.loli.net/2022/02/14/DLuOFgZKzHRQcEq.png" alt="img"></p>
+<p>以 Flink + Iceberg 构建数据湖为例，Flink 实现计算引擎层面的流批一体，Iceberg 实现存储层面的流批一体。计算+存储两个层面实现流批统一，可极大地降低实时数仓的开发和维护成本。</p>
+<h3 id="2-提升-ETL-任务的执行性能"><a href="#2-提升-ETL-任务的执行性能" class="headerlink" title="2.提升 ETL 任务的执行性能"></a>2.提升 ETL 任务的执行性能</h3><p>还是以 Iceberg 为例，新 Partition 模式下不再需要请求 NameNode 的分区信息，同时得益于文件级别统计信息模式下可以过滤很多不满足条件的数据文件，可以大大提升 ETL 任务执行的效率[4]。</p>
+<p>更多大数据领域干货笔记，搜索关注公众号：<strong>关二爷大数据笔记****（bigdata_guanerye）</strong>。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] 数据湖技术 Iceberg 的探索与实践——邵赛赛（腾讯数据湖负责人）</p>
+<p>[2] 计算引擎之下，存储之上 - 数据湖初探：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/MEhbm3Tyvms1ohwg4O8Umg">https://mp.weixin.qq.com/s/MEhbm3Tyvms1ohwg4O8Umg</a></p>
+<p>[3] 数据湖 VS 数据仓库之争？阿里提出大数据架构新概念：湖仓一体：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/775390">https://developer.aliyun.com/article/775390</a></p>
+<p>[4] 网易：Flink + Iceberg 数据湖探索与实践：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/776257">https://developer.aliyun.com/article/776257</a></p>
+<p>[5] Apache Hudi meets Apache Flink：<a target="_blank" rel="noopener" href="https://hudi.apache.org/blog/apache-hudi-meets-apache-flink/">https://hudi.apache.org/blog/apache-hudi-meets-apache-flink/</a></p>
+<p>[6] Apache Hudi 设计与架构最强解读：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/KbKKclT3oaNEnU--OI3f4Q">https://mp.weixin.qq.com/s/KbKKclT3oaNEnU--OI3f4Q</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3d24/" rel="prev" title="Tomcat启动报错：More than one fragment with the name [org_apache_tomcat_websocket]">
+      <i class="fa fa-chevron-left"></i> Tomcat启动报错：More than one fragment with the name [org_apache_tomcat_websocket]
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/ebc4/" rel="next" title="SQLServer日期格式化">
+      SQLServer日期格式化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E6%B9%96%E4%B8%8E%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">一、数据湖与数据仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E6%B9%96%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">2.1.</span> <span class="nav-text">1.数据湖到底是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.1.</span> <span class="nav-text">维基百科的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AWS-%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.2.</span> <span class="nav-text">AWS 的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.3.</span> <span class="nav-text">阿里云的定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E6%B9%96%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">2.2.</span> <span class="nav-text">2.数据湖的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E6%B9%96%E4%B8%8E%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.3.</span> <span class="nav-text">3.数据湖与数据仓库的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%BC%80%E6%BA%90%E6%95%B0%E6%8D%AE%E6%B9%96%E6%96%B9%E6%A1%88%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">二、开源数据湖方案介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E6%B9%96%E4%B8%89%E5%89%91%E5%AE%A2"><span class="nav-number">3.1.</span> <span class="nav-text">1.数据湖三剑客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Iceberg-%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.2.</span> <span class="nav-text">2.Iceberg 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Hudi-%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.3.</span> <span class="nav-text">3.Hudi 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Delta-Lake-%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.4.</span> <span class="nav-text">4.Delta Lake 介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%95%B0%E6%8D%AE%E6%B9%96%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E6%8E%A2%E7%B4%A2"><span class="nav-number">4.</span> <span class="nav-text">三、数据湖应用场景探索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9E%84%E5%BB%BA%E6%B5%81%E6%89%B9%E4%B8%80%E4%BD%93%E7%9A%84%E5%AE%9E%E6%97%B6%E6%95%B0%E4%BB%93"><span class="nav-number">4.1.</span> <span class="nav-text">1.构建流批一体的实时数仓</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lambda-%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84"><span class="nav-number">4.1.1.</span> <span class="nav-text">Lambda 数仓架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kappa-%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84"><span class="nav-number">4.1.2.</span> <span class="nav-text">Kappa 数仓架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%8F%90%E5%8D%87-ETL-%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%89%A7%E8%A1%8C%E6%80%A7%E8%83%BD"><span class="nav-number">4.2.</span> <span class="nav-text">2.提升 ETL 任务的执行性能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">407</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">265k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="6.1 6月任务会议  周例会  补丁包规范制定（修复bug描述、影响版本、补丁文件、替换路径……）  更新说明要包含修复bug     6.2 提测、发包前必做事项整理  重庆医药开发计划、代码、字典数据  自动化测试脚本计划–陈云鹏  Kibana了解（柱状图、饼图、数据筛选、导出）   6.3 埋点数据增加版本号  迭代版本增加埋点  科室区分门诊、住院（要考虑兼容性，涉及模块较多）   6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020-06">
+<meta property="og:url" content="http://example.com/posts/e824/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="6.1 6月任务会议  周例会  补丁包规范制定（修复bug描述、影响版本、补丁文件、替换路径……）  更新说明要包含修复bug     6.2 提测、发包前必做事项整理  重庆医药开发计划、代码、字典数据  自动化测试脚本计划–陈云鹏  Kibana了解（柱状图、饼图、数据筛选、导出）   6.3 埋点数据增加版本号  迭代版本增加埋点  科室区分门诊、住院（要考虑兼容性，涉及模块较多）   6">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-29T06:14:39.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:29:33.674Z">
+<meta property="article:author" content="林剑">
+<meta property="article:tag" content="Daily">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/e824/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2020-06 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e824/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2020-06
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-29 14:14:39" itemprop="dateCreated datePublished" datetime="2020-05-29T14:14:39+08:00">2020-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Daily/" itemprop="url" rel="index"><span itemprop="name">Daily</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="6-1"><a href="#6-1" class="headerlink" title="6.1"></a>6.1</h1><ol>
+<li><p>6月任务会议</p>
+<ul>
+<li><p>周例会</p>
+</li>
+<li><p>补丁包规范制定（修复bug描述、影响版本、补丁文件、替换路径……）</p>
+</li>
+<li><p>更新说明要包含修复bug</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="6-2"><a href="#6-2" class="headerlink" title="6.2"></a>6.2</h1><ol>
+<li><p>提测、发包前必做事项整理</p>
+</li>
+<li><p>重庆医药开发计划、代码、字典数据</p>
+</li>
+<li><p>自动化测试脚本计划–陈云鹏</p>
+</li>
+<li><p>Kibana了解（柱状图、饼图、数据筛选、导出）</p>
+</li>
+</ol>
+<h1 id="6-3"><a href="#6-3" class="headerlink" title="6.3"></a>6.3</h1><ol>
+<li><p>埋点数据增加版本号</p>
+</li>
+<li><p>迭代版本增加埋点</p>
+</li>
+<li><p>科室区分门诊、住院（要考虑兼容性，涉及模块较多）</p>
+</li>
+</ol>
+<h1 id="6-4"><a href="#6-4" class="headerlink" title="6.4"></a>6.4</h1><ol>
+<li><p>登陆后工作站加载统计数据慢（默认查今日）</p>
+</li>
+<li><p>数据量过大历史数据备份方案讨论（存储过程 – 金翔）</p>
+</li>
+<li><p>任务列表分页优化（count单独sql、查数据先查id）</p>
+</li>
+<li><p>分表分库Sharding-jdbc、Mycat（高翔）</p>
+</li>
+</ol>
+<h1 id="6-5"><a href="#6-5" class="headerlink" title="6.5"></a>6.5</h1><ol>
+<li><p>迭代重构分支去除无用依赖（慢病、妇幼等代码）</p>
+</li>
+<li><p>南京鼓楼患者注册状态同步失败（重启云端服务，疑似kafka消费者断开）</p>
+</li>
+</ol>
+<h1 id="6-6"><a href="#6-6" class="headerlink" title="6.6"></a>6.6</h1><ol>
+<li><p>开发流程培训</p>
+</li>
+<li><p>邵逸夫</p>
+<ul>
+<li><p>科室归并（院区科室级联，搜索全选所有修改，分类单题得分统计）  – 吴森、姚成润</p>
+</li>
+<li><p>满意度处理时间要选2次（异常任务处理，时间带进去）  – 姚成润</p>
+</li>
+<li><p>数据对不上（按表单单提统计）  – 金翔</p>
+</li>
+<li><p>数据下钻（分类得分统计，分类得分详情可以查看分类下每道题目的信息）–吴森、姚成润</p>
+</li>
+<li><p>ibd 表单自动填充基本信息、疾病特征 – 金翔</p>
+</li>
+<li><p>门诊满意率详情改为“满意率详情” ，住院（出院、在院）来源的不分初诊、复诊，叫“住院” – 吴森、姚成润</p>
+</li>
+</ul>
+</li>
+<li><p>加速实施</p>
+<ul>
+<li><p>质量</p>
+</li>
+<li><p>内置知识库</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="6-8"><a href="#6-8" class="headerlink" title="6.8"></a>6.8</h1><ol>
+<li><p>邵逸夫需求、bug宣讲</p>
+</li>
+<li><p>北京潞河录音重复问题跟踪（云端问题，下版本修复）</p>
+</li>
+<li><p>excel导出失败（批量导出使用iframe，不是windows.open()，iframe remove太快了）</p>
+</li>
+</ol>
+<h1 id="6-9"><a href="#6-9" class="headerlink" title="6.9"></a>6.9</h1><ol>
+<li><p>健管云平台接口梳理</p>
+</li>
+<li><p>线程合理分配（林剑）</p>
+</li>
+<li><p>医共体改造功能点梳理</p>
+<ul>
+<li><p>主索引</p>
+</li>
+<li><p>数据查看权限</p>
+</li>
+<li><p>计划查看权限</p>
+</li>
+<li><p>医疗档案</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="6-10"><a href="#6-10" class="headerlink" title="6.10"></a>6.10</h1><ol>
+<li><p>自动筛选、自动发送优化预警</p>
+<ul>
+<li><p>医院可搜索</p>
+</li>
+<li><p>PC端适配</p>
+</li>
+<li><p>本地缓存筛选数据</p>
+</li>
+<li><p>发送的统计维度</p>
+</li>
+<li><p>查询sql优化</p>
+</li>
+</ul>
+</li>
+<li><p>迭代验收会</p>
+</li>
+<li><p>健管云平台1.0分工讨论，确认接口清单</p>
+</li>
+</ol>
+<h1 id="6-11"><a href="#6-11" class="headerlink" title="6.11"></a>6.11</h1><ol>
+<li><p>统计优化方案</p>
+<ul>
+<li><p>历史数据迁移（效率优化验证）</p>
+</li>
+<li><p>sharing-jdbc（不适用随访）</p>
+</li>
+<li><p>数据固化</p>
+</li>
+<li><p>主从备份、读写分离（第三方工具）</p>
+</li>
+</ul>
+</li>
+<li><p>接口文档评审</p>
+</li>
+<li><p>配置文件整合</p>
+</li>
+</ol>
+<h1 id="6-15"><a href="#6-15" class="headerlink" title="6.15"></a>6.15</h1><ol>
+<li><p>健管云平台开发环境搭建（关闭206dte，3.71上部署dte，zk用206）</p>
+</li>
+<li><p>配置文件整合 – 高翔</p>
+</li>
+<li><p>Mysql读写分离、主从备份技术选型</p>
+<ul>
+<li>主从备份需要至少两台以上服务器，对安装以及后期的维护成本较高</li>
+</ul>
+</li>
+<li><p>自动化测试演示</p>
+<ul>
+<li><p>测试覆盖面不够全</p>
+</li>
+<li><p>6.17前整理出测试覆盖用例</p>
+</li>
+</ul>
+</li>
+<li><p>子宫内膜增生宣讲</p>
+</li>
+</ol>
+<h1 id="6-16"><a href="#6-16" class="headerlink" title="6.16"></a>6.16</h1><ol>
+<li><p>子宫内膜增生工作量评估、计划制定</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>前期准备</td>
+<td>2020&#x2F;6&#x2F;17</td>
+<td>2020&#x2F;6&#x2F;18</td>
+</tr>
+<tr>
+<td>计划开发</td>
+<td>2020&#x2F;6&#x2F;19</td>
+<td>2020&#x2F;6&#x2F;20</td>
+</tr>
+<tr>
+<td>计划对接</td>
+<td>2020&#x2F;6&#x2F;22</td>
+<td>2020&#x2F;6&#x2F;23</td>
+</tr>
+<tr>
+<td>任务列表、处理</td>
+<td>2020&#x2F;6&#x2F;24</td>
+<td>2020&#x2F;6&#x2F;30</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h1 id="6-17"><a href="#6-17" class="headerlink" title="6.17"></a>6.17</h1><ol>
+<li><p>临淄317护对接方案会议</p>
+</li>
+<li><p>健管云测试用例评审</p>
+</li>
+</ol>
+<h1 id="6-20"><a href="#6-20" class="headerlink" title="6.20"></a>6.20</h1><ol>
+<li><p>改造功能点</p>
+<ul>
+<li><p>适用科室必选、适用疾病非必选</p>
+</li>
+<li><p>基础库表单、规则自动分配给科室里的所有员工</p>
+</li>
+<li><p>记录引用自那一份表单id</p>
+</li>
+<li><p>基础库表单适用科室是全部科室的，自动分配给医院所有账号</p>
+</li>
+<li><p>新增一个（查看没操作权限）知识库管理分配</p>
+</li>
+<li><p>可以查看未映射科室</p>
+</li>
+</ul>
+</li>
+<li><p>问题：</p>
+<ul>
+<li>病区的知识如何内置</li>
+</ul>
+</li>
+<li><p>上线流程：</p>
+<ul>
+<li><p>接口对接</p>
+</li>
+<li><p>上传科室、疾病字典（实施，云端知识库），自动映射，检查标准化知识库必须科室的映射关系</p>
+</li>
+<li><p>分配标准化知识库（沈卫利）</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="6-22"><a href="#6-22" class="headerlink" title="6.22"></a>6.22</h1><ol>
+<li>杭州市肿瘤售</li>
+</ol>
+<h1 id="6-24"><a href="#6-24" class="headerlink" title="6.24"></a>6.24</h1><ol>
+<li><p>余杭中医院</p>
+<ul>
+<li><p>计划人数100个，统计里出院人数100个</p>
+</li>
+<li><p>表单内容维护</p>
+</li>
+<li><p>使用操作</p>
+</li>
+<li><p>唐主任  18072979063 1:30</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="6-28"><a href="#6-28" class="headerlink" title="6.28"></a>6.28</h1><ol>
+<li><p>健管云验收</p>
+</li>
+<li><p>余杭中医院技术支持（后续实施跟进）</p>
+<ul>
+<li><p>计划人数不对（不重复入档，抽样方式前5天）</p>
+</li>
+<li><p>表单需要维护</p>
+</li>
+<li><p>discharge_statistics_days&#x3D;21（延后统计截止天数）</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="6-29"><a href="#6-29" class="headerlink" title="6.29"></a>6.29</h1><ol>
+<li><p>郑州市金水区医院演示（宣教、短信平台）</p>
+</li>
+<li><p>重庆医药性能测试文档 – 王菲</p>
+</li>
+</ol>
+<h1 id="6-30"><a href="#6-30" class="headerlink" title="6.30"></a>6.30</h1><ol>
+<li><p>专病流程梳理</p>
+<ul>
+<li><p>新建专病路径 – 规则、表单、宣教、数据源、档案表单 （云端知识库）</p>
+</li>
+<li><p>科室、疾病、药品等映射（云端知识库）</p>
+</li>
+<li><p>知识授权适配（云端知识库）</p>
+</li>
+<li><p>维护专病档案（随访）</p>
+</li>
+<li><p>维护专病路径 – 数据源、专病档案（随访）</p>
+</li>
+<li><p>开启专病计划（随访）</p>
+</li>
+</ul>
+</li>
+<li><p>专病使用问题</p>
+<ul>
+<li><p>院内维护数据源显示的时候没有分类展示</p>
+</li>
+<li><p>院内维护专病档案的时候不知道云端维护了多少档案表单，病历分类名称不知道叫什么合适</p>
+</li>
+</ul>
+</li>
+<li><p>专病改造功能</p>
+<ul>
+<li><p>新建计划–所属路径非必选</p>
+</li>
+<li><p>院内维护数据源显示的时候推荐数据源按分类展示</p>
+</li>
+<li><p>专病档案在云端知识库维护，分配路径的时候一起分配下来</p>
+</li>
+</ul>
+</li>
+<li><p>医共体宣讲</p>
+<ul>
+<li><p>患者查询</p>
+<ul>
+<li><p>模块有什么作用</p>
+</li>
+<li><p>权限如何控制</p>
+</li>
+</ul>
+</li>
+<li><p>委托列表</p>
+<ul>
+<li><p>执行医院改为下拉选择</p>
+</li>
+<li><p>列表排序规则</p>
+</li>
+<li><p>已完成列表，任务状态：全部、已评价、未评价</p>
+</li>
+</ul>
+</li>
+<li><p>被委托列表</p>
+<ul>
+<li><p>委托医院改为下拉选择</p>
+</li>
+<li><p>名单未匹配排前面</p>
+</li>
+</ul>
+</li>
+<li><p>增加医院维护功能</p>
+<ul>
+<li><p>维护上下级关系</p>
+</li>
+<li><p>是否有委托权限</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="6-30-1"><a href="#6-30-1" class="headerlink" title="6.30"></a>6.30</h1><ol>
+<li><p>数据同步同居dataX</p>
+</li>
+<li><p>任务调度Luigi, airflow, Azkaban, Oozie, aurora</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Daily/" rel="tag"># Daily</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/256b/" rel="prev" title="微信订阅号、服务号区别">
+      <i class="fa fa-chevron-left"></i> 微信订阅号、服务号区别
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/2eca/" rel="next" title="LeetCode 把数字翻译成字符串">
+      LeetCode 把数字翻译成字符串 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#6-1"><span class="nav-number">1.</span> <span class="nav-text">6.1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-2"><span class="nav-number">2.</span> <span class="nav-text">6.2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-3"><span class="nav-number">3.</span> <span class="nav-text">6.3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-4"><span class="nav-number">4.</span> <span class="nav-text">6.4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-5"><span class="nav-number">5.</span> <span class="nav-text">6.5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-6"><span class="nav-number">6.</span> <span class="nav-text">6.6</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-8"><span class="nav-number">7.</span> <span class="nav-text">6.8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-9"><span class="nav-number">8.</span> <span class="nav-text">6.9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-10"><span class="nav-number">9.</span> <span class="nav-text">6.10</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-11"><span class="nav-number">10.</span> <span class="nav-text">6.11</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-15"><span class="nav-number">11.</span> <span class="nav-text">6.15</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-16"><span class="nav-number">12.</span> <span class="nav-text">6.16</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-17"><span class="nav-number">13.</span> <span class="nav-text">6.17</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-20"><span class="nav-number">14.</span> <span class="nav-text">6.20</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-22"><span class="nav-number">15.</span> <span class="nav-text">6.22</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-24"><span class="nav-number">16.</span> <span class="nav-text">6.24</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-28"><span class="nav-number">17.</span> <span class="nav-text">6.28</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-29"><span class="nav-number">18.</span> <span class="nav-text">6.29</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-30"><span class="nav-number">19.</span> <span class="nav-text">6.30</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-30-1"><span class="nav-number">20.</span> <span class="nav-text">6.30</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">407</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">265k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

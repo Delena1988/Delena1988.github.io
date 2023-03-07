@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什么是 OAuth 2.0OAuth 2.0 是一个行业的标准授权协议。OAuth 2.0 专注于简化客户端开发人员，同时为 Web 应用程序，桌面应用程序，手机和客厅设备提供特定的授权流程。 它的最终目的是为第三方应用颁发一个有时效性的令牌 token。使得第三方应用能够通过该令牌获取相关的资源。常见的场景就是：第三方登录。当你想要登录某个论坛，但没有账号，而这个论坛接入了如 QQ、Facebo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OAuth 2.0 协议">
+<meta property="og:url" content="http://example.com/posts/fec1/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="什么是 OAuth 2.0OAuth 2.0 是一个行业的标准授权协议。OAuth 2.0 专注于简化客户端开发人员，同时为 Web 应用程序，桌面应用程序，手机和客厅设备提供特定的授权流程。 它的最终目的是为第三方应用颁发一个有时效性的令牌 token。使得第三方应用能够通过该令牌获取相关的资源。常见的场景就是：第三方登录。当你想要登录某个论坛，但没有账号，而这个论坛接入了如 QQ、Facebo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://st.deepzz.com/blog/img/oauth2-roles.jpg">
+<meta property="article:published_time" content="2019-05-30T06:06:04.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:29:33.691Z">
+<meta property="article:author" content="林剑">
+<meta property="article:tag" content="OAuth2.0">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://st.deepzz.com/blog/img/oauth2-roles.jpg">
+
+<link rel="canonical" href="http://example.com/posts/fec1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>OAuth 2.0 协议 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/fec1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OAuth 2.0 协议
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-30 14:06:04" itemprop="dateCreated datePublished" datetime="2019-05-30T14:06:04+08:00">2019-05-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OAuth2-0/" itemprop="url" rel="index"><span itemprop="name">OAuth2.0</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>11 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="什么是-OAuth-2-0"><a href="#什么是-OAuth-2-0" class="headerlink" title="什么是 OAuth 2.0"></a>什么是 OAuth 2.0</h3><p>OAuth 2.0 是一个行业的标准授权协议。OAuth 2.0 专注于简化客户端开发人员，同时为 Web 应用程序，桌面应用程序，手机和客厅设备提供特定的授权流程。</p>
+<p>它的最终目的是为第三方应用颁发一个有时效性的令牌 token。使得第三方应用能够通过该令牌获取相关的资源。常见的场景就是：第三方登录。当你想要登录某个论坛，但没有账号，而这个论坛接入了如 QQ、Facebook 等登录功能，在你使用 QQ 登录的过程中就使用的 OAuth 2.0 协议。</p>
+<p>如果你想了解更多，其官方网址为：<a target="_blank" rel="noopener" href="https://oauth.net/2/">https://oauth.net/2/</a>。下面我们来了解下 OAuth 协议的基本原理</p>
+<span id="more"></span>
+
+<h3 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h3><p>首先需要介绍的是 OAuth 2.0 协议中的一些角色，整个授权协议的流程都将围绕着这些角色：</p>
+<ul>
+<li><code>resource owner</code>，资源所有者，能够允许访问受保护资源的实体。如果是个人，被称为 end-user。</li>
+<li><code>resource server</code>，资源服务器，托管受保护资源的服务器。</li>
+<li><code>client</code>，客户端，使用资源所有者的授权代表资源所有者发起对受保护资源的请求的应用程序。如：web网站，移动应用等。</li>
+<li><code>authorization server</code>，授权服务器，能够向客户端颁发令牌。</li>
+<li><code>user-agent</code>，用户代理，帮助资源所有者与客户端沟通的工具，一般为 web 浏览器，移动 APP 等。</li>
+</ul>
+<p>可能有些朋友依然不太理解，这里举例说明：假如我想要在  <code>coding.net</code>  这个网站上用  <code>github.com</code>  的账号登录。那么 coding 相对于 github 就是一个客户端。而我们用什么操作的呢？浏览器，这就是一个用户代理。当从 github 的授权服务器获得 token 后，coding 是需要请求 github 账号信息的，从哪请求？从 github 的资源服务器。</p>
+<h3 id="协议流程"><a href="#协议流程" class="headerlink" title="协议流程"></a>协议流程</h3><p><img src="https://st.deepzz.com/blog/img/oauth2-roles.jpg" alt="oauth2-roles"></p>
+<p>上图详细的描述了这四个角色之间的步骤流程：</p>
+<ul>
+<li>(A) Client 请求 Resource Owner 的授权。授权请求可以直接向 Resource Owner 请求，也可以通过 Authorization Server 间接的进行。</li>
+<li>(B) Client 获得授权许可。</li>
+<li>© Client 向 Authorization Server 请求访问令牌。</li>
+<li>(D) Authorization Server 验证授权许可，如果有效则颁发访问令牌。</li>
+<li>(E) Client 通过访问令牌从 Resource Server 请求受保护资源。</li>
+<li>(F) Resource Server 验证访问令牌，有效则响应请求。</li>
+</ul>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+--------+                               +---------------+</span><br><span class="line">|<span class="string">        </span>|<span class="string">--(A)- Authorization Request -&gt;</span>|<span class="string">   Resource    </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                               </span>|<span class="string">     Owner     </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">&lt;-(B)-- Authorization Grant ---</span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                               +---------------+</span></span><br><span class="line"><span class="string"></span>|<span class="string">        </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                               +---------------+</span></span><br><span class="line"><span class="string"></span>|<span class="string">        </span>|<span class="string">--(C)-- Authorization Grant --&gt;</span>|<span class="string"> Authorization </span>|</span><br><span class="line">|<span class="string"> Client </span>|<span class="string">                               </span>|<span class="string">     Server    </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">&lt;-(D)----- Access Token -------</span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                               +---------------+</span></span><br><span class="line"><span class="string"></span>|<span class="string">        </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                               +---------------+</span></span><br><span class="line"><span class="string"></span>|<span class="string">        </span>|<span class="string">--(E)----- Access Token ------&gt;</span>|<span class="string">    Resource   </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                               </span>|<span class="string">     Server    </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">&lt;-(F)--- Protected Resource ---</span>|<span class="string">               </span>|</span><br><span class="line">+--------+                               +---------------+</span><br><span class="line"></span><br><span class="line">                Figure 1: Abstract Protocol Flow</span><br></pre></td></tr></table></figure>
+
+<h3 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h3><p>一个客户端想要获得授权，就需要先到服务商那注册你的应用。一般需要你提供下面这些信息：</p>
+<ul>
+<li>应用名称</li>
+<li>应用网站</li>
+<li>重定向 URI 或回调 URL（redirect_uri）</li>
+</ul>
+<p>重定向 URI 是服务商在用户授权（或拒绝）应用程序之后重定向用户的地址，因此也是用于处理授权代码或访问令牌的应用程序的一部分。在你注册成功之后，你会从服务商那获取到你的应用相关的信息：</p>
+<ul>
+<li>客户端标识 client_id</li>
+<li>客户端密钥 client_secret</li>
+</ul>
+<p><code>client_id</code>  用来表识客户端（公开），<code>client_secret</code>  用来验证客户端身份（保密）。</p>
+<h4 id="授权类型"><a href="#授权类型" class="headerlink" title="授权类型"></a>授权类型</h4><p>OAuth 2.0 列举了四种授权类型，分别用于不同的场景：</p>
+<ul>
+<li>Authorization Code（授权码 code）：服务器与客户端配合使用。</li>
+<li>Implicit（隐式 token）：用于移动应用程序或 Web 应用程序（在用户设备上运行的应用程序）。</li>
+<li>Resource Owner Password Credentials（资源所有者密码凭证 password）：资源所有者和客户端之间具有高度信任时（例如，客户端是设备的操作系统的一部分，或者是一个高度特权应用程序），以及当其他授权许可类型（例如授权码）不可用时被使用。</li>
+<li>Client Credentials（客户端证书 client_credentials）：当客户端代表自己表演（客户端也是资源所有者）或者基于与授权服务器事先商定的授权请求对受保护资源的访问权限时，客户端凭据被用作为授权许可。</li>
+</ul>
+<p>下面来具体说说这四种授权。注意重定向一定要用 302。</p>
+<p><strong>授权码模式</strong></p>
+<p>该方式需要资源服务器的参与，应用场景大概是：</p>
+<ol>
+<li>资源拥有者（用户）需要登录客户端（APP），他选择了第三方登录。</li>
+<li>客户端（APP）重定向到第三方授权服务器。此时客户端携带了客户端标识（client_id），那么第三方就知道这是哪个客户端，资源拥有者确定（拒绝）授权后需要重定向到哪里。</li>
+<li>用户确认授权，客户端（APP）被重定向到注册时给定的 URI，并携带了第三方给定的 code。</li>
+<li>在重定向的过程中，客户端拿到 code 与  <code>client_id</code>、<code>client_secret</code>  去授权服务器请求令牌，如果成功，直接请求资源服务器获取资源，整个过程，用户代理是不会拿到令牌 token 的。</li>
+<li>客户端（APP）拿到令牌 token 后就可以向第三方的资源服务器请求资源了。</li>
+</ol>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">  +----------+</span><br><span class="line">  |<span class="string"> Resource </span>|</span><br><span class="line">  |<span class="string">   Owner  </span>|</span><br><span class="line">  |<span class="string">          </span>|</span><br><span class="line">  +----------+</span><br><span class="line">       ^</span><br><span class="line">       |<span class="string"></span></span><br><span class="line"><span class="string">      (B)</span></span><br><span class="line"><span class="string">  +----</span>|<span class="string">-----+          Client Identifier      +---------------+</span></span><br><span class="line"><span class="string">  </span>|<span class="string">         -+----(A)-- &amp; Redirection URI ----&gt;</span>|<span class="string">               </span>|</span><br><span class="line">  |<span class="string">  User-   </span>|<span class="string">                                 </span>|<span class="string"> Authorization </span>|</span><br><span class="line">  |<span class="string">  Agent  -+----(B)-- User authenticates ---&gt;</span>|<span class="string">     Server    </span>|</span><br><span class="line">  |<span class="string">          </span>|<span class="string">                                 </span>|<span class="string">               </span>|</span><br><span class="line">  |<span class="string">         -+----(C)-- Authorization Code ---&lt;</span>|<span class="string">               </span>|</span><br><span class="line">  +-|<span class="string">----</span>|<span class="string">---+                                 +---------------+</span></span><br><span class="line"><span class="string">    </span>|<span class="string">    </span>|<span class="string">                                         ^      v</span></span><br><span class="line"><span class="string">   (A)  (C)                                        </span>|<span class="string">      </span>|</span><br><span class="line">    |<span class="string">    </span>|<span class="string">                                         </span>|<span class="string">      </span>|</span><br><span class="line">    ^    v                                         |<span class="string">      </span>|</span><br><span class="line">  +---------+                                      |<span class="string">      </span>|</span><br><span class="line">  |<span class="string">         </span>|<span class="string">&gt;---(D)-- Authorization Code ---------&#x27;      </span>|</span><br><span class="line">  |<span class="string">  Client </span>|<span class="string">          &amp; Redirection URI                  </span>|</span><br><span class="line">  |<span class="string">         </span>|<span class="string">                                             </span>|</span><br><span class="line">  |<span class="string">         </span>|<span class="string">&lt;---(E)----- Access Token -------------------&#x27;</span></span><br><span class="line"><span class="string">  +---------+       (w/ Optional Refresh Token)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Note: The lines illustrating steps (A), (B), and (C) are broken into</span></span><br><span class="line"><span class="string">two parts as they pass through the user-agent.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                  Figure 3: Authorization Code Flow</span></span><br></pre></td></tr></table></figure>
+
+<p>具体说明，这里以 coding 和 github 为例。当我想在 coding 上通过 github 账号登录时：</p>
+<p>1、<code>GET 请求</code>  点击登录，重定向到 github 的授权端点：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/login/</span>oauth/authorize?</span><br><span class="line">  response_type=code&amp;</span><br><span class="line">  client_id=a5ce5a6c7e8c39567ca0&amp;</span><br><span class="line">  redirect_uri=https:<span class="regexp">//</span>coding.net<span class="regexp">/api/</span>oauth<span class="regexp">/github/</span>callback&amp;</span><br><span class="line">  scope=user:email</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>response_type</td>
+<td>必须，固定为 code，表示这是一个授权码请求。</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>必须，在 github 注册获得的客户端 ID。</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>可选，通过客户端注册的重定向 URI（一般要求且与注册时一致）。</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>可选，请求资源范围，多个空格隔开。</td>
+</tr>
+<tr>
+<td>state</td>
+<td>可选（推荐），如果存在，原样返回给客户端。</td>
+</tr>
+</tbody></table>
+<p>返回值：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>coding.net<span class="regexp">/api/</span>oauth<span class="regexp">/github/</span>callback?code=fb6a88dc09e843b33f</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>code</td>
+<td>必须。授权码</td>
+</tr>
+<tr>
+<td>state</td>
+<td>如果出现在请求中，必须包含。</td>
+</tr>
+</tbody></table>
+<p><strong>授权错误</strong></p>
+<p>第一种，客户端没有被识别或错误的重定向 URI，授权服务器没有必要重定向资源拥有者到重定向URI，而是通知资源拥有者发生了错误。</p>
+<p>第二种，客户端被正确地授权了，但是其他某些事情失败了。这种情况下下面地错误响应会被发送到客户端，包括在重定向 URI 中。</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//coding.net/api/oauth/github/callback?</span></span><br><span class="line">  <span class="keyword">error</span>=redirect_uri_mismatch&amp;</span><br><span class="line">  error_description=The+redirect_uri+MUST+<span class="keyword">match</span>+the+registered+callback+URL+<span class="keyword">for</span>+this+application.&amp;</span><br><span class="line">  error_uri=https%3A%2F%2Fdeveloper.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-authorization-request-errors%2F%23redirect-uri-mismatch</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>error</td>
+<td>必须，必须是预先定义的错误码。</td>
+</tr>
+<tr>
+<td>error_description</td>
+<td>可选，错误描述</td>
+</tr>
+<tr>
+<td>error_uri</td>
+<td>可选，指向可解读错误的 URI</td>
+</tr>
+<tr>
+<td>state</td>
+<td>必须，如果出现在授权请求中</td>
+</tr>
+</tbody></table>
+<p>2、<code>POST 请求</code>  获取令牌 token，当获取到授权码 code 后，客户端需要用它获取访问令牌：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/login/</span>oauth/access_token?</span><br><span class="line">  client_id=a5ce5a6c7e8c39567ca0&amp;</span><br><span class="line">  client_secret=xxxx&amp;</span><br><span class="line">  grant_type=authorization_code&amp;</span><br><span class="line">  code=fb6a88dc09e843b33f&amp;</span><br><span class="line">  redirect_uri=https:<span class="regexp">//</span>coding.net<span class="regexp">/api/</span>oauth<span class="regexp">/github/</span>callback</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>client_id</td>
+<td>必须，客户端标识。</td>
+</tr>
+<tr>
+<td>client_secret</td>
+<td>必须，客户端密钥。</td>
+</tr>
+<tr>
+<td>grant_type</td>
+<td>必须，固定为 authorization_code／refresh_token。</td>
+</tr>
+<tr>
+<td>code</td>
+<td>必须，上一步获取到的授权码。</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>必须，完成授权后的回调地址，与注册时一致。</td>
+</tr>
+</tbody></table>
+<p>返回值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;access_token&quot;</span><span class="punctuation">:</span><span class="string">&quot;a14afef0f66fcffce3e0fcd2e34f6ff4&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;token_type&quot;</span><span class="punctuation">:</span><span class="string">&quot;bearer&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;expires_in&quot;</span><span class="punctuation">:</span><span class="number">3920</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;refresh_token&quot;</span><span class="punctuation">:</span><span class="string">&quot;5d633d136b6d56a41829b73a424803ec&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>access_token</td>
+<td>这个就是最终获取到的令牌。</td>
+</tr>
+<tr>
+<td>token_type</td>
+<td>令牌类型，常见有 bearer&#x2F;mac&#x2F;token（可自定义）。</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>失效时间。</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>刷新令牌，用来刷新 access_token。</td>
+</tr>
+</tbody></table>
+<p>3、获取资源服务器资源，拿着 access_token 就可以获取账号的相关信息了：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">&quot;Authorization: token a14afef0f66fcffce3e0fcd2e34f6ff4&quot;</span> https:<span class="regexp">//</span>api.github.com/user</span><br></pre></td></tr></table></figure>
+
+<p>4、<code>POST 请求</code>  刷新令牌</p>
+<p>我们的 access_token 是有时效性的，当在获取 github 用户信息时，如果返回 token 过期：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/login/</span>oauth/access_token?</span><br><span class="line">  client_id=a5ce5a6c7e8c39567ca0&amp;</span><br><span class="line">  client_secret=xxxx&amp;</span><br><span class="line">  redirect_uri=https:<span class="regexp">//</span>coding.net<span class="regexp">/api/</span>oauth<span class="regexp">/github/</span>callback&amp;</span><br><span class="line">  grant_type=refresh_token&amp;</span><br><span class="line">  refresh_token=<span class="number">5</span>d633d136b6d56a41829b73a424803ec</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>client_id</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>client_secret</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>必须</td>
+</tr>
+<tr>
+<td>grant_type</td>
+<td>必须，固定为 refresh_token</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>必须，上面获取到的 refresh_token</td>
+</tr>
+</tbody></table>
+<p>返回值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;access_token&quot;</span><span class="punctuation">:</span><span class="string">&quot;a14afef0f66fcffce3e0fcd2e34f6ee4&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;token_type&quot;</span><span class="punctuation">:</span><span class="string">&quot;bearer&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;expires_in&quot;</span><span class="punctuation">:</span><span class="number">3920</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;refresh_token&quot;</span><span class="punctuation">:</span><span class="string">&quot;4a633d136b6d56a41829b73a424803vd&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>refresh_token 只有在 access_token 过期时才能使用，并且只能使用一次。当换取到的 access_token 再次过期时，使用新的 refresh_token 来换取 access_token</p>
+</blockquote>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">+--------+                                           +---------------+</span><br><span class="line">|<span class="string">        </span>|<span class="string">--(A)------- Authorization Grant ---------&gt;</span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                                           </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">&lt;-(B)----------- Access Token -------------</span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">               &amp; Refresh Token             </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                                           </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                            +----------+   </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">--(C)---- Access Token ----&gt;</span>|<span class="string">          </span>|<span class="string">   </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                            </span>|<span class="string">          </span>|<span class="string">   </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">&lt;-(D)- Protected Resource --</span>|<span class="string"> Resource </span>|<span class="string">   </span>|<span class="string"> Authorization </span>|</span><br><span class="line">|<span class="string"> Client </span>|<span class="string">                            </span>|<span class="string">  Server  </span>|<span class="string">   </span>|<span class="string">     Server    </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">--(E)---- Access Token ----&gt;</span>|<span class="string">          </span>|<span class="string">   </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                            </span>|<span class="string">          </span>|<span class="string">   </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">&lt;-(F)- Invalid Token Error -</span>|<span class="string">          </span>|<span class="string">   </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                            +----------+   </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                                           </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">--(G)----------- Refresh Token -----------&gt;</span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">                                           </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        </span>|<span class="string">&lt;-(H)----------- Access Token -------------</span>|<span class="string">               </span>|</span><br><span class="line">+--------+           &amp; Optional Refresh Token        +---------------+</span><br><span class="line"></span><br><span class="line">             Figure 2: Refreshing an Expired Access Token</span><br></pre></td></tr></table></figure>
+
+<p><strong>隐式模式</strong></p>
+<p>该方式一般用于移动客户端或网页客户端。隐式授权类似于授权码授权，但 token 被返回给用户代理再转发到客户端（APP），因此它可能会暴露给用户和用户设备上的其它客户端（APP）。此外，此流程不会对客户端（APP）的身份进行身份验证，并且依赖重定向 URI（已在服务商中注册）来实现此目的。</p>
+<p>基本原理：要求用户授权应用程序，然后授权服务器将访问令牌传回给用户代理，用户代理将其传递给客户端。</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">  +----------+</span><br><span class="line">  |<span class="string"> Resource </span>|</span><br><span class="line">  |<span class="string">  Owner   </span>|</span><br><span class="line">  |<span class="string">          </span>|</span><br><span class="line">  +----------+</span><br><span class="line">       ^</span><br><span class="line">       |<span class="string"></span></span><br><span class="line"><span class="string">      (B)</span></span><br><span class="line"><span class="string">  +----</span>|<span class="string">-----+          Client Identifier     +---------------+</span></span><br><span class="line"><span class="string">  </span>|<span class="string">         -+----(A)-- &amp; Redirection URI ---&gt;</span>|<span class="string">               </span>|</span><br><span class="line">  |<span class="string">  User-   </span>|<span class="string">                                </span>|<span class="string"> Authorization </span>|</span><br><span class="line">  |<span class="string">  Agent  -</span>|<span class="string">----(B)-- User authenticates --&gt;</span>|<span class="string">     Server    </span>|</span><br><span class="line">  |<span class="string">          </span>|<span class="string">                                </span>|<span class="string">               </span>|</span><br><span class="line">  |<span class="string">          </span>|<span class="string">&lt;---(C)--- Redirection URI ----&lt;</span>|<span class="string">               </span>|</span><br><span class="line">  |<span class="string">          </span>|<span class="string">          with Access Token     +---------------+</span></span><br><span class="line"><span class="string">  </span>|<span class="string">          </span>|<span class="string">            in Fragment</span></span><br><span class="line"><span class="string">  </span>|<span class="string">          </span>|<span class="string">                                +---------------+</span></span><br><span class="line"><span class="string">  </span>|<span class="string">          </span>|<span class="string">----(D)--- Redirection URI ----&gt;</span>|<span class="string">   Web-Hosted  </span>|</span><br><span class="line">  |<span class="string">          </span>|<span class="string">          without Fragment      </span>|<span class="string">     Client    </span>|</span><br><span class="line">  |<span class="string">          </span>|<span class="string">                                </span>|<span class="string">    Resource   </span>|</span><br><span class="line">  |<span class="string">     (F)  </span>|<span class="string">&lt;---(E)------- Script ---------&lt;</span>|<span class="string">               </span>|</span><br><span class="line">  |<span class="string">          </span>|<span class="string">                                +---------------+</span></span><br><span class="line"><span class="string">  +-</span>|<span class="string">--------+</span></span><br><span class="line"><span class="string">    </span>|<span class="string">    </span>|</span><br><span class="line">   (A)  (G) Access Token</span><br><span class="line">    |<span class="string">    </span>|</span><br><span class="line">    ^    v</span><br><span class="line">  +---------+</span><br><span class="line">  |<span class="string">         </span>|</span><br><span class="line">  |<span class="string">  Client </span>|</span><br><span class="line">  |<span class="string">         </span>|</span><br><span class="line">  +---------+</span><br><span class="line"></span><br><span class="line">Note: The lines illustrating steps (A) and (B) are broken into two</span><br><span class="line">parts as they pass through the user-agent.</span><br><span class="line"></span><br><span class="line">                    Figure 4: Implicit Grant Flow</span><br></pre></td></tr></table></figure>
+
+<p>1、同样以 coding 和 github 为例：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/login/</span>oauth/authorize?</span><br><span class="line">  response_type=token&amp;</span><br><span class="line">  client_id=a5ce5a6c7e8c39567ca0&amp;</span><br><span class="line">  redirect_uri=https:<span class="regexp">//</span>coding.net<span class="regexp">/api/</span>oauth<span class="regexp">/github/</span>callback&amp;</span><br><span class="line">  scope=user:email</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>response_type</td>
+<td>必须，固定为 token。</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>必须。当客户端被注册时，有授权服务器分配的客户端标识。</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>可选。由客户端注册的重定向URI。</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>可选。请求可能的作用域。</td>
+</tr>
+<tr>
+<td>state</td>
+<td>可选(推荐)。任何需要被传递到客户端请求的URI客户端的状态。</td>
+</tr>
+</tbody></table>
+<p>返回值：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>coding.net<span class="regexp">/api/</span>oauth<span class="regexp">/github/</span>callback<span class="comment">#</span></span><br><span class="line">  access_token=a14afef0f66fcffce3e0fcd2e34f6ff4&amp;</span><br><span class="line">  token_type=token&amp;</span><br><span class="line">  expires_in=<span class="number">3600</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>access_token</td>
+<td>必须。授权服务器分配的访问令牌。</td>
+</tr>
+<tr>
+<td>token_type</td>
+<td>必须。令牌类型。</td>
+</tr>
+<tr>
+<td>expires_in</td>
+<td>推荐，访问令牌过期的秒数。</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>可选，访问令牌的作用域。</td>
+</tr>
+<tr>
+<td>state</td>
+<td>必须，如果出现在授权请求期间，和请求中的 state 参数一样。</td>
+</tr>
+</tbody></table>
+<p>授权错误和上面一样</p>
+<p>2、用户代理提取令牌 token 并提交给 coding</p>
+<p>3、coding 拿到 token 就可以获取用户信息了</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -H <span class="string">&quot;Authorization: token a14afef0f66fcffce3e0fcd2e34f6ff4&quot;</span> https:<span class="regexp">//</span>api.github.com/user</span><br></pre></td></tr></table></figure>
+
+<p><strong>资源所有者密码模式</strong></p>
+<p>用户将其服务凭证（用户名和密码）直接提供给客户端，该客户端使用凭据从服务获取访问令牌。如果其它方式不可行，则只应在授权服务器上启用该授权类型。此外，只有在客户端受到用户信任时才能使用它（例如，它由服务商自有，或用户的桌面操作系统）。</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+----------+</span><br><span class="line">|<span class="string"> Resource </span>|</span><br><span class="line">|<span class="string">  Owner   </span>|</span><br><span class="line">|<span class="string">          </span>|</span><br><span class="line">+----------+</span><br><span class="line">     v</span><br><span class="line">     |<span class="string">    Resource Owner</span></span><br><span class="line"><span class="string">    (A) Password Credentials</span></span><br><span class="line"><span class="string">     </span>|</span><br><span class="line">     v</span><br><span class="line">+---------+                                  +---------------+</span><br><span class="line">|<span class="string">         </span>|<span class="string">&gt;--(B)---- Resource Owner -------&gt;</span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">         </span>|<span class="string">         Password Credentials     </span>|<span class="string"> Authorization </span>|</span><br><span class="line">|<span class="string"> Client  </span>|<span class="string">                                  </span>|<span class="string">     Server    </span>|</span><br><span class="line">|<span class="string">         </span>|<span class="string">&lt;--(C)---- Access Token ---------&lt;</span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">         </span>|<span class="string">    (w/ Optional Refresh Token)   </span>|<span class="string">               </span>|</span><br><span class="line">+---------+                                  +---------------+</span><br><span class="line"></span><br><span class="line">       Figure 5: Resource Owner Password Credentials Flow</span><br></pre></td></tr></table></figure>
+
+<p><code>POST 请求</code>  密码凭证流程</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://oauth.example.com/token?grant_type=<span class="keyword">password</span>&amp;username=USERNAME&amp;<span class="keyword">password</span>=<span class="keyword">PASSWORD</span>&amp;client_id=CLIENT_ID</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>grant_type</td>
+<td>必须，固定为 password。</td>
+</tr>
+<tr>
+<td>username</td>
+<td>必须，UTF-8 编码的资源拥有者用户名。</td>
+</tr>
+<tr>
+<td>password</td>
+<td>必须，UTF-8 编码的资源拥有者密码。</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>可选，授权范围。</td>
+</tr>
+</tbody></table>
+<p>返回值：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span> </span><br><span class="line">  <span class="attr">&quot;access_token&quot;</span>  <span class="punctuation">:</span> <span class="string">&quot;...&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;token_type&quot;</span>    <span class="punctuation">:</span> <span class="string">&quot;...&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;expires_in&quot;</span>    <span class="punctuation">:</span> <span class="string">&quot;...&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;refresh_token&quot;</span> <span class="punctuation">:</span> <span class="string">&quot;...&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果授权服务器验证成功，那么将直接返回令牌 token，改客户端已被授权。</p>
+<p><strong>客户端模式</strong></p>
+<p>这种模式只需要提供  <code>client_id</code>  和  <code>client_secret</code>  即可获取授权。一般用于后端 API 的相关操作。</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+---------+                                  +---------------+</span><br><span class="line">|<span class="string">         </span>|<span class="string">                                  </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">         </span>|<span class="string">&gt;--(A)- Client Authentication ---&gt;</span>|<span class="string"> Authorization </span>|</span><br><span class="line">|<span class="string"> Client  </span>|<span class="string">                                  </span>|<span class="string">     Server    </span>|</span><br><span class="line">|<span class="string">         </span>|<span class="string">&lt;--(B)---- Access Token ---------&lt;</span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">         </span>|<span class="string">                                  </span>|<span class="string">               </span>|</span><br><span class="line">+---------+                                  +---------------+</span><br><span class="line"></span><br><span class="line">                Figure 6: Client Credentials Flow</span><br></pre></td></tr></table></figure>
+
+<p><code>POST 请求</code>  客户端凭证流程：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//</span>oauth.example.com/token?grant_type=client_credentials&amp;client_id=CLIENT_ID&amp;client_secret=CLIENT_SECRET</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>grant_type</td>
+<td>必须。必须设置到客户端证书中。</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>可选。授权的作用域。</td>
+</tr>
+</tbody></table>
+<p>返回值</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span> </span><br><span class="line">  <span class="attr">&quot;access_token&quot;</span>  <span class="punctuation">:</span> <span class="string">&quot;...&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;token_type&quot;</span>    <span class="punctuation">:</span> <span class="string">&quot;...&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;expires_in&quot;</span>    <span class="punctuation">:</span> <span class="string">&quot;...&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果授权服务器验证成功，那么将直接返回令牌 token，改客户端已被授权。</p>
+<h3 id="参考网站"><a href="#参考网站" class="headerlink" title="参考网站"></a>参考网站</h3><p>[1]  <a target="_blank" rel="noopener" href="https://developers.douban.com/wiki/?title=oauth2">https://developers.douban.com/wiki/?title=oauth2</a></p>
+<p>[2]  <a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2">https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2</a></p>
+<p>[3]  <a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc6749">https://tools.ietf.org/html/rfc6749</a></p>
+<p>[4]  <a target="_blank" rel="noopener" href="https://oauth.net/2/">https://oauth.net/2/</a></p>
+<p>本文链接：<a target="_blank" rel="noopener" href="https://deepzz.com/post/what-is-oauth2-protocol.html" title="Permalink to 10 分钟理解什么是 OAuth 2.0 协议">https://deepzz.com/post/what-is-oauth2-protocol.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OAuth2-0/" rel="tag"># OAuth2.0</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/2ef0/" rel="prev" title="Spring Interceptor VS Filter 拦截器和过滤器的区别">
+      <i class="fa fa-chevron-left"></i> Spring Interceptor VS Filter 拦截器和过滤器的区别
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/8e30/" rel="next" title="RESTful API设计规范">
+      RESTful API设计规范 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-OAuth-2-0"><span class="nav-number">1.</span> <span class="nav-text">什么是 OAuth 2.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%92%E8%89%B2"><span class="nav-number">2.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">协议流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%88%E6%9D%83"><span class="nav-number">4.</span> <span class="nav-text">授权</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%88%E6%9D%83%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">授权类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E7%BD%91%E7%AB%99"><span class="nav-number">5.</span> <span class="nav-text">参考网站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">407</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">265k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

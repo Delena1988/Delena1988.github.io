@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="疑惑 一个 while 死循环，会不会引起 CPU 使用率飚升？ 频繁 Young GC 会不会引起 CPU 使用率飚升？ 线程数很高的应用，CPU 使用率一定高么？ CPU 使用率高的应用，线程数一定高么？ BLOCKED 状态的线程会不会引起 CPU 使用率飚升？ 分时操作系统 CPU 是耗费 us ？ 还是耗费 sy ？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分析java应用cpu使用率飙升">
+<meta property="og:url" content="http://example.com/posts/6748/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="疑惑 一个 while 死循环，会不会引起 CPU 使用率飚升？ 频繁 Young GC 会不会引起 CPU 使用率飚升？ 线程数很高的应用，CPU 使用率一定高么？ CPU 使用率高的应用，线程数一定高么？ BLOCKED 状态的线程会不会引起 CPU 使用率飚升？ 分时操作系统 CPU 是耗费 us ？ 还是耗费 sy ？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.pianshen.com/images/656/b9a045178b67f683c8f2dba797a481d0.JPEG">
+<meta property="og:image" content="https://www.pianshen.com/images/909/b433e06f8d2a11b040e0d84e2018d925.JPEG">
+<meta property="og:image" content="https://www.pianshen.com/images/453/4a4795af002747efa2f31fc2b03182f5.JPEG">
+<meta property="article:published_time" content="2020-11-17T08:43:57.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:29:33.700Z">
+<meta property="article:author" content="林剑">
+<meta property="article:tag" content="Problem">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.pianshen.com/images/656/b9a045178b67f683c8f2dba797a481d0.JPEG">
+
+<link rel="canonical" href="http://example.com/posts/6748/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>分析java应用cpu使用率飙升 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6748/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          分析java应用cpu使用率飙升
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-17 16:43:57" itemprop="dateCreated datePublished" datetime="2020-11-17T16:43:57+08:00">2020-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Problem/" itemprop="url" rel="index"><span itemprop="name">Problem</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="疑惑"><a href="#疑惑" class="headerlink" title="疑惑"></a><strong>疑惑</strong></h1><ul>
+<li>一个 while 死循环，会不会引起 CPU 使用率飚升？</li>
+<li>频繁 Young GC 会不会引起 CPU 使用率飚升？</li>
+<li>线程数很高的应用，CPU 使用率一定高么？</li>
+<li>CPU 使用率高的应用，线程数一定高么？</li>
+<li>BLOCKED 状态的线程会不会引起 CPU 使用率飚升？</li>
+<li>分时操作系统 CPU 是耗费 us ？ 还是耗费 sy ？</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a><strong>思考</strong></h1><p><strong>1、CPU 使用率怎么计算？</strong></p>
+<p>CPU% &#x3D; 1 - idleTime &#x2F; sysTime * 100</p>
+<ul>
+<li>idleTime：CPU处于空闲状态的时间</li>
+<li>sysTime：CPU处于用户态和内核台的时间总和</li>
+</ul>
+<p><strong>2、CPU 使用率跟啥有关系？</strong></p>
+<p>常听说计算密集型的程序是比较耗 CPU 使用率的。</p>
+<p>那 JAVA 应用中哪些操作是比较耗 CPU 使用的？</p>
+<p>列举日常程序中常见的耗CPU的操作：</p>
+<ul>
+<li>频繁GC，访问量高时，有可能造成频繁的GC、甚至FGC。当调用量大时，内存分配过快，就会造成GC线程不停的执行，导致CPU飙高</li>
+<li>序列化与反序列化，后文中举了一个真实的案例，程序执行xml解析的时，调用量增大的情况下，导致了CPU被打满</li>
+<li>加密、解密</li>
+<li>正则表达式校验，曾经线上发生一次血案，正则校验将CPU打满。大概原因是：Java 正则表达式使用的引擎实现是 NFA 自动机，这种引擎在进行字符匹配会发生回溯（backtracking）</li>
+<li>线程上下文切换、当启动了很多线程，而这些线程都处于不断的阻塞状态（锁等待、IO等待等）和执行状态的变化过程中。当锁竞争激烈时，很容易出现这种情况</li>
+<li>某些线程在做无阻塞的运算，简单的例子while(true)中不停的做运算，没有任何阻塞。写程序时，如果需要做很久的计算，可以适当将程序sleep下</li>
+</ul>
+<p><strong>3、CPU 与进程、线程有关系么？</strong></p>
+<p>现在分时操作系统是通过循轮方式分配时间片进行进程调度的，如果进程在等待或阻塞，不会造成 CPU 资源使用。线程称为轻进程，共享进程资源，关于线程的调度，CPU 对于线程也是分时调度。而在 Java 中，线程的调用由 JVM 负责，线程的调度一般有两种模式，分时调度和抢占式调度。</p>
+<p><strong>解惑</strong></p>
+<p><strong>1、一个 while 死循环，会不会引起 CPU 使用率飚升？</strong></p>
+<p>会的。</p>
+<p>先不说别的，死循环会调用 CPU 寄存器进行计数，这个操作就会占用 CPU。其次，如果线程一直处于死循环状态，CPU 调用会进行线程切换么？</p>
+<p>死循环不会让出 CPU，除非操作系统时间片到期，但死循环会不断向系统申请时间片，直到系统没有空闲时间做别的事情。</p>
+<p>这个问题在 stackoverflow 也有人提问：why does an infinite loop of the unintended kind increase the CPU use?</p>
+<p>地址：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/2846165/why-does-an-infinite-loop-of-the-unintended-kind-increase-the-cpu-use">https://stackoverflow.com/questions/2846165/why-does-an-infinite-loop-of-the-unintended-kind-increase-the-cpu-use</a></p>
+<p><strong>2、频繁 Young GC 会不会引起 CPU 使用率飚升？</strong></p>
+<p>会的。</p>
+<p>Young GC 本身是 JVM 进行垃圾回收的操作，会计算内存和调用寄存器，频繁 Young GC 一定是会占用 CPU。</p>
+<p>之前有个一个案例，for 循环从数据库查询数据集合，二次封装新的数据集合，这时如果量比较大时，内存没有足够的空间存储，那么 JVM 就会 GC 回收那些不再使用的数据，因此量大的时候，就会收到 CPU 使用率报警。</p>
+<p><strong>3、线程数很高的应用，CPU 使用率一定高么？</strong></p>
+<p>不会。</p>
+<p>通过 jstack 查看系统线程状态，查看整个线程数很多，但 Runable 和 Running 状态的线程不多，这时 CPU 使用率不一定会高。</p>
+<p>之前有过一个案例，查看系统线程数 1000+，jstack 分析 900多个线程是 BLOCKED 和 WAITING 状态的，这种线程是不会占用 CPU 的。</p>
+<p>如果线程数很高，其实大多数原因是死锁，大量线程处于 BLOCKED 和 WAITING 状态。</p>
+<p><strong>4、CPU 使用率高的应用，线程数一定高么？</strong></p>
+<p>不会。</p>
+<p>同上，CPU 使用率高的关键因素还是计算密集型操作，一个线程如果有大量计算，也会造成 CPU 使用率高，也是现在为什么一个大数据脚本任务，要大规模集群共同运算才能运行的原因。</p>
+<p><strong>5、BLOCKED 状态的线程会不会引起 CPU 使用率飚升？</strong></p>
+<p>不一定。</p>
+<p>CPU使用率的飙升，更多是因为上下文的切换或者runnable状态线程过多导致。Blocked状态，未必会引起CPU上升。</p>
+<p><strong>6、分时操作系统 CPU us高或者sy高是什么意思？</strong></p>
+<p>通过top命令，可以观察到CPU的us，sy值，示例如下：</p>
+<p><img src="https://www.pianshen.com/images/656/b9a045178b67f683c8f2dba797a481d0.JPEG" alt="这可能是全网分析java应用cpu使用率飙升最全的文章"></p>
+<ul>
+<li>us 用户空间占用CPU百分比，简单来说，us高是因为程序导致的，通过分析线程堆栈，可以很容易的定位到问题线程。</li>
+<li>sy 内核空间占用CPU百分比，sy高的时候，如果是程序问题导致，基本是因为线程上下文切换造成的。</li>
+</ul>
+<h1 id="经验"><a href="#经验" class="headerlink" title="经验"></a><strong>经验</strong></h1><p>平时怎么定位 CPU 使用率高的原因？网上有个教程和方法，下面简述一下分析过程。</p>
+<p>首先发现某台应用 CPU 使用率高，一要看先线程数、JVM、系统 load 等参数，共同作证。二要打印 jstack，通过工具分析线程情况，推荐 fastThread 这个在线的 Thread 分析工具。</p>
+<p>以下是线上发生的真实案例，简要介绍下：</p>
+<p>某日晚，突然收到短信报警，CPU利用率100%。立刻dump该机器jstack，通过 <a target="_blank" rel="noopener" href="http://fastthread.io/">http://fastthread.io/</a> 查看日志如下：</p>
+<p><img src="https://www.pianshen.com/images/909/b433e06f8d2a11b040e0d84e2018d925.JPEG" alt="这可能是全网分析java应用cpu使用率飙升最全的文章"></p>
+<p>进一步查看具体日志：</p>
+<p><img src="https://www.pianshen.com/images/453/4a4795af002747efa2f31fc2b03182f5.JPEG" alt="这可能是全网分析java应用cpu使用率飙升最全的文章"></p>
+<p>通过这段日志，已经定位到了具体CPU被打满的方法，接收MQ之后，MQ消息体为xml，反序列化的时候，造成了CPU飙高。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Problem/" rel="tag"># Problem</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/165f/" rel="prev" title="Windows下JAVA运行后，CPU使用率100&#37解决办法">
+      <i class="fa fa-chevron-left"></i> Windows下JAVA运行后，CPU使用率100&#37解决办法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/68d/" rel="next" title="2020销售培训">
+      2020销售培训 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%96%91%E6%83%91"><span class="nav-number">1.</span> <span class="nav-text">疑惑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">2.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%8F%E9%AA%8C"><span class="nav-number">3.</span> <span class="nav-text">经验</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">407</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">265k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

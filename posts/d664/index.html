@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="数据库命令规范 所有数据库对象名称必须使用小写字母并用下划线分割  所有数据库对象名称禁止使用mysql保留关键字（如果表名中包含关键字查询时，需要将其用单引号括起来）  数据库对象的命名要能做到见名识意，并且最后不要超过32个字符  临时库表必须以tmp_为前缀并以日期为后缀，备份表必须以bak_为前缀并以日期(时间戳)为后缀  所有存储相同数据的列名和列类型必须一致（一般作为关联列，如果查询时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL高性能优化规范建议">
+<meta property="og:url" content="http://example.com/posts/d664/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="数据库命令规范 所有数据库对象名称必须使用小写字母并用下划线分割  所有数据库对象名称禁止使用mysql保留关键字（如果表名中包含关键字查询时，需要将其用单引号括起来）  数据库对象的命名要能做到见名识意，并且最后不要超过32个字符  临时库表必须以tmp_为前缀并以日期为后缀，备份表必须以bak_为前缀并以日期(时间戳)为后缀  所有存储相同数据的列名和列类型必须一致（一般作为关联列，如果查询时">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-05-20T01:22:09.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:29:33.690Z">
+<meta property="article:author" content="林剑">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/d664/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MySQL高性能优化规范建议 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/d664/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL高性能优化规范建议
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-20 09:22:09" itemprop="dateCreated datePublished" datetime="2019-05-20T09:22:09+08:00">2019-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>18 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="数据库命令规范"><a href="#数据库命令规范" class="headerlink" title="数据库命令规范"></a>数据库命令规范</h1><ol start="2">
+<li><p>所有数据库对象名称必须使用小写字母并用下划线分割</p>
+</li>
+<li><p>所有数据库对象名称禁止使用mysql保留关键字（如果表名中包含关键字查询时，需要将其用单引号括起来）</p>
+</li>
+<li><p>数据库对象的命名要能做到见名识意，并且最后不要超过32个字符</p>
+</li>
+<li><p>临时库表必须以tmp_为前缀并以日期为后缀，备份表必须以bak_为前缀并以日期(时间戳)为后缀</p>
+</li>
+<li><p>所有存储相同数据的列名和列类型必须一致（一般作为关联列，如果查询时关联列类型不一致会自动进行数据类型隐式转换，会造成列上的索引失效，导致查询效率降低）</p>
+<span id="more"></span></li>
+</ol>
+<h1 id="数据库基本设计规范"><a href="#数据库基本设计规范" class="headerlink" title="数据库基本设计规范"></a>数据库基本设计规范</h1><h2 id="1-所有表必须使用Innodb存储引擎"><a href="#1-所有表必须使用Innodb存储引擎" class="headerlink" title="1. 所有表必须使用Innodb存储引擎"></a>1. 所有表必须使用Innodb存储引擎</h2><p>没有特殊要求（即Innodb无法满足的功能如：列存储，存储空间数据等）的情况下，所有表必须使用Innodb存储引擎（mysql5.5之前默认使用Myisam，5.6以后默认的为Innodb） Innodb 支持事务，支持行级锁，更好的恢复性，高并发下性能更好</p>
+<h2 id="2-数据库和表的字符集统一使用UTF8"><a href="#2-数据库和表的字符集统一使用UTF8" class="headerlink" title="2. 数据库和表的字符集统一使用UTF8"></a>2. 数据库和表的字符集统一使用UTF8</h2><p>兼容性更好，统一字符集可以避免由于字符集转换产生的乱码，不同的字符集进行比较前需要进行转换会造成索引失效，如果数据库中有存储emoji表情的需要，字符集需要采用utf8mb4字符集</p>
+<h2 id="3-所有表和字段都需要添加注释"><a href="#3-所有表和字段都需要添加注释" class="headerlink" title="3. 所有表和字段都需要添加注释"></a>3. 所有表和字段都需要添加注释</h2><p>使用comment从句添加表和列的备注 从一开始就进行数据字典的维护</p>
+<h2 id="4-尽量控制单表数据量的大小，建议控制在500万以内"><a href="#4-尽量控制单表数据量的大小，建议控制在500万以内" class="headerlink" title="4. 尽量控制单表数据量的大小，建议控制在500万以内"></a>4. 尽量控制单表数据量的大小，建议控制在500万以内</h2><p>500万并不是Mysql数据库的限制，过大会造成修改表结构，备份，恢复都会有很大的问题 可以用历史数据归档（应用于日志数据），分库分表（应用于业务数据）等手段来控制数据量大小</p>
+<h2 id="5-谨慎使用Mysql分区表"><a href="#5-谨慎使用Mysql分区表" class="headerlink" title="5. 谨慎使用Mysql分区表"></a>5. 谨慎使用Mysql分区表</h2><p>分区表在物理上表现为多个文件，在逻辑上表现为一个表 谨慎选择分区键，跨分区查询效率可能更低 建议采用物理分表的方式管理大数据</p>
+<h2 id="6-尽量做到冷热数据分离，减小表的宽度"><a href="#6-尽量做到冷热数据分离，减小表的宽度" class="headerlink" title="6. 尽量做到冷热数据分离，减小表的宽度"></a>6. 尽量做到冷热数据分离，减小表的宽度</h2><p>Mysql限制每个表最多存储4096列，并且每一行数据的大小不能超过65535字节 减少磁盘IO,保证热数据的内存缓存命中率（表越宽，把表装载进内存缓冲池时所占用的内存也就越大,也会消耗更多的IO） 更有效的利用缓存，避免读入无用的冷数据 经常一起使用的列放到一个表中（避免更多的关联操作）</p>
+<h2 id="7-禁止在表中建立预留字段"><a href="#7-禁止在表中建立预留字段" class="headerlink" title="7. 禁止在表中建立预留字段"></a>7. 禁止在表中建立预留字段</h2><p>预留字段的命名很难做到见名识义 预留字段无法确认存储的数据类型，所以无法选择合适的类型 对预留字段类型的修改，会对表进行锁定</p>
+<h2 id="8-禁止在数据库中存储图片，文件等大的二进制数据"><a href="#8-禁止在数据库中存储图片，文件等大的二进制数据" class="headerlink" title="8. 禁止在数据库中存储图片，文件等大的二进制数据"></a>8. 禁止在数据库中存储图片，文件等大的二进制数据</h2><p>通常文件很大，会短时间内造成数据量快速增长，数据库进行数据库读取时，通常会进行大量的随机IO操作，文件很大时，IO操作很耗时 通常存储于文件服务器，数据库只存储文件地址信息</p>
+<h2 id="9-禁止在线上做数据库压力测试"><a href="#9-禁止在线上做数据库压力测试" class="headerlink" title="9. 禁止在线上做数据库压力测试"></a>9. 禁止在线上做数据库压力测试</h2><h2 id="10-禁止从开发环境，测试环境直接连接生成环境数据库"><a href="#10-禁止从开发环境，测试环境直接连接生成环境数据库" class="headerlink" title="10. 禁止从开发环境，测试环境直接连接生成环境数据库"></a>10. 禁止从开发环境，测试环境直接连接生成环境数据库</h2><h1 id="数据库字段设计规范"><a href="#数据库字段设计规范" class="headerlink" title="数据库字段设计规范"></a>数据库字段设计规范</h1><h2 id="1-优先选择符合存储需要的最小的数据类型"><a href="#1-优先选择符合存储需要的最小的数据类型" class="headerlink" title="1. 优先选择符合存储需要的最小的数据类型"></a>1. 优先选择符合存储需要的最小的数据类型</h2><p>原因是：列的字段越大，建立索引时所需要的空间也就越大，这样一页中所能存储的索引节点的数量也就越少也越少，在遍历时所需要的IO次数也就越多， 索引的性能也就越差 方法：</p>
+<ul>
+<li>将字符串转换成数字类型存储，如：将IP地址转换成整形数据</li>
+</ul>
+<p>mysql提供了两个方法来处理ip地址</p>
+<p>inet_aton 把ip转为无符号整型(4-8位) inet_ntoa 把整型的ip转为地址</p>
+<p>插入数据前，先用inet_aton把ip地址转为整型，可以节省空间 显示数据时，使用inet_ntoa把整型的ip地址转为地址显示即可。</p>
+<ul>
+<li>对于非负型的数据（如自增ID、整型IP）来说，要优先使用无符号整型来存储</li>
+</ul>
+<p>因为：无符号相对于有符号可以多出一倍的存储空间 SIGNED INT -2147483648<del>2147483647 UNSIGNED INT 0</del>4294967295</p>
+<p>VARCHAR(N)中的N代表的是字符数，而不是字节数 使用UTF8存储255个汉字 Varchar(255)&#x3D;765个字节</p>
+<p>过大的长度会消耗更多的内存</p>
+<h2 id="2-避免使用TEXT、BLOB数据类型，最常见的TEXT类型可以存储64k的数据"><a href="#2-避免使用TEXT、BLOB数据类型，最常见的TEXT类型可以存储64k的数据" class="headerlink" title="2. 避免使用TEXT、BLOB数据类型，最常见的TEXT类型可以存储64k的数据"></a>2. 避免使用TEXT、BLOB数据类型，最常见的TEXT类型可以存储64k的数据</h2><ul>
+<li>建议把BLOB或是TEXT列分离到单独的扩展表中</li>
+</ul>
+<p>Mysql内存临时表不支持TEXT、BLOB这样的大数据类型，如果查询中包含这样的数据，在排序等操作时，就不能使用内存临时表，必须使用磁盘临时表进行 而且对于这种数据，Mysql还是要进行二次查询，会使sql性能变得很差，但是不是说一定不能使用这样的数据类型</p>
+<p>如果一定要使用，建议把BLOB或是TEXT列分离到单独的扩展表中，查询时一定不要使用select * 而只需要取出必要的列，不需要TEXT列的数据时不要对该列进行查询</p>
+<ul>
+<li>TEXT或BLOB类型只能使用前缀索引</li>
+</ul>
+<p>因为MySQL对索引字段长度是有限制的，所以TEXT类型只能使用前缀索引，并且TEXT列上是不能有默认值的</p>
+<h2 id="3-避免使用ENUM类型"><a href="#3-避免使用ENUM类型" class="headerlink" title="3. 避免使用ENUM类型"></a>3. 避免使用ENUM类型</h2><p>修改ENUM值需要使用ALTER语句 ENUM类型的ORDER BY操作效率低，需要额外操作 禁止使用数值作为ENUM的枚举值</p>
+<h2 id="4-尽可能把所有列定义为NOT-NULL"><a href="#4-尽可能把所有列定义为NOT-NULL" class="headerlink" title="4. 尽可能把所有列定义为NOT NULL"></a>4. 尽可能把所有列定义为NOT NULL</h2><p>原因： 索引NULL列需要额外的空间来保存，所以要占用更多的空间 进行比较和计算时要对NULL值做特别的处理</p>
+<h2 id="5-使用TIMESTAMP（4个字节）或DATETIME类型（8个字节）存储时间"><a href="#5-使用TIMESTAMP（4个字节）或DATETIME类型（8个字节）存储时间" class="headerlink" title="5. 使用TIMESTAMP（4个字节）或DATETIME类型（8个字节）存储时间"></a>5. 使用TIMESTAMP（4个字节）或DATETIME类型（8个字节）存储时间</h2><p>TIMESTAMP 存储的时间范围 1970-01-01 00:00:01 ~ 2038-01-19-03:14:07 TIMESTAMP 占用4字节和INT相同，但比INT可读性高 超出TIMESTAMP取值范围的使用DATETIME类型存储</p>
+<p>经常会有人用字符串存储日期型的数据（不正确的做法） 缺点1：无法用日期函数进行计算和比较 缺点2：用字符串存储日期要占用更多的空间</p>
+<h2 id="6-同财务相关的金额类数据必须使用decimal类型"><a href="#6-同财务相关的金额类数据必须使用decimal类型" class="headerlink" title="6. 同财务相关的金额类数据必须使用decimal类型"></a>6. 同财务相关的金额类数据必须使用decimal类型</h2><ul>
+<li>非精准浮点：float,double</li>
+<li>精准浮点：decimal</li>
+</ul>
+<p>Decimal类型为精准浮点数，在计算时不会丢失精度 占用空间由定义的宽度决定，每4个字节可以存储9位数字，并且小数点要占用一个字节 可用于存储比bigint更大的整型数据</p>
+<h1 id="索引设计规范"><a href="#索引设计规范" class="headerlink" title="索引设计规范"></a>索引设计规范</h1><h2 id="1-限制每张表上的索引数量，建议单张表索引不超过5个"><a href="#1-限制每张表上的索引数量，建议单张表索引不超过5个" class="headerlink" title="1. 限制每张表上的索引数量，建议单张表索引不超过5个"></a>1. 限制每张表上的索引数量，建议单张表索引不超过5个</h2><p>索引并不是越多越好！索引可以提高效率同样可以降低效率 索引可以增加查询效率，但同样也会降低插入和更新的效率，甚至有些情况下会降低查询效率 因为mysql优化器在选择如何优化查询时，会根据统一信息，对每一个可以用到的索引来进行评估，以生成出一个最好的执行计划，如果同时有很多个 索引都可以用于查询，就会增加mysql优化器生成执行计划的时间，同样会降低查询性能</p>
+<h2 id="2-禁止给表中的每一列都建立单独的索引"><a href="#2-禁止给表中的每一列都建立单独的索引" class="headerlink" title="2. 禁止给表中的每一列都建立单独的索引"></a>2. 禁止给表中的每一列都建立单独的索引</h2><p>5.6版本之前，一个sql只能使用到一个表中的一个索引，5.6以后，虽然有了合并索引的优化方式，但是还是远远没有使用一个联合索引的查询方式好</p>
+<h2 id="3-每个Innodb表必须有个主键"><a href="#3-每个Innodb表必须有个主键" class="headerlink" title="3. 每个Innodb表必须有个主键"></a>3. 每个Innodb表必须有个主键</h2><p>Innodb是一种索引组织表：数据的存储的逻辑顺序和索引的顺序是相同的 每个表都可以有多个索引，但是表的存储顺序只能有一种 Innodb是按照主键索引的顺序来组织表的 不要使用更新频繁的列作为主键，不适用多列主键（相当于联合索引） 不要使用UUID,MD5,HASH,字符串列作为主键（无法保证数据的顺序增长） 主键建议使用自增ID值</p>
+<h1 id="常见索引列建议"><a href="#常见索引列建议" class="headerlink" title="常见索引列建议"></a>常见索引列建议</h1><ol start="2">
+<li><p>出现在SELECT、UPDATE、DELETE语句的WHERE从句中的列</p>
+</li>
+<li><p>包含在ORDER BY、GROUP BY、DISTINCT中的字段</p>
+<p>并不要将符合1和2中的字段的列都建立一个索引， 通常将1、2中的字段建立联合索引效果更好</p>
+</li>
+<li><p>多表join的关联列</p>
+</li>
+</ol>
+<h1 id="如何选择索引列的顺序"><a href="#如何选择索引列的顺序" class="headerlink" title="如何选择索引列的顺序"></a>如何选择索引列的顺序</h1><p>建立索引的目的是：希望通过索引进行数据查找，减少随机IO，增加查询性能 ，索引能过滤出越少的数据，则从磁盘中读入的数据也就越少</p>
+<ol start="2">
+<li>区分度最高的放在联合索引的最左侧（区分度&#x3D;列中不同值的数量&#x2F;列的总行数）</li>
+<li>尽量把字段长度小的列放在联合索引的最左侧（因为字段长度越小，一页能存储的数据量越大，IO性能也就越好）</li>
+<li>使用最频繁的列放到联合索引的左侧（这样可以比较少的建立一些索引）</li>
+</ol>
+<h1 id="避免建立冗余索引和重复索引（增加了查询优化器生成执行计划的时间）"><a href="#避免建立冗余索引和重复索引（增加了查询优化器生成执行计划的时间）" class="headerlink" title="避免建立冗余索引和重复索引（增加了查询优化器生成执行计划的时间）"></a>避免建立冗余索引和重复索引（增加了查询优化器生成执行计划的时间）</h1><p>重复索引示例：primary key(id)、index(id)、unique index(id) 冗余索引示例：index(a,b,c)、index(a,b)、index(a)</p>
+<h1 id="对于频繁的查询优先考虑使用覆盖索引"><a href="#对于频繁的查询优先考虑使用覆盖索引" class="headerlink" title="对于频繁的查询优先考虑使用覆盖索引"></a>对于频繁的查询优先考虑使用覆盖索引</h1><p>覆盖索引：就是包含了所有查询字段(where,select,ordery by,group by包含的字段)的索引</p>
+<p>覆盖索引的好处:</p>
+<ol start="2">
+<li>避免Innodb表进行索引的二次查询</li>
+</ol>
+<p>Innodb是以聚集索引的顺序来存储的，对于Innodb来说，二级索引在叶子节点中所保存的是行的主键信息， 如果是用二级索引查询数据的话，在查找到相应的键值后，还要通过主键进行二次查询才能获取我们真实所需要的数据 而在覆盖索引中，二级索引的键值中可以获取所有的数据，避免了对主键的二次查询 ，减少了IO操作，提升了查询效率</p>
+<ol start="2">
+<li>可以把随机IO变成顺序IO加快查询效率</li>
+</ol>
+<p>由于覆盖索引是按键值的顺序存储的，对于IO密集型的范围查找来说，对比随机从磁盘读取每一行的数据IO要少的多， 因此利用覆盖索引在访问时也可以把磁盘的随机读取的IO转变成索引查找的顺序IO</p>
+<h1 id="索引SET规范"><a href="#索引SET规范" class="headerlink" title="索引SET规范"></a>索引SET规范</h1><h2 id="尽量避免使用外键约束"><a href="#尽量避免使用外键约束" class="headerlink" title="尽量避免使用外键约束"></a>尽量避免使用外键约束</h2><p>不建议使用外键约束（foreign key），但一定要在表与表之间的关联键上建立索引 外键可用于保证数据的参照完整性，但建议在业务端实现 外键会影响父表和子表的写操作从而降低性能</p>
+<h1 id="数据库SQL开发规范"><a href="#数据库SQL开发规范" class="headerlink" title="数据库SQL开发规范"></a>数据库SQL开发规范</h1><h2 id="1-建议使用预编译语句进行数据库操作"><a href="#1-建议使用预编译语句进行数据库操作" class="headerlink" title="1. 建议使用预编译语句进行数据库操作"></a>1. 建议使用预编译语句进行数据库操作</h2><p>预编译语句可以重复使用这些计划，减少SQL编译所需要的时间，还可以解决动态SQL所带来的SQL注入的问题 只传参数，比传递SQL语句更高效 相同语句可以一次解析，多次使用，提高处理效率</p>
+<h2 id="2-避免数据类型的隐式转换"><a href="#2-避免数据类型的隐式转换" class="headerlink" title="2. 避免数据类型的隐式转换"></a>2. 避免数据类型的隐式转换</h2><p>隐式转换会导致索引失效 如: select name,phone from customer where id &#x3D; ‘111’;</p>
+<h2 id="3-充分利用表上已经存在的索引"><a href="#3-充分利用表上已经存在的索引" class="headerlink" title="3. 充分利用表上已经存在的索引"></a>3. 充分利用表上已经存在的索引</h2><h3 id="避免使用双-号的查询条件。"><a href="#避免使用双-号的查询条件。" class="headerlink" title="避免使用双%号的查询条件。"></a>避免使用双%号的查询条件。</h3><p>如 a like ‘%123%’，（如果无前置%,只有后置%，是可以用到列上的索引的）</p>
+<h3 id="一个SQL只能利用到复合索引中的一列进行范围查询"><a href="#一个SQL只能利用到复合索引中的一列进行范围查询" class="headerlink" title="一个SQL只能利用到复合索引中的一列进行范围查询"></a>一个SQL只能利用到复合索引中的一列进行范围查询</h3><p>如 有 a,b,c列的联合索引，在查询条件中有a列的范围查询，则在b,c列上的索引将不会被用到， 在定义联合索引时，如果a列要用到范围查找的话，就要把a列放到联合索引的右侧</p>
+<h3 id="使用left-join-或-not-exists-来优化not-in-操作"><a href="#使用left-join-或-not-exists-来优化not-in-操作" class="headerlink" title="使用left join 或 not exists 来优化not in 操作"></a>使用left join 或 not exists 来优化not in 操作</h3><p>因为not in 也通常会使用索引失效</p>
+<h2 id="4-数据库设计时，应该要对以后扩展进行考虑"><a href="#4-数据库设计时，应该要对以后扩展进行考虑" class="headerlink" title="4. 数据库设计时，应该要对以后扩展进行考虑"></a>4. 数据库设计时，应该要对以后扩展进行考虑</h2><h2 id="5-程序连接不同的数据库使用不同的账号，进制跨库查询"><a href="#5-程序连接不同的数据库使用不同的账号，进制跨库查询" class="headerlink" title="5. 程序连接不同的数据库使用不同的账号，进制跨库查询"></a>5. 程序连接不同的数据库使用不同的账号，进制跨库查询</h2><p>为数据库迁移和分库分表留出余地 降低业务耦合度 避免权限过大而产生的安全风险</p>
+<h2 id="6-禁止使用SELECT-必须使用SELECT-lt-字段列表-gt-查询"><a href="#6-禁止使用SELECT-必须使用SELECT-lt-字段列表-gt-查询" class="headerlink" title="6. 禁止使用SELECT * 必须使用SELECT &lt;字段列表&gt; 查询"></a>6. 禁止使用SELECT * 必须使用SELECT &lt;字段列表&gt; 查询</h2><p>原因： 消耗更多的CPU和IO以网络带宽资源 无法使用覆盖索引 可减少表结构变更带来的影响</p>
+<h2 id="7-禁止使用不含字段列表的INSERT语句"><a href="#7-禁止使用不含字段列表的INSERT语句" class="headerlink" title="7. 禁止使用不含字段列表的INSERT语句"></a>7. 禁止使用不含字段列表的INSERT语句</h2><p>如： insert into values (‘a’,’b’,’c’); 应使用 insert into t(c1,c2,c3) values (‘a’,’b’,’c’);</p>
+<h2 id="8-避免使用子查询，可以把子查询优化为join操作"><a href="#8-避免使用子查询，可以把子查询优化为join操作" class="headerlink" title="8. 避免使用子查询，可以把子查询优化为join操作"></a>8. 避免使用子查询，可以把子查询优化为join操作</h2><p>通常子查询在in子句中，且子查询中为简单SQL(不包含union、group by、order by、limit从句)时,才可以把子查询转化为关联查询进行优化 子查询性能差的原因： 子查询的结果集无法使用索引，通常子查询的结果集会被存储到临时表中，不论是内存临时表还是磁盘临时表都不会存在索引，所以查询性能会受到一定的影响 特别是对于返回结果集比较大的子查询，其对查询性能的影响也就越大 由于子查询会产生大量的临时表也没有索引，所以会消耗过多的CPU和IO资源，产生大量的慢查询</p>
+<h2 id="9-避免使用JOIN关联太多的表"><a href="#9-避免使用JOIN关联太多的表" class="headerlink" title="9. 避免使用JOIN关联太多的表"></a>9. 避免使用JOIN关联太多的表</h2><p>对于Mysql来说，是存在关联缓存的，缓存的大小可以由join_buffer_size参数进行设置 在Mysql中，对于同一个SQL多关联（join）一个表，就会多分配一个关联缓存，如果在一个SQL中关联的表越多， 所占用的内存也就越大 如果程序中大量的使用了多表关联的操作，同时join_buffer_size设置的也不合理的情况下，就容易造成服务器内存溢出的情况， 就会影响到服务器数据库性能的稳定性 同时对于关联操作来说，会产生临时表操作，影响查询效率 Mysql最多允许关联61个表，建议不超过5个</p>
+<h2 id="10-减少同数据库的交互次数"><a href="#10-减少同数据库的交互次数" class="headerlink" title="10. 减少同数据库的交互次数"></a>10. 减少同数据库的交互次数</h2><p>数据库更适合处理批量操作 合并多个相同的操作到一起，可以提高处理效率</p>
+<h2 id="11-对应同一列进行or判断时，使用in代替or"><a href="#11-对应同一列进行or判断时，使用in代替or" class="headerlink" title="11. 对应同一列进行or判断时，使用in代替or"></a>11. 对应同一列进行or判断时，使用in代替or</h2><p>in 的值不要超过500个 in 操作可以更有效的利用索引，or大多数情况下很少能利用到索引</p>
+<h2 id="12-禁止使用order-by-rand-进行随机排序"><a href="#12-禁止使用order-by-rand-进行随机排序" class="headerlink" title="12. 禁止使用order by rand() 进行随机排序"></a>12. 禁止使用order by rand() 进行随机排序</h2><p>会把表中所有符合条件的数据装载到内存中，然后在内存中对所有数据根据随机生成的值进行排序，并且可能会对每一行都生成一个随机值，如果满足条件的数据集非常大， 就会消耗大量的CPU和IO及内存资源 推荐在程序中获取一个随机值，然后从数据库中获取数据的方式</p>
+<h2 id="13-WHERE从句中禁止对列进行函数转换和计算"><a href="#13-WHERE从句中禁止对列进行函数转换和计算" class="headerlink" title="13. WHERE从句中禁止对列进行函数转换和计算"></a>13. WHERE从句中禁止对列进行函数转换和计算</h2><p>对列进行函数转换或计算时会导致无法使用索引 不推荐： where date(create_time)&#x3D;’20190101’ 推荐： where create_time &gt;&#x3D; ‘20190101’ and create_time &lt; ‘20190102’</p>
+<h2 id="14-在明显不会有重复值时使用UNION-ALL-而不是UNION"><a href="#14-在明显不会有重复值时使用UNION-ALL-而不是UNION" class="headerlink" title="14. 在明显不会有重复值时使用UNION ALL 而不是UNION"></a>14. 在明显不会有重复值时使用UNION ALL 而不是UNION</h2><p>UNION 会把两个结果集的所有数据放到临时表中后再进行去重操作 UNION ALL 不会再对结果集进行去重操作</p>
+<h2 id="15-拆分复杂的大SQL为多个小SQL"><a href="#15-拆分复杂的大SQL为多个小SQL" class="headerlink" title="15. 拆分复杂的大SQL为多个小SQL"></a>15. 拆分复杂的大SQL为多个小SQL</h2><p>大SQL:逻辑上比较复杂，需要占用大量CPU进行计算的SQL MySQL 一个SQL只能使用一个CPU进行计算 SQL拆分后可以通过并行执行来提高处理效率</p>
+<h1 id="数据库操作行为规范"><a href="#数据库操作行为规范" class="headerlink" title="数据库操作行为规范"></a>数据库操作行为规范</h1><h2 id="超100万行的批量写（UPDATE、DELETE、INSERT）操作，要分批多次进行操作"><a href="#超100万行的批量写（UPDATE、DELETE、INSERT）操作，要分批多次进行操作" class="headerlink" title="超100万行的批量写（UPDATE、DELETE、INSERT）操作，要分批多次进行操作"></a>超100万行的批量写（UPDATE、DELETE、INSERT）操作，要分批多次进行操作</h2><h3 id="1-大批量操作可能会造成严重的主从延迟"><a href="#1-大批量操作可能会造成严重的主从延迟" class="headerlink" title="1. 大批量操作可能会造成严重的主从延迟"></a>1. 大批量操作可能会造成严重的主从延迟</h3><p>主从环境中,大批量操作可能会造成严重的主从延迟，大批量的写操作一般都需要执行一定长的时间， 而只有当主库上执行完成后，才会在其他从库上执行，所以会造成主库与从库长时间的延迟情况</p>
+<h3 id="2-binlog日志为row格式时会产生大量的日志"><a href="#2-binlog日志为row格式时会产生大量的日志" class="headerlink" title="2. binlog日志为row格式时会产生大量的日志"></a>2. binlog日志为row格式时会产生大量的日志</h3><p>大批量写操作会产生大量日志，特别是对于row格式二进制数据而言，由于在row格式中会记录每一行数据的修改，我们一次修改的数据越多， 产生的日志量也就会越多，日志的传输和恢复所需要的时间也就越长，这也是造成主从延迟的一个原因</p>
+<h3 id="3-避免产生大事务操作"><a href="#3-避免产生大事务操作" class="headerlink" title="3. 避免产生大事务操作"></a>3. 避免产生大事务操作</h3><p>大批量修改数据，一定是在一个事务中进行的，这就会造成表中大批量数据进行锁定，从而导致大量的阻塞，阻塞会对MySQL的性能产生非常大的影响 特别是长时间的阻塞会占满所有数据库的可用连接，这会使生产环境中的其他应用无法连接到数据库，因此一定要注意大批量写操作要进行分批</p>
+<h2 id="对于大表使用pt-online-schema-change修改表结构"><a href="#对于大表使用pt-online-schema-change修改表结构" class="headerlink" title="对于大表使用pt-online-schema-change修改表结构"></a>对于大表使用pt-online-schema-change修改表结构</h2><ol start="2">
+<li>避免大表修改产生的主从延迟</li>
+<li>避免在对表字段进行修改时进行锁表</li>
+</ol>
+<p>对大表数据结构的修改一定要谨慎，会造成严重的锁表操作，尤其是生产环境，是不能容忍的</p>
+<p>pt-online-schema-change它会首先建立一个与原表结构相同的新表，并且在新表上进行表结构的修改，然后再把原表中的数据复制到新表中，并在原表中增加一些触发器 把原表中新增的数据也复制到新表中，在行所有数据复制完成之后，把新表命名成原表，并把原来的表删除掉 把原来一个DDL操作，分解成多个小的批次进行</p>
+<h2 id="禁止为程序使用的账号赋予super权限"><a href="#禁止为程序使用的账号赋予super权限" class="headerlink" title="禁止为程序使用的账号赋予super权限"></a>禁止为程序使用的账号赋予super权限</h2><p>当达到最大连接数限制时，还运行1个有super权限的用户连接 super权限只能留给DBA处理问题的账号使用</p>
+<h2 id="对于程序连接数据库账号，遵循权限最小原则"><a href="#对于程序连接数据库账号，遵循权限最小原则" class="headerlink" title="对于程序连接数据库账号，遵循权限最小原则"></a>对于程序连接数据库账号，遵循权限最小原则</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/1c43/" rel="prev" title="MySQL登录命令">
+      <i class="fa fa-chevron-left"></i> MySQL登录命令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/7a85/" rel="next" title="MySQL批量SQL插入性能优化">
+      MySQL批量SQL插入性能优化 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%91%BD%E4%BB%A4%E8%A7%84%E8%8C%83"><span class="nav-number">1.</span> <span class="nav-text">数据库命令规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83"><span class="nav-number">2.</span> <span class="nav-text">数据库基本设计规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%89%80%E6%9C%89%E8%A1%A8%E5%BF%85%E9%A1%BB%E4%BD%BF%E7%94%A8Innodb%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="nav-number">2.1.</span> <span class="nav-text">1. 所有表必须使用Innodb存储引擎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E8%A1%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E7%BB%9F%E4%B8%80%E4%BD%BF%E7%94%A8UTF8"><span class="nav-number">2.2.</span> <span class="nav-text">2. 数据库和表的字符集统一使用UTF8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%89%80%E6%9C%89%E8%A1%A8%E5%92%8C%E5%AD%97%E6%AE%B5%E9%83%BD%E9%9C%80%E8%A6%81%E6%B7%BB%E5%8A%A0%E6%B3%A8%E9%87%8A"><span class="nav-number">2.3.</span> <span class="nav-text">3. 所有表和字段都需要添加注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B0%BD%E9%87%8F%E6%8E%A7%E5%88%B6%E5%8D%95%E8%A1%A8%E6%95%B0%E6%8D%AE%E9%87%8F%E7%9A%84%E5%A4%A7%E5%B0%8F%EF%BC%8C%E5%BB%BA%E8%AE%AE%E6%8E%A7%E5%88%B6%E5%9C%A8500%E4%B8%87%E4%BB%A5%E5%86%85"><span class="nav-number">2.4.</span> <span class="nav-text">4. 尽量控制单表数据量的大小，建议控制在500万以内</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%B0%A8%E6%85%8E%E4%BD%BF%E7%94%A8Mysql%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="nav-number">2.5.</span> <span class="nav-text">5. 谨慎使用Mysql分区表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%B0%BD%E9%87%8F%E5%81%9A%E5%88%B0%E5%86%B7%E7%83%AD%E6%95%B0%E6%8D%AE%E5%88%86%E7%A6%BB%EF%BC%8C%E5%87%8F%E5%B0%8F%E8%A1%A8%E7%9A%84%E5%AE%BD%E5%BA%A6"><span class="nav-number">2.6.</span> <span class="nav-text">6. 尽量做到冷热数据分离，减小表的宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E7%A6%81%E6%AD%A2%E5%9C%A8%E8%A1%A8%E4%B8%AD%E5%BB%BA%E7%AB%8B%E9%A2%84%E7%95%99%E5%AD%97%E6%AE%B5"><span class="nav-number">2.7.</span> <span class="nav-text">7. 禁止在表中建立预留字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E7%A6%81%E6%AD%A2%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%AD%98%E5%82%A8%E5%9B%BE%E7%89%87%EF%BC%8C%E6%96%87%E4%BB%B6%E7%AD%89%E5%A4%A7%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE"><span class="nav-number">2.8.</span> <span class="nav-text">8. 禁止在数据库中存储图片，文件等大的二进制数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E7%A6%81%E6%AD%A2%E5%9C%A8%E7%BA%BF%E4%B8%8A%E5%81%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95"><span class="nav-number">2.9.</span> <span class="nav-text">9. 禁止在线上做数据库压力测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E7%A6%81%E6%AD%A2%E4%BB%8E%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%8C%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E7%9B%B4%E6%8E%A5%E8%BF%9E%E6%8E%A5%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.10.</span> <span class="nav-text">10. 禁止从开发环境，测试环境直接连接生成环境数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E6%AE%B5%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83"><span class="nav-number">3.</span> <span class="nav-text">数据库字段设计规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BC%98%E5%85%88%E9%80%89%E6%8B%A9%E7%AC%A6%E5%90%88%E5%AD%98%E5%82%A8%E9%9C%80%E8%A6%81%E7%9A%84%E6%9C%80%E5%B0%8F%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">1. 优先选择符合存储需要的最小的数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8TEXT%E3%80%81BLOB%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%8C%E6%9C%80%E5%B8%B8%E8%A7%81%E7%9A%84TEXT%E7%B1%BB%E5%9E%8B%E5%8F%AF%E4%BB%A5%E5%AD%98%E5%82%A864k%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">3.2.</span> <span class="nav-text">2. 避免使用TEXT、BLOB数据类型，最常见的TEXT类型可以存储64k的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8ENUM%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text">3. 避免使用ENUM类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B0%BD%E5%8F%AF%E8%83%BD%E6%8A%8A%E6%89%80%E6%9C%89%E5%88%97%E5%AE%9A%E4%B9%89%E4%B8%BANOT-NULL"><span class="nav-number">3.4.</span> <span class="nav-text">4. 尽可能把所有列定义为NOT NULL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%BD%BF%E7%94%A8TIMESTAMP%EF%BC%884%E4%B8%AA%E5%AD%97%E8%8A%82%EF%BC%89%E6%88%96DATETIME%E7%B1%BB%E5%9E%8B%EF%BC%888%E4%B8%AA%E5%AD%97%E8%8A%82%EF%BC%89%E5%AD%98%E5%82%A8%E6%97%B6%E9%97%B4"><span class="nav-number">3.5.</span> <span class="nav-text">5. 使用TIMESTAMP（4个字节）或DATETIME类型（8个字节）存储时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%90%8C%E8%B4%A2%E5%8A%A1%E7%9B%B8%E5%85%B3%E7%9A%84%E9%87%91%E9%A2%9D%E7%B1%BB%E6%95%B0%E6%8D%AE%E5%BF%85%E9%A1%BB%E4%BD%BF%E7%94%A8decimal%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.6.</span> <span class="nav-text">6. 同财务相关的金额类数据必须使用decimal类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83"><span class="nav-number">4.</span> <span class="nav-text">索引设计规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%99%90%E5%88%B6%E6%AF%8F%E5%BC%A0%E8%A1%A8%E4%B8%8A%E7%9A%84%E7%B4%A2%E5%BC%95%E6%95%B0%E9%87%8F%EF%BC%8C%E5%BB%BA%E8%AE%AE%E5%8D%95%E5%BC%A0%E8%A1%A8%E7%B4%A2%E5%BC%95%E4%B8%8D%E8%B6%85%E8%BF%875%E4%B8%AA"><span class="nav-number">4.1.</span> <span class="nav-text">1. 限制每张表上的索引数量，建议单张表索引不超过5个</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%A6%81%E6%AD%A2%E7%BB%99%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%AF%8F%E4%B8%80%E5%88%97%E9%83%BD%E5%BB%BA%E7%AB%8B%E5%8D%95%E7%8B%AC%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">4.2.</span> <span class="nav-text">2. 禁止给表中的每一列都建立单独的索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%AF%8F%E4%B8%AAInnodb%E8%A1%A8%E5%BF%85%E9%A1%BB%E6%9C%89%E4%B8%AA%E4%B8%BB%E9%94%AE"><span class="nav-number">4.3.</span> <span class="nav-text">3. 每个Innodb表必须有个主键</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%B4%A2%E5%BC%95%E5%88%97%E5%BB%BA%E8%AE%AE"><span class="nav-number">5.</span> <span class="nav-text">常见索引列建议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%E7%B4%A2%E5%BC%95%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F"><span class="nav-number">6.</span> <span class="nav-text">如何选择索引列的顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E5%BB%BA%E7%AB%8B%E5%86%97%E4%BD%99%E7%B4%A2%E5%BC%95%E5%92%8C%E9%87%8D%E5%A4%8D%E7%B4%A2%E5%BC%95%EF%BC%88%E5%A2%9E%E5%8A%A0%E4%BA%86%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E5%99%A8%E7%94%9F%E6%88%90%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E7%9A%84%E6%97%B6%E9%97%B4%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">避免建立冗余索引和重复索引（增加了查询优化器生成执行计划的时间）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E9%A2%91%E7%B9%81%E7%9A%84%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%85%88%E8%80%83%E8%99%91%E4%BD%BF%E7%94%A8%E8%A6%86%E7%9B%96%E7%B4%A2%E5%BC%95"><span class="nav-number">8.</span> <span class="nav-text">对于频繁的查询优先考虑使用覆盖索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95SET%E8%A7%84%E8%8C%83"><span class="nav-number">9.</span> <span class="nav-text">索引SET规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%BD%E9%87%8F%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8%E5%A4%96%E9%94%AE%E7%BA%A6%E6%9D%9F"><span class="nav-number">9.1.</span> <span class="nav-text">尽量避免使用外键约束</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93SQL%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="nav-number">10.</span> <span class="nav-text">数据库SQL开发规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8%E9%A2%84%E7%BC%96%E8%AF%91%E8%AF%AD%E5%8F%A5%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">10.1.</span> <span class="nav-text">1. 建议使用预编译语句进行数据库操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%81%BF%E5%85%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">10.2.</span> <span class="nav-text">2. 避免数据类型的隐式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%85%85%E5%88%86%E5%88%A9%E7%94%A8%E8%A1%A8%E4%B8%8A%E5%B7%B2%E7%BB%8F%E5%AD%98%E5%9C%A8%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="nav-number">10.3.</span> <span class="nav-text">3. 充分利用表上已经存在的索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8%E5%8F%8C-%E5%8F%B7%E7%9A%84%E6%9F%A5%E8%AF%A2%E6%9D%A1%E4%BB%B6%E3%80%82"><span class="nav-number">10.3.1.</span> <span class="nav-text">避免使用双%号的查询条件。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AASQL%E5%8F%AA%E8%83%BD%E5%88%A9%E7%94%A8%E5%88%B0%E5%A4%8D%E5%90%88%E7%B4%A2%E5%BC%95%E4%B8%AD%E7%9A%84%E4%B8%80%E5%88%97%E8%BF%9B%E8%A1%8C%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2"><span class="nav-number">10.3.2.</span> <span class="nav-text">一个SQL只能利用到复合索引中的一列进行范围查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8left-join-%E6%88%96-not-exists-%E6%9D%A5%E4%BC%98%E5%8C%96not-in-%E6%93%8D%E4%BD%9C"><span class="nav-number">10.3.3.</span> <span class="nav-text">使用left join 或 not exists 来优化not in 操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E6%97%B6%EF%BC%8C%E5%BA%94%E8%AF%A5%E8%A6%81%E5%AF%B9%E4%BB%A5%E5%90%8E%E6%89%A9%E5%B1%95%E8%BF%9B%E8%A1%8C%E8%80%83%E8%99%91"><span class="nav-number">10.4.</span> <span class="nav-text">4. 数据库设计时，应该要对以后扩展进行考虑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%A8%8B%E5%BA%8F%E8%BF%9E%E6%8E%A5%E4%B8%8D%E5%90%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E7%9A%84%E8%B4%A6%E5%8F%B7%EF%BC%8C%E8%BF%9B%E5%88%B6%E8%B7%A8%E5%BA%93%E6%9F%A5%E8%AF%A2"><span class="nav-number">10.5.</span> <span class="nav-text">5. 程序连接不同的数据库使用不同的账号，进制跨库查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%A6%81%E6%AD%A2%E4%BD%BF%E7%94%A8SELECT-%E5%BF%85%E9%A1%BB%E4%BD%BF%E7%94%A8SELECT-lt-%E5%AD%97%E6%AE%B5%E5%88%97%E8%A1%A8-gt-%E6%9F%A5%E8%AF%A2"><span class="nav-number">10.6.</span> <span class="nav-text">6. 禁止使用SELECT * 必须使用SELECT &lt;字段列表&gt; 查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E7%A6%81%E6%AD%A2%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%AB%E5%AD%97%E6%AE%B5%E5%88%97%E8%A1%A8%E7%9A%84INSERT%E8%AF%AD%E5%8F%A5"><span class="nav-number">10.7.</span> <span class="nav-text">7. 禁止使用不含字段列表的INSERT语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8%E5%AD%90%E6%9F%A5%E8%AF%A2%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%8A%8A%E5%AD%90%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E4%B8%BAjoin%E6%93%8D%E4%BD%9C"><span class="nav-number">10.8.</span> <span class="nav-text">8. 避免使用子查询，可以把子查询优化为join操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8JOIN%E5%85%B3%E8%81%94%E5%A4%AA%E5%A4%9A%E7%9A%84%E8%A1%A8"><span class="nav-number">10.9.</span> <span class="nav-text">9. 避免使用JOIN关联太多的表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E5%87%8F%E5%B0%91%E5%90%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BA%A4%E4%BA%92%E6%AC%A1%E6%95%B0"><span class="nav-number">10.10.</span> <span class="nav-text">10. 减少同数据库的交互次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-%E5%AF%B9%E5%BA%94%E5%90%8C%E4%B8%80%E5%88%97%E8%BF%9B%E8%A1%8Cor%E5%88%A4%E6%96%AD%E6%97%B6%EF%BC%8C%E4%BD%BF%E7%94%A8in%E4%BB%A3%E6%9B%BFor"><span class="nav-number">10.11.</span> <span class="nav-text">11. 对应同一列进行or判断时，使用in代替or</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-%E7%A6%81%E6%AD%A2%E4%BD%BF%E7%94%A8order-by-rand-%E8%BF%9B%E8%A1%8C%E9%9A%8F%E6%9C%BA%E6%8E%92%E5%BA%8F"><span class="nav-number">10.12.</span> <span class="nav-text">12. 禁止使用order by rand() 进行随机排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-WHERE%E4%BB%8E%E5%8F%A5%E4%B8%AD%E7%A6%81%E6%AD%A2%E5%AF%B9%E5%88%97%E8%BF%9B%E8%A1%8C%E5%87%BD%E6%95%B0%E8%BD%AC%E6%8D%A2%E5%92%8C%E8%AE%A1%E7%AE%97"><span class="nav-number">10.13.</span> <span class="nav-text">13. WHERE从句中禁止对列进行函数转换和计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-%E5%9C%A8%E6%98%8E%E6%98%BE%E4%B8%8D%E4%BC%9A%E6%9C%89%E9%87%8D%E5%A4%8D%E5%80%BC%E6%97%B6%E4%BD%BF%E7%94%A8UNION-ALL-%E8%80%8C%E4%B8%8D%E6%98%AFUNION"><span class="nav-number">10.14.</span> <span class="nav-text">14. 在明显不会有重复值时使用UNION ALL 而不是UNION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-%E6%8B%86%E5%88%86%E5%A4%8D%E6%9D%82%E7%9A%84%E5%A4%A7SQL%E4%B8%BA%E5%A4%9A%E4%B8%AA%E5%B0%8FSQL"><span class="nav-number">10.15.</span> <span class="nav-text">15. 拆分复杂的大SQL为多个小SQL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E8%A1%8C%E4%B8%BA%E8%A7%84%E8%8C%83"><span class="nav-number">11.</span> <span class="nav-text">数据库操作行为规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85100%E4%B8%87%E8%A1%8C%E7%9A%84%E6%89%B9%E9%87%8F%E5%86%99%EF%BC%88UPDATE%E3%80%81DELETE%E3%80%81INSERT%EF%BC%89%E6%93%8D%E4%BD%9C%EF%BC%8C%E8%A6%81%E5%88%86%E6%89%B9%E5%A4%9A%E6%AC%A1%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C"><span class="nav-number">11.1.</span> <span class="nav-text">超100万行的批量写（UPDATE、DELETE、INSERT）操作，要分批多次进行操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%A4%A7%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E5%8F%AF%E8%83%BD%E4%BC%9A%E9%80%A0%E6%88%90%E4%B8%A5%E9%87%8D%E7%9A%84%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F"><span class="nav-number">11.1.1.</span> <span class="nav-text">1. 大批量操作可能会造成严重的主从延迟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-binlog%E6%97%A5%E5%BF%97%E4%B8%BArow%E6%A0%BC%E5%BC%8F%E6%97%B6%E4%BC%9A%E4%BA%A7%E7%94%9F%E5%A4%A7%E9%87%8F%E7%9A%84%E6%97%A5%E5%BF%97"><span class="nav-number">11.1.2.</span> <span class="nav-text">2. binlog日志为row格式时会产生大量的日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%81%BF%E5%85%8D%E4%BA%A7%E7%94%9F%E5%A4%A7%E4%BA%8B%E5%8A%A1%E6%93%8D%E4%BD%9C"><span class="nav-number">11.1.3.</span> <span class="nav-text">3. 避免产生大事务操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E5%A4%A7%E8%A1%A8%E4%BD%BF%E7%94%A8pt-online-schema-change%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="nav-number">11.2.</span> <span class="nav-text">对于大表使用pt-online-schema-change修改表结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A6%81%E6%AD%A2%E4%B8%BA%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E8%B4%A6%E5%8F%B7%E8%B5%8B%E4%BA%88super%E6%9D%83%E9%99%90"><span class="nav-number">11.3.</span> <span class="nav-text">禁止为程序使用的账号赋予super权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E7%A8%8B%E5%BA%8F%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E8%B4%A6%E5%8F%B7%EF%BC%8C%E9%81%B5%E5%BE%AA%E6%9D%83%E9%99%90%E6%9C%80%E5%B0%8F%E5%8E%9F%E5%88%99"><span class="nav-number">11.4.</span> <span class="nav-text">对于程序连接数据库账号，遵循权限最小原则</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">407</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">265k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

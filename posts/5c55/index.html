@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="rpm    rpm软件包是Linux的各个发行版本中应用最为广泛的软件包格式之一，成为众多Linux发行版公认的软件包管理标准，最早由Red Hat这家公司开发。 RPM优点： rpm内包含已经编译过的程序于配置文件等数据，用户不需要重新编译；  rpm在被安装之前，会现检查系统的硬盘容量、操作系统版本等，可避免文件被错误安装；  rpm文件本身提供软件的版本信息、依赖属性检查、软件用途说明、软">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux rpm安装">
+<meta property="og:url" content="http://example.com/posts/5c55/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="rpm    rpm软件包是Linux的各个发行版本中应用最为广泛的软件包格式之一，成为众多Linux发行版公认的软件包管理标准，最早由Red Hat这家公司开发。 RPM优点： rpm内包含已经编译过的程序于配置文件等数据，用户不需要重新编译；  rpm在被安装之前，会现检查系统的硬盘容量、操作系统版本等，可避免文件被错误安装；  rpm文件本身提供软件的版本信息、依赖属性检查、软件用途说明、软">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-11T06:27:47.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:29:33.683Z">
+<meta property="article:author" content="林剑">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/5c55/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Linux rpm安装 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/5c55/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux rpm安装
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-11 14:27:47" itemprop="dateCreated datePublished" datetime="2022-11-11T14:27:47+08:00">2022-11-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>665</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="rpm"><a href="#rpm" class="headerlink" title="rpm"></a>rpm</h1><p>    rpm软件包是Linux的各个发行版本中应用最为广泛的软件包格式之一，成为众多Linux发行版公认的软件包管理标准，最早由Red Hat这家公司开发。</p>
+<h1 id="RPM优点："><a href="#RPM优点：" class="headerlink" title="RPM优点："></a>RPM优点：</h1><ul>
+<li><p>rpm内包含已经编译过的程序于配置文件等数据，用户不需要重新编译；</p>
+</li>
+<li><p>rpm在被安装之前，会现检查系统的硬盘容量、操作系统版本等，可避免文件被错误安装；</p>
+</li>
+<li><p>rpm文件本身提供软件的版本信息、依赖属性检查、软件用途说明、软件所含文件等信息，便于了解软件；</p>
+</li>
+<li><p>rpm管理方式使用数据库记录rpm文件的相关参数，便于升级、删除、查询与验证</p>
+</li>
+<li><p>rpm这个软件管理器所处理的软件，是由软件提供者在特定的Linux平台上面将该软件编译完成并且打包好，用户只要拿到这个打包好的软件，然后将里面的文件放到应该要存放的目录，即完成安装。</p>
+</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="常用的rpm命令总结："><a href="#常用的rpm命令总结：" class="headerlink" title="常用的rpm命令总结："></a>常用的rpm命令总结：</h1><h3 id="rpm安装"><a href="#rpm安装" class="headerlink" title="rpm安装"></a>rpm安装</h3><h4 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh ipm软件安装包</span><br></pre></td></tr></table></figure>
+
+<h4 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-i : install 安装的意思</span><br><span class="line">-v : 查看更详细的安装信息</span><br><span class="line">-h: 显示安装进度，在安装升级的过程中，以“<span class="comment">#”显示安装进度</span></span><br><span class="line">–force: 强制安装某个软件包，可以用于替换已安装版本或安装旧版本</span><br><span class="line">–nodeps: 安装、升级过程中，不检查与其他软件包的依赖关系</span><br></pre></td></tr></table></figure>
+
+<h3 id="rpm-升级与更新"><a href="#rpm-升级与更新" class="headerlink" title="rpm 升级与更新"></a>rpm 升级与更新</h3><h4 id="常用-1"><a href="#常用-1" class="headerlink" title="常用"></a>常用</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -Fvh ipm软件安装包</span><br></pre></td></tr></table></figure>
+
+<h4 id="选项-1"><a href="#选项-1" class="headerlink" title="选项"></a>选项</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Uvh ：后面接的软件即使安装过，则系统将予以直接安装；若后面接的软件有安装过旧版，则系统自动更新至新版。</span><br><span class="line">-Fvh : 如果后面接的软件并未安装到你的Linux系统上，则该软件不会被安装，亦即只有安装至你的Linux系统内的软件会被升级</span><br></pre></td></tr></table></figure>
+
+<h3 id="rpm-查询已安装的rpm包"><a href="#rpm-查询已安装的rpm包" class="headerlink" title="rpm 查询已安装的rpm包"></a>rpm 查询已安装的rpm包</h3><h4 id="选项-2"><a href="#选项-2" class="headerlink" title="选项"></a>选项</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-q ：仅查询，后面接的软件名称是否有安装</span><br><span class="line">-qa :列出已经安装在本机Linux系统上面的所有软件名称</span><br><span class="line">-qp:查询未安装的rpm软件包</span><br></pre></td></tr></table></figure>
+
+<h3 id="rpm-软件包的卸载"><a href="#rpm-软件包的卸载" class="headerlink" title="rpm 软件包的卸载"></a>rpm 软件包的卸载</h3><h4 id="常用-2"><a href="#常用-2" class="headerlink" title="常用"></a>常用</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e 软件名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="选项-3"><a href="#选项-3" class="headerlink" title="选项"></a>选项</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-e ：卸载软件</span><br></pre></td></tr></table></figure>
+
+<h3 id="rpm软件包验证"><a href="#rpm软件包验证" class="headerlink" title="rpm软件包验证"></a>rpm软件包验证</h3><h4 id="常用-3"><a href="#常用-3" class="headerlink" title="常用"></a>常用</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm - V 软件名称</span><br></pre></td></tr></table></figure>
+
+<h4 id="选项-4"><a href="#选项-4" class="headerlink" title="选项"></a>选项</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-V： 验证一个软件包，可以使用任何包选择选项来查询要验证的软件包  </span><br><span class="line">-Vf： 验证包含特定文件的软件包  </span><br><span class="line">-Va：验证所有已安装的软件包</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/cd42/" rel="prev" title="HTML入门">
+      <i class="fa fa-chevron-left"></i> HTML入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/8dd6/" rel="next" title="systemctl命令">
+      systemctl命令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#rpm"><span class="nav-number">1.</span> <span class="nav-text">rpm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPM%E4%BC%98%E7%82%B9%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">RPM优点：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84rpm%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">常用的rpm命令总结：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm%E5%AE%89%E8%A3%85"><span class="nav-number">3.0.1.</span> <span class="nav-text">rpm安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8"><span class="nav-number">3.0.1.1.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E9%A1%B9"><span class="nav-number">3.0.1.2.</span> <span class="nav-text">选项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm-%E5%8D%87%E7%BA%A7%E4%B8%8E%E6%9B%B4%E6%96%B0"><span class="nav-number">3.0.2.</span> <span class="nav-text">rpm 升级与更新</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8-1"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E9%A1%B9-1"><span class="nav-number">3.0.2.2.</span> <span class="nav-text">选项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm-%E6%9F%A5%E8%AF%A2%E5%B7%B2%E5%AE%89%E8%A3%85%E7%9A%84rpm%E5%8C%85"><span class="nav-number">3.0.3.</span> <span class="nav-text">rpm 查询已安装的rpm包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E9%A1%B9-2"><span class="nav-number">3.0.3.1.</span> <span class="nav-text">选项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm-%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%9A%84%E5%8D%B8%E8%BD%BD"><span class="nav-number">3.0.4.</span> <span class="nav-text">rpm 软件包的卸载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8-2"><span class="nav-number">3.0.4.1.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E9%A1%B9-3"><span class="nav-number">3.0.4.2.</span> <span class="nav-text">选项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm%E8%BD%AF%E4%BB%B6%E5%8C%85%E9%AA%8C%E8%AF%81"><span class="nav-number">3.0.5.</span> <span class="nav-text">rpm软件包验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8-3"><span class="nav-number">3.0.5.1.</span> <span class="nav-text">常用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E9%A1%B9-4"><span class="nav-number">3.0.5.2.</span> <span class="nav-text">选项</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">407</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">265k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

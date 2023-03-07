@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="官网： https:&#x2F;&#x2F;www.bpmn.org&#x2F; BPMN2.0文档：BPMN 2.0 BPMN定义BPMN（Business Process Modeling Notation，即业务流程建模符号），是一种流程建模的通用和标准语言，用来绘制业务流程图，以便更好地让各部门之间理解业务流程和相互关系。 它有两个版本：  BPMN 1.0 规范由标准组织BPMI（后并入到OMG）于2004年5月发布">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BPMN2.0">
+<meta property="og:url" content="http://example.com/posts/9e9/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="官网： https:&#x2F;&#x2F;www.bpmn.org&#x2F; BPMN2.0文档：BPMN 2.0 BPMN定义BPMN（Business Process Modeling Notation，即业务流程建模符号），是一种流程建模的通用和标准语言，用来绘制业务流程图，以便更好地让各部门之间理解业务流程和相互关系。 它有两个版本：  BPMN 1.0 规范由标准组织BPMI（后并入到OMG）于2004年5月发布">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/xrbjKP.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/Yn416c.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/svQ9Dr.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/C2MN2P.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/9AgNWl.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/HYF9Lv.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/lGNsgc.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/UxqHGB.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/xAIDwK.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/H3zylK.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/af8Sna.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/pyn6gT.jpg">
+<meta property="article:published_time" content="2022-12-09T01:42:53.000Z">
+<meta property="article:modified_time" content="2023-03-01T10:29:33.676Z">
+<meta property="article:author" content="林剑">
+<meta property="article:tag" content="BPMN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/xrbjKP.jpg">
+
+<link rel="canonical" href="http://example.com/posts/9e9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>BPMN2.0 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/9e9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BPMN2.0
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-12-09 09:42:53" itemprop="dateCreated datePublished" datetime="2022-12-09T09:42:53+08:00">2022-12-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BPMN/" itemprop="url" rel="index"><span itemprop="name">BPMN</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>官网：</strong> <a target="_blank" rel="noopener" href="https://www.bpmn.org/">https://www.bpmn.org/</a></p>
+<p><strong>BPMN2.0文档：</strong><a target="_blank" rel="noopener" href="http://www.omg.org/spec/BPMN/2.0/">BPMN 2.0</a></p>
+<h1 id="BPMN定义"><a href="#BPMN定义" class="headerlink" title="BPMN定义"></a>BPMN定义</h1><p>BPMN（Business Process Modeling Notation，即业务流程建模符号），是一种流程建模的通用和标准语言，用来绘制业务流程图，以便更好地让各部门之间理解业务流程和相互关系。</p>
+<p>它有两个版本：</p>
+<blockquote>
+<p>BPMN 1.0 规范由标准组织BPMI（后并入到OMG）于2004年5月发布；<br>BPMN 2.0 标准由OMG于2011年推出。</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="BPMN基础元素类别"><a href="#BPMN基础元素类别" class="headerlink" title="BPMN基础元素类别"></a>BPMN基础元素类别</h1><p>BPMN 2.0 只要充分了解以下四类基础元素，基本就能掌握BPMN 2.0 的核心：</p>
+<h2 id="流对象（Flow-Objects）"><a href="#流对象（Flow-Objects）" class="headerlink" title="流对象（Flow Objects）"></a>流对象（Flow Objects）</h2><p>是定义业务流程的主要图形元素，包括三种：事件、活动、网关</p>
+<h3 id="事件（Events）"><a href="#事件（Events）" class="headerlink" title="事件（Events）"></a>事件（Events）</h3><p>指的是在业务流程的运行过程中发生的事情，分为</p>
+<ul>
+<li>开始：表示一个流程的开始</li>
+<li>中间：发生的开始和结束事件之间，影响处理的流程</li>
+<li>结束：表示该过程结束</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/xrbjKP.jpg"></p>
+<h3 id="活动（Activities）"><a href="#活动（Activities）" class="headerlink" title="活动（Activities）"></a>活动（Activities）</h3><p>在工作流中所有具备生命周期状态的都可以称之为“活动”，如原子级的任务（Task）、流向（Sequence Flow），以及子流程（Sub-Process）等活动用圆角矩形表示，一个活动多个活动组成，活动的类型分为Task和Sub-Process。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/Yn416c.jpg"></p>
+<h3 id="网关（Gateways）"><a href="#网关（Gateways）" class="headerlink" title="网关（Gateways）"></a>网关（Gateways）</h3><p>用于表示流程的分支与合并。</p>
+<ul>
+<li>排他网关：只有一条路径会被选择</li>
+<li>并行网关：所有路径会被同时选择</li>
+<li>包容网关：可以同时执行多条线路，也可以在网关上设置条件</li>
+<li>事件网关：专门为中间捕获事件设置的，允许设置多个输出流指向多个不同的中间捕获事件。当流程执行到事件网关后，流程处于等待状态，需要等待抛出事件才能将等待状态转换为活动状态。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/svQ9Dr.jpg"></p>
+<h2 id="数据（Data）"><a href="#数据（Data）" class="headerlink" title="数据（Data）"></a>数据（Data）</h2><p>数据主要通过四种元素表示</p>
+<ul>
+<li>数据对象（Data Objects）</li>
+<li>数据输入（Data Inputs）</li>
+<li>数据输出（Data Outputs）</li>
+<li>数据存储（Data Stores）</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/C2MN2P.jpg"></p>
+<h2 id="连接对象（Connecting-Objects）"><a href="#连接对象（Connecting-Objects）" class="headerlink" title="连接对象（Connecting Objects）"></a>连接对象（Connecting Objects）</h2><p>流对象彼此互相连接或者连接到其他信息的方法主要有四种</p>
+<ul>
+<li><p>Sequence Flows 序列流：用实线实心箭头表示，代表流程中将被执行的活动的执行顺序。</p>
+<img title="" src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/9AgNWl.jpg" alt="" data-align="center" width="220">
+</li>
+<li><p>Message Flows 消息流：用虚线空心箭头表示，用于2个分开的流程参与者直接发送或者接收到的消息流。</p>
+<img title="" src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/HYF9Lv.jpg" alt="" data-align="center" width="214">
+</li>
+<li><p>Associations 结合关系：用点状虚线表示，用于显示活动的输入输出。</p>
+<img title="" src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/lGNsgc.jpg" alt="" data-align="center" width="221">
+</li>
+<li><p>Data Associations 数据结合关系</p>
+</li>
+</ul>
+<h2 id="泳道（Swimlanes）"><a href="#泳道（Swimlanes）" class="headerlink" title="泳道（Swimlanes）"></a>泳道（Swimlanes）</h2><p>通过泳道对主要的建模元素进行分组，将活动划分到不同的可视化类别中来描述由不同的参与者的责任与职责。</p>
+<h3 id="Pools-池"><a href="#Pools-池" class="headerlink" title="Pools 池"></a>Pools 池</h3><p>池描述流程中的一个参与者。可以看做是将一系列活动区别于其他池的一个图形容器，一般用于B2B的上下文中</p>
+<img title="" src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/UxqHGB.jpg" alt="" data-align="center" width="363">
+
+<h3 id="Lanes-道"><a href="#Lanes-道" class="headerlink" title="Lanes 道"></a>Lanes 道</h3><p>道就是在池里面再细分，可以是垂直的也可以是水平的。道也是用于组织和分类活动。</p>
+<img title="" src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/xAIDwK.jpg" alt="" data-align="center" width="390">
+
+<h1 id="BPMN2-0流程示例"><a href="#BPMN2-0流程示例" class="headerlink" title="BPMN2.0流程示例"></a>BPMN2.0流程示例</h1><p>BPMN2.0为所有业务元素定义了标准的符号，不同的符号代表不同的含义，以OA应用中请假流程为例，使用标准的BPMN2.0图元定义示意如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/H3zylK.jpg"></p>
+<p>在上述的流程示意图中，所涉及到的执行语义图元主要有下表中的8类：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/af8Sna.jpg"></p>
+<p>    除了上述Start Event、User Task、Exclusive Gateway、Parallel Gateway、Service Task、End Event标准的BPMN2.0图元外，上述流程图还使用了Lane Set（业务部门、人力资源部、考勤系统），分别表示流程活动所涉及到的部门或角色，Lane的概念和jBPM4中“泳道”的概念一样，都用来表示同一类相似任务的归属者。应用BPMN2.0标准的一个最显著的特色是，不同阶段的人员，无论是需求分析、概要设计、详细设计或是具体的业务实现，都可在一个流程图上开展工作，避免业务理解存在偏差。</p>
+<p>    一个系统的实现，需求分析人员可以利用BPMN2.0标准图元草绘一下搜集到的需求；然后可以拿给设计人员，讨论出具体的业务需求进行功能设计，由设计人员在草图的基础上逐步细化，并得到需求人员的认同；设计人员又将细化后的流程图交给开发人员，罗列要实现的功能点，指出流程图上各活动节点所具备的行为，设计人员与开发人员依据此图达成共识，进入具体的开发阶段；如果后期请假流程发生更改，仍然是在现有流程图上更改，随着项目的推进，流程图也在不断的演进，但至始至终，项目受众都使用同一个流程图交流，保障需求理解的一致性，一定程度上推动了项目的敏捷性。</p>
+<h1 id="BPMN基本符号一览"><a href="#BPMN基本符号一览" class="headerlink" title="BPMN基本符号一览"></a>BPMN基本符号一览</h1><p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/pyn6gT.jpg"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/BPMN/" rel="tag"># BPMN</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/37be/" rel="prev" title="Druid开启慢SQL监控">
+      <i class="fa fa-chevron-left"></i> Druid开启慢SQL监控
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/6b5d/" rel="next" title="logback轮转日志设置maxHistory，totalSizeCap参数不生效">
+      logback轮转日志设置maxHistory，totalSizeCap参数不生效 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BPMN%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">BPMN定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BPMN%E5%9F%BA%E7%A1%80%E5%85%83%E7%B4%A0%E7%B1%BB%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">BPMN基础元素类别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E5%AF%B9%E8%B1%A1%EF%BC%88Flow-Objects%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">流对象（Flow Objects）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%EF%BC%88Events%EF%BC%89"><span class="nav-number">2.1.1.</span> <span class="nav-text">事件（Events）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B4%BB%E5%8A%A8%EF%BC%88Activities%EF%BC%89"><span class="nav-number">2.1.2.</span> <span class="nav-text">活动（Activities）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E5%85%B3%EF%BC%88Gateways%EF%BC%89"><span class="nav-number">2.1.3.</span> <span class="nav-text">网关（Gateways）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%EF%BC%88Data%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">数据（Data）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E5%AF%B9%E8%B1%A1%EF%BC%88Connecting-Objects%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">连接对象（Connecting Objects）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%B3%E9%81%93%EF%BC%88Swimlanes%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">泳道（Swimlanes）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pools-%E6%B1%A0"><span class="nav-number">2.4.1.</span> <span class="nav-text">Pools 池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lanes-%E9%81%93"><span class="nav-number">2.4.2.</span> <span class="nav-text">Lanes 道</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BPMN2-0%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">BPMN2.0流程示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BPMN%E5%9F%BA%E6%9C%AC%E7%AC%A6%E5%8F%B7%E4%B8%80%E8%A7%88"><span class="nav-number">4.</span> <span class="nav-text">BPMN基本符号一览</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">407</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">265k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">16:04</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
