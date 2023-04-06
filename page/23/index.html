@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/eca/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a91c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/eca/" class="post-title-link" itemprop="url">Linux常用命令知识积累</a>
+            <a href="/posts/a91c/" class="post-title-link" itemprop="url">RPO与RTO</a>
         </h2>
 
         <div class="post-meta">
@@ -212,328 +212,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-10-20 10:02:19" itemprop="dateCreated datePublished" datetime="2021-10-20T10:02:19+08:00">2021-10-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>18 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>虽然平时大部分工作都是和Java相关的开发, 但是每天都会接触Linux系统, 尤其是使用了Mac之后, 每天都是工作在黑色背景的命令行环境中. 自己记忆力不好, 很多有用的Linux命令不能很好的记忆, 现在逐渐总结一下, 以便后续查看.</p>
-<h2 id="Linux关机-重启"><a href="#Linux关机-重启" class="headerlink" title="Linux关机,重启"></a>Linux关机,重启</h2><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 关机</span></span><br><span class="line"><span class="built_in">shutdown</span> -h now</span><br><span class="line"></span><br><span class="line"><span class="meta"># 重启</span></span><br><span class="line"><span class="built_in">shutdown</span> -r now</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看系统-CPU信息"><a href="#查看系统-CPU信息" class="headerlink" title="查看系统,CPU信息"></a>查看系统,CPU信息</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看系统内核信息</span></span><br><span class="line"><span class="built_in">uname</span> -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看系统内核版本</span></span><br><span class="line"><span class="built_in">cat</span> /proc/version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前用户环境变量</span></span><br><span class="line"><span class="built_in">env</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> /proc/cpuinfo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看有几个逻辑cpu, 包括cpu型号</span></span><br><span class="line"><span class="built_in">cat</span> /proc/cpuinfo | grep name | <span class="built_in">cut</span> -f2 -d: | <span class="built_in">uniq</span> -c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看有几颗cpu,每颗分别是几核</span></span><br><span class="line"><span class="built_in">cat</span> /proc/cpuinfo | grep physical | <span class="built_in">uniq</span> -c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前CPU运行在32bit还是64bit模式下, 如果是运行在32bit下也不代表CPU不支持64bit</span></span><br><span class="line">getconf LONG_BIT</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果大于0, 说明支持64bit计算. lm指long mode, 支持lm则是64bit</span></span><br><span class="line"><span class="built_in">cat</span> /proc/cpuinfo | grep flags | grep <span class="string">&#x27; lm &#x27;</span> | <span class="built_in">wc</span> -l</span><br></pre></td></tr></table></figure>
-
-<h2 id="建立软连接"><a href="#建立软连接" class="headerlink" title="建立软连接"></a>建立软连接</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s <span class="regexp">/usr/</span>local<span class="regexp">/jdk1.8/</span> jdk</span><br></pre></td></tr></table></figure>
-
-<h2 id="rpm相关"><a href="#rpm相关" class="headerlink" title="rpm相关"></a>rpm相关</h2><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 查看是否通过rpm安装了该软件</span></span><br><span class="line">rpm -qa <span class="string">| grep 软件名</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="sshkey"><a href="#sshkey" class="headerlink" title="sshkey"></a>sshkey</h2><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 创建sshkey</span></span><br><span class="line">ssh-keygen -t rsa -C your_email<span class="symbol">@example</span>.com</span><br><span class="line"></span><br><span class="line"><span class="meta">#id_rsa.pub 的内容拷贝到要控制的服务器的 home/username/.ssh/authorized_keys 中,如果没有则新建(.ssh权限为700, authorized_keys权限为600)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="命令重命名"><a href="#命令重命名" class="headerlink" title="命令重命名"></a>命令重命名</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在各个用户的.bash_profile中添加重命名配置</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">&#x27;ls -alF&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="同步服务器时间"><a href="#同步服务器时间" class="headerlink" title="同步服务器时间"></a>同步服务器时间</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo</span> ntpdate -u ntp.api.bz</span><br></pre></td></tr></table></figure>
-
-<h2 id="后台运行命令"><a href="#后台运行命令" class="headerlink" title="后台运行命令"></a>后台运行命令</h2><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 后台运行,并且有nohup.out输出</span></span><br><span class="line">nohup xxx <span class="meta">&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 后台运行, 不输出任何日志</span></span><br><span class="line">nohup xxx &gt; /dev/<span class="literal">null</span> <span class="meta">&amp;</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 后台运行, 并将错误信息做标准输出到日志中 </span></span><br><span class="line">nohup xxx &gt;out.<span class="built_in">log</span> <span class="number">2</span>&gt;<span class="meta">&amp;1 &amp;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="强制活动用户退出"><a href="#强制活动用户退出" class="headerlink" title="强制活动用户退出"></a>强制活动用户退出</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 命令来完成强制活动用户退出.其中TTY表示终端名称</span></span><br><span class="line"><span class="attribute">pkill</span> -kill -t<span class="meta"> [TTY]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="查看命令路径"><a href="#查看命令路径" class="headerlink" title="查看命令路径"></a>查看命令路径</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which <span class="tag">&lt;<span class="name">命令</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="查看进程所有打开最大fd数"><a href="#查看进程所有打开最大fd数" class="headerlink" title="查看进程所有打开最大fd数"></a>查看进程所有打开最大fd数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ulimit</span> -n</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置dns"><a href="#配置dns" class="headerlink" title="配置dns"></a>配置dns</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/etc/</span>resolv.conf</span><br></pre></td></tr></table></figure>
-
-<h2 id="nslookup-查看域名路由表"><a href="#nslookup-查看域名路由表" class="headerlink" title="nslookup,查看域名路由表"></a>nslookup,查看域名路由表</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">nslookup</span> google.com</span><br></pre></td></tr></table></figure>
-
-<h2 id="last-最近登录信息列表"><a href="#last-最近登录信息列表" class="headerlink" title="last, 最近登录信息列表"></a>last, 最近登录信息列表</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 最近登录的5个账号</span></span><br><span class="line"><span class="attribute">last</span> -n <span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="设置固定ip"><a href="#设置固定ip" class="headerlink" title="设置固定ip"></a>设置固定ip</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ifconfig</span> em1  <span class="number">192.168.5.177</span> netmask <span class="number">255.255.255.0</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="查看进程内加载的环境变量"><a href="#查看进程内加载的环境变量" class="headerlink" title="查看进程内加载的环境变量"></a>查看进程内加载的环境变量</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">也可以去 <span class="built_in">cd</span> /proc 目录下, 查看进程内存中加载的东西</span></span><br><span class="line">ps eww -p  XXXXX(进程号)</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看进程树找到服务器进程"><a href="#查看进程树找到服务器进程" class="headerlink" title="查看进程树找到服务器进程"></a>查看进程树找到服务器进程</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ps auwxf</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="查看进程启动路径"><a href="#查看进程启动路径" class="headerlink" title="查看进程启动路径"></a>查看进程启动路径</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /proc/xxx(进程号)</span><br><span class="line"><span class="built_in">ls</span> -all</span><br><span class="line"><span class="comment"># cwd对应的是启动路径</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="添加用户-配置sudo权限"><a href="#添加用户-配置sudo权限" class="headerlink" title="添加用户, 配置sudo权限"></a>添加用户, 配置sudo权限</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增用户</span></span><br><span class="line">useradd 用户名</span><br><span class="line">passwd 用户名</span><br><span class="line"></span><br><span class="line"><span class="comment">#增加sudo权限</span></span><br><span class="line">vim <span class="regexp">/etc/</span>sudoers</span><br><span class="line"><span class="comment"># 修改文件里面的</span></span><br><span class="line"><span class="comment"># root    ALL=(ALL)       ALL</span></span><br><span class="line"><span class="comment"># 用户名 ALL=(ALL)       ALL</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="强制关闭进程名包含xxx的所有进程"><a href="#强制关闭进程名包含xxx的所有进程" class="headerlink" title="强制关闭进程名包含xxx的所有进程"></a>强制关闭进程名包含xxx的所有进程</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux|<span class="keyword">grep</span> xxx | <span class="keyword">grep</span> -v <span class="keyword">grep</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="keyword">kill</span> -<span class="number">9</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="磁盘-文件-目录相关操作"><a href="#磁盘-文件-目录相关操作" class="headerlink" title="磁盘,文件,目录相关操作"></a>磁盘,文件,目录相关操作</h1><h2 id="vim操作"><a href="#vim操作" class="headerlink" title="vim操作"></a>vim操作</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#normal模式下 g表示全局, x表示查找的内容, y表示替换后的内容</span></span><br><span class="line"><span class="symbol">:%s/x/y/g</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#normal模式下</span></span><br><span class="line"><span class="number">0</span>  <span class="comment"># 光标移到行首(数字0)</span></span><br><span class="line"><span class="variable">$ </span> <span class="comment"># 光标移至行尾</span></span><br><span class="line">shift + g <span class="comment"># 跳到文件最后</span></span><br><span class="line">gg <span class="comment"># 跳到文件头</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示行号</span></span><br><span class="line"><span class="symbol">:set</span> nu</span><br><span class="line"></span><br><span class="line"><span class="comment"># 去除行号</span></span><br><span class="line"><span class="symbol">:set</span> nonu</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检索</span></span><br><span class="line">/xxx(检索内容)  <span class="comment"># 从头检索, 按n查找下一个</span></span><br><span class="line"><span class="string">?x</span>xx(检索内容)  <span class="comment"># 从尾部检索</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="打开只读文件-修改后需要保存时-不用切换用户即可保存的方式"><a href="#打开只读文件-修改后需要保存时-不用切换用户即可保存的方式" class="headerlink" title="打开只读文件,修改后需要保存时(不用切换用户即可保存的方式)"></a>打开只读文件,修改后需要保存时(不用切换用户即可保存的方式)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在normal模式下</span></span><br><span class="line">:w !sudo <span class="built_in">tee</span> %</span><br></pre></td></tr></table></figure>
-
-<h2 id="查看磁盘-文件目录基本信息"><a href="#查看磁盘-文件目录基本信息" class="headerlink" title="查看磁盘, 文件目录基本信息"></a>查看磁盘, 文件目录基本信息</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看磁盘挂载情况</span></span><br><span class="line">mount</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘分区信息</span></span><br><span class="line"><span class="built_in">df</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看目录及子目录大小</span></span><br><span class="line"><span class="built_in">du</span> -H -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前目录下各个文件, 文件夹占了多少空间, 不会递归</span></span><br><span class="line"><span class="built_in">du</span> -sh *</span><br></pre></td></tr></table></figure>
-
-<h2 id="wc命令"><a href="#wc命令" class="headerlink" title="wc命令"></a>wc命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看文件里有多少行</span></span><br><span class="line"><span class="built_in">wc</span> -l filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 看文件里有多少个word</span></span><br><span class="line"><span class="built_in">wc</span> -w filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件里最长的那一行是多少个字</span></span><br><span class="line"><span class="built_in">wc</span> -L filename</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计字节数</span></span><br><span class="line"><span class="built_in">wc</span> -c</span><br></pre></td></tr></table></figure>
-
-<h2 id="常用压缩-解压缩命令"><a href="#常用压缩-解压缩命令" class="headerlink" title="常用压缩, 解压缩命令"></a>常用压缩, 解压缩命令</h2><h3 id="压缩命令"><a href="#压缩命令" class="headerlink" title="压缩命令"></a>压缩命令</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar czvf xxx.tar 压缩目录</span><br><span class="line"></span><br><span class="line"><span class="built_in">zip</span> -r xxx.<span class="built_in">zip</span> 压缩目录</span><br></pre></td></tr></table></figure>
-
-<h3 id="解压缩命令"><a href="#解压缩命令" class="headerlink" title="解压缩命令"></a>解压缩命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar zxvf xxx.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压到指定文件夹</span></span><br><span class="line">tar zxvf xxx.tar -C /xxx/yyy/</span><br><span class="line"></span><br><span class="line">unzip xxx.zip</span><br></pre></td></tr></table></figure>
-
-<h2 id="变更文件所属用户-用户组"><a href="#变更文件所属用户-用户组" class="headerlink" title="变更文件所属用户, 用户组"></a>变更文件所属用户, 用户组</h2><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown eagleye.eagleye xxx.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="cp-scp-mkdir"><a href="#cp-scp-mkdir" class="headerlink" title="cp, scp, mkdir"></a>cp, scp, mkdir</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#复制</span></span><br><span class="line"><span class="built_in">cp</span> xxx.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制并强制覆盖同名文件</span></span><br><span class="line"><span class="built_in">cp</span> -f xxx.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制文件夹</span></span><br><span class="line"><span class="built_in">cp</span> -r xxx(源文件夹) yyy(目标文件夹)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 远程复制</span></span><br><span class="line">scp -P ssh端口 username@10.10.10.101:/home/username/xxx /home/xxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 级联创建目录</span></span><br><span class="line"><span class="built_in">mkdir</span> -p /xxx/yyy/zzz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量创建文件夹, 会在test,main下都创建java, resources文件夹</span></span><br><span class="line"><span class="built_in">mkdir</span> -p src/&#123;<span class="built_in">test</span>,main&#125;/&#123;java,resources&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="比较两个文件"><a href="#比较两个文件" class="headerlink" title="比较两个文件"></a>比较两个文件</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">diff</span> -u <span class="number">1</span>.txt <span class="number">2</span>.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="日志输出的字节数-可以用作性能测试"><a href="#日志输出的字节数-可以用作性能测试" class="headerlink" title="日志输出的字节数,可以用作性能测试"></a>日志输出的字节数,可以用作性能测试</h2><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 如果做性能测试, 可以每执行一次, 往日志里面输出 “.” , 这样日志中的字节数就是实际的性能测试运行的次数, 还可以看见实时速率.</span></span><br><span class="line">tail -f xxx.<span class="built_in">log</span> <span class="string">| pv -bt</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="查看-去除特殊字符"><a href="#查看-去除特殊字符" class="headerlink" title="查看, 去除特殊字符"></a>查看, 去除特殊字符</h2><figure class="highlight parser3"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看特殊字符</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">cat -v xxx.sh</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"></span><span class="comment"># 去除特殊字符</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">sed -i &#x27;s/</span><span class="keyword">^M</span><span class="language-xml">//g’ env.sh  去除文件的特殊字符, 比如</span><span class="keyword">^M:</span><span class="language-xml">  需要这样输入: ctrl+v+enter</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="处理因系统原因引起的文件中特殊字符的问题"><a href="#处理因系统原因引起的文件中特殊字符的问题" class="headerlink" title="处理因系统原因引起的文件中特殊字符的问题"></a>处理因系统原因引起的文件中特殊字符的问题</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可以转换为该系统下的文件格式</span></span><br><span class="line">cat file.sh &gt; file.sh_bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># 先将file.sh中文件内容复制下来然后运行, 然后粘贴内容, 最后ctrl + d 保存退出</span></span><br><span class="line">cat &gt; file1.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在vim中通过如下设置文件编码和文件格式</span></span><br><span class="line">:<span class="built_in">set</span> <span class="attribute">fileencodings</span>=utf-8 ，然后 w （存盘）一下即可转化为 utf8 格式，</span><br><span class="line">:<span class="built_in">set</span> <span class="attribute">fileformat</span>=unix</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在mac下使用dos2unix进行文件格式化</span></span><br><span class="line"><span class="built_in">find</span> . -name <span class="string">&quot;*.sh&quot;</span> | xargs dos2unix</span><br></pre></td></tr></table></figure>
-
-<h2 id="tee-重定向的同时输出到屏幕"><a href="#tee-重定向的同时输出到屏幕" class="headerlink" title="tee, 重定向的同时输出到屏幕"></a>tee, 重定向的同时输出到屏幕</h2><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk ‘&#123;<span class="keyword">print</span> $0&#125;’ xxx.<span class="keyword">log</span> | tee test.<span class="keyword">log</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="检索相关"><a href="#检索相关" class="headerlink" title="检索相关"></a>检索相关</h1><h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 反向匹配, 查找不包含xxx的内容</span></span><br><span class="line"><span class="keyword">grep</span> -v xxx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 排除所有空行</span></span><br><span class="line"><span class="keyword">grep</span> -v <span class="string">&#x27;^$&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回结果 2,则说明第二行是空行</span></span><br><span class="line"><span class="keyword">grep</span> -n “^$” <span class="number">111</span>.txt    </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询以abc开头的行</span></span><br><span class="line"><span class="keyword">grep</span> -n “^abc” <span class="number">111</span>.txt </span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时列出该词语出现在文章的第几行</span></span><br><span class="line"><span class="keyword">grep</span> <span class="string">&#x27;xxx&#x27;</span> -n xxx.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算一下该字串出现的次数</span></span><br><span class="line"><span class="keyword">grep</span> <span class="string">&#x27;xxx&#x27;</span> -c xxx.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 比对的时候，不计较大小写的不同</span></span><br><span class="line"><span class="keyword">grep</span> <span class="string">&#x27;xxx&#x27;</span> -i xxx.log</span><br></pre></td></tr></table></figure>
-
-<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以&#x27;:&#x27; 为分隔符,如果第五域有user则输出该行</span></span><br><span class="line"><span class="attribute">awk</span> -F <span class="string">&#x27;:&#x27;</span> <span class="string">&#x27;&#123;if (<span class="variable">$5</span> ~ /user/) print <span class="variable">$0</span>&#125;&#x27;</span> /etc/passwd </span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计单个文件中某个字符（串）(中文无效)出现的次数</span></span><br><span class="line">awk -v RS=<span class="string">&#x27;character&#x27;</span> <span class="string">&#x27;END &#123;print --NR&#125;&#x27;</span> xxx.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="find检索命令"><a href="#find检索命令" class="headerlink" title="find检索命令"></a>find检索命令</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在目录下找后缀是.mysql的文件</span></span><br><span class="line"><span class="built_in">find</span> /home/eagleye -name <span class="string">&#x27;*.mysql&#x27;</span> -<span class="built_in">print</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 会从 /usr 目录开始往下找，找最近3天之内存取过的文件。</span></span><br><span class="line"><span class="built_in">find</span> /usr -atime 3 –<span class="built_in">print</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 会从 /usr 目录开始往下找，找最近5天之内修改过的文件。</span></span><br><span class="line"><span class="built_in">find</span> /usr -ctime 5 –<span class="built_in">print</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 会从 /doc 目录开始往下找，找jacky 的、文件名开头是 j的文件。  </span></span><br><span class="line"><span class="built_in">find</span> /doc -user jacky -name <span class="string">&#x27;j*&#x27;</span> –<span class="built_in">print</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 会从 /doc 目录开始往下找，找寻文件名是 ja 开头或者 ma开头的文件。</span></span><br><span class="line"><span class="built_in">find</span> /doc \( -name <span class="string">&#x27;ja*&#x27;</span> -o- -name <span class="string">&#x27;ma*&#x27;</span> \) –<span class="built_in">print</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#  会从 /doc 目录开始往下找，找到凡是文件名结尾为 bak的文件，把它删除掉。-exec 选项是执行的意思，rm 是删除命令，&#123; &#125; 表示文件名，“\;”是规定的命令结尾。 </span></span><br><span class="line"><span class="built_in">find</span> /doc -name <span class="string">&#x27;*bak&#x27;</span> -exec rm &#123;&#125; \;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h1><h2 id="查看什么进程使用了该端口"><a href="#查看什么进程使用了该端口" class="headerlink" title="查看什么进程使用了该端口"></a>查看什么进程使用了该端口</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -<span class="selector-tag">i</span>:port</span><br></pre></td></tr></table></figure>
-
-<h2 id="获取本机ip地址"><a href="#获取本机ip地址" class="headerlink" title="获取本机ip地址"></a>获取本机ip地址</h2><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/sbin/i</span>fconfig -a|<span class="keyword">grep</span> inet|<span class="keyword">grep</span> -v <span class="number">127.0</span>.<span class="number">0.1</span>|<span class="keyword">grep</span> -v inet6|awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|tr -d <span class="string">&quot;addr:&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 查看iptables状态</span></span><br><span class="line">service iptables status</span><br><span class="line"></span><br><span class="line"><span class="section"># 要封停一个ip</span></span><br><span class="line">iptables -I INPUT -s <span class="strong">**<span class="emphasis">*.*</span>**</span>.<span class="strong">**<span class="emphasis">*.*</span>**</span> -j DROP</span><br><span class="line"></span><br><span class="line"><span class="section"># 要解封一个IP，使用下面这条命令：</span></span><br><span class="line">iptables -D INPUT -s <span class="strong">**<span class="emphasis">*.*</span>**</span>.<span class="strong">**<span class="emphasis">*.*</span>**</span> -j DROP</span><br><span class="line"></span><br><span class="line">备注: 参数-I是表示Insert（添加），-D表示Delete（删除）。后面跟的是规则，INPUT表示入站，<span class="strong">**<span class="emphasis">*.*</span>**</span>.<span class="strong">**<span class="emphasis">*.*</span>**</span>表示要封停的IP，DROP表示放弃连接。</span><br><span class="line"></span><br><span class="line"><span class="section">#开启9090端口的访问</span></span><br><span class="line">/sbin/iptables -I INPUT -p tcp --dport 9090 -j ACCEPT </span><br><span class="line"></span><br><span class="line"><span class="section"># 防火墙开启、关闭、重启</span></span><br><span class="line">/etc/init.d/iptables status</span><br><span class="line">/etc/init.d/iptables start</span><br><span class="line">/etc/init.d/iptables stop</span><br><span class="line">/etc/init.d/iptables restart</span><br></pre></td></tr></table></figure>
-
-<h2 id="nc命令-tcp调试利器"><a href="#nc命令-tcp调试利器" class="headerlink" title="nc命令, tcp调试利器"></a>nc命令, tcp调试利器</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#给某一个endpoint发送TCP请求,就将data的内容发送到对端</span></span><br><span class="line"><span class="attribute">nc</span> <span class="number">192.168.0.11</span> <span class="number">8000</span> &lt; data.txt</span><br><span class="line"></span><br><span class="line"><span class="comment">#nc可以当做服务器，监听某个端口号,把某一次请求的内容存储到received_data里</span></span><br><span class="line"><span class="attribute">nc</span> -l <span class="number">8000</span> &gt; received_data</span><br><span class="line"></span><br><span class="line"><span class="comment">#上边只监听一次，如果多次可以加上-k参数</span></span><br><span class="line"><span class="attribute">nc</span> -lk <span class="number">8000</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dump出本机12301端口的tcp包</span></span><br><span class="line"><span class="attribute">tcpdump</span> -i em1 tcp port <span class="number">12301</span> -s <span class="number">1500</span> -w abc.pcap</span><br></pre></td></tr></table></figure>
-
-<h2 id="跟踪网络路由路径"><a href="#跟踪网络路由路径" class="headerlink" title="跟踪网络路由路径"></a>跟踪网络路由路径</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># traceroute默认使用udp方式, 如果是-I则改成icmp方式</span></span><br><span class="line"><span class="attribute">traceroute</span> -I www.<span class="number">163</span>.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从ttl第3跳跟踪</span></span><br><span class="line"><span class="attribute">traceroute</span> -M <span class="number">3</span> www.<span class="number">163</span>.com  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 加上端口跟踪</span></span><br><span class="line"><span class="attribute">traceroute</span> -p <span class="number">8080</span> <span class="number">192.168.10.11</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="ss"><a href="#ss" class="headerlink" title="ss"></a>ss</h2><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示本地打开的所有端口</span></span><br><span class="line">ss -l </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示每个进程具体打开的socket</span></span><br><span class="line">ss -pl </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有tcp socket</span></span><br><span class="line">ss -t -a </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有的UDP Socekt</span></span><br><span class="line">ss -u -a </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有已建立的SMTP连接</span></span><br><span class="line">ss -o <span class="keyword">state</span> established &#x27;( dport = :smtp or sport = :smtp )&#x27;  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示所有已建立的HTTP连接 </span></span><br><span class="line">ss -o <span class="keyword">state</span> established &#x27;( dport = :http or sport = :http )&#x27;  </span><br><span class="line"></span><br><span class="line">找出所有连接X服务器的进程</span><br><span class="line">ss -x src /tmp/.X11-unix/*  </span><br><span class="line"></span><br><span class="line">列出当前socket统计信息</span><br><span class="line">ss -s </span><br><span class="line"></span><br><span class="line">解释：netstat是遍历/proc下面每个PID目录，ss直接读/proc/net下面的统计信息。所以ss执行的时候消耗资源以及消耗的时间都比netstat少很多</span><br></pre></td></tr></table></figure>
-
-<h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><figure class="highlight stan"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输出每个ip的连接数，以及总的各个状态的连接数</span></span><br><span class="line">netstat -n | awk &#x27;/^tcp/ &#123;n=split($(NF-<span class="number">1</span>),<span class="type">array</span>,<span class="string">&quot;:&quot;</span>);<span class="keyword">if</span>(n&lt;=<span class="number">2</span>)++S[<span class="type">array</span>[(<span class="number">1</span>)]];<span class="keyword">else</span>++S[<span class="type">array</span>[(<span class="number">4</span>)]];++s[$NF];++N&#125; END &#123;<span class="keyword">for</span>(a <span class="keyword">in</span> S)&#123;printf(<span class="string">&quot;%-20s %s\n&quot;</span>, a, S[a]);++I&#125;printf(<span class="string">&quot;%-20s %s\n&quot;</span>,<span class="string">&quot;TOTAL_IP&quot;</span>,I);<span class="keyword">for</span>(a <span class="keyword">in</span> s) printf(<span class="string">&quot;%-20s %s\n&quot;</span>,a, s[a]);printf(<span class="string">&quot;%-20s %s\n&quot;</span>,<span class="string">&quot;TOTAL_LINK&quot;</span>,N);&#125;&#x27;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计所有连接状态, </span></span><br><span class="line"><span class="comment"># CLOSED：无连接是活动的或正在进行</span></span><br><span class="line"><span class="comment"># LISTEN：服务器在等待进入呼叫</span></span><br><span class="line"><span class="comment"># SYN_RECV：一个连接请求已经到达，等待确认</span></span><br><span class="line"><span class="comment"># SYN_SENT：应用已经开始，打开一个连接</span></span><br><span class="line"><span class="comment"># ESTABLISHED：正常数据传输状态</span></span><br><span class="line"><span class="comment"># FIN_WAIT1：应用说它已经完成</span></span><br><span class="line"><span class="comment"># FIN_WAIT2：另一边已同意释放</span></span><br><span class="line"><span class="comment"># ITMED_WAIT：等待所有分组死掉</span></span><br><span class="line"><span class="comment"># CLOSING：两边同时尝试关闭</span></span><br><span class="line"><span class="comment"># TIME_WAIT：主动关闭连接一端还没有等到另一端反馈期间的状态</span></span><br><span class="line"><span class="comment"># LAST_ACK：等待所有分组死掉</span></span><br><span class="line">netstat -n | awk &#x27;/^tcp/ &#123;++state[$NF]&#125; END &#123;<span class="keyword">for</span>(key <span class="keyword">in</span> state) <span class="built_in">print</span> key,<span class="string">&quot;\t&quot;</span>,state[key]&#125;&#x27;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找较多time_wait连接</span></span><br><span class="line">netstat -n|grep TIME_WAIT|awk &#x27;&#123;<span class="built_in">print</span> $<span class="number">5</span>&#125;&#x27;|sort|uniq -c|sort -rn|<span class="built_in">head</span> -n20</span><br></pre></td></tr></table></figure>
-
-<h1 id="监控linux性能命令"><a href="#监控linux性能命令" class="headerlink" title="监控linux性能命令"></a>监控linux性能命令</h1><h2 id="top"><a href="#top" class="headerlink" title="top"></a>top</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">按大写的 F 或 O 键，然后按 <span class="selector-tag">a</span>-z 可以将进程按照相应的列进行排序, 然后回车。而大写的 R 键可以将当前的排序倒转</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="left">列名</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">PID</td>
-<td align="left">进程id</td>
-</tr>
-<tr>
-<td align="left">PPID</td>
-<td align="left">父进程id</td>
-</tr>
-<tr>
-<td align="left">RUSER</td>
-<td align="left">Real user name</td>
-</tr>
-<tr>
-<td align="left">UID</td>
-<td align="left">进程所有者的用户id</td>
-</tr>
-<tr>
-<td align="left">USER</td>
-<td align="left">进程所有者的用户名</td>
-</tr>
-<tr>
-<td align="left">GROUP</td>
-<td align="left">进程所有者的组名</td>
-</tr>
-<tr>
-<td align="left">TTY</td>
-<td align="left">启动进程的终端名。不是从终端启动的进程则显示为 ?</td>
-</tr>
-<tr>
-<td align="left">PR</td>
-<td align="left">优先级</td>
-</tr>
-<tr>
-<td align="left">NI</td>
-<td align="left">nice值。负值表示高优先级，正值表示低优先级</td>
-</tr>
-<tr>
-<td align="left">P</td>
-<td align="left">最后使用的CPU，仅在多CPU环境下有意义</td>
-</tr>
-<tr>
-<td align="left">%CPU</td>
-<td align="left">上次更新到现在的CPU时间占用百分比</td>
-</tr>
-<tr>
-<td align="left">TIME</td>
-<td align="left">进程使用的CPU时间总计，单位秒</td>
-</tr>
-<tr>
-<td align="left">TIME+</td>
-<td align="left">进程使用的CPU时间总计，单位1&#x2F;100秒</td>
-</tr>
-<tr>
-<td align="left">%MEM</td>
-<td align="left">进程使用的物理内存百分比</td>
-</tr>
-<tr>
-<td align="left">VIRT</td>
-<td align="left">进程使用的虚拟内存总量，单位kb。VIRT&#x3D;SWAP+RES</td>
-</tr>
-<tr>
-<td align="left">SWAP</td>
-<td align="left">进程使用的虚拟内存中，被换出的大小，单位kb。</td>
-</tr>
-<tr>
-<td align="left">RES</td>
-<td align="left">进程使用的、未被换出的物理内存大小，单位kb。RES&#x3D;CODE+DATA</td>
-</tr>
-<tr>
-<td align="left">CODE</td>
-<td align="left">可执行代码占用的物理内存大小，单位kb</td>
-</tr>
-<tr>
-<td align="left">DATA</td>
-<td align="left">可执行代码以外的部分(数据段+栈)占用的物理内存大小，单位kb</td>
-</tr>
-<tr>
-<td align="left">SHR</td>
-<td align="left">共享内存大小，单位kb</td>
-</tr>
-<tr>
-<td align="left">nFLT</td>
-<td align="left">页面错误次数</td>
-</tr>
-<tr>
-<td align="left">nDRT</td>
-<td align="left">最后一次写入到现在，被修改过的页面数。</td>
-</tr>
-<tr>
-<td align="left">S</td>
-<td align="left">进程状态。D&#x3D;不可中断的睡眠状态,R&#x3D;运行,S&#x3D;睡眠,T&#x3D;跟踪&#x2F;停止,Z&#x3D;僵尸进程</td>
-</tr>
-<tr>
-<td align="left">COMMAND</td>
-<td align="left">命令名&#x2F;命令行</td>
-</tr>
-<tr>
-<td align="left">WCHAN</td>
-<td align="left">若该进程在睡眠，则显示睡眠中的系统函数名</td>
-</tr>
-<tr>
-<td align="left">Flags</td>
-<td align="left">任务标志，参考 sched.h</td>
-</tr>
-</tbody></table>
-<h2 id="dmesg-查看系统日志"><a href="#dmesg-查看系统日志" class="headerlink" title="dmesg,查看系统日志"></a>dmesg,查看系统日志</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">dmesg</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="iostat-磁盘IO情况监控"><a href="#iostat-磁盘IO情况监控" class="headerlink" title="iostat,磁盘IO情况监控"></a>iostat,磁盘IO情况监控</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">iostat -xz 1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">r/s, w/s, rkB/s, wkB/s：分别表示每秒读写次数和每秒读写数据量（千字节）。读写量过大，可能会引起性能问题。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">await：IO操作的平均等待时间，单位是毫秒。这是应用程序在和磁盘交互时，需要消耗的时间，包括IO等待和实际操作的耗时。如果这个数值过大，可能是硬件设备遇到了瓶颈或者出现故障。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">avgqu-sz：向设备发出的请求平均数量。如果这个数值大于1，可能是硬件设备已经饱和（部分前端硬件设备支持并行写入）。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">%util：设备利用率。这个数值表示设备的繁忙程度，经验值是如果超过60，可能会影响IO性能（可以参照IO操作平均等待时间）。如果到达100%，说明硬件设备已经饱和。</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果显示的是逻辑设备的数据，那么设备利用率不代表后端实际的硬件设备已经饱和。值得注意的是，即使IO性能不理想，也不一定意味这应用程序性能会不好，可以利用诸如预读取、写缓存等策略提升应用性能。</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="free-内存使用情况"><a href="#free-内存使用情况" class="headerlink" title="free,内存使用情况"></a>free,内存使用情况</h2><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">free -m</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">eg</span><span class="punctuation">:</span></span><br><span class="line"><span class="punctuation"></span></span><br><span class="line">     <span class="attribute">total       used       free     shared    buffers     cached</span></span><br><span class="line"><span class="attribute">Mem</span><span class="punctuation">:</span> <span class="string">         1002        769        232          0         62        421</span></span><br><span class="line"><span class="attribute">-/+ buffers/cache</span><span class="punctuation">:</span> <span class="string">         286        715</span></span><br><span class="line"><span class="attribute">Swap</span><span class="punctuation">:</span> <span class="string">         1153          0       1153</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">第一部分Mem行</span><span class="punctuation">:</span></span><br><span class="line"><span class="attribute">total 内存总数</span><span class="punctuation">:</span> <span class="string">1002M</span></span><br><span class="line"><span class="attribute">used 已经使用的内存数</span><span class="punctuation">:</span> <span class="string">769M</span></span><br><span class="line"><span class="attribute">free 空闲的内存数</span><span class="punctuation">:</span> <span class="string">232M</span></span><br><span class="line"><span class="attribute">shared 当前已经废弃不用,总是0</span></span><br><span class="line"><span class="attribute">buffers Buffer 缓存内存数</span><span class="punctuation">:</span> <span class="string">62M</span></span><br><span class="line">cached Page 缓存内存数:421M</span><br><span class="line"></span><br><span class="line"><span class="attribute">关系：total(1002M) = used(769M) + free(232M)</span></span><br><span class="line"><span class="attribute"></span></span><br><span class="line"><span class="attribute">第二部分(-/+ buffers/cache)</span><span class="punctuation">:</span></span><br><span class="line"><span class="attribute">(-buffers/cache) used内存数：286M (指的第一部分Mem行中的used – buffers – cached)</span></span><br><span class="line"><span class="attribute">(+buffers/cache) free内存数</span><span class="punctuation">:</span> <span class="string">715M (指的第一部分Mem行中的free + buffers + cached)</span></span><br><span class="line"></span><br><span class="line">可见-buffers/cache反映的是被程序实实在在吃掉的内存,而+buffers/cache反映的是可以挪用的内存总数.</span><br><span class="line"></span><br><span class="line">第三部分是指交换分区</span><br></pre></td></tr></table></figure>
-
-<h2 id="sar-查看网络吞吐状态"><a href="#sar-查看网络吞吐状态" class="headerlink" title="sar,查看网络吞吐状态"></a>sar,查看网络吞吐状态</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">sar命令在这里可以查看网络设备的吞吐率。在排查性能问题时，可以通过网络设备的吞吐量，判断网络设备是否已经饱和</span></span><br><span class="line">sar -n DEV 1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># sar命令在这里用于查看TCP连接状态，其中包括：</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">active/s：每秒本地发起的TCP连接数，既通过connect调用创建的TCP连接；</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">passive/s：每秒远程发起的TCP连接数，即通过accept调用创建的TCP连接；</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">retrans/s：每秒TCP重传数量；</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">TCP连接数可以用来判断性能问题是否由于建立了过多的连接，进一步可以判断是主动发起的连接，还是被动接受的连接。TCP重传可能是因为网络环境恶劣，或者服务器压力过大导致丢包</span></span><br><span class="line">sar -n TCP,ETCP 1</span><br></pre></td></tr></table></figure>
-
-<h2 id="vmstat-给定时间监控CPU使用率-内存使用-虚拟内存交互-IO读写"><a href="#vmstat-给定时间监控CPU使用率-内存使用-虚拟内存交互-IO读写" class="headerlink" title="vmstat, 给定时间监控CPU使用率, 内存使用, 虚拟内存交互, IO读写"></a>vmstat, 给定时间监控CPU使用率, 内存使用, 虚拟内存交互, IO读写</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2表示每2秒采集一次状态信息, 1表示只采集一次(忽略既是一直采集)</span></span><br><span class="line"><span class="attribute">vmstat</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">eg</span>:</span><br><span class="line"><span class="attribute">r</span> b swpd free buff cache si so bi bo in cs us sy id wa</span><br><span class="line"><span class="attribute">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">3499840</span> <span class="number">315836</span> <span class="number">3819660</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">100</span> <span class="number">0</span></span><br><span class="line"><span class="attribute">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">3499584</span> <span class="number">315836</span> <span class="number">3819660</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">88</span> <span class="number">158</span> <span class="number">0</span> <span class="number">0</span> <span class="number">100</span> <span class="number">0</span></span><br><span class="line"><span class="attribute">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">3499708</span> <span class="number">315836</span> <span class="number">3819660</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">2</span> <span class="number">86</span> <span class="number">162</span> <span class="number">0</span> <span class="number">0</span> <span class="number">100</span> <span class="number">0</span></span><br><span class="line"><span class="attribute">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">3499708</span> <span class="number">315836</span> <span class="number">3819660</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">10</span> <span class="number">81</span> <span class="number">151</span> <span class="number">0</span> <span class="number">0</span> <span class="number">100</span> <span class="number">0</span></span><br><span class="line"><span class="attribute">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">3499732</span> <span class="number">315836</span> <span class="number">3819660</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">2</span> <span class="number">83</span> <span class="number">154</span> <span class="number">0</span> <span class="number">0</span> <span class="number">100</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>r</strong> 表示运行队列(就是说多少个进程真的分配到CPU)，我测试的服务器目前CPU比较空闲，没什么程序在跑，当这个值超过了CPU数目，就会出现CPU瓶颈了。这个也和top的负载有关系，一般负载超过了3就比较高，超过了5就高，超过了10就不正常了，服务器的状态很危险。top的负载类似每秒的运行队列。如果运行队列过大，表示你的CPU很繁忙，一般会造成CPU使用率很高。</li>
-<li><strong>b</strong> 表示阻塞的进程,这个不多说，进程阻塞，大家懂的。</li>
-<li><strong>swpd</strong> 虚拟内存已使用的大小，如果大于0，表示你的机器物理内存不足了，如果不是程序内存泄露的原因，那么你该升级内存了或者把耗内存的任务迁移到其他机器。</li>
-<li><strong>free</strong> 空闲的物理内存的大小，我的机器内存总共8G，剩余3415M。</li>
-<li><strong>buff</strong> Linux&#x2F;Unix系统是用来存储，目录里面有什么内容，权限等的缓存，我本机大概占用300多M</li>
-<li><strong>cache</strong> cache直接用来记忆我们打开的文件,给文件做缓冲，我本机大概占用300多M(这里是Linux&#x2F;Unix的聪明之处，把空闲的物理内存的一部分拿来做文件和目录的缓存，是为了提高 程序执行的性能，当程序使用内存时，buffer&#x2F;cached会很快地被使用。)</li>
-<li><strong>si</strong> 每秒从磁盘读入虚拟内存的大小，如果这个值大于0，表示物理内存不够用或者内存泄露了，要查找耗内存进程解决掉。我的机器内存充裕，一切正常。</li>
-<li><strong>so</strong> 每秒虚拟内存写入磁盘的大小，如果这个值大于0，同上。</li>
-<li><strong>bi</strong> 块设备每秒接收的块数量，这里的块设备是指系统上所有的磁盘和其他块设备，默认块大小是1024byte，我本机上没什么IO操作，所以一直是0，但是我曾在处理拷贝大量数据(2-3T)的机器上看过可以达到140000&#x2F;s，磁盘写入速度差不多140M每秒</li>
-<li><strong>bo</strong> 块设备每秒发送的块数量，例如我们读取文件，bo就要大于0。bi和bo一般都要接近0，不然就是IO过于频繁，需要调整。</li>
-<li><strong>in</strong> 每秒CPU的中断次数，包括时间中断</li>
-<li><strong>cs</strong> 每秒上下文切换次数，例如我们调用系统函数，就要进行上下文切换，线程的切换，也要进程上下文切换，这个值要越小越好，太大了，要考虑调低线程或者进程的数目,例如在apache和nginx这种web服务器中，我们一般做性能测试时会进行几千并发甚至几万并发的测试，选择web服务器的进程可以由进程或者线程的峰值一直下调，压测，直到cs到一个比较小的值，这个进程和线程数就是比较合适的值了。系统调用也是，每次调用系统函数，我们的代码就会进入内核空间，导致上下文切换，这个是很耗资源，也要尽量避免频繁调用系统函数。上下文切换次数过多表示你的CPU大部分浪费在上下文切换，导致CPU干正经事的时间少了，CPU没有充分利用，是不可取的。</li>
-<li><strong>us</strong> 用户CPU时间，我曾经在一个做加密解密很频繁的服务器上，可以看到us接近100,r运行队列达到80(机器在做压力测试，性能表现不佳)。</li>
-<li><strong>sy</strong> 系统CPU时间，如果太高，表示系统调用时间长，例如是IO操作频繁。</li>
-<li><strong>id</strong> 空闲 CPU时间，一般来说，<code>id + us + sy = 100</code>,一般我认为id是空闲CPU使用率，us是用户CPU使用率，sy是系统CPU使用率。</li>
-<li><strong>wt</strong> 等待IO CPU时间。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1aa8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/1aa8/" class="post-title-link" itemprop="url">联通云讯通</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-10-18 17:05:01" itemprop="dateCreated datePublished" datetime="2021-10-18T17:05:01+08:00">2021-10-18</time>
+              <time title="创建时间：2021-12-31 11:46:59" itemprop="dateCreated datePublished" datetime="2021-12-31T11:46:59+08:00">2021-12-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -549,197 +228,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>412</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="云讯通智能呼叫中心"><a href="#云讯通智能呼叫中心" class="headerlink" title="云讯通智能呼叫中心"></a>云讯通智能呼叫中心</h1><p><a target="_blank" rel="noopener" href="https://gec.10010.com/product/1001058">https://gec.10010.com/product/1001058</a></p>
-<p>为客户提供面向行业的“云+网+呼叫中心”的智能呼叫中心产品</p>
-<h3 id="产品介绍"><a href="#产品介绍" class="headerlink" title="产品介绍"></a>产品介绍</h3><p>云讯通智能呼叫中心是为满足政企客户语音业务发展需要，提供全国固网号码资源及各类语音业务接入能力，构建SaaS+PaaS一体化的政企语音能力平台，协同云联网整合形成面向行业的“云+网+呼叫中心”的智能呼叫中心产品。</p>
-<p>适用客户：云讯通智能呼叫中心产品的目标客户群为银行、保险、快递物流、政府、制造业、旅游、教育等行业内的大型企业。</p>
-<h3 id="产品功能"><a href="#产品功能" class="headerlink" title="产品功能"></a>产品功能</h3><ul>
-<li><p>基础语音功能包括单呼、直呼、回呼、点击拨号</p>
-</li>
-<li><p>增值功能包括语音通知、多方通话&#x2F;电话会议、通话录音、IVR语音、呼叫中心坐席、智能外呼、语音质检、呼叫控制等</p>
-</li>
-</ul>
-<h3 id="产品优势"><a href="#产品优势" class="headerlink" title="产品优势"></a>产品优势</h3><ul>
-<li>能力平台一点对接  语音能力平台集中管理，云化部署，灵活便捷；支持一点对接，服务全国</li>
-<li>多样化能力按需选择  支持多样化语音业务，能够根据客户需求进行能力开放</li>
-<li>专业团队一体化支撑  由专职运营团队，基于标准化服务体系，一点支撑全国业务。覆盖售前、售中、售后产品全生命周期，提供运营商级SLA客户服务承诺</li>
-<li>简单易用  根据业务需求提供API、SIP对接、SaaS服务等多种接入方式，简单易用</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/cf36/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/cf36/" class="post-title-link" itemprop="url">从个人贡献者转为团队管理者</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-28 09:14:35" itemprop="dateCreated datePublished" datetime="2021-08-28T09:14:35+08:00">2021-08-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>139</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="第一角色原理"><a href="#第一角色原理" class="headerlink" title="第一角色原理"></a>第一角色原理</h3><p>站在第一角色上思考、讲话、做事，是做正确的事、少犯错误保障。</p>
-<p>工作理念，管理技能，</p>
-<p>内心的纠结和矛盾大多事角色认知的冲突！</p>
-<p>人生的很多错误都是角色认知的错误！</p>
-<p>职场上的大多数错误都是角色认知的错误！</p>
-<p>管理着的第一角色是“人”的工作–先人后事</p>
-<p>计划、组织、指挥、控制（事前、事中、事后）</p>
-<p>721法则（人才培养）</p>
-<h3 id="任职资格"><a href="#任职资格" class="headerlink" title="任职资格"></a>任职资格</h3><p>薪酬、职业发展、</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/8c4f/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/8c4f/" class="post-title-link" itemprop="url">FreeSWITCH权威指南（一）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-11 11:19:13" itemprop="dateCreated datePublished" datetime="2021-08-11T11:19:13+08:00">2021-08-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-22 18:07:34" itemprop="dateModified" datetime="2023-03-22T18:07:34+08:00">2023-03-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FreeSWITCH/" itemprop="url" rel="index"><span itemprop="name">FreeSWITCH</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>517</span>
+              <span>607</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -758,102 +247,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="名词"><a href="#名词" class="headerlink" title="名词"></a>名词</h1><table>
-<thead>
-<tr>
-<th>简称</th>
-<th>全称</th>
-<th>释义</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>VoIP</td>
-<td>Voice over IP</td>
-<td>承载于IP网上的语音通信</td>
-<td></td>
-</tr>
-<tr>
-<td>VoLTE</td>
-<td>Voice over LTE</td>
-<td>LTE网络直传</td>
-<td>LTE网络环境下的VoIP业务</td>
-</tr>
-<tr>
-<td>LTE</td>
-<td>Long Term Evolution</td>
-<td>长期演进技术</td>
-<td>电信中用于手机及数据终端的高速无线通讯标准</td>
-</tr>
-<tr>
-<td>SIP</td>
-<td>Session Initiation Protocol</td>
-<td>会话初始协议</td>
-<td>IP电话信令协议</td>
-</tr>
-<tr>
-<td>PSTN</td>
-<td>Public Switched Telephone Network</td>
-<td>公共交换电话网</td>
-<td>我们日常打电话所使用的电话网络</td>
-</tr>
-<tr>
-<td>PCM</td>
-<td>Pulse Code Modulation</td>
-<td>脉冲编码调制</td>
-<td>是一种通用的将模拟信号转换成以0，1表示的数字信号方法</td>
-</tr>
-<tr>
-<td>RTP</td>
-<td>Real-time Transport Protocol</td>
-<td>实时传输协议</td>
-<td></td>
-</tr>
-<tr>
-<td>IMS</td>
-<td>IP Multimedia Subsystem</td>
-<td>IP多媒体子系统</td>
-<td>基于IP网提供语音及多媒体业务的网络体系架构</td>
-</tr>
-<tr>
-<td>HLR</td>
-<td>Home Location Register</td>
-<td>归属位置寄存器</td>
-<td></td>
-</tr>
-<tr>
-<td>VLR</td>
-<td>Visitor Location Register</td>
-<td>拜访位置寄存器</td>
-<td></td>
-</tr>
-<tr>
-<td>MSC</td>
-<td>Mobile Switch Center</td>
-<td>移动交换中心</td>
-<td></td>
-</tr>
-<tr>
-<td>PBX</td>
-<td>Private Branch e Xchange</td>
-<td>专用小交换机</td>
-<td></td>
-</tr>
-<tr>
-<td>CTI</td>
-<td>Computer Telephony Integration</td>
-<td>计算机电话集成</td>
-<td></td>
-</tr>
-</tbody></table>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/8c4f/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p><strong>RPO（Recovery Point Objective）：即数据恢复点目标，</strong>主要指的是业务系统所能容忍的数据丢失量，指灾难发生后，从IT系统宕机导致业务停顿之时开始，到IT系统恢复至可以支持各部门运作、恢复运营之时，此两点之间的时间段称为RTO，广道容灾备份系统RTO达到分钟级。</p>
+<p><strong>RTO（Recovery Time Objective）：即恢复时间目标，</strong>主要指的是所能容忍的业务停止服务的最长时间，也就是从灾难发生到业务系统恢复服务功能所需要的最短时间周期。</p>
+<p>指从系统和应用数据而言，要实现能够恢复至可以支持各部门业务运作，系统及生产数据应恢复到怎样的更新程度，这种更新程度可以是上一周的备份数据，也可以是上一次交易的实时数据。</p>
+<p>RPO针对的是数据丢失，而RTO针对的是服务丢失，二者没有必然的关联性。RTO和RPO的确定必须在进行风险分析和业务影响分析后根据不同的业务需求确定。对于不同企业的同一种业务，RTO和RPO的需求也会有所不同。</p>
+<p><img src="https://s2.loli.net/2021/12/31/ufIy6DrP84UbohT.png" alt="img"></p>
+<p>系统选择</p>
+<p>在选择容灾系统的构造时，还要建立多层次的广域网络故障切换机制。本地的高可用系统指在多个服务器运行一个或多种应用的情况下，应确保任意服务器出现任何故障时，其运行的应用不能中断，应用程序和系统应能迅速切换到其它服务器上运行，即本地系统集群和热备份。</p>
+<p>整的应用容灾，既要包含本地系统的安全机制、远程的数据复制机制，还应具有广域网范围的远程故障切换能力和故障诊断能力。</p>
+<p>也就是说，一旦故障发生，系统要有强大的故障诊断和切换策略制订机制，确保快速的反应和迅速的业务接管。实际上，广域网范围的高可用能力与本地系统的高可用能力应形成一个整体，实现多级的故障切换和恢复机制，确保系统在各个范围的可靠和安全。</p>
+
       
     </div>
 
@@ -872,7 +275,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e1c4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/59af/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -886,7 +289,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/e1c4/" class="post-title-link" itemprop="url">FreeSWITCH常用命令</a>
+            <a href="/posts/59af/" class="post-title-link" itemprop="url">cmd执行程序时容易卡住以及解决方式</a>
         </h2>
 
         <div class="post-meta">
@@ -896,24 +299,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-08-09 18:32:38" itemprop="dateCreated datePublished" datetime="2021-08-09T18:32:38+08:00">2021-08-09</time>
+              <time title="创建时间：2021-12-30 10:56:19" itemprop="dateCreated datePublished" datetime="2021-12-30T10:56:19+08:00">2021-12-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-17 09:22:29" itemprop="dateModified" datetime="2023-03-17T09:22:29+08:00">2023-03-17</time>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FreeSWITCH/" itemprop="url" rel="index"><span itemprop="name">FreeSWITCH</span></a>
-                </span>
-            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -921,7 +315,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>267</span>
+              <span>251</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -940,15 +334,423 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="freeswitch常用命令"><a href="#freeswitch常用命令" class="headerlink" title="freeswitch常用命令"></a>freeswitch常用命令</h1><h3 id="Linux环境"><a href="#Linux环境" class="headerlink" title="Linux环境"></a>Linux环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动</span></span><br><span class="line">freeswitch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动并后台运行</span></span><br><span class="line">freeswitch -nc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入客户端</span></span><br><span class="line">fs_cli</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出客户端：</span></span><br><span class="line">/exit， /bye, /quit Ctrl+D</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止：</span></span><br><span class="line">freeswitch -stop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看freeswitch的端口情况：</span></span><br><span class="line">netstat -anp|grep freeswitch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前注册的用户数量：</span></span><br><span class="line">sofia status profile internal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看坐席是否注册 （1001为分机号）</span></span><br><span class="line">sofia status profile internal reg 1001</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用fs_cli进行呼叫,其中&amp;echo会把听到的声音返回给发出者：</span></span><br><span class="line">originate user/1001 &amp;<span class="built_in">echo</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询网关状态: sofia status profile <span class="built_in">local</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/e1c4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h3 id="手动解决"><a href="#手动解决" class="headerlink" title="手动解决"></a>手动解决</h3><p><strong>windows cmd-&gt;属性-&gt;选项-&gt;编辑选项</strong></p>
+<p><strong>取消 快速编辑模式</strong></p>
+<p>cmd默认开启了“快速编辑模式”，只要当鼠标点击cmd任何区域时，就自动进入了编辑模式，之后的程序向控制台输入内容甚至后台的程序都会被阻塞。</p>
+<p>我们在控制台里面回车或者右键鼠标后，自动退出了编辑模式。因此，控制又恢复输出内容，服务端又正常了。</p>
+<p>选择快速编辑模式的时候,鼠标不小心点到cmd某个位置,都可能让正在运行的进程都卡住，直到按下回车后，会跳出一堆。</p>
+<h3 id="自动解决"><a href="#自动解决" class="headerlink" title="自动解决"></a>自动解决</h3><p>拖动或点击CMD窗口造成程序阻塞，这是因为windows默认cmd窗口启用快速编辑模式，关闭即可。在bat文件中关闭cmd窗口的快速编辑模式，bat文件如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">reg add HKEY_CURRENT_USER\Console /v QuickEdit /t REG_DWORD /d 00000000 /f</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a4c2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/a4c2/" class="post-title-link" itemprop="url">RCA示例</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-26 14:00:26" itemprop="dateCreated datePublished" datetime="2021-11-26T14:00:26+08:00">2021-11-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="通过示例和方法说明了解根本原因分析"><a href="#通过示例和方法说明了解根本原因分析" class="headerlink" title="通过示例和方法说明了解根本原因分析"></a>通过示例和方法说明了解根本原因分析</h1><p>要理解根本原因分析，最简单的方法是考虑常见问题。如果我们生病了并在工作时呕吐，我们会去看医生，让医生找出病根。如果我们的汽车抛锚了，我们会让汽修师找出问题的根本原因。如果我们的业务在某个地区的业绩超出或低于预期，我们会尝试找出原因。</p>
+<p>在以上每个例子中，我们都可以通过简单的方法来应付表面的问题。如果不想在上班时呕吐，我们可以待在家中并准备好痰盂。如果要在私家车无法启动时外出，我们可以坐公交车，把坏车留在家中。但这些办法治标而不治本 — 需要治疗的肠胃感染或者需要维修的交流发电机得不到处理。要解决或分析一个问题，我们必须进行根本原因分析，找出确切的原因以及解决方法。</p>
+<p>本文将定义根本原因分析，简要介绍常用技巧，演示模板方法，并提供一些示例。</p>
+<h2 id="好的。那什么是根本原因分析呢？"><a href="#好的。那什么是根本原因分析呢？" class="headerlink" title="好的。那什么是根本原因分析呢？"></a>好的。那什么是根本原因分析呢？</h2><p>根本原因分析 (RCA) 指为了确定适合的解决方案而探查问题根本原因的过程。RCA 认为，与解决临时问题和被动应对相比，以系统化方式防范和解决基础问题可以让效果得到显著改善。</p>
+<p>根本原因分析可以综合运用一系列原理、技巧和方法来找出某个事件或趋势的根本原因。RCA 可以透过表层的因果关系，显示流程或系统最初在哪个环节出现故障或造成问题。</p>
+<h3 id="目标和优势"><a href="#目标和优势" class="headerlink" title="目标和优势"></a>目标和优势</h3><p>根本原因分析的<strong>第一个目标</strong>是发现问题或事件的根本原因。</p>
+<p><strong>第二个目标</strong>是全面了解如何修复、弥补根本原因内的深层问题，以及如何吸取教训。</p>
+<p><strong>第三个目标</strong>是将从分析中获得的见解应用到实践中，从而以系统化方式预防各种问题，或者再次运用成功的做法。</p>
+<p>分析的价值只能通过应用来体现，因此 RCA 的第三个目标十分重要。我们还可以通过 RCA 来修改核心流程或解决系统问题，从而避免将来可能出现的事故。举例来说，在橄榄球运动员出现脑震荡时，我们不仅仅要治疗症状，还可以通过根本原因分析来建议运动员佩戴头盔，减少再次出现脑震荡的风险。</p>
+<p>对症治疗看起来非常有效。解决大量的问题会让人获得成就感。但如果不切实诊断出问题的根本原因，我们就可能一而再，再而三地遇到相同的问题。新闻编辑不仅仅要将每一个缺失的逗号补上，还需要对新闻作者进行培训，让他们知道如何在日后的新闻稿件中正确使用逗号，从而防止类似的问题。</p>
+<h3 id="核心原则"><a href="#核心原则" class="headerlink" title="核心原则"></a>核心原则</h3><p>要有效进行根本原因分析，我们必须遵循几条核心原则，其中的一些原则是显而易见的。这些原则不仅有助于确保分析质量，还可以帮助分析师获得利益相关者、客户或患者的信任和支持。</p>
+<ul>
+<li>您的重点应该是针对根本原因进行纠正和弥补，而不是仅仅消除症状。</li>
+<li>但对症治疗可以在短期内缓解症状，您不应该忽视其重要性。</li>
+<li>您需要认识到，问题可能有多个根本原因，这种情况经常出现。</li>
+<li>专注于事情如何发生以及为何发生，而不是应该归咎于谁。</li>
+<li>应该讲究策略，找出实实在在的因果证据来支持自己的根本原因结论。</li>
+<li>提供充足的信息作为更正措施的依据。</li>
+<li>考虑如何在日后防范（或复制）根本原因。</li>
+</ul>
+<p>以上原则表明：分析深层次的问题或原因时，我们必须采用从整体出发，采取全面的策略。我们不但要发现根本原因，还应该努力提供相关背景和信息，以便制定决策或行动方案。记住：高质量的分析是可以付诸行动的分析。</p>
+<h2 id="如何进行有效的根本原因分析：技巧和方法"><a href="#如何进行有效的根本原因分析：技巧和方法" class="headerlink" title="如何进行有效的根本原因分析：技巧和方法"></a>如何进行有效的根本原因分析：技巧和方法</h2><p>我们可以在进行根本原因分析时选用大量的技巧和策略，下文并未列出所有技巧和策略。但我们将介绍一些最常用、适用范围最广泛的技巧。</p>
+<h3 id="5-个为什么"><a href="#5-个为什么" class="headerlink" title="5 个为什么"></a>5 个为什么</h3><p>进行根本原因分析时，一种较为常见的技巧是 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/5_Whys">5 问法</a>。我们也可以将这种方法视为顽皮宝宝的方法。得到每个问题（“为什么”）的答案后，继续提出更深入的问题（“好，那为什么”）。儿童能够有效地进行根本原因分析，这让很多人感到惊讶。根据常识，我们可以通过大约五个“为什么”找到最根本的原因 — 但有时只需要问两次，有时需要问 50 次。</p>
+<p><strong>示例：</strong>我们回到刚才的橄榄球运动员脑震荡示例。首先，我们的运动员会反映一个问题：为什么我的头痛这么严重？这是第一个“为什么”。<br>第一个答案：因为我视物模糊。<br><strong>第二个“为什么”：</strong>为什么您视物模糊？<br>第二个答案：因为我的头撞到了地面。<br><strong>第三个“为什么”：</strong>为什么您的头撞到了地面？<br>第三个答案：我在对手的阻截下倒地，头重重地撞到地面。<br><strong>第四个“为什么”：</strong>为什么撞到地面后会这么痛？<br>第四个答案：因为我没有佩戴头盔。<br><strong>第五个“为什么”：</strong>为什么您没有佩戴头盔？<br>第五个“为什么”：因为更衣室没有足够多的头盔。</p>
+<p>啊哈。通过这五个问题，我们发现脑震荡的根本原因最有可能是头盔数量不足。今后，为了防止此类脑震荡的风险，我们可以确保每名橄榄球运动员都有一顶头盔。（当然，佩戴头盔也不能保证脑震荡一定不会发生。因此要多加小心！）</p>
+<p>这 5 个问题所起的作用是避免我们进行无根据的假设。针对递进式问题探寻详细的答复，答案会在每一轮变得更加明确、更加精炼。在理想情况下，最后一个问题会揭示出某个失败的过程，此时我们就能够对此过程采取更正措施。</p>
+<h3 id="变更分析-x2F-事件分析"><a href="#变更分析-x2F-事件分析" class="headerlink" title="变更分析&#x2F;事件分析"></a>变更分析&#x2F;事件分析</h3><p>在进行根本原因分析时，另一个有用的方法是仔细分析事件发生之前的各种变更。<br>如果存在大量可能的原因，这种方法会非常管用。我们的调查不应该局限于出现问题的具体日期或时刻，而是应该覆盖一个更长的时期，以便获得历史背景。</p>
+<p>**1.**首先，我们列出可能导致某个事件发生的所有潜在原因。这应该包括所有有害、有益及良性变更。</p>
+<p><strong>示例：</strong>我们假设，要分析的事件是我们在纽约市的销售额在某一天出奇地高，我们想知道这个销售额背后的原因，以便重现这样的事件。首先，我们列出每个主要客户的每个接触点、每个事件、每个可能相关的变更。</p>
+<p>**2.**接下来，我们根据自己对每个变更或事件的影响力对其进行分类。我们的类别可以是“内部&#x2F;外部”、“自有&#x2F;非自有”等等。</p>
+<p><strong>示例：</strong>在我们的“日销售额超高”示例中，我们开始梳理出一些事情，例如“销售代表进行了关于社会影响的新幻灯片演示”（内部），“季度最后一天”（外部）或“春季第一天”（外部）等。</p>
+<p>**3.**第三步，我们逐个分析每个事件，确定该事件是无关因素、相关因素、促成因素，还是可能的根本原因。大部分分析工作都集中在这个阶段，我们也可以在此阶段使用其他方法，例如“5 问法”。</p>
+<p><strong>示例：</strong>我们在分析中发现，那些制作精美的新销售幻灯片其实是无关因素，而那个时间节点（季度最后一天）肯定是一个促成因素。但可能性最大的根本原因却是另一个因素：该地区的销售主管搬到了车程更近的新住所，因此从该季度的最后一个星期开始，她与客户会面的时间比以往早了 10 分钟。</p>
+<p>**4.**第四步，我们研究怎样才能复制根本原因或者对其采取纠正措施。</p>
+<p><strong>示例：</strong>让每个人都搬家不太现实，但我们的组织决定：如果销售代表能够在季度的最后一星期每天提前十分钟与客户会面，他们就有可能复制这个根本原因并取得成功。</p>
+<h3 id="因果鱼骨图"><a href="#因果鱼骨图" class="headerlink" title="因果鱼骨图"></a>因果鱼骨图</h3><p>另一种常见的方法是创建<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Ishikawa_diagram">鱼骨图（又称 Ishikawa 图）</a>来对因果关系进行可视化呈现。这种方法有助于发现问题的可能原因；根据此方法，我们沿着类别分支路径找到各种潜在原因并最终确定根本原因。它与 5 问法类似但直观程度远高于 5 问法。</p>
+<p>通常，我们先把问题放在图形中部（鱼的脊柱），然后通过头脑风暴找出几个类别的原因，将这些原因放到从主线散发出的分支（鱼骨架的肋骨）上。这些类别非常宽泛，可能包括“人”或者“环境”等。划分类别后，我们将其细分为更小的群组。举例来说，在“人”下方，我们可以考虑“领导”、“职员”或“培训”等潜在的根本原因。</p>
+<p>我们越来越深入地分析潜在的原因和次级原因，对每个分支提出问题，并在这个过程中越来越接近问题的来源。通过这种方法，我们可以去除无关类别，确定相关因素，并且可能找到根本原因。为简明起见，请在创建图表前仔细考虑要使用的类别。</p>
+<p><strong>创建鱼骨图时可以考虑的常见类别：</strong></p>
+<ul>
+<li>机器（设备，技术）</li>
+<li>方法（流程）</li>
+<li>物料（包括原料、消耗品和信息）</li>
+<li>人&#x2F;智力（体力或脑力劳动）</li>
+<li>测量（检查）</li>
+<li>任务（目的，预期）</li>
+<li>管理&#x2F;财力（领导）</li>
+<li>维护</li>
+<li>产品（或服务）</li>
+<li>价格</li>
+<li>推广（营销）</li>
+<li>流程（系统）</li>
+<li>人员（员工）</li>
+<li>实物证据</li>
+<li>绩效</li>
+<li>场所（地点，环境）</li>
+<li>供应方</li>
+<li>技能</li>
+</ul>
+<h3 id="关于如何有效进行根本原因分析的提示"><a href="#关于如何有效进行根本原因分析的提示" class="headerlink" title="关于如何有效进行根本原因分析的提示"></a>关于如何有效进行根本原因分析的提示</h3><p>通过提问来澄清信息并接近答案。越是针对每个可能的原因提出深入的问题，我们就越容易找到根本原因。一旦认为自己找到了问题的根本原因（而不仅仅是另一种表面现象），我们可以提出更多问题：为什么说这个原因（而非其他原因）是根本原因？我们如何解决根本原因，防止问题再次发生？使用简单的问题，例如“为什么？”“如何？”以及“那意味着什么”来寻找理解问题的途径。</p>
+<h3 id="进行团队合作并寻求新颖的观点"><a href="#进行团队合作并寻求新颖的观点" class="headerlink" title="进行团队合作并寻求新颖的观点"></a>进行团队合作并寻求新颖的观点</h3><p>无论是单个合作伙伴还是由同事组成的整个团队，不同的视角总是有助于我们更快地找到解决方案，还可以打消我们的偏见。获取其他人的意见也有助于发掘更多的观点，帮助我们验证自己的假设。</p>
+<h3 id="为将来的根本原因分析制定计划"><a href="#为将来的根本原因分析制定计划" class="headerlink" title="为将来的根本原因分析制定计划"></a>为将来的根本原因分析制定计划</h3><p>进行根本原因分析的时候，我们必须注意流程本身。做好笔记。提出关于分析流程本身的问题。根据您的具体业务需求和环境，确定是否存在某种最适合您的技术或方法。</p>
+<h3 id="别忘了也对成功事件进行根本原因分析"><a href="#别忘了也对成功事件进行根本原因分析" class="headerlink" title="别忘了也对成功事件进行根本原因分析"></a>别忘了也对成功事件进行根本原因分析</h3><p>根本原因分析是确定故障环节的好方法。我们常常使用根本原因分析来诊断问题，但它在确定成功的根本原因方面同样有效。在成功实现目标、超额或者提前完成任务时，查找成功的根本原因往往是有益的做法。这种分析有助于我们提升关键因素的优先级并主动采取保护措施，进而有可能将一个领域的成功复制到另一个领域。 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/3107/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/3107/" class="post-title-link" itemprop="url">RCA根本原因分析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-24 17:52:19" itemprop="dateCreated datePublished" datetime="2021-11-24T17:52:19+08:00">2021-11-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="RCA（根本原因分析）的重要步骤"><a href="#RCA（根本原因分析）的重要步骤" class="headerlink" title="RCA（根本原因分析）的重要步骤"></a>RCA（根本原因分析）的重要步骤</h1><h3 id="01-根本原因分析"><a href="#01-根本原因分析" class="headerlink" title="01 根本原因分析"></a>01 根本原因分析</h3><p>Let’s look now at an important tool used in continuous improvement efforts. The tool is Root Cause Analysis (RCA). We will cover steps you can take when using this tool to help solve problems and resolve issues.</p>
+<p>现在，我们一起来看看用在持续改善方面的一个非常重要的工具：RCA（根本原因分析）。在这篇文章里，我们会涵盖一些在使用RCA来解决问题时可以采用的步骤。</p>
+<p>We should note that Root Cause Analysis is a way of finding a fundamental cause for a problem not just a ways to address a symptom.</p>
+<p>我们应该注意一下，RCA（根本原因分析）是一个找出问题根本原因的方法，而不单单是是用来处理某个症状的方法。</p>
+<p>For example, imagine you are manufacturing plastic cups and scrap 100 of them in a day.</p>
+<p>举例，假设你生产塑料杯，而在一天内会有100个塑料杯会报废。</p>
+<p>A cause of this could be that the technician did not maintain equipment properly. The root cause could be that the maintenance procedure is not clear and training did not cover maintenance.</p>
+<p>造成这种情况出现的原因可能是：技术人员没有对设备进行适当的维护，而问题的根本原因则可能是设备维护程序不清晰，以及培训并没有涉及到设备维护。</p>
+<p>To fix the problem properly you must maintain the equipment and improve the overall process of documentation and training.</p>
+<p>为了妥善解决问题，你得对设备进行维护，并对文件和培训的整个过程进行改善。</p>
+<p>We should also note that Root Cause Analysis when done properly is an iterative process to help with continuous improvement in an organization.</p>
+<p>我们还应该注意到，正确完成RCA（根本原因分析），是一个帮助组织进行持续改进的反复过程。</p>
+<p>Root Cause Analysis can use approaches that depend on the application. These can be quality industrial applications, safety concerns, process concerns, business processes, and systems approaches.</p>
+<p>RCA（根本原因分析），可以使用基于实际案例的方法，可以是质量方面的行业应用、安全问题、流程问题、业务流程，以及系统方法。</p>
+<h3 id="02-RCA的基本原则"><a href="#02-RCA的基本原则" class="headerlink" title="02 RCA的基本原则"></a>02 RCA的基本原则</h3><p>Here are some of the general best practices for Root Cause Analysis:</p>
+<p>下面是一些RCA（根本原因分析）的常见最佳做法：</p>
+<p>· Make the aim of Root Cause Analysis to determine how to fix a particular problem and other related problems.</p>
+<p>将RCA（根本原因分析）的目标设定为：确定如何处理特定的问题，以及与之相关的问题。</p>
+<p>· Use Root Cause Analysis in a systematic way.</p>
+<p>用系统性的方法运用RCA（根本原因分析）。</p>
+<p>· Remember a problem can have more than one root cause.</p>
+<p>要注意，一个问题可能有多个根本原因。</p>
+<p>· Keep cost in mind when determining a fix to a problem.</p>
+<p>在确定问题的解决方案时，要有成本意识。</p>
+<p>· Keep in mind a fix needs to be sustained.</p>
+<p>请牢记，需要确认应急措施。</p>
+<p>· Understand that Root Cause Analysis can cause a change to a culture and resistance from those who will implement the change.</p>
+<p>要理解：RCA（根本原因分析），会让文化产生变革，并会导致变革实施者的抵制。</p>
+<h3 id="03-RCA的步骤"><a href="#03-RCA的步骤" class="headerlink" title="03 RCA的步骤"></a>03 RCA的步骤</h3><p>Here are some steps to taking action based on Root Cause Analysis:</p>
+<p>基于RCA（根本原因分析），以下是可以采取行动的一些步骤：</p>
+<p>1.Define the problem </p>
+<p>定义问题</p>
+<p>2.Collect data </p>
+<p>收集数据</p>
+<p>3.Ask why. This means determining the factors that led to the problem.</p>
+<p>询问原因。该步骤意味着要确定导致问题的因素。</p>
+<p>4.Determine which factors are root causes and not just symptoms.</p>
+<p>需要确定哪些因素是导致问题的根本原因，而不单单是征兆。</p>
+<p>5.Identify corrective actions.</p>
+<p>确定纠正措施。</p>
+<p>6.Identify solutions that will help the problem from recurring and do not cause other problems.</p>
+<p>确定问题的解决方案，避免问题重现，并导致其他问题的出现。</p>
+<p>7.Implement the solution.</p>
+<p>实施解决方案。</p>
+<p>8.Determine if you can use this solution with other problems.</p>
+<p>确认该方案可否用来解决其他的问题。</p>
+<h3 id="04-更多准则"><a href="#04-更多准则" class="headerlink" title="04 更多准则"></a>04 更多准则</h3><p>Remember that Root Cause Analysis is one of the basic tools you should use for continual improvement. Your goal using it is to understand an issue and what is causing it. You can then resolve the issue, not repeat the problem, and improve a process.</p>
+<p>请记住：RCA（根本原因分析），是应该被用于持续改善的最基本的工具之一。使用RCA（根本原因分析），是用来理解问题，以及导致该问题出现的原因的。后续，你可以解决问题，不让问题重现，并对流程进行改进。</p>
+<p>Here are some guidelines:</p>
+<p>以下是一些准则：</p>
+<p>· Use Root Cause Analysis as soon as you recognize a problem.</p>
+<p>一旦识别出问题，请立即使用RCA（根本原因分析）。</p>
+<p>· Do not wait until a problem becomes severe.</p>
+<p>不要等到问题变得很严重。</p>
+<p>· Use Root Cause Analysis in an iterative way.</p>
+<p>要反复使用RCA（根本原因分析）。</p>
+<p>· Give priority to the problem that is most urgent.</p>
+<p>对最紧急的问题进行优先处理。</p>
+<p>· Be precise.</p>
+<p>要一丝不苟。</p>
+<p>· Pick a problem that is solvable.</p>
+<p>选择可以解决的问题。</p>
+<p>· Use the 5 Whys technique.</p>
+<p>使用5WHY的方法。</p>
+<h3 id="05-沟通纠正措施"><a href="#05-沟通纠正措施" class="headerlink" title="05 沟通纠正措施"></a>05 沟通纠正措施</h3><p>When you implement a corrective action communicate to all involved the:</p>
+<p>在实施纠正措施时，请与所有相关的人员就以下3个方面进行沟通：</p>
+<p>· reason for the action.</p>
+<p>实施纠正措施的原因。</p>
+<p>· benefits of the action.</p>
+<p>实施纠正措施的好处。</p>
+<p>· time needed to implement.</p>
+<p>实施纠正措施所需要的时间。</p>
+<p>After implementing a solution remember to iterate.</p>
+<p>实施解决方案之后，要记住要重复进行。</p>
+<h3 id="06-要分享最佳做法"><a href="#06-要分享最佳做法" class="headerlink" title="06 要分享最佳做法"></a>06 要分享最佳做法</h3><p>Here are some related best practices:</p>
+<p>以下是相关的一些最佳做法：</p>
+<p>·Ask if the solution is effective.</p>
+<p>询问解决方案是否有效。</p>
+<p>·Review the results of the action.</p>
+<p>回顾行动的结果。</p>
+<p>·Modify the action as needed.</p>
+<p>如有必要，对行动进行更改。</p>
+<p>·Recognize you may need a different approach if the problem continues.</p>
+<p>如果问题还是继续存在，要意识到可以采用不同的方法。</p>
+<p>·Update procedures.</p>
+<p>对程序进行更新。</p>
+<p>After you update procedures check that everyone is following the procedures. </p>
+<p>在程序更新后，请检查确认下是否所有人都遵守程序了。</p>
+<p>In time revisit the issue to make sure the fix is still working and everyone is following the procedures properly. </p>
+<p>要及时继续讨论问题，确保结果还是有效的，每个人都在正确地遵守程序。</p>
+<p>Remember that training could be involved once you determine a resolution of a root cause problem.</p>
+<p>记住，一旦确定下导致问题的根本原因的解决方案，就可能会涉及到培训。</p>
+<p>Remember also that when you do a root cause analysis the next step is critical. </p>
+<p>还要记住，在做根本原因分析时，下一个步骤是非常重要的。</p>
+<p>You must have an effective corrective action plan and a preventive action plan too. </p>
+<p>你得拥有有效的纠正性措施计划，以及预防性措施计划。</p>
+<p>Make sure your organization follows the plan, provides proper documentation, trains all involved, and continuously follows up on additional improvements to the process.</p>
+<p>要确保组织落实了计划，请提供恰当的文件，对所有的相关人员进行培训，并持续跟踪过程中其他方面的改进。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6890/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/6890/" class="post-title-link" itemprop="url">MySQL随机取时间</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-23 18:53:14" itemprop="dateCreated datePublished" datetime="2021-11-23T18:53:14+08:00">2021-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>191</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="随机生成日期、时间"><a href="#随机生成日期、时间" class="headerlink" title="随机生成日期、时间"></a>随机生成日期、时间</h3><p>用mysql自带函数生成随机日期&#x2F;时间</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 取<span class="number">12</span>到<span class="number">24</span>的随机整数，包括<span class="number">12</span>到<span class="number">24</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">FLOOR</span>(<span class="number">12</span><span class="operator">+</span>(RAND()<span class="operator">*</span><span class="number">13</span>)); </span><br><span class="line"></span><br><span class="line"># 取<span class="number">0</span><span class="number">-24</span>之间的随机数，不够<span class="number">2</span>位的前补<span class="number">0</span></span><br><span class="line"><span class="keyword">SELECT</span> LPAD(<span class="built_in">FLOOR</span>(<span class="number">0</span> <span class="operator">+</span> (RAND() <span class="operator">*</span> <span class="number">23</span>)),<span class="number">2</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"># 给用户赋一个随机创建日期，年份为<span class="number">2015</span><span class="number">-2015</span></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(</span><br><span class="line">    <span class="built_in">FLOOR</span>(<span class="number">2015</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">1</span> )),</span><br><span class="line">    <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">    LPAD(<span class="built_in">FLOOR</span>(<span class="number">10</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">2</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">    <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">    LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">25</span> )),<span class="number">2</span>,<span class="number">0</span> )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 给用户赋一个随机创建时间，年份为<span class="number">2019</span></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(</span><br><span class="line">            <span class="built_in">FLOOR</span>(<span class="number">2019</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">1</span> )),</span><br><span class="line">            <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">0</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">12</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">25</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27; &#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">23</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27;:&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">59</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27;:&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">59</span> )),<span class="number">2</span>,<span class="number">0</span> ) </span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数说明"><a href="#函数说明" class="headerlink" title="函数说明"></a>函数说明</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 可以在<span class="number">0</span>和<span class="number">1</span>之间产生一个随机数：</span><br><span class="line">RAND()</span><br><span class="line"></span><br><span class="line"># 向下取整</span><br><span class="line"><span class="built_in">FLOOR</span>(x) </span><br><span class="line"></span><br><span class="line"># 填充字符串左边</span><br><span class="line">LPAD(str,len,padstr)</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -966,7 +768,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/22/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/84/">84</a><a class="extend next" rel="next" href="/page/24/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/22/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/page/85/">85</a><a class="extend next" rel="next" href="/page/24/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1032,20 +834,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">416</span>
+          <span class="site-state-item-count">422</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1081,12 +883,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">268k</span>
+    <span title="站点总字数">273k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16:16</span>
+    <span title="站点阅读时长">16:34</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

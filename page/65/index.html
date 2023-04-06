@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/64fe/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/3f6d/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/64fe/" class="post-title-link" itemprop="url">SpringCloud Config-server</a>
+            <a href="/posts/3f6d/" class="post-title-link" itemprop="url">SpringCloud Service-producer</a>
         </h2>
 
         <div class="post-meta">
@@ -212,7 +212,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 09:26:14" itemprop="dateCreated datePublished" datetime="2019-05-20T09:26:14+08:00">2019-05-20</time>
+              <time title="创建时间：2019-05-20 09:26:48" itemprop="dateCreated datePublished" datetime="2019-05-20T09:26:48+08:00">2019-05-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -237,7 +237,108 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>197</span>
+              <span>107</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>pom.xml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>application.yml</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">port</span>: <span class="string">7003</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">instance</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">hostname</span>: <span class="string">localhost</span></span><br><span class="line">  <span class="attr">client</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">serviceUrl</span>:<span class="string"></span></span><br><span class="line">      <span class="attr">defaultZone</span>: <span class="string">http://localhost:7001/eureka/  #注册中心的地址</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">application</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">name</span>: <span class="string">service-producer  #服务的名字</span></span><br></pre></td></tr></table></figure>
+
+<p>启动类添加注解**@EnableDiscoveryClient**</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/3f6d/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/36f5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/36f5/" class="post-title-link" itemprop="url">SpringCloud Service-consumer</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-20 09:26:42" itemprop="dateCreated datePublished" datetime="2019-05-20T09:26:42+08:00">2019-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringCloud/" itemprop="url" rel="index"><span itemprop="name">SpringCloud</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>338</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -259,7 +360,7 @@
           <h3 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h3>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/64fe/#more" rel="contents">
+              <a class="btn" href="/posts/36f5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -283,7 +384,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e650/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/33cf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -297,7 +398,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/e650/" class="post-title-link" itemprop="url">SpringCloud Config-client</a>
+            <a href="/posts/33cf/" class="post-title-link" itemprop="url">SpringCloud ParentPom</a>
         </h2>
 
         <div class="post-meta">
@@ -307,7 +408,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 09:26:07" itemprop="dateCreated datePublished" datetime="2019-05-20T09:26:07+08:00">2019-05-20</time>
+              <time title="创建时间：2019-05-20 09:26:37" itemprop="dateCreated datePublished" datetime="2019-05-20T09:26:37+08:00">2019-05-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -332,7 +433,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>175</span>
+              <span>143</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -351,10 +452,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h3>
+          <h3 id="parent-pom-xml"><a href="#parent-pom-xml" class="headerlink" title="parent pom.xml"></a>parent pom.xml</h3>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/e650/#more" rel="contents">
+              <a class="btn" href="/posts/33cf/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -378,7 +479,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/87d9/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/4511/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -392,7 +493,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/87d9/" class="post-title-link" itemprop="url">SpringCloud Actuator</a>
+            <a href="/posts/4511/" class="post-title-link" itemprop="url">SpringCloud Hystrix</a>
         </h2>
 
         <div class="post-meta">
@@ -402,7 +503,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 09:26:00" itemprop="dateCreated datePublished" datetime="2019-05-20T09:26:00+08:00">2019-05-20</time>
+              <time title="创建时间：2019-05-20 09:26:31" itemprop="dateCreated datePublished" datetime="2019-05-20T09:26:31+08:00">2019-05-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -427,102 +528,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>92</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>动态刷新配置</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/87d9/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/9415/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/9415/" class="post-title-link" itemprop="url">SpringBoot项目创建</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-20 09:25:36" itemprop="dateCreated datePublished" datetime="2019-05-20T09:25:36+08:00">2019-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>784</span>
+              <span>882</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -541,10 +547,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="new-project-选择spring-initializr"><a href="#new-project-选择spring-initializr" class="headerlink" title="new -project 选择spring initializr"></a>new -project 选择spring initializr</h3>
+          <p>断路器模式源于Martin Fowler的Circuit Breaker一文。“断路器”本身是一种开关装置，用于在电路上保护线路过载，当线路中有电器发生短路时，“断路器”能够及时的切断故障电路，防止发生过载、发热、甚至起火等严重后果。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/9415/#more" rel="contents">
+              <a class="btn" href="/posts/4511/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -568,7 +574,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/206f/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/902c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -582,7 +588,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/206f/" class="post-title-link" itemprop="url">SpringBoot线程池</a>
+            <a href="/posts/902c/" class="post-title-link" itemprop="url">SpringCloud Eureka-server</a>
         </h2>
 
         <div class="post-meta">
@@ -592,7 +598,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 09:25:31" itemprop="dateCreated datePublished" datetime="2019-05-20T09:25:31+08:00">2019-05-20</time>
+              <time title="创建时间：2019-05-20 09:26:26" itemprop="dateCreated datePublished" datetime="2019-05-20T09:26:26+08:00">2019-05-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -607,7 +613,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+                  <a href="/categories/SpringCloud/" itemprop="url" rel="index"><span itemprop="name">SpringCloud</span></a>
                 </span>
             </span>
 
@@ -617,7 +623,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>38</span>
+              <span>130</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -636,12 +642,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>TaskPoolConfig.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableAsync</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TaskPoolConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean(&quot;taskExecutor&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Executor <span class="title function_">taskExecutor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ThreadPoolTaskExecutor</span> <span class="variable">executor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadPoolTaskExecutor</span>();</span><br><span class="line">        executor.setCorePoolSize(<span class="number">10</span>);</span><br><span class="line">        executor.setMaxPoolSize(<span class="number">20</span>);</span><br><span class="line">        executor.setQueueCapacity(<span class="number">200</span>);</span><br><span class="line">        executor.setKeepAliveSeconds(<span class="number">60</span>);</span><br><span class="line">        executor.setThreadNamePrefix(<span class="string">&quot;taskExecutor-&quot;</span>);</span><br><span class="line">        executor.setRejectedExecutionHandler(<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>.CallerRunsPolicy());</span><br><span class="line">        <span class="keyword">return</span> executor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ThreadPoolTaskExecutor taskExecutor;</span><br></pre></td></tr></table></figure>
-
+          <h3 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/902c/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -659,7 +668,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/64/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><span class="page-number current">65</span><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/84/">84</a><a class="extend next" rel="next" href="/page/66/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/64/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><span class="page-number current">65</span><a class="page-number" href="/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/page/85/">85</a><a class="extend next" rel="next" href="/page/66/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -725,20 +734,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">416</span>
+          <span class="site-state-item-count">422</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -774,12 +783,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">268k</span>
+    <span title="站点总字数">273k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16:16</span>
+    <span title="站点阅读时长">16:34</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

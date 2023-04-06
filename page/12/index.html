@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/7ae/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/c58c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/7ae/" class="post-title-link" itemprop="url">GC (Allocation Failure)日志分析</a>
+            <a href="/posts/c58c/" class="post-title-link" itemprop="url">Linux crontab定时任务</a>
         </h2>
 
         <div class="post-meta">
@@ -212,287 +212,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-09-08 09:53:20" itemprop="dateCreated datePublished" datetime="2022-09-08T09:53:20+08:00">2022-09-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在分析gc日实例志之前，我们先通过一条《深入理解java虚拟机》一书中的一个例子gc日志来回顾一下gc日志的基本知识，下面是一条gc日志：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">33.125：[GC[DefNew: 3324k-&gt;152k(3712k), 0.0025925 secs] 3324k&gt;152k(11904k),0.0031680 secs]</span><br></pre></td></tr></table></figure>
-
-<p>从左至右，各个信息的意思为：</p>
-<ul>
-<li><p>33.125： 自虚拟机启动以来经过的秒数，单位为秒；</p>
-</li>
-<li><p>GC： 垃圾收集的停顿类型为不需要STW（Stop The World ）。如果是Full GC说明发生了STW。如果是Full GC (System)说明是调用System.gc()方法所触发的收集。</p>
-</li>
-<li><p>DefNew：表示GC发生的区域在新生代。这个名称和所使用的收集器密切相关。可以有Tenured、Perm、ParNew、PSYoungGen等等。其中hotspot虚拟机使用的是PSYoungGen代表新生代</p>
-</li>
-<li><p>3324k-&gt;152k(3712k)：GC前该区域（DefNew）已使用容量-&gt;GC后该区域已使用容量（该内存区域总容量）</p>
-</li>
-<li><p>0.0025925 secs：该内存区域（DefNew）GC所占用的时间。</p>
-</li>
-<li><p>3324k-&gt;152k(11904k)：GC前Java堆已使用容量-&gt;GC后Java堆已使用容量（Java堆总容量）</p>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/7ae/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/f4b8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/f4b8/" class="post-title-link" itemprop="url">Github+jsDeliver+uPic搭建免费快速的个人图床</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-09-07 17:36:19" itemprop="dateCreated datePublished" datetime="2022-09-07T17:36:19+08:00">2022-09-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>624</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>经常写博文的朋友对床图肯定不陌生。使用markdown撰写博客，将图片放在床图网站生成外链统一管理，这样一份博文就可以发布在不同的平台。不过免费的床图网站有时不稳定，付费价格又都不便宜。</p>
-<p>可以使用<code>Github+jsDelivr</code>的方式搭建个人床图，既稳定又快速还免费。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/f4b8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/925d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/925d/" class="post-title-link" itemprop="url">SecureCRT屏幕输出行数设置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-09-07 10:23:04" itemprop="dateCreated datePublished" datetime="2022-09-07T10:23:04+08:00">2022-09-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>27</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-Option-–-gt-Session-Options"><a href="#1-Option-–-gt-Session-Options" class="headerlink" title="1. Option –&gt; Session Options"></a>1. Option –&gt; Session Options</h1><p><img src="https://lanniu-xuanjiao.oss-cn-hangzhou.aliyuncs.com/jlin/screenshot-20220907-104249.png"></p>
-<h1 id="2-Terminal-–-gt-Emulation"><a href="#2-Terminal-–-gt-Emulation" class="headerlink" title="2. Terminal –&gt; Emulation"></a>2. Terminal –&gt; Emulation</h1><p>在Scrollback输入你需要的最大显示行数，最大行数是128000</p>
-<p><img src="https://lanniu-xuanjiao.oss-cn-hangzhou.aliyuncs.com/jlin/screenshot-20220907-104119.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e302/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/e302/" class="post-title-link" itemprop="url">Linux修改和恢复服务器时间</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-09-06 14:34:01" itemprop="dateCreated datePublished" datetime="2022-09-06T14:34:01+08:00">2022-09-06</time>
+              <time title="创建时间：2022-10-18 13:54:20" itemprop="dateCreated datePublished" datetime="2022-10-18T13:54:20+08:00">2022-10-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -517,7 +237,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>169</span>
+              <span>174</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -536,14 +256,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="修改时间"><a href="#修改时间" class="headerlink" title="修改时间"></a>修改时间</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看时间</span></span><br><span class="line"><span class="built_in">date</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置时间</span></span><br><span class="line"><span class="comment"># 设置日期为：2022年6月22日</span></span><br><span class="line"><span class="built_in">date</span> -s 20220622</span><br><span class="line"><span class="comment"># 设置时间为：当前日期的下午14点30分22秒</span></span><br><span class="line"><span class="built_in">date</span> -s 14:30:22 </span><br><span class="line"><span class="comment"># 设置时间日期为：2022年6月22日下午14点30分22秒</span></span><br><span class="line"><span class="built_in">date</span> -s <span class="string">&quot;20220622 14:30:22&quot;</span></span><br></pre></td></tr></table></figure>
+          <h2 id="编辑cron任务模式"><a href="#编辑cron任务模式" class="headerlink" title="编辑cron任务模式"></a>编辑cron任务模式</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
 
-<h3 id="同步服务器时间"><a href="#同步服务器时间" class="headerlink" title="同步服务器时间"></a>同步服务器时间</h3><p>简单方法：用ntpdate从时间服务器更新时间（适用于小白）</p>
-<p>没有ntpdate命令时，可先输入以下代码进行安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install ntpdate</span><br></pre></td></tr></table></figure>
+<h2 id="查看任务列表"><a href="#查看任务列表" class="headerlink" title="查看任务列表"></a>查看任务列表</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -l</span><br></pre></td></tr></table></figure>
 
-<p>安装完成后输入同步时间代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ntpdate -u cn.pool.ntp.org  </span><br><span class="line"><span class="comment"># -u：从man ntpdate中可以看出-u参数可以越过防火墙与主机同步；</span></span><br></pre></td></tr></table></figure>
+<h1 id="安装Crontab"><a href="#安装Crontab" class="headerlink" title="安装Crontab"></a>安装Crontab</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum install vixie-cron </span><br><span class="line">yum install crontabs</span><br><span class="line"><span class="comment"># 注：vixie-cron软件包是cron的主程序；</span></span><br><span class="line"><span class="comment"># crontabs软件包是用来安装、卸装、或列举用来驱动 cron 守护进程的表格的程序。</span></span><br><span class="line"><span class="comment"># cron是linux的内置服务，但它不自动起来，可以用以下的方法启动、关闭这个服务：</span></span><br><span class="line">/sbin/service crond start <span class="comment">#启动服务</span></span><br><span class="line">/sbin/service crond stop <span class="comment">#关闭服务</span></span><br><span class="line">/sbin/service crond restart <span class="comment">#重启服务</span></span><br><span class="line">/sbin/service crond reload <span class="comment">#重新载入配置</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="查看Crontab状态"><a href="#查看Crontab状态" class="headerlink" title="查看Crontab状态"></a>查看Crontab状态</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service crond status</span><br><span class="line">ntsysv <span class="comment">#查看crontab服务是否已设置为开机启动</span></span><br><span class="line">chkconfig –level 35 crond on <span class="comment">#加入开机自动启动</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -563,7 +282,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/5163/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/c524/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -577,7 +296,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/5163/" class="post-title-link" itemprop="url">64位CPU为什么叫amd64，而不是intel64?</a>
+            <a href="/posts/c524/" class="post-title-link" itemprop="url">Linux监控脚本</a>
         </h2>
 
         <div class="post-meta">
@@ -587,7 +306,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-09-02 09:52:35" itemprop="dateCreated datePublished" datetime="2022-09-02T09:52:35+08:00">2022-09-02</time>
+              <time title="创建时间：2022-10-17 16:10:24" itemprop="dateCreated datePublished" datetime="2022-10-17T16:10:24+08:00">2022-10-17</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -596,6 +315,15 @@
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -603,14 +331,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>774</span>
+              <span>183</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -622,16 +350,200 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在安装软件的时候，我们总是碰到疑惑：为什么64位软件包总是称为<em>amd64</em>而不是<em>intel64</em>呢？</p>
-<p>如下所示的两款软件（Python的第三方库文件）：</p>
-<ul>
-<li>TA_Lib-0.4.19-cp37-cp37m-win32.whl</li>
-<li>TA_Lib-0.4.19-cp37-cp37m-win_amd64.whl</li>
-</ul>
-<p>你能分清楚那个对应32位机子，那个对应64位机子吗？此时很多人可能会有疑惑：<em>虽然能知道win32是做什么的，但是amd64不太清楚</em>。</p>
+          <h1 id="磁盘监控"><a href="#磁盘监控" class="headerlink" title="磁盘监控"></a>磁盘监控</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#ip</span></span><br><span class="line">adr=`/usr/sbin/ip addr | grep <span class="string">&#x27;172.17&#x27;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | <span class="built_in">tail</span> -n 1`</span><br><span class="line"><span class="comment">#90%check</span></span><br><span class="line">/bin/df -h | grep <span class="string">&#x27;9[0-9]%&#x27;</span></span><br><span class="line"><span class="keyword">if</span> [ $? = 0 ];<span class="keyword">then</span></span><br><span class="line">    <span class="built_in">dir</span>=`/bin/df -h | grep <span class="string">&#x27;9[0-9]%&#x27;</span> | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span> | <span class="built_in">head</span> -n 1`</span><br><span class="line">    usg=`/bin/df -h | grep <span class="string">&#x27;9[0-9]%&#x27;</span> | awk <span class="string">&#x27;&#123;print $(NF-1)&#125;&#x27;</span> | <span class="built_in">head</span> -n 1`</span><br><span class="line">    curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> -d <span class="string">&#x27;&#123;&quot;msg_type&quot;:&quot;text&quot;,&quot;content&quot;:&#123;&quot;text&quot;:&quot;&#x27;</span>瑞金本地化云服服务器<span class="string">&#x27;\n&#x27;</span>DiskWarn<span class="string">&#x27;\n&#x27;</span>IP:<span class="variable">$&#123;adr&#125;</span><span class="string">&#x27;\n&#x27;</span>Directory:<span class="variable">$&#123;dir&#125;</span><span class="string">&#x27;\n&#x27;</span>Usage:<span class="variable">$&#123;usg&#125;</span><span class="string">&#x27;&quot;&#125;&#125;&#x27;</span> https://open.feishu.cn/open-apis/bot/v2/hook/f9e39c63-0bd9-4e54-a35e-2cb50931be56</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="comment">#100%check</span></span><br><span class="line">/bin/df -h | grep <span class="string">&#x27;100%&#x27;</span></span><br><span class="line"><span class="keyword">if</span> [ $? = 0 ];<span class="keyword">then</span></span><br><span class="line">    <span class="built_in">dir</span>=`/bin/df -h | grep <span class="string">&#x27;100%&#x27;</span> | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span> | <span class="built_in">head</span> -n 1`</span><br><span class="line">    usg=`/bin/df -h | grep <span class="string">&#x27;100%&#x27;</span> | awk <span class="string">&#x27;&#123;print $(NF-1)&#125;&#x27;</span> | <span class="built_in">head</span> -n 1`</span><br><span class="line">    curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> -d <span class="string">&#x27;&#123;&quot;msg_type&quot;:&quot;text&quot;,&quot;content&quot;:&#123;&quot;text&quot;:&quot;&#x27;</span>瑞金本地化云服服务器<span class="string">&#x27;\n&#x27;</span>DiskWarn<span class="string">&#x27;\n&#x27;</span>IP:<span class="variable">$&#123;adr&#125;</span><span class="string">&#x27;\n&#x27;</span>Directory:<span class="variable">$&#123;dir&#125;</span><span class="string">&#x27;\n&#x27;</span>Usage:<span class="variable">$&#123;usg&#125;</span><span class="string">&#x27;&quot;&#125;&#125;&#x27;</span> https://open.feishu.cn/open-apis/bot/v2/hook/f9e39c63-0bd9-4e54-a35e-2cb50931be56</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/9bde/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/9bde/" class="post-title-link" itemprop="url">Linux修改jar包中配置文件信息</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-09 17:25:06" itemprop="dateCreated datePublished" datetime="2022-10-09T17:25:06+08:00">2022-10-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>140</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h1><p>查询出目标文件在jar包中的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar tvf userService-1.0.0.jar |grep bootstrap.yml </span><br></pre></td></tr></table></figure>
+
+<h1 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h1><p>目标文件名(copy上面查出的全路径) 将目标文件及所在jar包中的目录解压到当前路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar xvf userService-1.0.0.jar BOOT-INF/classes/bootstrap.yml ；</span><br></pre></td></tr></table></figure>
+
+<h1 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h1><p>修改配置文件的信息</p>
+<p>vim BOOT-INF&#x2F;classes&#x2F;bootstrap.yml；<br>wq 保存退出；</p>
+<h1 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h1><p>替换修改后的文件使配置文件生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar uf userService-1.0.0.jar BOOT-INF/classes/bootstrap.yml ；</span><br></pre></td></tr></table></figure>
+
+<h1 id="第五步"><a href="#第五步" class="headerlink" title="第五步"></a>第五步</h1><p>运行jar包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> java -jar userService-1.0.0.jar &gt;&gt; run.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/4e0c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/4e0c/" class="post-title-link" itemprop="url">Nacos常用命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-09 16:12:09" itemprop="dateCreated datePublished" datetime="2022-10-09T16:12:09+08:00">2022-10-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nacos/" itemprop="url" rel="index"><span itemprop="name">Nacos</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>89</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="修改端口"><a href="#修改端口" class="headerlink" title="修改端口"></a>修改端口</h1><p>在nacos目录下，进入conf，编辑 application.properties文件</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">server</span>.<span class="keyword">port</span>=8888</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/5163/#more" rel="contents">
+              <a class="btn" href="/posts/4e0c/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -651,10 +563,105 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/b368/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/b368/" class="post-title-link" itemprop="url">MySQL唯一索引与null</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-09-23 11:11:03" itemprop="dateCreated datePublished" datetime="2022-09-23T11:11:03+08:00">2022-09-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>249</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-模拟数据"><a href="#1-模拟数据" class="headerlink" title="1. 模拟数据"></a>1. 模拟数据</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 建表</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `test_user` (</span><br><span class="line">  `id` <span class="type">bigint</span>(<span class="number">20</span>) unsigned <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `name` <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `age` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`),</span><br><span class="line">  <span class="keyword">UNIQUE</span> KEY `name` (`name`,`age`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB AUTO_INCREMENT<span class="operator">=</span><span class="number">6</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4;</span><br><span class="line"></span><br><span class="line"># 添加数据</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `test_user` <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">&#x27;张三1&#x27;</span>, <span class="keyword">NULL</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `test_user` <span class="keyword">VALUES</span> (<span class="number">3</span>, <span class="string">&#x27;张三1&#x27;</span>, <span class="keyword">NULL</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `test_user` <span class="keyword">VALUES</span> (<span class="number">5</span>, <span class="string">&#x27;张三1&#x27;</span>, <span class="keyword">NULL</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `test_user` <span class="keyword">VALUES</span> (<span class="number">2</span>, <span class="string">&#x27;张三2&#x27;</span>, <span class="keyword">NULL</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `test_user` <span class="keyword">VALUES</span> (<span class="number">4</span>, <span class="string">&#x27;张三4&#x27;</span>, <span class="keyword">NULL</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="2、null破坏了唯一性"><a href="#2、null破坏了唯一性" class="headerlink" title="2、null破坏了唯一性"></a>2、null破坏了唯一性</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="operator">*</span> </span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    test_user </span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    NAME <span class="operator">=</span> &quot;张三1&quot; </span><br><span class="line">    <span class="keyword">AND</span> age <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/83YpKp.jpg"></p>
+<h1 id="3、原因"><a href="#3、原因" class="headerlink" title="3、原因"></a>3、原因</h1><p>在mysql 的innodb引擎中，是允许在唯一索引的字段中出现多个null值的。</p>
+<p>根据NULL的定义，NULL表示的是未知，因此两个NULL比较的结果既不相等，也不不等，结果仍然是未知。根据这个定义，多个NULL值的存在应该不违反唯一约束，所以是合理的，在oracel也是如此。</p>
+<h1 id="4、怎么避免破坏唯一性"><a href="#4、怎么避免破坏唯一性" class="headerlink" title="4、怎么避免破坏唯一性"></a>4、怎么避免破坏唯一性</h1><p>不允许列出现 null 值，即not null<br>给列增加 default 值，注意default值不能是 null。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/84/">84</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/85/">85</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -720,20 +727,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">416</span>
+          <span class="site-state-item-count">422</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -769,12 +776,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">268k</span>
+    <span title="站点总字数">273k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16:16</span>
+    <span title="站点阅读时长">16:34</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

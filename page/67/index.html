@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/5e6e/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/206f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/5e6e/" class="post-title-link" itemprop="url">SpringBoot集成elasticsearch</a>
+            <a href="/posts/206f/" class="post-title-link" itemprop="url">SpringBoot线程池</a>
         </h2>
 
         <div class="post-meta">
@@ -212,7 +212,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 09:24:48" itemprop="dateCreated datePublished" datetime="2019-05-20T09:24:48+08:00">2019-05-20</time>
+              <time title="创建时间：2019-05-20 09:25:31" itemprop="dateCreated datePublished" datetime="2019-05-20T09:25:31+08:00">2019-05-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -237,7 +237,99 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>227</span>
+              <span>38</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>TaskPoolConfig.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableAsync</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TaskPoolConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean(&quot;taskExecutor&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Executor <span class="title function_">taskExecutor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ThreadPoolTaskExecutor</span> <span class="variable">executor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadPoolTaskExecutor</span>();</span><br><span class="line">        executor.setCorePoolSize(<span class="number">10</span>);</span><br><span class="line">        executor.setMaxPoolSize(<span class="number">20</span>);</span><br><span class="line">        executor.setQueueCapacity(<span class="number">200</span>);</span><br><span class="line">        executor.setKeepAliveSeconds(<span class="number">60</span>);</span><br><span class="line">        executor.setThreadNamePrefix(<span class="string">&quot;taskExecutor-&quot;</span>);</span><br><span class="line">        executor.setRejectedExecutionHandler(<span class="keyword">new</span> <span class="title class_">ThreadPoolExecutor</span>.CallerRunsPolicy());</span><br><span class="line">        <span class="keyword">return</span> executor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ThreadPoolTaskExecutor taskExecutor;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a9e2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/a9e2/" class="post-title-link" itemprop="url">SpringBoot集成Swagger</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-20 09:25:25" itemprop="dateCreated datePublished" datetime="2019-05-20T09:25:25+08:00">2019-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>51</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -259,7 +351,7 @@
           <h3 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h3>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/5e6e/#more" rel="contents">
+              <a class="btn" href="/posts/a9e2/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -283,7 +375,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/4518/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/beb3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -297,7 +389,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/4518/" class="post-title-link" itemprop="url">SpringBoot集成dubbo</a>
+            <a href="/posts/beb3/" class="post-title-link" itemprop="url">SpringBoot集成redis</a>
         </h2>
 
         <div class="post-meta">
@@ -307,7 +399,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 09:24:39" itemprop="dateCreated datePublished" datetime="2019-05-20T09:24:39+08:00">2019-05-20</time>
+              <time title="创建时间：2019-05-20 09:25:20" itemprop="dateCreated datePublished" datetime="2019-05-20T09:25:20+08:00">2019-05-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -332,7 +424,99 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>173</span>
+              <span>208</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&lt;dependency&gt;</span></span><br><span class="line">    <span class="attr">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span></span><br><span class="line">    <span class="attr">&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span></span><br><span class="line"><span class="attr">&lt;/dependency&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="RedisConfig-java"><a href="#RedisConfig-java" class="headerlink" title="RedisConfig.java"></a>RedisConfig.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * RedisConfig</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> jlin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2018/11/7 18:44</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@AutoConfigureAfter(RedisAutoConfiguration.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 配置自定义redisTemplate</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    RedisTemplate&lt;String, Object&gt; <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span> &#123;</span><br><span class="line">        RedisTemplate&lt;String, Object&gt; template = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;&gt;();</span><br><span class="line">        template.setConnectionFactory(redisConnectionFactory);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值</span></span><br><span class="line">        <span class="type">Jackson2JsonRedisSerializer</span> <span class="variable">serializer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>(Object.class);</span><br><span class="line"></span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">mapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line">        serializer.setObjectMapper(mapper);</span><br><span class="line">        template.setValueSerializer(serializer);</span><br><span class="line">        <span class="comment">//使用StringRedisSerializer来序列化和反序列化redis的key值</span></span><br><span class="line">        template.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        template.setHashKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        template.setHashValueSerializer(serializer);</span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="RedisTest-java-测试"><a href="#RedisTest-java-测试" class="headerlink" title="RedisTest.java 测试"></a>RedisTest.java 测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * RedisTest</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> jlin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2018/11/9 09:41</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisTest</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRedis</span><span class="params">()</span> &#123;</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;林剑&quot;</span>);</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">&quot;sex&quot;</span>, <span class="string">&quot;男&quot;</span>);</span><br><span class="line">        <span class="type">User</span> <span class="variable">user1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">        user1.setUserId(<span class="number">1</span>);</span><br><span class="line">        user1.setUserName(<span class="string">&quot;张三&quot;</span>);</span><br><span class="line">        user1.setPassword(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">        <span class="type">User</span> <span class="variable">user2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">        user2.setUserId(<span class="number">2</span>);</span><br><span class="line">        user2.setUserName(<span class="string">&quot;李四&quot;</span>);</span><br><span class="line">        user2.setPassword(<span class="string">&quot;456&quot;</span>);</span><br><span class="line">        redisTemplate.opsForHash().put(<span class="string">&quot;user&quot;</span>, String.valueOf(user1.getUserId()), user1);</span><br><span class="line">        redisTemplate.opsForHash().put(<span class="string">&quot;user&quot;</span>, String.valueOf(user2.getUserId()), user2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getRedis</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(JSON.toJSONString(redisTemplate.opsForHash().get(<span class="string">&quot;user&quot;</span>, <span class="string">&quot;1&quot;</span>)));</span><br><span class="line">        System.out.println(JSON.toJSONString(redisTemplate.opsForHash().get(<span class="string">&quot;user&quot;</span>, <span class="string">&quot;2&quot;</span>)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/c53d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/c53d/" class="post-title-link" itemprop="url">SpringBoot集成mybatis-generator</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-20 09:25:10" itemprop="dateCreated datePublished" datetime="2019-05-20T09:25:10+08:00">2019-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>307</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -354,7 +538,7 @@
           <h3 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h3>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/4518/#more" rel="contents">
+              <a class="btn" href="/posts/c53d/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -378,7 +562,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/d5fe/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/7773/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -392,7 +576,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/d5fe/" class="post-title-link" itemprop="url">SpringBoot集成Cache</a>
+            <a href="/posts/7773/" class="post-title-link" itemprop="url">SpringBoot集成liquibase</a>
         </h2>
 
         <div class="post-meta">
@@ -402,7 +586,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 09:24:34" itemprop="dateCreated datePublished" datetime="2019-05-20T09:24:34+08:00">2019-05-20</time>
+              <time title="创建时间：2019-05-20 09:25:05" itemprop="dateCreated datePublished" datetime="2019-05-20T09:25:05+08:00">2019-05-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -427,102 +611,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>516</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&lt;!--</span> <span class="string">cache --&gt;</span></span><br><span class="line"><span class="attr">&lt;dependency&gt;</span></span><br><span class="line">    <span class="attr">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span></span><br><span class="line">    <span class="attr">&lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;</span></span><br><span class="line"><span class="attr">&lt;/dependency&gt;</span></span><br><span class="line"><span class="attr">&lt;!--</span> <span class="string">ehcache --&gt;</span></span><br><span class="line"><span class="attr">&lt;dependency&gt;</span></span><br><span class="line">    <span class="attr">&lt;groupId&gt;net.sf.ehcache&lt;/groupId&gt;</span></span><br><span class="line">    <span class="attr">&lt;artifactId&gt;ehcache&lt;/artifactId&gt;</span></span><br><span class="line"><span class="attr">&lt;/dependency&gt;</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/d5fe/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/ae65/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/ae65/" class="post-title-link" itemprop="url">SpringBoot多环境配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-20 09:24:28" itemprop="dateCreated datePublished" datetime="2019-05-20T09:24:28+08:00">2019-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>83</span>
+              <span>31</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -541,105 +630,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="多环境配置"><a href="#多环境配置" class="headerlink" title="多环境配置"></a>多环境配置</h3>
+          <h3 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h3>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/ae65/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/3fcd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/3fcd/" class="post-title-link" itemprop="url">SpringBoot logback配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-20 09:24:22" itemprop="dateCreated datePublished" datetime="2019-05-20T09:24:22+08:00">2019-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="logback-test-xml"><a href="#logback-test-xml" class="headerlink" title="logback-test.xml"></a>logback-test.xml</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/3fcd/#more" rel="contents">
+              <a class="btn" href="/posts/7773/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -662,7 +656,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/66/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/66/">66</a><span class="page-number current">67</span><a class="page-number" href="/page/68/">68</a><span class="space">&hellip;</span><a class="page-number" href="/page/84/">84</a><a class="extend next" rel="next" href="/page/68/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/66/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/66/">66</a><span class="page-number current">67</span><a class="page-number" href="/page/68/">68</a><span class="space">&hellip;</span><a class="page-number" href="/page/85/">85</a><a class="extend next" rel="next" href="/page/68/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -728,20 +722,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">416</span>
+          <span class="site-state-item-count">422</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">84</span>
+        <span class="site-state-item-count">85</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -777,12 +771,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">268k</span>
+    <span title="站点总字数">273k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16:16</span>
+    <span title="站点阅读时长">16:34</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
