@@ -188,6 +188,350 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/76cc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/76cc/" class="post-title-link" itemprop="url">随访-日间手术</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-28 10:54:49" itemprop="dateCreated datePublished" datetime="2019-11-28T10:54:49+08:00">2019-11-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E8%AE%BF/" itemprop="url" rel="index"><span itemprop="name">随访</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>757</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="日间手术介绍"><a href="#日间手术介绍" class="headerlink" title="日间手术介绍"></a>日间手术介绍</h1><p>日间手术是临床诊断明确的患者在24小时内完成计划性住院、手术、术后短暂观察并出院的一种手术模式。</p>
+<p>日间手术的产生及发展完全出于改善患者诊疗服务的目的。它在缓解病人住院难、缩短患者住院天数、降低医疗费用、节约医保基金、加快医院病床周转率等方面具有显著的积极作用。据文献资料查找，通过日间手术的开展，同种手术患者的平均住院费用可降低10<del>40%，平均住院天数可降低2</del>5天。</p>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p><img src="https://i.loli.net/2019/11/28/b5FIoS9ZQ17ABmg.png"></p>
+<h1 id="功能模块设计"><a href="#功能模块设计" class="headerlink" title="功能模块设计"></a>功能模块设计</h1><h3 id="患者管理"><a href="#患者管理" class="headerlink" title="患者管理"></a>患者管理</h3><p>对要做日间手术的患者进行管理。</p>
+<ul>
+<li><p>添加日间手术患者（从门诊记录根据科室、诊断添加患者）。操作（入组、暂不入组、不可入组），入组需要选择手术方式（宫腔镜手术、腹腔镜手术、其他）</p>
+</li>
+<li><p>手术患者列表可根据门诊号、姓名、门诊诊断、术前评估状态（待评估、评估中、评估完成、强制评估完成）、预约状态（待预约、已预约、取消预约、爽约）、入组时间进行搜索</p>
+</li>
+<li><p>列表可以点击病程管理进入病程管理页面，可以查看患者当前所处阶段，任务执行情况。</p>
+</li>
+</ul>
+<h3 id="麻醉会诊管理"><a href="#麻醉会诊管理" class="headerlink" title="麻醉会诊管理"></a>麻醉会诊管理</h3><p>麻醉科医生对日间手术患者进行麻醉评估，可查看已评估患者的评估说明。</p>
+<h3 id="排班管理"><a href="#排班管理" class="headerlink" title="排班管理"></a>排班管理</h3><p>维护日间手术排班。</p>
+<ul>
+<li><p>可维护本周至之后3周的排班信息（包含本周）。</p>
+</li>
+<li><p>设置排班模版。</p>
+</li>
+<li><p>根据模版生成一年排班。</p>
+</li>
+<li><p>推送排班信息</p>
+</li>
+<li><p>默认显示下一周排班。</p>
+</li>
+</ul>
+<h3 id="排班总览"><a href="#排班总览" class="headerlink" title="排班总览"></a>排班总览</h3><p>查看排班信息。</p>
+<ul>
+<li>默认显示当前周排班。</li>
+</ul>
+<h3 id="预约管理"><a href="#预约管理" class="headerlink" title="预约管理"></a>预约管理</h3><p>对日间手术预约情况进行管理。</p>
+<ul>
+<li><p>待预约。对未预约患者预约手术时间。</p>
+</li>
+<li><p>已预约。查看已预约患者信息，群发术前宣教，导出患者数据。</p>
+</li>
+<li><p>已取消。查看取消预约患者信息及取消原因，删除预约记录。</p>
+</li>
+<li><p>已爽约。查看爽约患者信息及爽约原因，删除预约记录。</p>
+</li>
+</ul>
+<h3 id="医生管理"><a href="#医生管理" class="headerlink" title="医生管理"></a>医生管理</h3><p>维护日间手术的医生、手术室信息。</p>
+<h3 id="医生手术管理"><a href="#医生手术管理" class="headerlink" title="医生手术管理"></a>医生手术管理</h3><p>给已预约患者分配手术医生、手术室、及手术顺序号。</p>
+<h3 id="医生手术总览"><a href="#医生手术总览" class="headerlink" title="医生手术总览"></a>医生手术总览</h3><p>查看医生手术排台情况。</p>
+<h3 id="疾病路径管理"><a href="#疾病路径管理" class="headerlink" title="疾病路径管理"></a>疾病路径管理</h3><p>维护日间手术随访路径。</p>
+<ul>
+<li><p>术前任务根据手术方式（宫腔镜、腹腔镜、其他）匹配路径。</p>
+</li>
+<li><p>术后任务根据手术名称匹配路径。</p>
+</li>
+</ul>
+<h3 id="任务管理"><a href="#任务管理" class="headerlink" title="任务管理"></a>任务管理</h3><p>病程管理任务列表。可根据任务状态（已完成、未完成）、发送状态（未发送、已发送、已回复、异常）、计划发送时间等搜索。</p>
+<ul>
+<li><p>手动发送</p>
+</li>
+<li><p>删除任务</p>
+</li>
+<li><p>AI推送</p>
+</li>
+<li><p>随访</p>
+</li>
+</ul>
+<h1 id="E-R图"><a href="#E-R图" class="headerlink" title="E-R图"></a>E-R图</h1><p><img src="https://i.loli.net/2019/11/28/kCwF91uvUel2mOj.png"></p>
+<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/c4ed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/c4ed/" class="post-title-link" itemprop="url">MySQL innodb_force_recovery</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-25 17:03:51" itemprop="dateCreated datePublished" datetime="2019-11-25T17:03:51+08:00">2019-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>658</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p><strong>t_repository_form_answer</strong>数据量近亿级，需要增加字段，新建临时表<strong>t_repository_form_answer_tmp</strong>（增加字段），copy数据到临时表，删除原表，修改临时表名。</p>
+<p>由于数据量过大，导致copy数据耗时太久，回滚版本未及时kill掉数据库进程，1天后发现copy进程还在，kill掉进程出现killed死锁。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> information_schema.INNODB_TRX</span><br></pre></td></tr></table></figure>
+
+<p>查询trx_rows_modified数据量高达6000万，mysql在执行事务回滚操作，但是数据减小速度比较慢，同时表锁住导致表单提交答案失败。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/c4ed/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/59c5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/59c5/" class="post-title-link" itemprop="url">MySQL 统计每张表的记录数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-25 14:42:38" itemprop="dateCreated datePublished" datetime="2019-11-25T14:42:38+08:00">2019-11-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>233</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">USE information_schema;</span><br><span class="line"></span><br><span class="line"># cloud_followup_v2 为要统计的数据库名</span><br><span class="line"><span class="keyword">SELECT</span> table_name,table_rows <span class="keyword">FROM</span> TABLES <span class="keyword">WHERE</span> TABLE_SCHEMA <span class="operator">=</span> <span class="string">&#x27;cloud_followup_v2&#x27;</span> <span class="keyword">ORDER</span> <span class="keyword">BY</span> table_rows <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/59c5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/df68/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -368,366 +712,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/d8a2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/d8a2/" class="post-title-link" itemprop="url">MySQL kill进程后出现killed死锁</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-22 16:37:45" itemprop="dateCreated datePublished" datetime="2019-11-22T16:37:45+08:00">2019-11-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>489</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h1><p>  有一张3亿的表，现在要对这张表进行删除1亿行，于是有人开始运行<code>delete from table limit 100000000</code>;毫无疑问这是一个愚蠢的删除方式，于是有人开始变更删除方式：<code>delete from table where id&lt;100000000</code>;然而运行一段时间后，又发现批量删除的效率可能会更高，所以kill掉了上一条运行了一段时间的sql，开始批量删除， 由于是大sql，晚上点击运行想第二天早上来看结果的DBA就会遗憾的发现新执行的sql被锁给挡了回来，并没有运行，导致浪费了一晚上的时间。但是盲目的等待锁释放心里没底，所以我们可以通过下面的方式计算出这个锁什么时候能够释放，我们就可以使用表了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/d8a2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/922c/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/922c/" class="post-title-link" itemprop="url">演示环境</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-13 15:11:34" itemprop="dateCreated datePublished" datetime="2019-11-13T15:11:34+08:00">2019-11-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jh/" itemprop="url" rel="index"><span itemprop="name">Jh</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>26</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">116.62.29.166  nexus / hZ296nEx296</span><br></pre></td></tr></table></figure>
-
-<h1 id="随访路径"><a href="#随访路径" class="headerlink" title="随访路径"></a>随访路径</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/joinhealthys</span><br></pre></td></tr></table></figure>
-
-<h1 id="账号"><a href="#账号" class="headerlink" title="账号"></a>账号</h1><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">jhys_admin</span> / <span class="number">493004271</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="随访地址"><a href="#随访地址" class="headerlink" title="随访地址"></a>随访地址</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://ys.joinhealth.cn/hug_interview/</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/79f3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/79f3/" class="post-title-link" itemprop="url">装机</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-12 11:22:40" itemprop="dateCreated datePublished" datetime="2019-11-12T11:22:40+08:00">2019-11-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>144</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>办公使用，常用软件：微信、钉钉、QQ、office、几何画板、录屏软件、pdf、视频、音乐</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>型号</th>
-<th>价格</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>CPU</td>
-<td>AMD 锐龙3 2200G（盒装）</td>
-<td>599</td>
-</tr>
-<tr>
-<td>主板</td>
-<td>华擎 A320</td>
-<td>359</td>
-</tr>
-<tr>
-<td>内存条</td>
-<td>海盗船 DDR4 3200</td>
-<td>258</td>
-</tr>
-<tr>
-<td>固态硬盘</td>
-<td>三星 970 EVO Plus 250G</td>
-<td>479</td>
-</tr>
-<tr>
-<td>硬盘</td>
-<td>西部数据 蓝盘 1T</td>
-<td>299</td>
-</tr>
-<tr>
-<td>机箱</td>
-<td>先马 黑洞</td>
-<td>289</td>
-</tr>
-<tr>
-<td>电源</td>
-<td>长城HOPE-6000DS</td>
-<td>269</td>
-</tr>
-<tr>
-<td>散热器</td>
-<td>盒装自带幽灵散热器</td>
-<td></td>
-</tr>
-<tr>
-<td>显卡</td>
-<td>无</td>
-<td></td>
-</tr>
-<tr>
-<td>显示器</td>
-<td>Philip 243S7EHMB</td>
-<td>799</td>
-</tr>
-<tr>
-<td>鼠标键盘</td>
-<td>罗技（Logitech）MK275</td>
-<td>95</td>
-</tr>
-<tr>
-<td>无线网卡</td>
-<td>TP-LINK TL-WN725N</td>
-<td>51</td>
-</tr>
-<tr>
-<td>总价</td>
-<td></td>
-<td>3270</td>
-</tr>
-</tbody></table>
-<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><ul>
-<li><p>office</p>
-</li>
-<li><p>Snipaste</p>
-</li>
-<li><p>Listary</p>
-</li>
-<li><p>Everything</p>
-</li>
-<li><p>SpaceSniffer</p>
-</li>
-<li><p>fences</p>
-</li>
-<li><p>Bandizip</p>
-</li>
-<li><p>Potplayer</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -797,7 +781,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">422</span>
+          <span class="site-state-item-count">425</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -810,7 +794,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-count">86</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -846,12 +830,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">273k</span>
+    <span title="站点总字数">274k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16:34</span>
+    <span title="站点阅读时长">16:35</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

@@ -188,6 +188,299 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6827/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/6827/" class="post-title-link" itemprop="url">@Scheduled多个定时任务同时执行</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-08-17 15:59:17" itemprop="dateCreated datePublished" datetime="2022-08-17T15:59:17+08:00">2022-08-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>282</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>定时任务是单线程执行的，默认一个时间段只能执行一个定时任务</p>
+<p>如果多个定时任务同时执行的话，那么会按照顺序执行</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>在启动类中加上以下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建定时任务线程池</span></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> TaskScheduler <span class="title function_">taskScheduler</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">ThreadPoolTaskScheduler</span> <span class="variable">taskScheduler</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadPoolTaskScheduler</span>();</span><br><span class="line">    <span class="comment">//线程池可根据实际情况调整</span></span><br><span class="line">    taskScheduler.setPoolSize(<span class="number">64</span>);</span><br><span class="line">    <span class="keyword">return</span> taskScheduler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h2 id="用例一"><a href="#用例一" class="headerlink" title="用例一"></a>用例一</h2><p>一个Job，两个任务</p>
+<p>task1每5s执行一次，每次执行耗时10s</p>
+<p>task2每5s执行一次，每次执行耗时10s</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><p><img src="https://s2.loli.net/2022/08/17/jQmrYngozSvFwAM.jpg"></p>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="https://s2.loli.net/2022/08/17/wi4SUZtxqALXeoN.jpg"></p>
+<h2 id="用例二"><a href="#用例二" class="headerlink" title="用例二"></a>用例二</h2><p>两个Job，每个Job中各一个任务</p>
+<p>task1每5s执行一次，每次执行耗时10s</p>
+<p>task3每7s执行一次，每次执行耗时10s</p>
+<h3 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h3><p><img src="https://s2.loli.net/2022/08/17/pPoABMmcN5RFWDC.jpg"></p>
+<p><img src="https://s2.loli.net/2022/08/17/SyK3J1grlEP2NcO.jpg"></p>
+<h3 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h3><p><img src="https://s2.loli.net/2022/08/17/aycn67Io4UJiEsb.jpg"></p>
+<h2 id="用例三"><a href="#用例三" class="headerlink" title="用例三"></a>用例三</h2><p>一个Job，两个任务</p>
+<p>task1每5s执行一次，每次执行耗时10s</p>
+<p>task2每7s执行一次，每次执行耗时10s</p>
+<h3 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h3><p><img src="https://s2.loli.net/2022/08/18/dB5fV9jNXnHIcvE.jpg"></p>
+<h3 id="结果-2"><a href="#结果-2" class="headerlink" title="结果"></a>结果</h3><p><img src="https://s2.loli.net/2022/08/18/3bZspNWt91hQ7IK.jpg"></p>
+<h2 id="另一种方案"><a href="#另一种方案" class="headerlink" title="另一种方案"></a>另一种方案</h2><p>使用@Async注解实现异步任务</p>
+<p>注意：需启动类配合加上 @EnableAsync才会生效</p>
+<p>同一个task也不会阻塞，不建议使用</p>
+<h3 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h3><p><img src="/Users/linjian/Library/Application%20Support/marktext/images/2022-08-18-09-07-27-image.png"></p>
+<p><img src="/Users/linjian/Library/Application%20Support/marktext/images/2022-08-18-09-07-48-image.png"></p>
+<h3 id="结果-3"><a href="#结果-3" class="headerlink" title="结果"></a>结果</h3><p><img src="https://s2.loli.net/2022/08/18/PosCl2Jzif1XNuR.jpg"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/9d67/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/9d67/" class="post-title-link" itemprop="url">MongoDB迁移数据</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-08-04 14:36:12" itemprop="dateCreated datePublished" datetime="2022-08-04T14:36:12+08:00">2022-08-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>75</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="一、关闭MongoDB"><a href="#一、关闭MongoDB" class="headerlink" title="一、关闭MongoDB"></a>一、关闭MongoDB</h2><p>运行–&gt;services.msc–&gt;找到MongoDB服务–&gt;停止服务</p>
+<p><img src="/"></p>
+<h2 id="二、找到配置文件mongod-cfg"><a href="#二、找到配置文件mongod-cfg" class="headerlink" title="二、找到配置文件mongod.cfg"></a>二、找到配置文件mongod.cfg</h2><h2 id="三、找到数据文件路径"><a href="#三、找到数据文件路径" class="headerlink" title="三、找到数据文件路径"></a>三、找到数据文件路径</h2><p><img src="/"></p>
+<h2 id="四、迁移数据文件"><a href="#四、迁移数据文件" class="headerlink" title="四、迁移数据文件"></a>四、迁移数据文件</h2><p>复制data目录到目标磁盘</p>
+<h2 id="五、修改配置文件"><a href="#五、修改配置文件" class="headerlink" title="五、修改配置文件"></a>五、修改配置文件</h2><p><img src="/"></p>
+<h2 id="六、启动MongoDB"><a href="#六、启动MongoDB" class="headerlink" title="六、启动MongoDB"></a>六、启动MongoDB</h2><p>运行—&gt;services.msc，找到MongoDB服务，启动</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/82b1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/82b1/" class="post-title-link" itemprop="url">Linux文件切割</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-19 19:21:09" itemprop="dateCreated datePublished" datetime="2022-07-19T19:21:09+08:00">2022-07-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>872</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="文件切割-split"><a href="#文件切割-split" class="headerlink" title="文件切割 - split"></a>文件切割 - split</h1><p>在 Linux 系统下使用 split命令进行大文件切割很方便</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/82b1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/6317/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -379,294 +672,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/b43d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/b43d/" class="post-title-link" itemprop="url">Java使用下划线提高可读性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-14 15:18:11" itemprop="dateCreated datePublished" datetime="2022-07-14T15:18:11+08:00">2022-07-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>230</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>从Java 7开始，可以使用一个或多个下划线(_)分隔原始数字文字中的数字组，以提高其可读性。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/b43d/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/db6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/db6/" class="post-title-link" itemprop="url">二分法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-14 10:18:49" itemprop="dateCreated datePublished" datetime="2022-07-14T10:18:49+08:00">2022-07-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>558</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>二分法查找，也称为折半法，是一种在有序数组中查找特定元素的搜索算法。</p>
-<h1 id="二分法查找的思路如下"><a href="#二分法查找的思路如下" class="headerlink" title="二分法查找的思路如下"></a>二分法查找的思路如下</h1><p>1：首先，从数组的中间元素开始搜索，如果该元素正好是目标元素，则搜索过程结束，否则执行下一步。</p>
-<p>2：如果目标元素大于&#x2F;小于中间元素，则在数组大于&#x2F;小于中间元素的那一半区域查找，然后重复步骤1的操作。</p>
-<p>3：如果某一步数组为空，则表示找不到目标元素。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/db6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/9949/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/9949/" class="post-title-link" itemprop="url">位（bit）、字节（byte）、字符之间的关系</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-13 09:08:43" itemprop="dateCreated datePublished" datetime="2022-07-13T09:08:43+08:00">2022-07-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>304</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1、位："><a href="#1、位：" class="headerlink" title="1、位："></a>1、位：</h2><p>数据存储的最小单位。每个<strong>二进制</strong>数字<strong>0或者1</strong>就是<strong>1个位</strong>；</p>
-<h2 id="2、字节："><a href="#2、字节：" class="headerlink" title="2、字节："></a>2、字节：</h2><p>8个位构成一个字节；即：<strong>1 byte (字节)&#x3D; 8 bit(位)；</strong></p>
-<p>1 KB &#x3D; 1024 B(字节)；</p>
-<p>1 MB &#x3D; 1024 KB; (2^10 B)</p>
-<p>1 GB &#x3D; 1024 MB; (2^20 B)</p>
-<p>1 TB &#x3D; 1024 GB; (2^30 B)</p>
-<h2 id="3、字符："><a href="#3、字符：" class="headerlink" title="3、字符："></a>3、字符：</h2><p>a、A、中、+、*、の……均表示一个字节（<strong>不包括数字</strong>）</p>
-<blockquote>
-<p>注意：<br><strong>英文半角</strong>符号占用1个字节，<br><strong>中文全角</strong>符号等同于汉字，占用2个或3个字节需要根据不同编码集判断</p>
-</blockquote>
-<p>一般 utf-8 编码下，一个汉字 字符 占用 3 个 字节；<br>一般 gbk 或 ASCII 编码下，一个汉字 字符 占用 2 个 字节；</p>
-<hr>
-<h2 id="特殊：数字"><a href="#特殊：数字" class="headerlink" title="特殊：数字"></a>特殊：数字</h2><blockquote>
-<p>byte型：1个字节（<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E4%BA%8C%E8%BF%9B%E5%88%B6&spm=1001.2101.3001.7020">二进制</a>8位）<br>short型：2个字节（二进制16位）<br><strong>int型：不管数字是几，都占用4个字节（二进制表示32位：00000000 00000000 00000000 00000000）</strong><br>long型：8个字节（二进制64位）</p>
-</blockquote>
-<p>这里要特殊说明一下“二进制”表示的数字</p>
-<p><strong>有符号位：</strong><br>一字节存的最小数为 11111111（**-128<strong>）<br>最大数为 01111111（</strong>127<strong>）<br><strong>如果没有符号位，则：</strong><br>最小数为00000000（十进制</strong>0<strong>）<br>最大数为11111111（十进制</strong>255**）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -736,7 +741,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">422</span>
+          <span class="site-state-item-count">425</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -749,7 +754,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">85</span>
+        <span class="site-state-item-count">86</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -785,12 +790,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">273k</span>
+    <span title="站点总字数">274k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16:34</span>
+    <span title="站点阅读时长">16:35</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
