@@ -188,6 +188,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a3d8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/a3d8/" class="post-title-link" itemprop="url">Linux下查看最消耗CPU、内存的进程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-29 16:16:52" itemprop="dateCreated datePublished" datetime="2019-07-29T16:16:52+08:00">2019-07-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>307</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="CPU占用最多的前10个进程"><a href="#CPU占用最多的前10个进程" class="headerlink" title="CPU占用最多的前10个进程"></a>CPU占用最多的前10个进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps auxw|<span class="built_in">head</span> -1;ps auxw|<span class="built_in">sort</span> -rn -k3|<span class="built_in">head</span> -10 </span><br></pre></td></tr></table></figure>
+
+<h3 id="内存消耗最多的前10个进程"><a href="#内存消耗最多的前10个进程" class="headerlink" title="内存消耗最多的前10个进程"></a>内存消耗最多的前10个进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps auxw|<span class="built_in">head</span> -1;ps auxw|<span class="built_in">sort</span> -rn -k4|<span class="built_in">head</span> -10</span><br></pre></td></tr></table></figure>
+
+<h3 id="虚拟内存使用最多的前10个进程"><a href="#虚拟内存使用最多的前10个进程" class="headerlink" title="虚拟内存使用最多的前10个进程"></a>虚拟内存使用最多的前10个进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps auxw|<span class="built_in">head</span> -1;ps auxw|<span class="built_in">sort</span> -rn -k5|<span class="built_in">head</span> -10</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/a3d8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/3657/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -568,161 +667,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e91f/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/e91f/" class="post-title-link" itemprop="url">钉钉对接流程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-07-24 15:55:51" itemprop="dateCreated datePublished" datetime="2019-07-24T15:55:51+08:00">2019-07-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jh/" itemprop="url" rel="index"><span itemprop="name">Jh</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>194</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="医院上线钉钉微服务操作步骤"><a href="#医院上线钉钉微服务操作步骤" class="headerlink" title="医院上线钉钉微服务操作步骤"></a>医院上线钉钉微服务操作步骤</h3><ol>
-<li><p>登录钉钉开放平台（赵晰铖）</p>
-</li>
-<li><p>应用开发–&gt;第三方企业应用–&gt;H5微应用–&gt;生成随访微应用二维码</p>
-</li>
-</ol>
-<p><img src="https://i.loli.net/2019/07/24/5d3811de7b96f54041.png" alt="5d3811de7b96f54041"></p>
-<ol start="3">
-<li><p>医院钉钉管理员扫随访微应用二维码（扫码后t_dingtalk_corp会多一条记录）</p>
-</li>
-<li><p>到生产环境数据库中维护<strong>医院编码</strong>（t_dingtalk_corp）</p>
-</li>
-<li><p>esb对接医院接口，医院需要提供钉钉userId对应的职工信息视图（微应用免登录）</p>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>说明</th>
-<th>必填</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>userId</td>
-<td>钉钉userId</td>
-<td>Y</td>
-</tr>
-<tr>
-<td>ORGAN_CODE</td>
-<td>医院编码</td>
-<td>Y</td>
-</tr>
-<tr>
-<td>phone</td>
-<td>手机号</td>
-<td>Y</td>
-</tr>
-<tr>
-<td>card</td>
-<td>身份证</td>
-<td>N</td>
-</tr>
-<tr>
-<td>sex</td>
-<td>性别（1男 2女）</td>
-<td>N</td>
-</tr>
-<tr>
-<td>drCode</td>
-<td>职工工号</td>
-<td>Y</td>
-</tr>
-<tr>
-<td>name</td>
-<td>姓名</td>
-<td>Y</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<ol start="6">
-<li>去蓝牛后台维护医院参数配置（微应用免登录）</li>
-</ol>
-<p><img src="https://i.loli.net/2019/07/24/5d38134ab11ee24305.png" alt="5d38134ab11ee24305"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -792,14 +736,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">433</span>
+          <span class="site-state-item-count">434</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -841,7 +785,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">275k</span>
+    <span title="站点总字数">276k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
