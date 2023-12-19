@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/b434/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/ed60/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/b434/" class="post-title-link" itemprop="url">单例模式</a>
+            <a href="/posts/ed60/" class="post-title-link" itemprop="url">Windows Server 2016下tomcat执行缓慢</a>
         </h2>
 
         <div class="post-meta">
@@ -212,14 +212,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-10-24 20:39:25" itemprop="dateCreated datePublished" datetime="2019-10-24T20:39:25+08:00">2019-10-24</time>
+              <time title="创建时间：2019-11-07 10:56:34" itemprop="dateCreated datePublished" datetime="2019-11-07T10:56:34+08:00">2019-11-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+                <time title="修改时间：2023-03-07 13:53:12" itemprop="dateModified" datetime="2023-03-07T13:53:12+08:00">2023-03-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +227,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                  <a href="/categories/Tomcat/" itemprop="url" rel="index"><span itemprop="name">Tomcat</span></a>
                 </span>
             </span>
 
@@ -237,7 +237,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>263</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -256,7 +256,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>Windows Server 2016 下以startup.bat 方式启动比在Windows Server 2012 下执行JAVA程序速度慢很多。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>将tomcat注册成为服务，到tomcat&#x2F;bin路径下执行 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service.bat install tomcat7</span><br></pre></td></tr></table></figure>
+
+<p>在服务中启动tomcat，速度就明显上去了。</p>
+<p>环境变量：</p>
+<p><img src="https://i.loli.net/2020/07/24/ayeCuAZ9TsvOxhH.png" alt="ayeCuAZ9TsvOxhH"></p>
+<p>另外备注：而且点击tomcat控制台会让程序终端 中止，ctrl+c会让程序继续运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#从服务列表中移除</span></span><br><span class="line">service.bat remove tomcat7</span><br></pre></td></tr></table></figure>
+
+<p>启动、停用tomcat</p>
+<p><img src="https://i.loli.net/2020/07/24/3kCIWZvYsl6SaG7.png" alt="3kCIWZvYsl6SaG7"></p>
+<p>stdout.log日志暴增</p>
+<p><img src="https://i.loli.net/2020/12/17/qo7CGA6mwuOXZFs.jpg" alt="qo7CGA6mwuOXZFs"></p>
+
       
     </div>
 
@@ -275,7 +289,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/65be/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/828/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -289,7 +303,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/65be/" class="post-title-link" itemprop="url">UML中的类图及类图之间的关系</a>
+            <a href="/posts/828/" class="post-title-link" itemprop="url">微信对接</a>
         </h2>
 
         <div class="post-meta">
@@ -299,7 +313,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-10-24 19:22:57" itemprop="dateCreated datePublished" datetime="2019-10-24T19:22:57+08:00">2019-10-24</time>
+              <time title="创建时间：2019-11-05 10:27:42" itemprop="dateCreated datePublished" datetime="2019-11-05T10:27:42+08:00">2019-11-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -314,7 +328,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                  <a href="/categories/Jh/" itemprop="url" rel="index"><span itemprop="name">Jh</span></a>
                 </span>
             </span>
 
@@ -324,14 +338,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>102</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -343,18 +357,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="统一建模语言简介"><a href="#统一建模语言简介" class="headerlink" title="统一建模语言简介"></a>统一建模语言简介</h2><p>统一建模语言（Unified Modeling Language，UML）是用来设计软件蓝图的可视化建模语言，1997 年被国际对象管理组织（OMG）采纳为面向对象的建模语言的国际标准。它的特点是简单、统一、图形化、能表达软件设计中的动态与静态信息。  </p>
-<p>统一建模语言能为软件开发的所有阶段提供模型化和可视化支持。而且融入了软件工程领域的新思想、新方法和新技术，使软件设计人员沟通更简明，进一步缩短了设计时间，减少开发成本。它的应用领域很宽，不仅适合于一般系统的开发，而且适合于并行与分布式系统的建模。  </p>
-<p>UML 从目标系统的不同角度出发，定义了用例图、类图、对象图、状态图、活动图、时序图、协作图、构件图、部署图等 9 种图。  </p>
-<p>本教程主要介绍软件<a target="_blank" rel="noopener" href="http://c.biancheng.net/design_pattern/">设计模式</a>中经常用到的类图，以及类之间的关系。另外，在实验部分将简单介绍 UML 建模工具的使用方法，当前业界使用最广泛的是 Rational Rose。使用 Umlet 的人也很多，它是一个轻量级的开源 UML 建模工具，简单实用，常用于小型软件系统的开发与设计。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/65be/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="匿名投诉表扬"><a href="#匿名投诉表扬" class="headerlink" title="匿名投诉表扬"></a>匿名投诉表扬</h1><p><a target="_blank" rel="noopener" href="https://www.lanniuh.com/web-bin/m/followup/feedBack/to_departSelect_page?hospCode=683292136">https://www.lanniuh.com/web-bin/m/followup/feedBack/to_departSelect_page?hospCode&#x3D;683292136</a></p>
+
       
     </div>
 
@@ -373,7 +377,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a055/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/2623/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -387,7 +391,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/a055/" class="post-title-link" itemprop="url">23 种设计模式的分类和功能</a>
+            <a href="/posts/2623/" class="post-title-link" itemprop="url">2019-11</a>
         </h2>
 
         <div class="post-meta">
@@ -397,7 +401,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-10-24 10:20:43" itemprop="dateCreated datePublished" datetime="2019-10-24T10:20:43+08:00">2019-10-24</time>
+              <time title="创建时间：2019-11-01 11:44:29" itemprop="dateCreated datePublished" datetime="2019-11-01T11:44:29+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -412,7 +416,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                  <a href="/categories/Daily/" itemprop="url" rel="index"><span itemprop="name">Daily</span></a>
                 </span>
             </span>
 
@@ -422,14 +426,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -441,43 +445,337 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><h3 id="根据目的来分"><a href="#根据目的来分" class="headerlink" title="根据目的来分"></a>根据目的来分</h3><p>根据模式是用来完成什么工作来划分，这种方式可分为创建型模式、结构型模式和行为型模式 3 种。</p>
+          <h3 id="11-1"><a href="#11-1" class="headerlink" title="11.1"></a>11.1</h3><ol>
+<li><p>广妇儿宣教发送查看问题（url链接编辑过，云端有缓存）</p>
+</li>
+<li><p>广妇儿匿名投诉表扬发布测试</p>
+</li>
+<li><p>广妇儿esb宕机问题排查（初步推断是微信接口不支持并发导致）</p>
+</li>
+<li><p>上海瑞金安全整改评估（struts2升级比较麻烦，当前版本2.5，最新版本2.5.20）</p>
+</li>
+<li><p>重庆医药集团随访平台</p>
+<ul>
+<li><p>新加来源（新药、特药）</p>
+</li>
+<li><p>专科外包</p>
+</li>
+<li><p>病程（医院使用）</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="11-4"><a href="#11-4" class="headerlink" title="11.4"></a>11.4</h3><ol>
+<li><p>10月份绩效打分，11月份绩效目标整理</p>
+</li>
+<li><p>浙二心脏瓣膜专科工作量评估</p>
+</li>
+<li><p>广妇儿317护宣教内网查看问题（修改server.properties、nginx、host配置）</p>
+</li>
+<li><p>阜南人民医院满意度异常要看到PC端提交的异常（已远程修改）</p>
+</li>
+</ol>
+<h3 id="11-5"><a href="#11-5" class="headerlink" title="11.5"></a>11.5</h3><ol>
+<li><p>mongodb数据中心、高级筛选（存储动态列可行性验证）</p>
+</li>
+<li><p>简惠MDT随访嵌入对接</p>
+</li>
+</ol>
+<h3 id="11-6"><a href="#11-6" class="headerlink" title="11.6"></a>11.6</h3><ol>
+<li><p>mongodb学习</p>
+</li>
+<li><p>厦门心血管表单自动填充问题（无需处理）</p>
+</li>
+<li><p>专科随访数据源讨论</p>
+<ul>
+<li><p>列表展示的是最新数据还是最近一次就诊相关数据</p>
+</li>
+<li><p>指标分析是否只要路径中配置数据源的相关数据曲线</p>
+</li>
+<li><p>患者档案数据源显示最新数据</p>
+</li>
+</ul>
+</li>
+<li><p>邵逸夫满意度宣讲</p>
+</li>
+</ol>
+<h3 id="11-7"><a href="#11-7" class="headerlink" title="11.7"></a>11.7</h3><ol>
+<li><p>mongodb学习（数据结构、操作符、基本命令）</p>
+</li>
+<li><p>高级筛选方案构思</p>
+</li>
+<li><p>windows server 2016环境下tomcat卡（已解决）</p>
+</li>
+</ol>
+<h3 id="11-8"><a href="#11-8" class="headerlink" title="11.8"></a>11.8</h3><ol>
+<li><p>mongodb学习（索引、关联查询）</p>
+</li>
+<li><p>高级筛选方案构思</p>
+</li>
+</ol>
+<h3 id="11-11"><a href="#11-11" class="headerlink" title="11.11"></a>11.11</h3><ol>
+<li><p>专科随访数据中心mongodb保存&#x2F;更新数据demo</p>
+</li>
+<li><p>广妇儿计划名单问题排查</p>
+</li>
+<li><p>广妇儿宣教规则迁移配合（宣教内容导出）</p>
+</li>
+<li><p>重庆医药表单、宣教知识导入</p>
+</li>
+</ol>
+<h3 id="11-12"><a href="#11-12" class="headerlink" title="11.12"></a>11.12</h3><ol>
+<li><p>浙二心脏瓣膜专科</p>
+</li>
+<li><p>余杭第一预约挂号支持分院、科室自定义排序设计（获取医院关系接口开好）</p>
+</li>
+<li><p>鄞州人民医院默认密码不让登陆（已处理）</p>
+</li>
+<li><p>平阳随访工作量统计优化（有个性话字段，t_manage_call表加索引）</p>
+</li>
+</ol>
+<h3 id="11-13"><a href="#11-13" class="headerlink" title="11.13"></a>11.13</h3><ol>
+<li><p>代码审核</p>
+</li>
+<li><p>鄞州人民医院默认密码不让登陆，admin账号登陆其他账号不限制</p>
+</li>
+<li><p>广妇儿esb宕机（微信厂商接口不支持多线程，微信调用控制并发数）</p>
+</li>
+<li><p>医惠MDT对接</p>
+</li>
+<li><p>mongodb学习（事务，ACID）</p>
+</li>
+</ol>
+<h3 id="11-14"><a href="#11-14" class="headerlink" title="11.14"></a>11.14</h3><ol>
+<li><p>重庆医科大学附属永川医院钉钉对接</p>
+</li>
+<li><p>广妇儿自助报道未推送问题排查（确实漏发，日志确实，未找到原因，暂时先增加日志）</p>
+</li>
+<li><p>出差（重庆医药集团）</p>
+</li>
+</ol>
+<h3 id="11-15"><a href="#11-15" class="headerlink" title="11.15"></a>11.15</h3><ol>
+<li>重庆医药接口方案沟通</li>
+</ol>
+<h3 id="11-18"><a href="#11-18" class="headerlink" title="11.18"></a>11.18</h3><ol>
+<li><p>新附一上报接口沟通</p>
+</li>
+<li><p>福建省立动态满意度记录表太大优化（待处理）</p>
+</li>
+<li><p>广妇儿宣教查看问题</p>
+</li>
+<li><p>半月会（统计指标的价值，医学介入）</p>
+</li>
+<li><p>鄞州人民admin登陆问题（已处理）</p>
+</li>
+</ol>
+<h3 id="11-19"><a href="#11-19" class="headerlink" title="11.19"></a>11.19</h3><ol>
+<li><p>重庆医药集团接口文档细节沟通</p>
+</li>
+<li><p>专科随访高级筛选讨论（目标基本确定）</p>
+</li>
+<li><p>广妇儿esb宕机排查（处方视图效率很差、云端调用接口并发很高，具体原因还未明确）</p>
+</li>
+</ol>
+<h3 id="11-20"><a href="#11-20" class="headerlink" title="11.20"></a>11.20</h3><ol>
+<li><p>广妇儿esb宕机原因继续排查</p>
+</li>
+<li><p>上海红房子Mysql CPU过高（开放给MDT中间库查询导致）</p>
+</li>
+<li><p>广妇儿宣教查看处理</p>
+</li>
+<li><p>医学部需要配合事项整理</p>
+</li>
+</ol>
+<h3 id="11-21"><a href="#11-21" class="headerlink" title="11.21"></a>11.21</h3><ol>
+<li><p>医惠MDT对接问题处理</p>
+</li>
+<li><p>广妇儿表单提交失败问题处理</p>
+</li>
+<li><p>广妇儿音频宣教查看失败</p>
+</li>
+<li><p>代码评审</p>
+</li>
+</ol>
+<h3 id="11-22"><a href="#11-22" class="headerlink" title="11.22"></a>11.22</h3><ol>
+<li><p>郑州市金水区总医院随访CPU过高，tomcat内存分配太少</p>
+</li>
+<li><p>邵逸夫知识库内网环境新建表单宣教配置</p>
+</li>
+<li><p>邵逸夫云端下发宣教分类问题处理</p>
+</li>
+<li><p>广妇儿知识库模式切换</p>
+</li>
+</ol>
+<h3 id="11-23"><a href="#11-23" class="headerlink" title="11.23"></a>11.23</h3><ol>
+<li><p>专科随访高级筛选实现方案构思</p>
+</li>
+<li><p>mysql ibd文件优化大小</p>
+</li>
+<li><p>Java内存回收机制</p>
+</li>
+</ol>
+<p>高尿酸（肾功能不好的患者排除）</p>
 <ol>
-<li>创建型模式：用于描述“怎样创建对象”，它的主要特点是“将对象的创建与使用分离”。GoF 中提供了单例、原型、工厂方法、抽象工厂、建造者等 5 种创建型模式。</li>
-<li>结构型模式：用于描述如何将类或对象按某种布局组成更大的结构，GoF 中提供了代理、适配器、桥接、装饰、外观、享元、组合等 7 种结构型模式。</li>
-<li>行为型模式：用于描述类或对象之间怎样相互协作共同完成单个对象都无法单独完成的任务，以及怎样分配职责。GoF 中提供了模板方法、策略、命令、职责链、状态、观察者、中介者、迭代器、访问者、备忘录、解释器等 11 种行为型模式。</li>
+<li><p>复发率（尿酸）</p>
+</li>
+<li><p>达标率</p>
+</li>
+<li><p>血肌酐均值</p>
+</li>
+<li><p>关注指标：尿酸、血肌酐（肾功能）、诊断（痛风）</p>
+</li>
 </ol>
-<h3 id="根据作用范围来分"><a href="#根据作用范围来分" class="headerlink" title="根据作用范围来分"></a>根据作用范围来分</h3><p>根据模式是主要用于类上还是主要用于对象上来分，这种方式可分为类模式和对象模式两种。</p>
+<p>糖尿病</p>
 <ol>
-<li>类模式：用于处理类与子类之间的关系，这些关系通过继承来建立，是静态的，在编译时刻便确定下来了。GoF中的工厂方法、（类）适配器、模板方法、解释器属于该模式。</li>
-<li>对象模式：用于处理对象之间的关系，这些关系可以通过组合或聚合来实现，在运行时刻是可以变化的，更具动态性。GoF 中除了以上 4 种，其他的都是对象模式。</li>
+<li><p>低血糖发生率 低于3.9</p>
+</li>
+<li><p>酮症酸中毒发生率（诊断）</p>
+</li>
 </ol>
-<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ol>
-<li>单例（Singleton）模式：某个类只能生成一个实例，该类提供了一个全局访问点供外部获取该实例，其拓展是有限多例模式。</li>
-<li>原型（Prototype）模式：将一个对象作为原型，通过对其进行复制而克隆出多个和原型类似的新实例。</li>
-<li>工厂方法（Factory Method）模式：定义一个用于创建产品的接口，由子类决定生产什么产品。</li>
-<li>抽象工厂（AbstractFactory）模式：提供一个创建产品族的接口，其每个子类可以生产一系列相关的产品。</li>
-<li>建造者（Builder）模式：将一个复杂对象分解成多个相对简单的部分，然后根据不同需要分别创建它们，最后构建成该复杂对象。</li>
-<li>代理（Proxy）模式：为某对象提供一种代理以控制对该对象的访问。即客户端通过代理间接地访问该对象，从而限制、增强或修改该对象的一些特性。</li>
-<li>适配器（Adapter）模式：将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。</li>
-<li>桥接（Bridge）模式：将抽象与实现分离，使它们可以独立变化。它是用组合关系代替继承关系来实现，从而降低了抽象和实现这两个可变维度的耦合度。</li>
-<li>装饰（Decorator）模式：动态的给对象增加一些职责，即增加其额外的功能。</li>
-<li>外观（Facade）模式：为多个复杂的子系统提供一个一致的接口，使这些子系统更加容易被访问。</li>
-<li>享元（Flyweight）模式：运用共享技术来有效地支持大量细粒度对象的复用。</li>
-<li>组合（Composite）模式：将对象组合成树状层次结构，使用户对单个对象和组合对象具有一致的访问性。</li>
-<li>模板方法（TemplateMethod）模式：定义一个操作中的算法骨架，而将算法的一些步骤延迟到子类中，使得子类可以不改变该算法结构的情况下重定义该算法的某些特定步骤。</li>
-<li>策略（Strategy）模式：定义了一系列算法，并将每个算法封装起来，使它们可以相互替换，且算法的改变不会影响使用算法的客户。</li>
-<li>命令（Command）模式：将一个请求封装为一个对象，使发出请求的责任和执行请求的责任分割开。</li>
-<li>职责链（Chain of Responsibility）模式：把请求从链中的一个对象传到下一个对象，直到请求被响应为止。通过这种方式去除对象之间的耦合。</li>
-<li>状态（State）模式：允许一个对象在其内部状态发生改变时改变其行为能力。</li>
-<li>观察者（Observer）模式：多个对象间存在一对多关系，当一个对象发生改变时，把这种改变通知给其他多个对象，从而影响其他对象的行为。</li>
-<li>中介者（Mediator）模式：定义一个中介对象来简化原有对象之间的交互关系，降低系统中对象间的耦合度，使原有对象之间不必相互了解。</li>
-<li>迭代器（Iterator）模式：提供一种方法来顺序访问聚合对象中的一系列数据，而不暴露聚合对象的内部表示。</li>
-<li>访问者（Visitor）模式：在不改变集合元素的前提下，为一个集合中的每个元素提供多种访问方式，即每个元素有多个访问者对象访问。</li>
-<li>备忘录（Memento）模式：在不破坏封装性的前提下，获取并保存一个对象的内部状态，以便以后恢复它。</li>
-<li>解释器（Interpreter）模式：提供如何定义语言的文法，以及对语言句子的解释方法，即解释器。</li>
+<p>spss</p>
+<p>1、专科转病管理路径（专科随访路径）</p>
+<p>2、知识库：宣教、表单（表单说明，题目、选项的医学意义）</p>
+<p>3、专科关注指标（为什么关注指标项）</p>
+<p>4、专科统计（统计指标含义，统计的管理价值，统计的医学价值）</p>
+<p>5、文献资料，权威医院、科室临床经验</p>
+<h3 id="11-25"><a href="#11-25" class="headerlink" title="11.25"></a>11.25</h3><ol>
+<li><p>下城区事务回滚问题处理（已处理）</p>
+</li>
+<li><p>广妇儿宣教历史数据处理（已处理）</p>
+</li>
+<li><p>南京鼓楼需求讨论</p>
+</li>
+<li><p>吉大一需求评估</p>
+</li>
 </ol>
-<p>必须指出，这 23 种设计模式不是孤立存在的，很多模式之间存在一定的关联关系，在大的系统开发中常常同时使用多种设计模式，希望读者认真学好它们。</p>
+<h3 id="11-26"><a href="#11-26" class="headerlink" title="11.26"></a>11.26</h3><ol>
+<li>广妇儿宣教编辑问题（云端知识库问题，已处理）</li>
+</ol>
+<h3 id="11-27"><a href="#11-27" class="headerlink" title="11.27"></a>11.27</h3><ol>
+<li><p>mongodb-java-driver，复杂查询</p>
+</li>
+<li><p>java内存管理</p>
+</li>
+<li><p>邵逸夫日间手术问题处理</p>
+</li>
+</ol>
+<h3 id="11-28"><a href="#11-28" class="headerlink" title="11.28"></a>11.28</h3><ol>
+<li><p>日间手术流程整理，概要设计（省妇保版本功能模块、E-R图）</p>
+</li>
+<li><p>专科随访演示环境问题处理</p>
+</li>
+</ol>
+<h3 id="11-29"><a href="#11-29" class="headerlink" title="11.29"></a>11.29</h3><ol>
+<li><p>日间手术概要设计（数据库）</p>
+</li>
+<li><p>专科随访演示环境搭建</p>
+</li>
+</ol>
+<h3 id="重庆医药集团"><a href="#重庆医药集团" class="headerlink" title="重庆医药集团"></a>重庆医药集团</h3><ol>
+<li><p>专科</p>
+<ul>
+<li><p>出院患者</p>
+</li>
+<li><p>各合作医院科室的患者</p>
+</li>
+<li><p>提供excel导入的功能</p>
+</li>
+</ul>
+</li>
+<li><p>药房</p>
+<ul>
+<li><p>新增患者来源（患者信息、购药记录、购药详情接口），推送</p>
+</li>
+<li><p>随访、复诊题型、配药提醒、失访人群跟踪</p>
+</li>
+</ul>
+</li>
+<li><p>病程管理</p>
+<ul>
+<li><p>和病程系统对接（多个病种，新增病种需要个性化开发，随访可以用表单功能实现扩展）</p>
+</li>
+<li><p>提供随访记录接口（推送接口）</p>
+</li>
+</ul>
+</li>
+<li><p>微信接口</p>
+<ul>
+<li><p>模版消息推送，手机号、身份证、就诊卡号作为患者标识</p>
+</li>
+<li><p>医院将多个服务号整合，统一入口，随访在原有基础上增加类型（实为科室代码）疾病</p>
+</li>
+</ul>
+</li>
+<li><p>短信接口</p>
+<ul>
+<li><p>手机号、内容、类型，返回成功&#x2F;失败状态</p>
+</li>
+<li><p>医院将多个服务号整合，统一入口，随访在原有基础上增加类型（实为科室代码），模版类型，发送内容（完整内容，json串）、疾病</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>6- APP接口</p>
+<ul>
+<li>患者id、姓名、手机号、身份证</li>
+</ul>
+<p>    微信、短信、APP接口都是异步</p>
+<h3 id="重庆医药集团-1"><a href="#重庆医药集团-1" class="headerlink" title="重庆医药集团"></a>重庆医药集团</h3><ol start="2">
+<li><p>技术方向看系统数据结构、数据库结构</p>
+</li>
+<li><p>接口</p>
+<ul>
+<li><p>消息，推送</p>
+</li>
+<li><p>患者信息（重庆医药提供，科室、病种名称）</p>
+</li>
+<li><p>随访信息（随访提供接口，多选用逗号分隔，随访提供接口Demo）</p>
+</li>
+</ul>
+</li>
+<li><p>病程管理系统，患者信息（重庆医药开接口）（科室，病种），采用住院记录接口</p>
+</li>
+<li><p>零售ERP系统（药房），患者信息（重庆医药）开接口</p>
+</li>
+<li><p>脱失人员管理，购药记录和随访配药提醒记录关联</p>
+</li>
+<li><p>表单题目增加code属性（重庆医药字段名），用来提供接口</p>
+</li>
+</ol>
+<h3 id="随访提供（11-18提供）"><a href="#随访提供（11-18提供）" class="headerlink" title="随访提供（11.18提供）"></a>随访提供（11.18提供）</h3><ol>
+<li><p>随访结果Demo</p>
+</li>
+<li><p>短信模版</p>
+</li>
+<li><p>住院记录接口</p>
+</li>
+<li><p>患者信息中间库表结构</p>
+</li>
+</ol>
+<h1 id="重庆医药提供"><a href="#重庆医药提供" class="headerlink" title="重庆医药提供"></a>重庆医药提供</h1><ol>
+<li><p>APP、微信、短信发送接口</p>
+</li>
+<li><p>病程管理患者信息、药房订单信息&#x2F;订单明细接口</p>
+</li>
+<li><p>随访信息回写接口</p>
+</li>
+</ol>
+<h3 id="接口问题："><a href="#接口问题：" class="headerlink" title="接口问题："></a>接口问题：</h3><ol>
+<li><p>病程管理</p>
+<ul>
+<li><p>organ_code 组织机构代码为固定值，dept_code为科室id。</p>
+</li>
+<li><p>字段长度都是：患者在院id–64、科室id–64、系统患者id–64、性别代码–64、性别名称64、科室名称–100？</p>
+</li>
+</ul>
+</li>
+<li><p>erp订单信息</p>
+<ul>
+<li>字段长度：患者id–64？</li>
+<li></li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -497,7 +795,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/7c2c/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/45a0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -511,7 +809,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/7c2c/" class="post-title-link" itemprop="url">设计模式概述</a>
+            <a href="/posts/45a0/" class="post-title-link" itemprop="url">Java并发Semaphore使用</a>
         </h2>
 
         <div class="post-meta">
@@ -521,102 +819,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-10-24 10:10:26" itemprop="dateCreated datePublished" datetime="2019-10-24T10:10:26+08:00">2019-10-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>927</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="软件设计模式的概念"><a href="#软件设计模式的概念" class="headerlink" title="软件设计模式的概念"></a>软件设计模式的概念</h1><p>软件设计模式（Software Design Pattern），又称设计模式，是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。它描述了在软件设计过程中的一些不断重复发生的问题，以及该问题的解决方案。也就是说，它是解决特定问题的一系列套路，是前辈们的代码设计经验的总结，具有一定的普遍性，可以反复使用。其目的是为了提高代码的可重用性、代码的可读性和代码的可靠性。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/7c2c/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1403/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/1403/" class="post-title-link" itemprop="url">Java 8 中的 Streams API 详解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-23 15:56:35" itemprop="dateCreated datePublished" datetime="2019-10-23T15:56:35+08:00">2019-10-23</time>
+              <time title="创建时间：2019-11-01 09:47:14" itemprop="dateCreated datePublished" datetime="2019-11-01T09:47:14+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -641,14 +844,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.8k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>21 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -660,10 +863,108 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="为什么需要-Stream"><a href="#为什么需要-Stream" class="headerlink" title="为什么需要 Stream"></a>为什么需要 Stream</h1><p>Stream 作为 Java 8 的一大亮点，它与 java.io 包里的 InputStream 和 OutputStream 是完全不同的概念。它也不同于 StAX 对 XML 解析的 Stream，也不是 Amazon Kinesis 对大数据实时处理的 Stream。Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性。同时它提供串行和并行两种模式进行汇聚操作，并发模式能够充分利用多核处理器的优势，使用 fork&#x2F;join 并行方式来拆分任务和加速处理过程。通常编写并行代码很难而且容易出错, 但使用 Stream API 无需编写一行多线程的代码，就可以很方便地写出高性能的并发程序。所以说，Java 8 中首次出现的 java.util.stream 是一个函数式语言+多核时代综合影响的产物。</p>
+          <p>Semaphore 是 synchronized 的加强版，作用是控制线程的并发数量。</p>
+<p>示例：</p>
+<p>MyThread.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyThread</span> <span class="keyword">extends</span> <span class="title class_">Thread</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> SemaphoreService service;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyThread</span><span class="params">(String name, SemaphoreService service)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.service = service;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.service.doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SemaphoreService.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Semaphore;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SemaphoreService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">SimpleDateFormat</span> <span class="variable">sf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">Semaphore</span> <span class="variable">semaphore</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Semaphore</span>(<span class="number">2</span>);<span class="comment">// 同步关键类，构造方法传入的数字是多少，则同一个时刻，只运行多少个进程同时运行制定代码</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doSomething</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 在 semaphore.acquire() 和 semaphore.release()之间的代码，同一时刻只允许制定个数的线程进入，</span></span><br><span class="line"><span class="comment">             * 因为semaphore的构造方法是1，则同一时刻只允许一个线程进入，其他线程只能等待。</span></span><br><span class="line"><span class="comment">             * */</span></span><br><span class="line">            semaphore.acquire();</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">&quot;:doSomething start-&quot;</span> + getFormatTimeStr());</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + <span class="string">&quot;:doSomething end-&quot;</span> + getFormatTimeStr());</span><br><span class="line">            semaphore.release();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">getFormatTimeStr</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> sf.format(<span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SemaphoreTest.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SemaphoreTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span> &#123;</span><br><span class="line">        <span class="type">SemaphoreService</span> <span class="variable">service</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SemaphoreService</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="type">MyThread</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyThread</span>(<span class="string">&quot;thread&quot;</span> + (i + <span class="number">1</span>), service);</span><br><span class="line">            t.start();<span class="comment">// 这里使用 t.run() 也可以运行，但是不是并发执行了</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1082/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/1082/" class="post-title-link" itemprop="url">MySQL server has gone away</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-30 09:31:22" itemprop="dateCreated datePublished" datetime="2019-10-30T09:31:22+08:00">2019-10-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>201</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>批量导入数据时，数据量大的话会报错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2006 - MySQL server has gone away</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/1403/#more" rel="contents">
+              <a class="btn" href="/posts/1082/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -686,7 +987,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/53/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/page/55/">55</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><a class="extend next" rel="next" href="/page/55/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/53/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/page/55/">55</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/55/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -752,20 +1053,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">434</span>
+          <span class="site-state-item-count">439</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-count">75</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -801,12 +1102,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">276k</span>
+    <span title="站点总字数">742k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16:42</span>
+    <span title="站点阅读时长">11:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

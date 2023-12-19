@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/f426/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1f79/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/f426/" class="post-title-link" itemprop="url">Linux查看端口占用情况</a>
+            <a href="/posts/1f79/" class="post-title-link" itemprop="url">Zookeeper数据查看工具ZooInspector</a>
         </h2>
 
         <div class="post-meta">
@@ -212,14 +212,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-01-21 11:15:46" itemprop="dateCreated datePublished" datetime="2022-01-21T11:15:46+08:00">2022-01-21</time>
+              <time title="创建时间：2022-02-21 10:32:19" itemprop="dateCreated datePublished" datetime="2022-02-21T10:32:19+08:00">2022-02-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+                <time title="修改时间：2023-03-15 10:26:23" itemprop="dateModified" datetime="2023-03-15T10:26:23+08:00">2023-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +227,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                  <a href="/categories/Zookeeper/" itemprop="url" rel="index"><span itemprop="name">Zookeeper</span></a>
                 </span>
             </span>
 
@@ -237,14 +237,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>511</span>
+              <span>228</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -256,45 +256,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Linux 查看端口占用情况可以使用 <strong>lsof</strong> 和 <strong>netstat</strong> 命令。</p>
-<hr>
-<h2 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h2><p>lsof(list open files)是一个列出当前系统打开文件的工具。</p>
-<p>lsof 查看端口占用语法格式：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof -<span class="selector-tag">i</span>:端口号</span><br></pre></td></tr></table></figure>
+          <h4 id="1、下载"><a href="#1、下载" class="headerlink" title="1、下载"></a>1、下载</h4><p><a target="_blank" rel="noopener" href="https://issues.apache.org/jira/secure/attachment/12436620/*ZooInspector*.zip%EF%BC%9B">https://issues.apache.org/jira/secure/attachment/12436620/*ZooInspector*.zip；</a></p>
+<h4 id="2、解压"><a href="#2、解压" class="headerlink" title="2、解压"></a>2、解压</h4><p> 进入目录ZooInspector\build，运行zookeeper-dev-ZooInspector.jar；</p>
+<p><img src="https://s2.loli.net/2022/02/21/6CaX38JPLiqUrjg.png" alt="image-20220221103419342"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar zookeeper-dev-ZooInspector.jar</span><br></pre></td></tr></table></figure>
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查看服务器 8000 端口的占用情况：</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># lsof -i:8000</span></span><br><span class="line">COMMAND   PID <span class="keyword">USER</span>   <span class="title">FD</span>   <span class="keyword">TYPE</span>   DEVICE SIZE/OFF <span class="keyword">NODE</span> <span class="title">NAME</span></span><br><span class="line">nodejs  <span class="number">26993</span> root   <span class="number">10</span>u  IPv4 <span class="number">37999514</span>      <span class="number">0</span>t0  TCP *:<span class="number">8000</span> (LISTEN)</span><br></pre></td></tr></table></figure>
-
-<p>可以看到 8000 端口已经被轻 nodejs 服务占用。</p>
-<p>lsof -i 需要 root 用户的权限来执行，如下图：</p>
-<p><img src="https://s2.loli.net/2022/01/21/f6J3I8OqdPw7Nr4.png"></p>
-<p>更多 lsof 的命令如下：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">lsof</span> -i:<span class="number">8080</span>：查看<span class="number">8080</span>端口占用</span><br><span class="line"><span class="attribute">lsof</span> abc.txt：显示开启文件abc.txt的进程</span><br><span class="line"><span class="attribute">lsof</span> -c abc：显示abc进程现在打开的文件</span><br><span class="line"><span class="attribute">lsof</span> -c -p <span class="number">1234</span>：列出进程号为<span class="number">1234</span>的进程所打开的文件</span><br><span class="line"><span class="attribute">lsof</span> -g gid：显示归属gid的进程情况</span><br><span class="line"><span class="attribute">lsof</span> +d /usr/local/：显示目录下被进程开启的文件</span><br><span class="line"><span class="attribute">lsof</span> +D /usr/local/：同上，但是会搜索目录下的目录，时间较长</span><br><span class="line"><span class="attribute">lsof</span> -d <span class="number">4</span>：显示使用fd为<span class="number">4</span>的进程</span><br><span class="line"><span class="attribute">lsof</span> -i -U：显示所有打开的端口和UNIX domain文件</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h2><p><strong>netstat -tunlp</strong> 用于显示 tcp，udp 的端口和进程等相关情况。</p>
-<p>netstat 查看端口占用语法格式：</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tunlp <span class="string">| grep 端口号</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>-t (tcp) 仅显示tcp相关选项</li>
-<li>-u (udp)仅显示udp相关选项</li>
-<li>-n 拒绝显示别名，能显示数字的全部转化为数字</li>
-<li>-l 仅列出在Listen(监听)的服务状态</li>
-<li>-p 显示建立相关链接的程序名</li>
-</ul>
-<p>例如查看 8000 端口的情况，使用以下命令：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># netstat -tunlp | grep 8000</span></span><br><span class="line"><span class="attribute">tcp</span>        <span class="number">0</span>      <span class="number">0</span> <span class="number">0.0.0.0:8000</span>            <span class="number">0.0.0.0</span>:*               LISTEN      <span class="number">26993</span>/nodejs   </span><br></pre></td></tr></table></figure>
-
-<p>更多命令：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -ntlp   <span class="regexp">//</span>查看当前所有tcp端口</span><br><span class="line">netstat -ntulp | grep <span class="number">80</span>   <span class="regexp">//</span>查看所有<span class="number">80</span>端口使用情况</span><br><span class="line">netstat -ntulp | grep <span class="number">3306</span>   <span class="regexp">//</span>查看所有<span class="number">3306</span>端口使用情况</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h2><p>在查到端口占用的进程后，如果你要杀掉对应的进程可以使用 kill 命令：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">kill</span> -<span class="number">9</span> PID</span><br></pre></td></tr></table></figure>
-
-<p>如上实例，我们看到 8000 端口对应的 PID 为 26993，使用以下命令杀死进程：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">kill</span> -<span class="number">9</span> <span class="number">26993</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/02/21/mUnsQZwhGKz8B4a.png" alt="image-20220221103434760"></p>
+<h4 id="3、点击左上角连接按钮，输入zk服务地址：ip或者主机名-2181"><a href="#3、点击左上角连接按钮，输入zk服务地址：ip或者主机名-2181" class="headerlink" title="3、点击左上角连接按钮，输入zk服务地址：ip或者主机名:2181"></a>3、点击左上角连接按钮，输入zk服务地址：ip或者主机名:2181</h4><p><img src="https://s2.loli.net/2022/02/21/orCpDEdhtLeZg7F.png" alt="image-20220221103449101"></p>
+<p> 点击OK，即可查看ZK节点信息</p>
+<p><img src="https://s2.loli.net/2022/02/21/Zvr72tBAaIDcl9o.png" alt="image-20220221103504135"></p>
 
       
     </div>
@@ -314,7 +284,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/c4a6/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/ebc4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -328,7 +298,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/c4a6/" class="post-title-link" itemprop="url">MySQL中datetime和timestamp的区别与选择</a>
+            <a href="/posts/ebc4/" class="post-title-link" itemprop="url">SQLServer日期格式化</a>
         </h2>
 
         <div class="post-meta">
@@ -338,7 +308,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-01-19 17:15:19" itemprop="dateCreated datePublished" datetime="2022-01-19T17:15:19+08:00">2022-01-19</time>
+              <time title="创建时间：2022-02-18 11:52:26" itemprop="dateCreated datePublished" datetime="2022-02-18T11:52:26+08:00">2022-02-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -347,15 +317,6 @@
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
-            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -363,14 +324,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>741</span>
+              <span>216</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -382,10 +343,93 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>MySQL 中常用的两种时间储存类型分别是<code>datetime</code>和 <code>timestamp</code>。如何在它们之间选择是建表时必要的考虑。下面就谈谈他们的区别和怎么选择。</p>
+          <h1 id="日期时间转字符串"><a href="#日期时间转字符串" class="headerlink" title="日期时间转字符串"></a>日期时间转字符串</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># <span class="number">2006</span><span class="number">-05</span><span class="number">-16</span></span><br><span class="line"><span class="keyword">Select</span> <span class="keyword">CONVERT</span>(<span class="type">varchar</span>(<span class="number">100</span>), GETDATE(), <span class="number">23</span>)</span><br><span class="line"></span><br><span class="line"># <span class="number">2006</span><span class="number">-05</span><span class="number">-16</span> <span class="number">10</span>:<span class="number">57</span>:<span class="number">49</span>  </span><br><span class="line"><span class="keyword">Select</span> <span class="keyword">CONVERT</span>(<span class="type">varchar</span>(<span class="number">100</span>), GETDATE(), <span class="number">120</span>)</span><br><span class="line"></span><br><span class="line"># <span class="number">2006</span><span class="number">-05</span><span class="number">-16</span> <span class="number">10</span>:<span class="number">57</span>:<span class="number">49.700</span> </span><br><span class="line"><span class="keyword">Select</span> <span class="keyword">CONVERT</span>(<span class="type">varchar</span>(<span class="number">100</span>), GETDATE(), <span class="number">121</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="当前系统日期、时间"><a href="#当前系统日期、时间" class="headerlink" title="当前系统日期、时间"></a>当前系统日期、时间</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> getdate() </span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e209/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/e209/" class="post-title-link" itemprop="url">数据湖到底是什么？有什么用？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-14 15:29:20" itemprop="dateCreated datePublished" datetime="2022-02-14T15:29:20+08:00">2022-02-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>当前大数据发展有三大趋势： 数据仓库往数据湖方向发展、批处理往流式处理发展、本地部署往云模式发展。数据湖作为最近两年兴起的热点概念，各大互联网公司都在对其研究和探索。本文参考了阿里、腾讯和网易等公司的一些资料，将告诉你数据湖到底是什么？有什么用？</p>
+<p><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/7f01991ac2f3b6ef0423be513">https://xie.infoq.cn/article/7f01991ac2f3b6ef0423be513</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/c4a6/#more" rel="contents">
+              <a class="btn" href="/posts/e209/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -409,7 +453,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/729d/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/3d24/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -423,7 +467,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/729d/" class="post-title-link" itemprop="url">MongoDB中的insert into select</a>
+            <a href="/posts/3d24/" class="post-title-link" itemprop="url">Tomcat启动报错：More than one fragment with the name [org_apache_tomcat_websocket]</a>
         </h2>
 
         <div class="post-meta">
@@ -433,7 +477,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-01-19 13:37:17" itemprop="dateCreated datePublished" datetime="2022-01-19T13:37:17+08:00">2022-01-19</time>
+              <time title="创建时间：2022-02-11 09:51:38" itemprop="dateCreated datePublished" datetime="2022-02-11T09:51:38+08:00">2022-02-11</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -448,7 +492,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
+                  <a href="/categories/Tomcat/" itemprop="url" rel="index"><span itemprop="name">Tomcat</span></a>
                 </span>
             </span>
 
@@ -458,7 +502,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>21</span>
+              <span>287</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -477,8 +521,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="MongoDB实现MySQL-insert-into-select功能"><a href="#MongoDB实现MySQL-insert-into-select功能" class="headerlink" title="MongoDB实现MySQL  insert into select功能"></a>MongoDB实现MySQL  insert into select功能</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.collectionABC.find(&#123; conditionB: <span class="number">1</span> &#125;).</span><br><span class="line">forEach( <span class="keyword">function</span>(i) &#123; </span><br><span class="line">  i.ts_imported <span class="operator">=</span> <span class="keyword">new</span> <span class="type">Date</span>();</span><br><span class="line">  db.collectionB.insert(i);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
+          <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>SpringBoot项目，本机运行正常，打war包放到服务器的Tomcat中之后无法访问，404.</p>
+<p>查看了Tomcat的catalina.日志，发现报错：</p>
+<p>More than one fragment with the name [org_apache_tomcat_websocket] was found.This is not legal with relative ordering. See section 8.2.2 2c of the Servlet specification for details. Consider using absolute ordering.</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>把Tomcat7 换成Tomcat8</p>
 
       
     </div>
@@ -498,7 +544,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/65d5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/7b54/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -512,7 +558,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/65d5/" class="post-title-link" itemprop="url">Mac查看JAVA_HOME</a>
+            <a href="/posts/7b54/" class="post-title-link" itemprop="url">Mac在home目录下创建文件夹</a>
         </h2>
 
         <div class="post-meta">
@@ -522,7 +568,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-01-17 17:57:55" itemprop="dateCreated datePublished" datetime="2022-01-17T17:57:55+08:00">2022-01-17</time>
+              <time title="创建时间：2022-01-26 10:10:58" itemprop="dateCreated datePublished" datetime="2022-01-26T10:10:58+08:00">2022-01-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -538,7 +584,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>31</span>
+              <span>558</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -557,100 +603,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="控制台命令"><a href="#控制台命令" class="headerlink" title="控制台命令"></a>控制台命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/libexec/java_home -v</span><br></pre></td></tr></table></figure>
+          <h3 id="1、修改auto-master"><a href="#1、修改auto-master" class="headerlink" title="1、修改auto_master"></a>1、修改auto_master</h3><p>编译 &#x2F;etc&#x2F;auto_master 文件，注释掉或者移除以 &#x2F;home 开头的那一行，保存。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/auto_master</span><br></pre></td></tr></table></figure>
+
+<p>会提示<code>&quot;/etc/auto_master&quot; [readonly] 8L, 196C</code> ,文件不可编辑</p>
+<p>可以使用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/auto_master</span><br></pre></td></tr></table></figure>
+
+<p>注释掉 &#x2F;home 哪一行，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Automounter master map</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">+auto_master            <span class="comment"># Use directory service</span></span><br><span class="line">/net                    -hosts          -nobrowse,hidefromfinder,nosuid</span><br><span class="line"><span class="comment">#/home                  auto_home       -nobrowse,hidefromfinder</span></span><br><span class="line">/Network/Servers        -fstab</span><br><span class="line">/-                      -static</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><img src="/Users/linjian/Library/Application%20Support/typora-user-images/image-20220117175906480.png" alt="image-20220117175906480" style="zoom:70%;" />
+<h3 id="2、回到根目录，创建文件夹"><a href="#2、回到根目录，创建文件夹" class="headerlink" title="2、回到根目录，创建文件夹"></a>2、回到根目录，创建文件夹</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /  (这一步很重要)</span><br><span class="line">sudo automount （必须在/目录下执行）</span><br><span class="line"><span class="built_in">mkdir</span> /home/config</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/4e35/">
+<h3 id="3、此目录是mac系统保留的目录，升级或修复系统都会抹除此目录下的数据，如果一定要使用，建议创建一个链接目录来存储数据，执行以下命令："><a href="#3、此目录是mac系统保留的目录，升级或修复系统都会抹除此目录下的数据，如果一定要使用，建议创建一个链接目录来存储数据，执行以下命令：" class="headerlink" title="3、此目录是mac系统保留的目录，升级或修复系统都会抹除此目录下的数据，如果一定要使用，建议创建一个链接目录来存储数据，执行以下命令："></a>3、此目录是mac系统保留的目录，升级或修复系统都会抹除此目录下的数据，如果一定要使用，建议创建一个链接目录来存储数据，执行以下命令：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">ln</span> -s /Users/linjian/config /home/config</span><br></pre></td></tr></table></figure>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/4e35/" class="post-title-link" itemprop="url">Nacos部署环境</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-01-13 15:57:38" itemprop="dateCreated datePublished" datetime="2022-01-13T15:57:38+08:00">2022-01-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><h4 id="动态配置服务"><a href="#动态配置服务" class="headerlink" title="动态配置服务"></a>动态配置服务</h4><p>动态配置服务让您能够以中心化、外部化和动态化的方式管理所有环境的配置。动态配置消除了配置变更时重新部署应用和服务的需要。配置中心化管理让实现无状态服务更简单，也让按需弹性扩展服务更容易。</p>
-<h4 id="服务发现及管理"><a href="#服务发现及管理" class="headerlink" title="服务发现及管理"></a>服务发现及管理</h4><p>动态服务发现对以服务为中心的（例如微服务和云原生）应用架构方式非常关键。Nacos支持DNS-Based和RPC-Based（Dubbo、gRPC）模式的服务发现。Nacos也提供实时健康检查，以防止将请求发往不健康的主机或服务实例。借助Nacos，您可以更容易地为您的服务实现断路器。</p>
-<h4 id="动态DNS服务"><a href="#动态DNS服务" class="headerlink" title="动态DNS服务"></a>动态DNS服务</h4><p>通过支持权重路由，动态DNS服务能让您轻松实现中间层负载均衡、更灵活的路由策略、流量控制以及简单数据中心内网的简单DNS解析服务。动态DNS服务还能让您更容易地实现以DNS协议为基础的服务发现，以消除耦合到厂商私有服务发现API上的风险。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/4e35/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
@@ -668,7 +638,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -734,20 +704,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">434</span>
+          <span class="site-state-item-count">439</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-count">75</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -783,12 +753,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">276k</span>
+    <span title="站点总字数">742k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16:42</span>
+    <span title="站点阅读时长">11:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

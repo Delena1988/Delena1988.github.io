@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一 虚拟环境基础知识Python在开发人员中大受欢迎，最大的原因之一是它广泛且不断扩大的第三方包选择。虚拟环境可以为每个项目创建单独的隔离环境，达到分离不同项目的依赖关系的目的。 Python有针对不同应用程序的各种模块和包。在我们的项目开发中，可能需要一些三方库，那么就需要安装这个库，而另一个项目可能不需要任何其他第三方包，或者是需要其中某些三方包的其他的版本。当不同的Python项目需要相同插">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python虚拟环境">
+<meta property="og:url" content="http://example.com/posts/6670/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="一 虚拟环境基础知识Python在开发人员中大受欢迎，最大的原因之一是它广泛且不断扩大的第三方包选择。虚拟环境可以为每个项目创建单独的隔离环境，达到分离不同项目的依赖关系的目的。 Python有针对不同应用程序的各种模块和包。在我们的项目开发中，可能需要一些三方库，那么就需要安装这个库，而另一个项目可能不需要任何其他第三方包，或者是需要其中某些三方包的其他的版本。当不同的Python项目需要相同插">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/vQgJEK.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/Byzfqv.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/6wOG7D.jpg">
+<meta property="article:published_time" content="2023-11-30T07:21:22.000Z">
+<meta property="article:modified_time" content="2023-12-01T01:41:47.929Z">
+<meta property="article:author" content="林剑">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/vQgJEK.jpg">
+
+<link rel="canonical" href="http://example.com/posts/6670/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python虚拟环境 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6670/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python虚拟环境
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-30 15:21:22" itemprop="dateCreated datePublished" datetime="2023-11-30T15:21:22+08:00">2023-11-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-01 09:41:47" itemprop="dateModified" datetime="2023-12-01T09:41:47+08:00">2023-12-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="一-虚拟环境基础知识"><a href="#一-虚拟环境基础知识" class="headerlink" title="一 虚拟环境基础知识"></a>一 虚拟环境基础知识</h2><p>Python在开发人员中大受欢迎，最大的原因之一是它广泛且不断扩大的第三方包选择。虚拟环境可以为每个项目创建单独的隔离环境，达到分离不同项目的依赖关系的目的。</p>
+<p>Python有针对不同应用程序的各种模块和包。在我们的项目开发中，可能需要一些三方库，那么就需要安装这个库，而另一个项目可能不需要任何其他第三方包，或者是需要其中某些三方包的其他的版本。当不同的Python项目需要相同插件的竞争或不兼容版本时，就会出现问题，导致程序莫名的异常。</p>
+<p>另外开发用的电脑，可能同时安装了Python2和Python3，而Python2和Python3又有更多的小版本号，而有些现成的项目可能开发比较早，只支持用Python2编译，而有些则必须要Python3才行，这样如果没有隔离，则也会导致程序无法运行。</p>
+<p>因此，虚拟环境此时能够发挥作用，为不同的Python安装版本、或不同的项目创建单独的隔离环境，每个项目可以从其特定的环境中存储和检索包，使用特定的Python版本。</p>
+<h2 id="二-如何使用虚拟环境"><a href="#二-如何使用虚拟环境" class="headerlink" title="二 如何使用虚拟环境"></a>二 如何使用虚拟环境</h2><p>这里通过具体操作执行进行示例说明。</p>
+<h2 id="2-1-安装virtualenv"><a href="#2-1-安装virtualenv" class="headerlink" title="2.1 安装virtualenv"></a>2.1 安装virtualenv</h2><p>要创建虚拟环境，需要先安装一个名为virtualenv的模块。首先要确保在计算机上安装了pip。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 如果计算机上没有安装pip，需使用以下命令先安装pip，不同的操作系统命令会有差异:</span><br><span class="line">sudo apt-get install python-pip</span><br><span class="line"></span><br><span class="line"># 然后通过pip来安装virtualenv，安装后可以检查下virtualenv的版本:</span><br><span class="line">pip install virtualenv</span><br><span class="line">virtualenv --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-创建虚拟环境并激活"><a href="#2-2-创建虚拟环境并激活" class="headerlink" title="2.2 创建虚拟环境并激活"></a>2.2 创建虚拟环境并激活</h2><p>成功安装virtualenv之后，可以使用以下命令创建一个特定名称的虚拟环境:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 创建特定名称的虚拟环境,myvenv可以换成任意你喜欢的名字都行</span><br><span class="line">virtualenv myvenv</span><br><span class="line"># 执行以上命令会创建myvenv的文件夹，包含运行Python项目所需的所有可执行文件</span><br><span class="line"></span><br><span class="line"># 如果要指定Python版本，可以通过下面指令来创建虚拟环境:</span><br><span class="line">python2.7 virtualenv myvenv    # 创建使用Python2.7的虚拟环境</span><br><span class="line"># 也可以通过下面的命令来创建虚拟环境，效果和上面的一样的</span><br><span class="line">python3 -m venv myvenv         # 创建使用Python3的虚拟环境</span><br><span class="line"></span><br><span class="line"># 在创建好虚拟环境后，还需要用如下命令启用，激活进入特定的隔离环境</span><br><span class="line">source venv/bin/activate</span><br><span class="line"># 如果是在Windows系统下，上面的激活命令略有差异：</span><br><span class="line">venv/Scripts/activate</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/vQgJEK.jpg"></p>
+<p>成功激活进入虚拟环境后，如下图所示，会在命令行前面看到有(.venv)的标志：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/Byzfqv.jpg"></p>
+<p>成功创建并激活了虚拟环境后，就可以安装项目所需的依赖项和需求，而不会干扰到其他项目了。</p>
+<h2 id="2-3-退出虚拟环境"><a href="#2-3-退出虚拟环境" class="headerlink" title="2.3 退出虚拟环境"></a>2.3 退出虚拟环境</h2><p>一旦完成了当前项目的工作，可以返回到系统默认环境，只需要使用deactivate命令即可退出。</p>
+<h2 id="三-虚拟环境的工作原理"><a href="#三-虚拟环境的工作原理" class="headerlink" title="三 虚拟环境的工作原理"></a>三 虚拟环境的工作原理</h2><p>如果没有使用虚拟环境时，Python的第三方包都会被pip安装到Python安装路径的site-packages目录下。当使用虚拟环境时，按照前面的“python3 -m venv myvenv”等方式创建虚拟环境后，可以查看当前目录，会看到几个文件：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/6wOG7D.jpg"></p>
+<ul>
+<li>bin目录：python3、pip3等可执行文件，其实就是是软链接到Python系统目录(或者是复制的副本)的</li>
+<li>lib&#x2F;python3.10&#x2F;site-packages：用于该虚拟环境下安装的三方包的存储目录的</li>
+</ul>
+<p>所以，通过venv，会将系统的Python软链接到venv的环境下，当用source命令激活虚拟环境时，就会启用该venv下面的python和pip了，同时过程中安装的三方包都是放在venv&#x2F;lib&#x2F;pythonx.x&#x2F;site-packages下面的，这样系统的Python环境是不会受到任何影响的。</p>
+<h2 id="四-虚拟环境的更多用法"><a href="#四-虚拟环境的更多用法" class="headerlink" title="四 虚拟环境的更多用法"></a>四 虚拟环境的更多用法</h2><h2 id="4-1-三方包依赖需求生成与重新安装"><a href="#4-1-三方包依赖需求生成与重新安装" class="headerlink" title="4.1 三方包依赖需求生成与重新安装"></a>4.1 三方包依赖需求生成与重新安装</h2><p>如前所述，在创建一个新的虚拟环境后，pip和setuptools包会被软链接（或复制）到虚拟环境下，接下来可以安装在环境中使用的任何其他包。对于具有复杂需求的项目，在项目的根目录中最好能保留一个requirements.txt的文件，这个文件列出了项目的三方包依赖的需求。这样，如果需要重新创建虚拟环境，可以使用pip install -r requirements.txt命令重新安装所有需要的包。</p>
+<p>在项目的虚拟环境中安装完所需的库后，可使用pip list查看当前所有已安装的库，然后可以通过运行以下命令生成一个文本文件，列出所有项目依赖项：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>那么在其他计算机上重新搭建这个项目的环境时，则可以快速通过如下命令，一次将所有依赖的三方包安装齐全：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-虚拟环境更新升级"><a href="#4-2-虚拟环境更新升级" class="headerlink" title="4.2 虚拟环境更新升级"></a>4.2 虚拟环境更新升级</h2><p>虚拟环境中的pip和setuptools副本是该虚拟环境的本地副本，需要独立地进行更新和维护。所以会遇到某些虚拟环境中pip过时的警告，而在其他虚拟环境中则不会，pip必须在每个虚拟环境中分别更新才行。</p>
+<p>因此当升级系统上的Python运行时时，使用该版本的Python的虚拟环境是不会自动升级的，这样设计也是合理的，因为无意中升级到新Python版本可能会破坏它们的三方包依赖。</p>
+<p>具体的虚拟环境更新升级操作如下：</p>
+<p>Python小版本升级：</p>
+<p>如果已经升级了一个现有的Python小版本，比如从Python 3.9.5到Python 3.9.7，那么可以在项目目录下通过如下方式升级虚拟环境(不要提前激活虚拟环境，否则可能导致升级失败)：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m venv myvenv --upgrade</span><br></pre></td></tr></table></figure>
+
+<p>Python大版本升级：</p>
+<p>如果已经安装了一个主要的新版本的Python，比如已经有了Python 3.8，现在将安装Python 3.9，那么就不要用上面的升级方式了，而是重新创建一个新的虚拟环境，专门使用新的Python大版本。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/64ac/" rel="prev" title="RestController与Controller区别">
+      <i class="fa fa-chevron-left"></i> RestController与Controller区别
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/8fb0/" rel="next" title="ChatGLM3-6B Demo搭建">
+      ChatGLM3-6B Demo搭建 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">一 虚拟环境基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">二 如何使用虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%AE%89%E8%A3%85virtualenv"><span class="nav-number">3.</span> <span class="nav-text">2.1 安装virtualenv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B9%B6%E6%BF%80%E6%B4%BB"><span class="nav-number">4.</span> <span class="nav-text">2.2 创建虚拟环境并激活</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E9%80%80%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">5.</span> <span class="nav-text">2.3 退出虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">三 虚拟环境的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E6%9B%B4%E5%A4%9A%E7%94%A8%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">四 虚拟环境的更多用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E4%B8%89%E6%96%B9%E5%8C%85%E4%BE%9D%E8%B5%96%E9%9C%80%E6%B1%82%E7%94%9F%E6%88%90%E4%B8%8E%E9%87%8D%E6%96%B0%E5%AE%89%E8%A3%85"><span class="nav-number">8.</span> <span class="nav-text">4.1 三方包依赖需求生成与重新安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E6%9B%B4%E6%96%B0%E5%8D%87%E7%BA%A7"><span class="nav-number">9.</span> <span class="nav-text">4.2 虚拟环境更新升级</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">439</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">742k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">11:14</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

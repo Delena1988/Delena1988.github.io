@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/db6/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/9d67/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/db6/" class="post-title-link" itemprop="url">二分法</a>
+            <a href="/posts/9d67/" class="post-title-link" itemprop="url">MongoDB迁移数据</a>
         </h2>
 
         <div class="post-meta">
@@ -212,7 +212,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-07-14 10:18:49" itemprop="dateCreated datePublished" datetime="2022-07-14T10:18:49+08:00">2022-07-14</time>
+              <time title="创建时间：2022-08-04 14:36:12" itemprop="dateCreated datePublished" datetime="2022-08-04T14:36:12+08:00">2022-08-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -227,7 +227,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
                 </span>
             </span>
 
@@ -237,14 +237,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>558</span>
+              <span>161</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -256,13 +256,103 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>二分法查找，也称为折半法，是一种在有序数组中查找特定元素的搜索算法。</p>
-<h1 id="二分法查找的思路如下"><a href="#二分法查找的思路如下" class="headerlink" title="二分法查找的思路如下"></a>二分法查找的思路如下</h1><p>1：首先，从数组的中间元素开始搜索，如果该元素正好是目标元素，则搜索过程结束，否则执行下一步。</p>
-<p>2：如果目标元素大于&#x2F;小于中间元素，则在数组大于&#x2F;小于中间元素的那一半区域查找，然后重复步骤1的操作。</p>
-<p>3：如果某一步数组为空，则表示找不到目标元素。</p>
+          <h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h2 id="一、关闭MongoDB"><a href="#一、关闭MongoDB" class="headerlink" title="一、关闭MongoDB"></a>一、关闭MongoDB</h2><p>运行–&gt;services.msc–&gt;找到MongoDB服务–&gt;停止服务</p>
+<p><img src="/"></p>
+<h2 id="二、找到配置文件mongod-cfg"><a href="#二、找到配置文件mongod-cfg" class="headerlink" title="二、找到配置文件mongod.cfg"></a>二、找到配置文件mongod.cfg</h2><h2 id="三、找到数据文件路径"><a href="#三、找到数据文件路径" class="headerlink" title="三、找到数据文件路径"></a>三、找到数据文件路径</h2><p><img src="/"></p>
+<h2 id="四、迁移数据文件"><a href="#四、迁移数据文件" class="headerlink" title="四、迁移数据文件"></a>四、迁移数据文件</h2><p>复制data目录到目标磁盘</p>
+<h2 id="五、修改配置文件"><a href="#五、修改配置文件" class="headerlink" title="五、修改配置文件"></a>五、修改配置文件</h2><p><img src="/"></p>
+<h2 id="六、启动MongoDB"><a href="#六、启动MongoDB" class="headerlink" title="六、启动MongoDB"></a>六、启动MongoDB</h2><p>运行—&gt;services.msc，找到MongoDB服务，启动</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/82b1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/82b1/" class="post-title-link" itemprop="url">Linux文件切割</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-19 19:21:09" itemprop="dateCreated datePublished" datetime="2022-07-19T19:21:09+08:00">2022-07-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="文件切割-split"><a href="#文件切割-split" class="headerlink" title="文件切割 - split"></a>文件切割 - split</h1><p>在 Linux 系统下使用 split命令进行大文件切割很方便</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/db6/#more" rel="contents">
+              <a class="btn" href="/posts/82b1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -286,7 +376,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/9949/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6317/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -300,7 +390,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/9949/" class="post-title-link" itemprop="url">位（bit）、字节（byte）、字符之间的关系</a>
+            <a href="/posts/6317/" class="post-title-link" itemprop="url">Dubbo的连接机制</a>
         </h2>
 
         <div class="post-meta">
@@ -310,7 +400,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-07-13 09:08:43" itemprop="dateCreated datePublished" datetime="2022-07-13T09:08:43+08:00">2022-07-13</time>
+              <time title="创建时间：2022-07-18 11:02:14" itemprop="dateCreated datePublished" datetime="2022-07-18T11:02:14+08:00">2022-07-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -319,101 +409,15 @@
                 <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
               </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>304</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1、位："><a href="#1、位：" class="headerlink" title="1、位："></a>1、位：</h2><p>数据存储的最小单位。每个<strong>二进制</strong>数字<strong>0或者1</strong>就是<strong>1个位</strong>；</p>
-<h2 id="2、字节："><a href="#2、字节：" class="headerlink" title="2、字节："></a>2、字节：</h2><p>8个位构成一个字节；即：<strong>1 byte (字节)&#x3D; 8 bit(位)；</strong></p>
-<p>1 KB &#x3D; 1024 B(字节)；</p>
-<p>1 MB &#x3D; 1024 KB; (2^10 B)</p>
-<p>1 GB &#x3D; 1024 MB; (2^20 B)</p>
-<p>1 TB &#x3D; 1024 GB; (2^30 B)</p>
-<h2 id="3、字符："><a href="#3、字符：" class="headerlink" title="3、字符："></a>3、字符：</h2><p>a、A、中、+、*、の……均表示一个字节（<strong>不包括数字</strong>）</p>
-<blockquote>
-<p>注意：<br><strong>英文半角</strong>符号占用1个字节，<br><strong>中文全角</strong>符号等同于汉字，占用2个或3个字节需要根据不同编码集判断</p>
-</blockquote>
-<p>一般 utf-8 编码下，一个汉字 字符 占用 3 个 字节；<br>一般 gbk 或 ASCII 编码下，一个汉字 字符 占用 2 个 字节；</p>
-<hr>
-<h2 id="特殊：数字"><a href="#特殊：数字" class="headerlink" title="特殊：数字"></a>特殊：数字</h2><blockquote>
-<p>byte型：1个字节（<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E4%BA%8C%E8%BF%9B%E5%88%B6&spm=1001.2101.3001.7020">二进制</a>8位）<br>short型：2个字节（二进制16位）<br><strong>int型：不管数字是几，都占用4个字节（二进制表示32位：00000000 00000000 00000000 00000000）</strong><br>long型：8个字节（二进制64位）</p>
-</blockquote>
-<p>这里要特殊说明一下“二进制”表示的数字</p>
-<p><strong>有符号位：</strong><br>一字节存的最小数为 11111111（**-128<strong>）<br>最大数为 01111111（</strong>127<strong>）<br><strong>如果没有符号位，则：</strong><br>最小数为00000000（十进制</strong>0<strong>）<br>最大数为11111111（十进制</strong>255**）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/12fd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/12fd/" class="post-title-link" itemprop="url">OLTP和OLAP有何区别</a>
-        </h2>
-
-        <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
+                <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-07 15:50:44" itemprop="dateCreated datePublished" datetime="2022-07-07T15:50:44+08:00">2022-07-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Dubbo/" itemprop="url" rel="index"><span itemprop="name">Dubbo</span></a>
                 </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -421,7 +425,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>7.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -440,160 +444,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="OLAP和OLTP"><a href="#OLAP和OLTP" class="headerlink" title="OLAP和OLTP"></a>OLAP和OLTP</h1><p>OLTP（On-Line Transaction Processing）:联机事务处理，典型代表是关系型数据库(mysql)，它的数据存储在服务器本地的文件里</p>
-<p>OLAP（On-Line Analytical Processing）:联机分析处理，OLAP型数据库的典型代表是分布式文件系统(hive)，它的数据存储在HDFS集群里</p>
-<p>它们的主要区别入下图：<br><img src="https://s2.loli.net/2022/07/07/HqfhZO4oJxD3SAk.jpg"></p>
-<p>数据从何而来？</p>
-<p>企业日常的各个环节都会产生数据，一个企业从小到大的过程中，最初建设IT系统的时刻是一个分隔点。</p>
-<p>在此之前，数据零散分布在邮箱、发票、单据、APP等各种地方。</p>
-<p><img src="https://s2.loli.net/2022/07/07/LA7uFQn1vzIeqyV.png"></p>
-<p>零散的数据分布</p>
-<p>企业规模达到一定程度时则必须要建设IT系统，此时，数据开始在各种系统（ERP、CRM、MES等）中积累。</p>
-<p><img src="https://s2.loli.net/2022/07/07/G8eC4NMrE2P9Qyb.png"></p>
-<p>IT系统中的数据分布</p>
-<p>数据价值随着其体量不断的累积也在一直增加。</p>
-<p>获取其中的知识，能够帮助企业发现问题与机遇并进行正确的决策，以达到赢得市场之目的。</p>
-<p>数据分析则是实现以上目标的重要手段之一。</p>
-<p>数据分析体系的建设往往是在初次进行信息化建设后某个时间开始。</p>
-<p><img src="https://s2.loli.net/2022/07/07/vMQ2tlUPhSeVGpj.png"></p>
-<p>信息化之后数据分析体系的建立</p>
-<p>数据分析体系与其他业务类系统有着显著的不同。</p>
-<p>业务类系统主要供基层人员使用，进行一线业务操作，通常被称为OLTP（On-Line Transaction Processing，联机事务处理）。</p>
-<p>数据分析的目标则是探索并挖掘数据价值，作为企业高层进行决策的参考，通常被称为OLAP（On-Line Analytical Processing，联机分析处理）。</p>
-<p>从功能角度来看，OLTP负责基本业务的正常运转，而业务数据积累时所产生的价值信息则被OLAP不断呈现，企业高层通过参考这些信息会不断调整经营方针，也会促进基础业务的不断优化，这是OLTP与OLAP最根本的区别（其他OLTP与OLAP的差别各位可以自行网上搜索，这里不再啰嗦）。</p>
-<p><img src="https://s2.loli.net/2022/07/07/JCjfIQWtcxiDglS.png"></p>
-<p>OLTP与OLAP</p>
-<p>OLAP不应该对OLTP产生任何影响，（理想情况下）OLTP应该完全感觉不到OLAP的存在。</p>
-<h1 id="OLAP核心概念"><a href="#OLAP核心概念" class="headerlink" title="OLAP核心概念"></a>OLAP核心概念</h1><p>基本概念<br>1） 维<br>维(Dimension)：人们观察事物的视角，如时间、地理位置、年龄和性别等，是单一角度概念。<br>维的层次(Lever of Dimension)：表示维度概念基础上进一步的细分，如时间可以细分为年、季度、月三个层次。<br>维成员(Member of Dimension)：表示维不可再细分的原子取值，如时间维的成员可以是2019年1月10日。<br>度量(Measure)：表示在这个维成员上的取值。</p>
-<p>2）操作<br>下探(Drill down)：维度是有层次的，下探表示进入维度的下一层，将汇总数据拆分到下一层所在细节数据信息，如下图从第二季度下探到看4、5、6月的明细数据。<br>上钻(Drill up)： 下探的反向操作，回到更高汇聚层的汇总数据。<br>切片(Slice)：切片可以理解成把立体按某一个维度进行切分，就可以看两维数据，如图中按电子产品切分，看到的是时间和地理位置关系的二维数据。<br>切块(Dice)：相对于切片是按一个点切分，切块就是按一个范围(区间)来做切分。<br>旋转(Pivot)：维的行列位置交换，换一个视角分析数据。<br><img src="https://s2.loli.net/2022/07/07/h5SVzyC42c8PNex.png"></p>
-<h1 id="OLAP分类"><a href="#OLAP分类" class="headerlink" title="OLAP分类"></a>OLAP分类</h1><p>OLAP按存储器的数据存储格式分为ROLAP、MOLAP和HOLAP。</p>
-<p>MOLAP（Multi-dimensional OLAP）<br>以多维数组（Multi-dimensional Array）存储模型的OLAP，是OLAP发源最初的形态，某些方面也等同于OLAP。它的特点是数据需要预计算（pre-computaion），然后把预计算之后的结果（cube）存在多维数组里。</p>
-<p>优点：<br>cube包含所有维度的聚合结果，所以查询速度非常快。<br>计算结果数据占用的磁盘空间相对关系型数据库更小<br>缺点：<br>空间和时间开销大。update cube的时间跟计算维度（degree）相关，随着维度增加计算时间大幅增加，此外预计算还会造成数据库占用急剧膨胀。<br>查询灵活度比较低。需要提前设计维度模型，查询分析的内容仅限于这些指定维度，增加维度需要重新计算。</p>
-<p>ROLAP（Relational OLAP）<br>基于关系模型存放数据，一般要求事实表（fact table）和维度表（dimensition table）按一定关系设计，它不需要预计算，使用标准SQL就可以根据需要即时查询不同维度数据。</p>
-<p>优点<br>扩展性强，适用于维度数量多的模型，MOLAP对于维度多的模型预计算慢，空间占用大。<br>更适合处理non-aggregate事实，例如文本描述<br>基于row数据更容易做权限管理<br>缺点<br>因为是即时计算，查询响应时间一般比预计算的MOLAP长。</p>
-<p>HOLAP<br>业界还没有一致的定义，它是MOLAP和ROLAP类型的混合运用，细节的数据以ROLAP的形式存放，更加方便灵活，而高度聚合的数据以MOLAP的形式展现，更适合于高效的分析处理。公司使用HOLAP的目的是根据不同场景来利用不同OLAP的特性。</p>
-<p>OLAP业界产品<br>MOLAP 产品有 Cognos Powerplay, Oracle Database OLAP Option, MicroStrategy, Microsoft Analysis Services, Essbase, TM1, Jedox ,icCube和kylin等。<br>ROLAP产品有Vertica、Amazon Redshift、Google Dremel、Hulu Nesto、Presto、Druid、Impala、Greenplum、HAWQ和Doris等。<br><img src="https://s2.loli.net/2022/07/07/BnwlePiF9a4XqdJ.png"></p>
-<h1 id="OLAP场景的关键特征"><a href="#OLAP场景的关键特征" class="headerlink" title="OLAP场景的关键特征"></a>OLAP场景的关键特征</h1><ul>
-<li><p>绝大多数是读请求</p>
-</li>
-<li><p>数据以相当大的批次(&gt; 1000行)更新，而不是单行更新;或者根本没有更新。</p>
-</li>
-<li><p>已添加到数据库的数据不能修改。</p>
-</li>
-<li><p>对于读取，从数据库中提取相当多的行，但只提取列的一小部分。</p>
-</li>
-<li><p>宽表，即每个表包含着大量的列</p>
-</li>
-<li><p>查询相对较少(通常每台服务器每秒查询数百次或更少)</p>
-</li>
-<li><p>对于简单查询，允许延迟大约50毫秒</p>
-</li>
-<li><p>列中的数据相对较小：数字和短字符串(例如，每个URL 60个字节)</p>
-</li>
-<li><p>处理单个查询时需要高吞吐量(每台服务器每秒可达数十亿行)</p>
-</li>
-<li><p>事务不是必须的</p>
-</li>
-<li><p>对数据一致性要求低</p>
-</li>
-<li><p>每个查询有一个大表。除了他以外，其他的都很小。</p>
-</li>
-<li><p>查询结果明显小于源数据。换句话说，数据经过过滤或聚合，因此结果适合于单个服务器的RAM中</p>
-</li>
-</ul>
-<p>很容易可以看出，OLAP场景与其他通常业务场景(例如,OLTP或K&#x2F;V)有很大的不同， 因此想要使用OLTP或Key-Value数据库去高效的处理分析查询场景，并不是非常完美的适用方案。例如，使用OLAP数据库去处理分析请求通常要优于使用MongoDB或Redis去处理分析请求。</p>
-<p>- </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/682a/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/682a/" class="post-title-link" itemprop="url">Nacos保护阈值</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-07-05 11:11:48" itemprop="dateCreated datePublished" datetime="2022-07-05T11:11:48+08:00">2022-07-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nacos/" itemprop="url" rel="index"><span itemprop="name">Nacos</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>523</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>健康保护阈值（ProtectThresHold）：为了防止因过多实例故障，导致所有流量全部流入剩余实例，继而造成流量压力将剩余实例被压垮形成雪崩效应。应将健康保护阈值定义为一个0到1之间的浮点数。当域名健康实例数占总服务实例数的比例小于该值时，无论实例是否健康，都会将这个实例返回给客户端。这样做虽然损失一部分流量，但是保证了集群中剩余健康实例能正常工作。</p>
+          <h2 id="dubbo的连接机制"><a href="#dubbo的连接机制" class="headerlink" title="dubbo的连接机制"></a>dubbo的连接机制</h2><p>这里直接上结论了，<strong>dubbo默认是使用单一长连接</strong>，即消费者与每个服务提供者建立一个单一长连接，即如果有消费者soa-user1，soa-user2,提供者soa-account三台，则每台消费者user都会与3台account建立一个连接，结果是每台消费者user有3个长连接到分别到3台提供者，每台提供者account维持到soa-user1和soa-user2的2个长连接。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/682a/#more" rel="contents">
+              <a class="btn" href="/posts/6317/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -617,7 +471,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/2cc0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -631,7 +485,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/2cc0/" class="post-title-link" itemprop="url">MySQL查询某一个字段是否包含中文汉字</a>
+            <a href="/posts/92/" class="post-title-link" itemprop="url">Dubbo的心跳机制</a>
         </h2>
 
         <div class="post-meta">
@@ -641,7 +495,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-07-04 14:10:16" itemprop="dateCreated datePublished" datetime="2022-07-04T14:10:16+08:00">2022-07-04</time>
+              <time title="创建时间：2022-07-18 10:56:57" itemprop="dateCreated datePublished" datetime="2022-07-18T10:56:57+08:00">2022-07-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -656,7 +510,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                  <a href="/categories/Dubbo/" itemprop="url" rel="index"><span itemprop="name">Dubbo</span></a>
                 </span>
             </span>
 
@@ -666,7 +520,107 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>84</span>
+              <span>7.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>谈到RPC肯定绕不开TCP通信，而主流的RPC框架都依赖于Netty等通信框架，这时候我们还要考虑是使用长连接还是短连接：</p>
+<ul>
+<li>短连接：每次通信结束后关闭连接，下次通信需要重新创建连接；优点就是无需管理连接，无需保活连接；</li>
+<li>长连接：每次通信结束不关闭连接，连接可以复用，保证了性能；缺点就是连接需要统一管理，并且需要保活；</li>
+</ul>
+<p>主流的RPC框架都会追求性能选择使用长连接，所以如何保活连接就是一个重要的话题，也是本文的主题，下面会重点介绍一些保活策略；</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/92/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/b43d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/b43d/" class="post-title-link" itemprop="url">Java使用下划线提高可读性</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-14 15:18:11" itemprop="dateCreated datePublished" datetime="2022-07-14T15:18:11+08:00">2022-07-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>577</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -685,11 +639,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在使用mysql时候，某些字段会存储中文字符，或是包含中文字符的串，查询出来的方法是：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">column</span> <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">WHERE</span> length(<span class="keyword">column</span>) <span class="operator">!=</span> <span class="keyword">char_length</span>(<span class="keyword">column</span>)</span><br></pre></td></tr></table></figure>
-
-<p>原理其实很简单，当字符集为UTF-8，并且字符为中文时，<code>length()</code> 和 <code>char_length()</code> 两个方法返回的结果是不相同的。</p>
-
+          <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>从Java 7开始，可以使用一个或多个下划线(_)分隔原始数字文字中的数字组，以提高其可读性。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/b43d/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -707,7 +665,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -773,20 +731,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">434</span>
+          <span class="site-state-item-count">439</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-count">75</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -822,12 +780,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">276k</span>
+    <span title="站点总字数">742k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16:42</span>
+    <span title="站点阅读时长">11:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

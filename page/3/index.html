@@ -188,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/c902/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e9a3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/c902/" class="post-title-link" itemprop="url">Anaconda安装第三方包</a>
+            <a href="/posts/e9a3/" class="post-title-link" itemprop="url">Anaconda安装jieba</a>
         </h2>
 
         <div class="post-meta">
@@ -213,7 +213,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-04-20 15:33:30 / 修改时间：15:53:27" itemprop="dateCreated datePublished" datetime="2023-04-20T15:33:30+08:00">2023-04-20</time>
+              <time title="创建时间：2023-08-25 16:30:36 / 修改时间：16:40:43" itemprop="dateCreated datePublished" datetime="2023-08-25T16:30:36+08:00">2023-08-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -231,7 +231,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>66</span>
+              <span>182</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -250,13 +250,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>有些包在Anaconda中找不到，例如pdf2image，需要手动安装。</p>
-<h1 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h1><h3 id="获取安装命令"><a href="#获取安装命令" class="headerlink" title="获取安装命令"></a>获取安装命令</h3><p><a target="_blank" rel="noopener" href="https://anaconda.org/">https://anaconda.org/</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/YinT3k.jpg"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/Vldy8J.jpg"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/9TjCWb.jpg"></p>
-<h3 id="执行安装命令"><a href="#执行安装命令" class="headerlink" title="执行安装命令"></a>执行安装命令</h3><p>到Anaconda安装目录<code>/Users/linjian/anaconda3/bin</code>执行以下命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -n 指定环境</span></span><br><span class="line">conda install -n RPA_Code -c conda-forge pdf2image</span><br></pre></td></tr></table></figure>
+          <h3 id="1-进入jieba官网下载jieba包"><a href="#1-进入jieba官网下载jieba包" class="headerlink" title="1. 进入jieba官网下载jieba包"></a>1. 进入jieba官网下载jieba包</h3><p><a target="_blank" rel="noopener" href="https://pypi.org/project/jieba/">jieba · PyPI</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/78I1x7.jpg"></p>
+<h3 id="2-把下载好的安装包解压，复制在anaconda软件pkgs文件夹里"><a href="#2-把下载好的安装包解压，复制在anaconda软件pkgs文件夹里" class="headerlink" title="2. 把下载好的安装包解压，复制在anaconda软件pkgs文件夹里"></a>2. 把下载好的安装包解压，复制在anaconda软件pkgs文件夹里</h3><p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/JKy2fu.jpg"></p>
+<h3 id="3-打开终端，到pkgs-x2F-jieba-xxx路径下"><a href="#3-打开终端，到pkgs-x2F-jieba-xxx路径下" class="headerlink" title="3. 打开终端，到pkgs&#x2F;jieba-xxx路径下"></a>3. 打开终端，到pkgs&#x2F;jieba-xxx路径下</h3><h3 id="4-激活环境"><a href="#4-激活环境" class="headerlink" title="4. 激活环境"></a>4. 激活环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate <span class="variable">$&#123;环境名&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/ob0gPv.jpg"></p>
+<h3 id="5-输入-python-setup-py-install-即可完成安装"><a href="#5-输入-python-setup-py-install-即可完成安装" class="headerlink" title="5. 输入 python setup.py install 即可完成安装"></a>5. 输入 python setup.py install 即可完成安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/s5wBac.jpg"></p>
 
       
     </div>
@@ -276,7 +278,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/21c9/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/ae9d/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -290,7 +292,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/21c9/" class="post-title-link" itemprop="url">软件版本GA、RC、beta、Build 等含义</a>
+            <a href="/posts/ae9d/" class="post-title-link" itemprop="url">Navicat导出连接并解密密码</a>
         </h2>
 
         <div class="post-meta">
@@ -300,15 +302,24 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-04-06 09:29:17" itemprop="dateCreated datePublished" datetime="2023-04-06T09:29:17+08:00">2023-04-06</time>
+              <time title="创建时间：2023-06-19 09:47:11" itemprop="dateCreated datePublished" datetime="2023-06-19T09:47:11+08:00">2023-06-19</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-20 15:45:46" itemprop="dateModified" datetime="2023-04-20T15:45:46+08:00">2023-04-20</time>
+                <time title="修改时间：2023-06-20 10:57:08" itemprop="dateModified" datetime="2023-06-20T10:57:08+08:00">2023-06-20</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Navicat/" itemprop="url" rel="index"><span itemprop="name">Navicat</span></a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -316,14 +327,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>296</span>
+              <span>3.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -335,15 +346,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/gM0gIA.jpg"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/21c9/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="导出连接"><a href="#导出连接" class="headerlink" title="导出连接"></a>导出连接</h1><ol>
+<li>文件 –&gt; 导出连接</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/zrBLFC.jpg"></p>
+<ol start="2">
+<li><p>更改保存路径，记得勾选导出密码，点击确定，生产connections.ncx文件，注意以.ncx结尾的文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/spKNpT.jpg"></p>
+</li>
+</ol>
+<h1 id="密码解密"><a href="#密码解密" class="headerlink" title="密码解密"></a>密码解密</h1><p>将connections.crx用text打开，在txt文档中搜索Password，找到Password&#x3D;后面的明文，在下面代码中进行运行解密，就可以得到数据库连接的密码；</p>
+<p>那么就需要用到一段PHP代码，该代码可以通过<a target="_blank" rel="noopener" href="https://tool.lu/coderunner/" title="在线运行PHP代码">在线运行PHP代码</a>在线运行：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NavicatPassword</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$version</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$aesKey</span> = <span class="string">&#x27;libcckeylibcckey&#x27;</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$aesIv</span> = <span class="string">&#x27;libcciv libcciv &#x27;</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$blowString</span> = <span class="string">&#x27;3DC5CA39&#x27;</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$blowKey</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$blowIv</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$version</span> = <span class="number">12</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;version = <span class="variable">$version</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;blowKey = <span class="title function_ invoke__">sha1</span>(<span class="string">&#x27;3DC5CA39&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;blowIv = <span class="title function_ invoke__">hex2bin</span>(<span class="string">&#x27;d9c7c3c8870d64bd&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">encrypt</span>(<span class="params"><span class="variable">$string</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$result</span> = <span class="literal">FALSE</span>;</span><br><span class="line">        <span class="keyword">switch</span> (<span class="variable language_">$this</span>-&gt;version) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">11</span>:</span><br><span class="line">                <span class="variable">$result</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">encryptEleven</span>(<span class="variable">$string</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">12</span>:</span><br><span class="line">                <span class="variable">$result</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">encryptTwelve</span>(<span class="variable">$string</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">encryptEleven</span>(<span class="params"><span class="variable">$string</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$round</span> = <span class="title function_ invoke__">intval</span>(<span class="title function_ invoke__">floor</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$string</span>) / <span class="number">8</span>));</span><br><span class="line">        <span class="variable">$leftLength</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$string</span>) % <span class="number">8</span>;</span><br><span class="line">        <span class="variable">$result</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="variable">$currentVector</span> = <span class="variable language_">$this</span>-&gt;blowIv;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$round</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">            <span class="variable">$temp</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">encryptBlock</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">xorBytes</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$string</span>, <span class="number">8</span> * <span class="variable">$i</span>, <span class="number">8</span>), <span class="variable">$currentVector</span>));</span><br><span class="line">            <span class="variable">$currentVector</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">xorBytes</span>(<span class="variable">$currentVector</span>, <span class="variable">$temp</span>);</span><br><span class="line">            <span class="variable">$result</span> .= <span class="variable">$temp</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$leftLength</span>) &#123;</span><br><span class="line">            <span class="variable">$currentVector</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">encryptBlock</span>(<span class="variable">$currentVector</span>);</span><br><span class="line">            <span class="variable">$result</span> .= <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">xorBytes</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$string</span>, <span class="number">8</span> * <span class="variable">$i</span>, <span class="variable">$leftLength</span>), <span class="variable">$currentVector</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">strtoupper</span>(<span class="title function_ invoke__">bin2hex</span>(<span class="variable">$result</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">encryptBlock</span>(<span class="params"><span class="variable">$block</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">openssl_encrypt</span>(<span class="variable">$block</span>, <span class="string">&#x27;BF-ECB&#x27;</span>, <span class="variable">$this</span>-&gt;blowKey, OPENSSL_RAW_DATA|OPENSSL_NO_PADDING);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">decryptBlock</span>(<span class="params"><span class="variable">$block</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">openssl_decrypt</span>(<span class="variable">$block</span>, <span class="string">&#x27;BF-ECB&#x27;</span>, <span class="variable">$this</span>-&gt;blowKey, OPENSSL_RAW_DATA|OPENSSL_NO_PADDING);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">xorBytes</span>(<span class="params"><span class="variable">$str1</span>, <span class="variable">$str2</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$result</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$str1</span>); <span class="variable">$i</span>++) &#123;</span><br><span class="line">            <span class="variable">$result</span> .= <span class="title function_ invoke__">chr</span>(<span class="title function_ invoke__">ord</span>(<span class="variable">$str1</span>[<span class="variable">$i</span>]) ^ <span class="title function_ invoke__">ord</span>(<span class="variable">$str2</span>[<span class="variable">$i</span>]));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">encryptTwelve</span>(<span class="params"><span class="variable">$string</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$result</span> = <span class="title function_ invoke__">openssl_encrypt</span>(<span class="variable">$string</span>, <span class="string">&#x27;AES-128-CBC&#x27;</span>, <span class="variable">$this</span>-&gt;aesKey, OPENSSL_RAW_DATA, <span class="variable">$this</span>-&gt;aesIv);</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">strtoupper</span>(<span class="title function_ invoke__">bin2hex</span>(<span class="variable">$result</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">decrypt</span>(<span class="params"><span class="variable">$string</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$result</span> = <span class="literal">FALSE</span>;</span><br><span class="line">        <span class="keyword">switch</span> (<span class="variable language_">$this</span>-&gt;version) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">11</span>:</span><br><span class="line">                <span class="variable">$result</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">decryptEleven</span>(<span class="variable">$string</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">12</span>:</span><br><span class="line">                <span class="variable">$result</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">decryptTwelve</span>(<span class="variable">$string</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">decryptEleven</span>(<span class="params"><span class="variable">$upperString</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$string</span> = <span class="title function_ invoke__">hex2bin</span>(<span class="title function_ invoke__">strtolower</span>(<span class="variable">$upperString</span>));</span><br><span class="line"></span><br><span class="line">        <span class="variable">$round</span> = <span class="title function_ invoke__">intval</span>(<span class="title function_ invoke__">floor</span>(<span class="title function_ invoke__">strlen</span>(<span class="variable">$string</span>) / <span class="number">8</span>));</span><br><span class="line">        <span class="variable">$leftLength</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$string</span>) % <span class="number">8</span>;</span><br><span class="line">        <span class="variable">$result</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="variable">$currentVector</span> = <span class="variable language_">$this</span>-&gt;blowIv;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$round</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">            <span class="variable">$encryptedBlock</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$string</span>, <span class="number">8</span> * <span class="variable">$i</span>, <span class="number">8</span>);</span><br><span class="line">            <span class="variable">$temp</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">xorBytes</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">decryptBlock</span>(<span class="variable">$encryptedBlock</span>), <span class="variable">$currentVector</span>);</span><br><span class="line">            <span class="variable">$currentVector</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">xorBytes</span>(<span class="variable">$currentVector</span>, <span class="variable">$encryptedBlock</span>);</span><br><span class="line">            <span class="variable">$result</span> .= <span class="variable">$temp</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$leftLength</span>) &#123;</span><br><span class="line">            <span class="variable">$currentVector</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">encryptBlock</span>(<span class="variable">$currentVector</span>);</span><br><span class="line">            <span class="variable">$result</span> .= <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">xorBytes</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$string</span>, <span class="number">8</span> * <span class="variable">$i</span>, <span class="variable">$leftLength</span>), <span class="variable">$currentVector</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">decryptTwelve</span>(<span class="params"><span class="variable">$upperString</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$string</span> = <span class="title function_ invoke__">hex2bin</span>(<span class="title function_ invoke__">strtolower</span>(<span class="variable">$upperString</span>));</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">openssl_decrypt</span>(<span class="variable">$string</span>, <span class="string">&#x27;AES-128-CBC&#x27;</span>, <span class="variable">$this</span>-&gt;aesKey, OPENSSL_RAW_DATA, <span class="variable">$this</span>-&gt;aesIv);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//需要指定navacat版本两种，11或12</span></span><br><span class="line"><span class="variable">$navicatPassword</span> = <span class="keyword">new</span> <span class="title class_">NavicatPassword</span>(<span class="number">12</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//解密，括号里面写入navicat加密后的密码</span></span><br><span class="line"><span class="variable">$decode</span> = <span class="variable">$navicatPassword</span>-&gt;<span class="title function_ invoke__">decrypt</span>(<span class="string">&#x27;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$decode</span>.<span class="string">&quot;\n&quot;</span>;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -362,7 +377,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/cc95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/9c19/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -376,7 +391,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/cc95/" class="post-title-link" itemprop="url">SpringBoot2和SpringBoot3 有什么区别？</a>
+            <a href="/posts/9c19/" class="post-title-link" itemprop="url">cmd命令行窗口内容显示不全</a>
         </h2>
 
         <div class="post-meta">
@@ -387,16 +402,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-04-06 09:07:10 / 修改时间：09:15:56" itemprop="dateCreated datePublished" datetime="2023-04-06T09:07:10+08:00">2023-04-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
-                </span>
+              <time title="创建时间：2023-05-16 09:55:38 / 修改时间：09:57:43" itemprop="dateCreated datePublished" datetime="2023-05-16T09:55:38+08:00">2023-05-16</time>
             </span>
 
           <br>
@@ -405,7 +411,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>124</span>
+              <span>47</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -424,16 +430,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Spring Boot 2.7基本已经是Spring Boot 2.x最后一个大版本了，Spring Boot 2.5已经停止OSS支持，不再进行维护，Spring Boot 2.6也将在Spring Boot 3.0发布后停止维护，迭代的速度越来越快了。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0.0-M1-Release-Notes">Spring Boot 3.0.0 M1 Release Notes · spring-projects&#x2F;spring-boot Wiki · GitHub</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/cc95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>鼠标右击命令行窗口上边框<code>-&gt;</code>属性<code>-&gt;</code>布局，适当调整屏幕缓冲区高度大小即可。</p>
+<img title="" src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/5V6afj.jpg" alt="" width="348" data-align="center">
+
+<img title="" src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/rfzkqF.jpg" alt="" width="352" data-align="center">
+
       
     </div>
 
@@ -452,7 +453,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6322/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1317/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -466,7 +467,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/6322/" class="post-title-link" itemprop="url">Python3基础语法</a>
+            <a href="/posts/1317/" class="post-title-link" itemprop="url">Python3.6.8安装(Windows)</a>
         </h2>
 
         <div class="post-meta">
@@ -476,14 +477,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-03-27 09:49:30" itemprop="dateCreated datePublished" datetime="2023-03-27T09:49:30+08:00">2023-03-27</time>
+              <time title="创建时间：2023-04-21 10:26:02" itemprop="dateCreated datePublished" datetime="2023-04-21T10:26:02+08:00">2023-04-21</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-06 09:15:39" itemprop="dateModified" datetime="2023-04-06T09:15:39+08:00">2023-04-06</time>
+                <time title="修改时间：2023-05-16 09:57:43" itemprop="dateModified" datetime="2023-05-16T09:57:43+08:00">2023-05-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -501,14 +502,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>318</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>8 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -520,132 +521,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h1><h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><p>默认情况下，Python 3 源码文件以 <strong>UTF-8</strong> 编码，所有字符串都是 unicode 字符串。 当然你也可以为源码文件指定不同的编码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: cp-1252 -*-</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="python保留字"><a href="#python保留字" class="headerlink" title="python保留字"></a>python保留字</h2><p>保留字即关键字，我们不能把它们用作任何标识符名称。Python 的标准库提供了一个 keyword 模块，可以输出当前版本的所有关键字：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> keyword</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>keyword.kwlist</span><br><span class="line">[<span class="string">&#x27;False&#x27;</span>, <span class="string">&#x27;None&#x27;</span>, <span class="string">&#x27;True&#x27;</span>, <span class="string">&#x27;and&#x27;</span>, <span class="string">&#x27;as&#x27;</span>, <span class="string">&#x27;assert&#x27;</span>, <span class="string">&#x27;async&#x27;</span>, <span class="string">&#x27;await&#x27;</span>, <span class="string">&#x27;break&#x27;</span>, <span class="string">&#x27;class&#x27;</span>, <span class="string">&#x27;continue&#x27;</span>, <span class="string">&#x27;def&#x27;</span>, <span class="string">&#x27;del&#x27;</span>, <span class="string">&#x27;elif&#x27;</span>, <span class="string">&#x27;else&#x27;</span>, <span class="string">&#x27;except&#x27;</span>, <span class="string">&#x27;finally&#x27;</span>, <span class="string">&#x27;for&#x27;</span>, <span class="string">&#x27;from&#x27;</span>, <span class="string">&#x27;global&#x27;</span>, <span class="string">&#x27;if&#x27;</span>, <span class="string">&#x27;import&#x27;</span>, <span class="string">&#x27;in&#x27;</span>, <span class="string">&#x27;is&#x27;</span>, <span class="string">&#x27;lambda&#x27;</span>, <span class="string">&#x27;nonlocal&#x27;</span>, <span class="string">&#x27;not&#x27;</span>, <span class="string">&#x27;or&#x27;</span>, <span class="string">&#x27;pass&#x27;</span>, <span class="string">&#x27;raise&#x27;</span>, <span class="string">&#x27;return&#x27;</span>, <span class="string">&#x27;try&#x27;</span>, <span class="string">&#x27;while&#x27;</span>, <span class="string">&#x27;with&#x27;</span>, <span class="string">&#x27;yield&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<h2 id="行与缩进"><a href="#行与缩进" class="headerlink" title="行与缩进"></a>行与缩进</h2><p>python最具特色的就是使用缩进来表示代码块，不需要使用大括号 {} 。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;True&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span> (<span class="string">&quot;False&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="多行语句"><a href="#多行语句" class="headerlink" title="多行语句"></a>多行语句</h2><p>Python 通常是一行写完一条语句，但如果语句很长，我们可以使用反斜杠 \ 来实现多行语句，例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">total = item_one + \</span><br><span class="line">        item_two + \</span><br><span class="line">        item_three</span><br></pre></td></tr></table></figure>
-
-<p>在 [], {}, 或 () 中的多行语句，不需要使用反斜杠 \，例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">total = [<span class="string">&#x27;item_one&#x27;</span>, <span class="string">&#x27;item_two&#x27;</span>, <span class="string">&#x27;item_three&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;item_four&#x27;</span>, <span class="string">&#x27;item_five&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<h2 id="数字-Number-类型"><a href="#数字-Number-类型" class="headerlink" title="数字(Number)类型"></a>数字(Number)类型</h2><p>python中数字有四种类型：整数、布尔型、浮点数和复数。</p>
-<ul>
-<li><strong>int</strong> (整数), 如 1, 只有一种整数类型 int，表示为长整型，没有 python2 中的 Long。</li>
-<li><strong>bool</strong> (布尔), 如 True。</li>
-<li><strong>float</strong> (浮点数), 如 1.23、3E-2</li>
-<li><strong>complex</strong> (复数), 如 1 + 2j、 1.1 + 2.2j</li>
-</ul>
-<h2 id="字符串-String"><a href="#字符串-String" class="headerlink" title="字符串(String)"></a>字符串(String)</h2><ul>
-<li>Python 中单引号 ‘ 和双引号 “ 使用完全相同。</li>
-<li>使用三引号(‘’’ 或 “””)可以指定一个多行字符串。</li>
-<li>转义符 \。</li>
-<li>反斜杠可以用来转义，使用 r 可以让反斜杠不发生转义。 如 <strong>r”this is a line with \n”</strong> 则 \n 会显示，并不是换行。</li>
-<li>按字面意义级联字符串，如 <strong>“this “ “is “ “string”</strong> 会被自动转换为 <strong>this is string</strong>。</li>
-<li>字符串可以用 + 运算符连接在一起，用 * 运算符重复。</li>
-<li>Python 中的字符串有两种索引方式，从左往右以 0 开始，从右往左以 -1 开始。</li>
-<li>Python 中的字符串不能改变。</li>
-<li>Python 没有单独的字符类型，一个字符就是长度为 1 的字符串。</li>
-<li>字符串的截取的语法格式如下：变量[头下标:尾下标:步长]</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">str</span>=<span class="string">&#x27;123456789&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>)                 <span class="comment"># 输出字符串</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">0</span>:-<span class="number">1</span>])           <span class="comment"># 输出第一个到倒数第二个的所有字符</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">0</span>])              <span class="comment"># 输出字符串第一个字符</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">2</span>:<span class="number">5</span>])            <span class="comment"># 输出从第三个开始到第五个的字符</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">2</span>:])             <span class="comment"># 输出从第三个开始后的所有字符</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">1</span>:<span class="number">5</span>:<span class="number">2</span>])          <span class="comment"># 输出从第二个开始到第五个且每隔一个的字符（步长为2）</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span> * <span class="number">2</span>)             <span class="comment"># 输出字符串两次</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span> + <span class="string">&#x27;你好&#x27;</span>)         <span class="comment"># 连接字符串</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;------------------------------&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello\nrunoob&#x27;</span>)      <span class="comment"># 使用反斜杠(\)+n转义特殊字符</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">r&#x27;hello\nrunoob&#x27;</span>)     <span class="comment"># 在字符串前面添加一个 r，表示原始字符串，不会发生转义</span></span><br></pre></td></tr></table></figure>
-
-<p>这里的 r 指 raw，即 raw string，会自动将反斜杠转义，例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>)       <span class="comment"># 输出空行</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">r&#x27;\n&#x27;</span>)      <span class="comment"># 输出 \n</span></span><br><span class="line">\n</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="import-与-from…import"><a href="#import-与-from…import" class="headerlink" title="import 与 from…import"></a>import 与 from…import</h2><p>在 python 用 <strong>import</strong> 或者** from…import **来导入相应的模块。</p>
-<ul>
-<li><p>将整个模块(somemodule)导入，格式为： <strong>import somemodule</strong></p>
-</li>
-<li><p>从某个模块中导入某个函数,格式为： <strong>from somemodule import somefunction</strong></p>
-</li>
-<li><p>从某个模块中导入多个函数,格式为： <strong>from somemodule import firstfunc, secondfunc, thirdfunc</strong></p>
-</li>
-<li><p>将某个模块中的全部函数导入，格式为： **from somemodule import ***</p>
-</li>
-</ul>
-<h1 id="Python3基本数据类型"><a href="#Python3基本数据类型" class="headerlink" title="Python3基本数据类型"></a>Python3基本数据类型</h1><p>Python 中的变量<strong>不需要声明</strong>。每个变量在使用前都必须赋值，变量赋值以后该变量才会被创建。</p>
-<p>在 Python 中，变量就是变量，它没有类型，我们所说的”类型”是变量所指的内存中对象的类型。</p>
-<h2 id="标准数据类型"><a href="#标准数据类型" class="headerlink" title="标准数据类型"></a>标准数据类型</h2><p>Python3 中常见的数据类型有：</p>
-<ul>
-<li>Number（数字）</li>
-<li>String（字符串）</li>
-<li>bool（布尔类型）</li>
-<li>List（列表）</li>
-<li>Tuple（元组）</li>
-<li>Set（集合）</li>
-<li>Dictionary（字典）</li>
-</ul>
-<p>Python3 的六个标准数据类型中：</p>
-<ul>
-<li><strong>不可变数据（3 个）：</strong> Number（数字）、String（字符串）、Tuple（元组）；</li>
-<li><strong>可变数据（3 个）：</strong> List（列表）、Dictionary（字典）、Set（集合）。</li>
-</ul>
-<h2 id="Number（数字）"><a href="#Number（数字）" class="headerlink" title="Number（数字）"></a>Number（数字）</h2><p>Python3 支持 <strong>int、float、bool、complex（复数）</strong>。</p>
-<h3 id="数值运算"><a href="#数值运算" class="headerlink" title="数值运算"></a>数值运算</h3><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">5</span> + <span class="number">4</span>  <span class="comment"># 加法</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">4.3</span> - <span class="number">2</span> <span class="comment"># 减法</span></span><br><span class="line"><span class="number">2.3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span> * <span class="number">7</span>  <span class="comment"># 乘法</span></span><br><span class="line"><span class="number">21</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span> / <span class="number">4</span>  <span class="comment"># 除法，得到一个浮点数</span></span><br><span class="line"><span class="number">0.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span> // <span class="number">4</span> <span class="comment"># 除法，得到一个整数</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">17</span> % <span class="number">3</span> <span class="comment"># 取余</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">2</span> ** <span class="number">5</span> <span class="comment"># 乘方</span></span><br><span class="line"><span class="number">32</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="String（字符串）"><a href="#String（字符串）" class="headerlink" title="String（字符串）"></a>String（字符串）</h2><p>Python中的字符串用单引号 ‘ 或双引号 “ 括起来，同时使用反斜杠 \ 转义特殊字符。</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>1、反斜杠可以用来转义，使用r可以让反斜杠不发生转义。</li>
-<li>2、字符串可以用+运算符连接在一起，用*运算符重复。</li>
-<li>3、Python中的字符串有两种索引方式，从左往右以0开始，从右往左以-1开始。</li>
-<li>4、Python中的字符串不能改变。</li>
-</ul>
-<h2 id="bool（布尔类型）"><a href="#bool（布尔类型）" class="headerlink" title="bool（布尔类型）"></a>bool（布尔类型）</h2><p>布尔类型即 True 或 False。</p>
-<p>在 Python 中，True 和 False 都是关键字，表示布尔值。</p>
-<p>布尔类型可以用来控制程序的流程，比如判断某个条件是否成立，或者在某个条件满足时执行某段代码。</p>
-<p>布尔类型特点：</p>
-<ul>
-<li><p>布尔类型只有两个值：True 和 False。</p>
-</li>
-<li><p>布尔类型可以和其他数据类型进行比较，比如数字、字符串等。在比较时，Python 会将 True 视为 1，False 视为 0。</p>
-</li>
-<li><p>布尔类型可以和逻辑运算符一起使用，包括 and、or 和 not。这些运算符可以用来组合多个布尔表达式，生成一个新的布尔值。</p>
-</li>
-<li><p>布尔类型也可以被转换成其他数据类型，比如整数、浮点数和字符串。在转换时，True 会被转换成 1，False 会被转换成 0。</p>
-</li>
-</ul>
-<p><strong>注意:</strong> 在 Python 中，所有非零的数字和非空的字符串、列表、元组等数据类型都被视为 True，只有 <strong>0、空字符串、空列表、空元组</strong>等被视为 False。因此，在进行布尔类型转换时，需要注意数据类型的真假性。</p>
-<h2 id="List（列表）"><a href="#List（列表）" class="headerlink" title="List（列表）"></a>List（列表）</h2><p>List（列表） 是 Python 中使用最频繁的数据类型。</p>
-<p>列表可以完成大多数集合类的数据结构实现。列表中元素的类型可以不相同，它支持数字，字符串甚至可以包含列表（所谓嵌套）。</p>
-<p>列表是写在方括号 [] 之间、用逗号分隔开的元素列表。</p>
-<p>和字符串一样，列表同样可以被索引和截取，列表被截取后返回一个包含所需元素的新列表。</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>1、List写在方括号之间，元素用逗号隔开。</li>
-<li>2、和字符串一样，list可以被索引和切片。</li>
-<li>3、List可以使用+操作符进行拼接。</li>
-<li>4、List中的元素是可以改变的。</li>
-</ul>
-<h2 id="Tuple（元组）"><a href="#Tuple（元组）" class="headerlink" title="Tuple（元组）"></a>Tuple（元组）</h2><p>元组（tuple）与列表类似，不同之处在于元组的元素<strong>不能修改</strong>。元组写在小括号 () 里，元素之间用逗号隔开。</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>1、与字符串一样，元组的元素不能修改。</li>
-<li>2、元组也可以被索引和切片，方法一样。</li>
-<li>3、注意构造包含 0 或 1 个元素的元组的特殊语法规则。</li>
-<li>4、元组也可以使用+操作符进行拼接。</li>
-</ul>
-<h2 id="Set（集合）"><a href="#Set（集合）" class="headerlink" title="Set（集合）"></a>Set（集合）</h2><p>集合（set）是由一个或数个形态各异的大小整体组成的，构成集合的事物或对象称作元素或是成员。</p>
-<p>基本功能是进行成员关系测试和删除重复元素。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sites = &#123;<span class="string">&#x27;Google&#x27;</span>, <span class="string">&#x27;Taobao&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;Facebook&#x27;</span>, <span class="string">&#x27;Zhihu&#x27;</span>, <span class="string">&#x27;Baidu&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Dictionary（字典）"><a href="#Dictionary（字典）" class="headerlink" title="Dictionary（字典）"></a>Dictionary（字典）</h2><p>字典（dictionary）是Python中另一个非常有用的内置数据类型。</p>
-<p>列表是有序的对象集合，字典是无序的对象集合。两者之间的区别在于：字典当中的元素是通过键来存取的，而不是通过偏移存取。</p>
-<p>字典是一种映射类型，字典用 { } 标识，它是一个无序的 <strong>键(key) : 值(value)</strong> 的集合。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tinydict = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;runoob&#x27;</span>,<span class="string">&#x27;code&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;site&#x27;</span>: <span class="string">&#x27;www.runoob.com&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="bytes-类型"><a href="#bytes-类型" class="headerlink" title="bytes 类型"></a>bytes 类型</h2><p>在 Python3 中，bytes 类型表示的是不可变的二进制序列（byte sequence）。</p>
-<p>与字符串类型不同的是，bytes 类型中的元素是整数值（0 到 255 之间的整数），而不是 Unicode 字符。</p>
-<p>bytes 类型通常用于处理二进制数据，比如图像文件、音频文件、视频文件等等。在网络编程中，也经常使用 bytes 类型来传输二进制数据。</p>
-<p>创建 bytes 对象的方式有多种，最常见的方式是使用 b 前缀：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="built_in">bytes</span>(<span class="string">&quot;hello&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>)</span><br></pre></td></tr></table></figure>
+          <h1 id="下载Python"><a href="#下载Python" class="headerlink" title="下载Python"></a>下载Python</h1><p><a target="_blank" rel="noopener" href="https://www.python.org/downloads/windows/">https://www.python.org/downloads/windows/</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/DbAspx.jpg"></p>
+<p><strong>选择Windows x86 executable installer下载</strong></p>
+<p>embeddable zip file（压缩包安装，直接解压就可以） executable installer（应用程序安装，推荐！！） web-based installer（网络安装，安装的时候胡需要网络）</p>
+<h1 id="安装Python"><a href="#安装Python" class="headerlink" title="安装Python"></a>安装Python</h1><p><strong>1. 打开下载的安装软件</strong></p>
+<p><strong>2. 选择install now并勾选Add Python 3.6 to PATH（重要！！！）</strong></p>
+<p><strong>3. 安装成功点击close</strong></p>
+<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><p><strong>在cmd窗口中输入python -V检查是否安装成功</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/img_v2_14abec87-41da-4fe6-9f97-0822de56d38g.jpg"></p>
+<h1 id="更新pip"><a href="#更新pip" class="headerlink" title="更新pip"></a>更新pip</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install --upgrade pip</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -665,7 +550,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/cf88/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/28b3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -679,7 +564,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/cf88/" class="post-title-link" itemprop="url">FreeSWITCH权威指南（六）</a>
+            <a href="/posts/28b3/" class="post-title-link" itemprop="url">Anaconda下载的包路径</a>
         </h2>
 
         <div class="post-meta">
@@ -688,16 +573,19 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-03-25 11:00:15" itemprop="dateCreated datePublished" datetime="2023-03-25T11:00:15+08:00">2023-03-25</time>
+              <time title="创建时间：2023-04-20 15:33:46 / 修改时间：15:53:24" itemprop="dateCreated datePublished" datetime="2023-04-20T15:33:46+08:00">2023-04-20</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-06 09:15:39" itemprop="dateModified" datetime="2023-04-06T09:15:39+08:00">2023-04-06</time>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
               </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -705,7 +593,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>169</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -724,7 +612,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /Users/linjian/anaconda3 anaconda安装路径</span></span><br><span class="line"><span class="comment"># RPA_Code 环境名称</span></span><br><span class="line">/Users/linjian/anaconda3/envs/RPA_Code/lib/python3.10/site-packages</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/Users/linjian/anaconda3/envs/RPA_Code/include</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -742,7 +631,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/87/">87</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -808,20 +697,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">434</span>
+          <span class="site-state-item-count">439</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-count">75</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">87</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -857,12 +746,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">276k</span>
+    <span title="站点总字数">742k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">16:42</span>
+    <span title="站点阅读时长">11:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
