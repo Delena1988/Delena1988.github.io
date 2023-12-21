@@ -188,6 +188,302 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/f21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/f21/" class="post-title-link" itemprop="url">Linux安装rz/sz命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-01 13:47:17" itemprop="dateCreated datePublished" datetime="2021-06-01T13:47:17+08:00">2021-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>139</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="方式一：yum命令安装"><a href="#方式一：yum命令安装" class="headerlink" title="方式一：yum命令安装"></a>方式一：yum命令安装</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> lrzsz</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="方式二：手动安装"><a href="#方式二：手动安装" class="headerlink" title="方式二：手动安装"></a>方式二：手动安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载lrzsz安装包</span></span><br><span class="line">wget http://www.ohse.de/uwe/releases/lrzsz-0.12.20.tar.gz </span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压并切换到lrzsz-0.12.20目录下</span></span><br><span class="line">tar zxvf lrzsz-0.12.20.tar.gz &amp;&amp; <span class="built_in">cd</span> lrzsz-0.12.20 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">./configure &amp;&amp; make &amp;&amp; make install </span><br><span class="line"></span><br><span class="line"><span class="comment"># 上面安装过程默认把lsz和lrz安装到了/usr/local/bin/目录下，现在我们并不能直接使用，下面创建软链接，并命名为rz/sz：</span></span><br><span class="line"><span class="built_in">cd</span> /usr/bin</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/bin/lrz rz</span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/bin/lsz sz</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载</span></span><br><span class="line">sz -y <span class="variable">$&#123;文件名&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传</span></span><br><span class="line">rz -y <span class="variable">$&#123;文件名&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/f4ff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/f4ff/" class="post-title-link" itemprop="url">Linux安装java环境</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-01 11:25:08" itemprop="dateCreated datePublished" datetime="2021-06-01T11:25:08+08:00">2021-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-13 13:43:11" itemprop="dateModified" datetime="2023-03-13T13:43:11+08:00">2023-03-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CentOS/" itemprop="url" rel="index"><span itemprop="name">CentOS</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>233</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一、卸载老版本"><a href="#一、卸载老版本" class="headerlink" title="一、卸载老版本"></a>一、卸载老版本</h1><ol>
+<li><p>卸载可能存在的CentOS自带的java环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa|grep java</span><br><span class="line"></span><br><span class="line">rpm -qa|grep jdk</span><br><span class="line"></span><br><span class="line">rpm -qa|grep gcj</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证是否删除了旧版本java</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -<span class="built_in">version</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/f4ff/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/21d5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/21d5/" class="post-title-link" itemprop="url">MongoDB客户端工具使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-28 13:59:56" itemprop="dateCreated datePublished" datetime="2021-05-28T13:59:56+08:00">2021-05-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>92</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p>客户端工具 <em>NoSQLBooster</em> <em>for</em> <em>MongoDB</em></p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://nosqlbooster.com/downloads">https://nosqlbooster.com/downloads</a></p>
+<h1 id="连接MongoDB"><a href="#连接MongoDB" class="headerlink" title="连接MongoDB"></a>连接MongoDB</h1><p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210528140542513.png" alt="image-20210528140542513"></p>
+<h1 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h1><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>可以打开SQL脚本执行窗口，如下图在runSQLQuery里可以写sql进行查询操作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210528141106685.png" alt="image-20210528141106685"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="property">visitInfo</span>.<span class="title function_">find</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;visitDate&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;$gte&#x27;</span>: <span class="string">&#x27;2019-01-01 00:00:00&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;empiId&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;$ne&#x27;</span>: <span class="literal">null</span>,</span><br><span class="line">        <span class="string">&#x27;$ne&#x27;</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">    .<span class="title function_">projection</span>(&#123;&#125;)</span><br><span class="line">    .<span class="title function_">sort</span>(&#123; <span class="attr">_id</span>: -<span class="number">1</span> &#125;)</span><br><span class="line">    .<span class="title function_">limit</span>(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="property">visitInfo</span>.<span class="title function_">updateMany</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;outhospSerialNo&#x27;</span>: <span class="string">&#x27;1696222&#x27;</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="attr">$set</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;idNumber&#x27;</span>: <span class="string">&#x27;330225198810260359&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="property">visitInfo</span>.<span class="title function_">remove</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;outhospSerialNo&#x27;</span>: <span class="string">&#x27;1696222&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/55ef/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -237,7 +533,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>222</span>
+              <span>70</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -330,7 +626,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>162</span>
+              <span>18</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -366,352 +662,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1ca7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/1ca7/" class="post-title-link" itemprop="url">Nginx Unique Tracing ID</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-26 16:07:17" itemprop="dateCreated datePublished" datetime="2021-05-26T16:07:17+08:00">2021-05-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>我们想要从Nginx接受请求开始，生成一个Unique Tracing ID，不仅记录在Nginx的日志中，也要贯穿到整个后台的服务，从而利用这个ID方便问题的排查。</p>
-<h1 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h1><p>利用Nginx丰富的内置变量，拼接出一个“unique enough id”。这里使用了五个变量：</p>
-<ul>
-<li>$pid: Nginx worker process id</li>
-<li>$msec: timestamp in millisecond</li>
-<li>$remote_addr: client address</li>
-<li>$connection: TCP connection serial number</li>
-<li>$connection_requests: current number of requests made through a connection</li>
-</ul>
-<h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><p>1.在nginx.conf的location模块里：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    proxy_pass http://upstream;</span><br><span class="line">    <span class="built_in">set</span> <span class="variable">$req_id</span> <span class="variable">$pid</span>.<span class="variable">$msec</span>.<span class="variable">$remote_addr</span>.<span class="variable">$connection</span>.<span class="variable">$connection_requests</span>;</span><br><span class="line">    proxy_set_header X-Request-Id <span class="variable">$req_id</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.在http模块的 log_format 里加上 $req_id，至此Nginx的日志中将包含这个ID</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log_format trace <span class="string">&#x27;... <span class="subst">$req_id</span>&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>3.在后台服务中可以通过下面的方式获取$req_id</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MainHandler</span>(tornado.web.<span class="title class_">RequestHandler</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params"><span class="variable language_">self</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.write(<span class="variable language_">self</span>.request.headers[<span class="string">&quot;X-Request-Id&quot;</span>])</span><br></pre></td></tr></table></figure>
-
-<p>4.重启Nginx</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a><em>问题</em></h2><p>格式混乱，信息冗余，生成的效果如下：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">97372.1493211301</span>.<span class="number">686.127</span>.<span class="number">0.0</span>.<span class="number">1.471</span>.<span class="number">32</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h1><p>使用Nginx内置的变量 $request_id<br>这是最直接的办法，使用Nginx自带的一个$request_id，一个16位比特的随机数，用32位的16进制数表示。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header X-Request-Id <span class="variable">$request_id</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a><em>问题</em></h2><p>这Nginx 1.11.0 版本新增加的feature，使用Nginx旧版本，或者依赖某些二次开发的Nginx版本，例如 <a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://tengine.taobao.org/">Tengine</a> 继承的是Nginx 1.8.1 版本，都面临着升级Nginx的问题。</p>
-<h1 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h1><p>使用 <a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://www.lua.org/">Lua</a> 生成一个uuid.<br> 利用Lua轻量小巧的特性，嵌入到Nginx的配置文件当中，然后生成一个uuid.</p>
-<h2 id="实现步骤-1"><a href="#实现步骤-1" class="headerlink" title="实现步骤"></a>实现步骤</h2><p>1.在 http 模块里加入：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">map</span> $host $uuid &#123;</span><br><span class="line">    <span class="keyword">default</span> <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">lua_package_path <span class="string">&#x27;/path/to/uuid4.lua&#x27;</span>;</span><br><span class="line">init_by_lua <span class="string">&#x27;</span></span><br><span class="line"><span class="string">    uuid4 = require &quot;uuid4&quot;</span></span><br><span class="line"><span class="string">    math = require &quot;math&quot;</span></span><br><span class="line"><span class="string">&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>2.在server模块里加入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set_by_lua <span class="variable">$uuid</span> <span class="string">&#x27;</span></span><br><span class="line"><span class="string">    return uuid4.getUUID()</span></span><br><span class="line"><span class="string">&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>3.在location模块里加入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header X-Request-Id <span class="variable">$uuid</span>;</span><br></pre></td></tr></table></figure>
-
-<p>4.uuid4.lua<br>引用自 <a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https://github.com/tcjennings/LUA-RFC-4122-UUID-Generator/blob/master/uuid4.lua">第三方库</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">--[[</span><br><span class="line">The MIT License (MIT)</span><br><span class="line">Copyright (c) 2012 Toby Jennings</span><br><span class="line">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and</span><br><span class="line">associated documentation files (the <span class="string">&quot;Software&quot;</span>), to deal <span class="keyword">in</span> the Software without restriction,</span><br><span class="line">including without limitation the rights to use, copy, modify, merge, publish, distribute,</span><br><span class="line">sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is</span><br><span class="line">furnished to <span class="keyword">do</span> so, subject to the following conditions:</span><br><span class="line">The above copyright notice and this permission notice shall be included <span class="keyword">in</span> all copies or substantial</span><br><span class="line">portions of the Software.</span><br><span class="line">THE SOFTWARE IS PROVIDED <span class="string">&quot;AS IS&quot;</span>, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT</span><br><span class="line">NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND</span><br><span class="line">NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,</span><br><span class="line">DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span><br><span class="line">OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</span><br><span class="line">--]]</span><br><span class="line"></span><br><span class="line"><span class="built_in">local</span> M = &#123;&#125;</span><br><span class="line">-----</span><br><span class="line">math.randomseed( os.time() )</span><br><span class="line">math.random()</span><br><span class="line">-----</span><br><span class="line"><span class="built_in">local</span> <span class="keyword">function</span> num2bs(num)</span><br><span class="line">    <span class="built_in">local</span> _mod = math.fmod or math.mod</span><br><span class="line">    <span class="built_in">local</span> _floor = math.floor</span><br><span class="line">    --</span><br><span class="line">    <span class="built_in">local</span> result = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span>(num == 0) <span class="keyword">then</span> <span class="built_in">return</span> <span class="string">&quot;0&quot;</span> end</span><br><span class="line">    <span class="keyword">while</span>(num  &gt; 0) <span class="keyword">do</span></span><br><span class="line">         result = _mod(num,2) .. result</span><br><span class="line">         num = _floor(num*0.5)</span><br><span class="line">    end</span><br><span class="line">    <span class="built_in">return</span> result</span><br><span class="line">end</span><br><span class="line">--</span><br><span class="line"><span class="built_in">local</span> <span class="keyword">function</span> bs2num(num)</span><br><span class="line">    <span class="built_in">local</span> _sub = string.sub</span><br><span class="line">    <span class="built_in">local</span> index, result = 0, 0</span><br><span class="line">    <span class="keyword">if</span>(num == <span class="string">&quot;0&quot;</span>) <span class="keyword">then</span> <span class="built_in">return</span> 0; end</span><br><span class="line">    <span class="keyword">for</span> p=<span class="comment">#num,1,-1 do</span></span><br><span class="line">        <span class="built_in">local</span> this_val = _sub( num, p,p )</span><br><span class="line">        <span class="keyword">if</span> this_val == <span class="string">&quot;1&quot;</span> <span class="keyword">then</span></span><br><span class="line">            result = result + ( 2^index )</span><br><span class="line">        end</span><br><span class="line">        index=index+1</span><br><span class="line">    end</span><br><span class="line">    <span class="built_in">return</span> result</span><br><span class="line">end</span><br><span class="line">--</span><br><span class="line"><span class="built_in">local</span> <span class="keyword">function</span> padbits(num,bits)</span><br><span class="line">    <span class="keyword">if</span> <span class="comment">#num == bits then return num end</span></span><br><span class="line">    <span class="keyword">if</span> <span class="comment">#num &gt; bits then print(&quot;too many bits&quot;) end</span></span><br><span class="line">    <span class="built_in">local</span> pad = bits - <span class="comment">#num</span></span><br><span class="line">    <span class="keyword">for</span> i=1,pad <span class="keyword">do</span></span><br><span class="line">        num = <span class="string">&quot;0&quot;</span> .. num</span><br><span class="line">    end</span><br><span class="line">    <span class="built_in">return</span> num</span><br><span class="line">end</span><br><span class="line">--</span><br><span class="line"><span class="built_in">local</span> <span class="keyword">function</span> getUUID()</span><br><span class="line">    <span class="built_in">local</span> _rnd = math.random</span><br><span class="line">    <span class="built_in">local</span> _fmt = string.format</span><br><span class="line">    --</span><br><span class="line">    _rnd()</span><br><span class="line">    --</span><br><span class="line">    <span class="built_in">local</span> time_low_a = _rnd(0, 65535)</span><br><span class="line">    <span class="built_in">local</span> time_low_b = _rnd(0, 65535)</span><br><span class="line">    --</span><br><span class="line">    <span class="built_in">local</span> time_mid = _rnd(0, 65535)</span><br><span class="line">    --</span><br><span class="line">    <span class="built_in">local</span> time_hi = _rnd(0, 4095 )</span><br><span class="line">    time_hi = padbits( num2bs(time_hi), 12 )</span><br><span class="line">    <span class="built_in">local</span> time_hi_and_version = bs2num( <span class="string">&quot;0100&quot;</span> .. time_hi )</span><br><span class="line">    --</span><br><span class="line">    <span class="built_in">local</span> clock_seq_hi_res = _rnd(0,63)</span><br><span class="line">    clock_seq_hi_res = padbits( num2bs(clock_seq_hi_res), 6 )</span><br><span class="line">    clock_seq_hi_res = <span class="string">&quot;10&quot;</span> .. clock_seq_hi_res</span><br><span class="line">    --</span><br><span class="line">    <span class="built_in">local</span> clock_seq_low = _rnd(0,255)</span><br><span class="line">    clock_seq_low = padbits( num2bs(clock_seq_low), 8 )</span><br><span class="line">    --</span><br><span class="line">    <span class="built_in">local</span> clock_seq = bs2num(clock_seq_hi_res .. clock_seq_low)</span><br><span class="line">    --</span><br><span class="line">    <span class="built_in">local</span> node = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i=1,6 <span class="keyword">do</span></span><br><span class="line">        node[i] = _rnd(0,255)</span><br><span class="line">    end</span><br><span class="line">    --</span><br><span class="line">    <span class="built_in">local</span> guid = <span class="string">&quot;&quot;</span></span><br><span class="line">    guid = guid .. padbits(_fmt(<span class="string">&quot;%X&quot;</span>,time_low_a), 4)</span><br><span class="line">    guid = guid .. padbits(_fmt(<span class="string">&quot;%X&quot;</span>,time_low_b), 4)</span><br><span class="line">    guid = guid .. padbits(_fmt(<span class="string">&quot;%X&quot;</span>,time_mid), 4)</span><br><span class="line">    guid = guid .. padbits(_fmt(<span class="string">&quot;%X&quot;</span>,time_hi_and_version), 4)</span><br><span class="line">    guid = guid .. padbits(_fmt(<span class="string">&quot;%X&quot;</span>,clock_seq), 4)</span><br><span class="line">    --</span><br><span class="line">    <span class="keyword">for</span> i=1,6 <span class="keyword">do</span></span><br><span class="line">        guid = guid .. padbits(_fmt(<span class="string">&quot;%X&quot;</span>,node[i]), 2)</span><br><span class="line">    end</span><br><span class="line">    --</span><br><span class="line">    <span class="built_in">return</span> guid</span><br><span class="line">end</span><br><span class="line">--</span><br><span class="line">M.getUUID = getUUID</span><br><span class="line"><span class="built_in">return</span> M</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a><em>问题</em></h2><p>Lua的这个模块太长，担心性能问题，需要进行性能评估。</p>
-<h1 id="方案四"><a href="#方案四" class="headerlink" title="方案四"></a>方案四</h1><p>还是利用Lua脚本，使用时间戳加随机数的方式<br>关键步骤：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set_by_lua <span class="variable">$rdm_number</span> <span class="string">&#x27;</span></span><br><span class="line"><span class="string">    return os.time() .. os.clock()*100 .. math.random(1000000000, os.time())</span></span><br><span class="line"><span class="string">&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a><em>问题</em></h2><p>os.time()的精确度在1秒，os.clock()的精确度在0.01秒，这样处理之后，总的精度在10毫秒，没有达到要求。<br> Lua有一个 Luasocket 模块，可以达到毫秒级别的精度，但是需要安装。</p>
-<h1 id="方案五"><a href="#方案五" class="headerlink" title="方案五"></a>方案五</h1><p>结合Nginx的 $msec 变量和 Lua 的随机数<br>关键配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    ...</span><br><span class="line">    set_by_lua <span class="variable">$rdm_number</span> <span class="string">&#x27;</span></span><br><span class="line"><span class="string">        return math.random(1000000000, os.time())</span></span><br><span class="line"><span class="string">    &#x27;</span>;</span><br><span class="line">    location / &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="built_in">set</span> <span class="variable">$req_id</span> $msec<span class="variable">$rdm_number</span>;</span><br><span class="line">        proxy_set_header X-Request-Id <span class="variable">$req_id</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="终记"><a href="#终记" class="headerlink" title="终记"></a>终记</h1><p>最终确定方案五，简单，方便，影响最小。<br> 在方案选择、测试过程中，还遇到了环境搭建相关的问题，将记录在下篇文章中，敬请期待！</p>
-<hr>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>1.<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://stackoverflow.com/questions/17748735/setting-a-trace-id-in-nginx-load-balancer">http://stackoverflow.com/questions/17748735/setting-a-trace-id-in-nginx-load-balancer</a><br> 2.<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https://blog.ryandlane.com/2014/12/11/using-lua-in-nginx-for-unique-request-ids-and-millisecond-times-in-logs/">https://blog.ryandlane.com/2014/12/11/using-lua-in-nginx-for-unique-request-ids-and-millisecond-times-in-logs/</a><br> 3.<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://www.jb51.net/article/82167.htm">http://www.jb51.net/article/82167.htm</a><br> 4.<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://nginx.org/en/docs/http/ngx_http_core_module.html#.24args">http://nginx.org/en/docs/http/ngx_http_core_module.html#.24args</a><br> 5.<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://nginx.org/en/docs/http/ngx_http_core_module.html#var_request_id">http://nginx.org/en/docs/http/ngx_http_core_module.html#var_request_id</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/b73c/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/b73c/" class="post-title-link" itemprop="url">静态资源版本号解决方案（css/js等）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-26 11:36:37" itemprop="dateCreated datePublished" datetime="2021-05-26T11:36:37+08:00">2021-05-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li>1.解决方案</li>
-<li>2.原始文件和最终生成效果</li>
-<li>3.pom.xml 中插件添加</li>
-<li>4.html中 css&#x2F;js 文件引用规则</li>
-</ul>
-<h3 id="1-解决方案"><a href="#1-解决方案" class="headerlink" title="1.解决方案"></a>1.解决方案</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">解决问题：</span><br><span class="line">    防止浏览器缓存，修改静态文件（<span class="keyword">js/css）后无效，需要强刷。</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line">解决方案：</span><br><span class="line">    使用 maven 的 com.google<span class="meta">.code</span>.maven-replacer-plugin 插件，</span><br><span class="line">    在项目打包 package 时自动为静态文件追加 xxx.<span class="keyword">js?v=time </span>的后缀，</span><br><span class="line">    从而解决浏览器修改后浏览器缓存问题，此插件只会在生成 war 包源码时生效，不需要修改任何代码。</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-原始文件和最终生成效果"><a href="#2-原始文件和最终生成效果" class="headerlink" title="2.原始文件和最终生成效果"></a>2.原始文件和最终生成效果</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">原始文件：</span><br><span class="line">&lt;script src=<span class="string">&quot;$&#123;resource!&#125;/js/xxx/xxx.js&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">打包后：</span><br><span class="line">&lt;script src=<span class="string">&quot;$&#123;resource!&#125;/js/xxx/xxx.js?v=20180316082543&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-pom-xml-中插件添加"><a href="#3-pom-xml-中插件添加" class="headerlink" title="3.pom.xml 中插件添加"></a>3.pom.xml 中插件添加</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- maven.build.timestamp 默认时间戳格式 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">maven.build.timestamp.format</span>&gt;</span>yyyyMMddHHmmss<span class="tag">&lt;/<span class="name">maven.build.timestamp.format</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 使用缓存 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">useCache</span>&gt;</span>true<span class="tag">&lt;/<span class="name">useCache</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 在打包之前执行，打包后包含已经执行后的文件 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">id</span>&gt;</span>prepare-war<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">phase</span>&gt;</span>prepare-package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">goal</span>&gt;</span>exploded<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.code.maven-replacer-plugin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>replacer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 打包前进行替换 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">phase</span>&gt;</span>prepare-package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">goal</span>&gt;</span>replace<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 自动识别到项目target文件夹 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">basedir</span>&gt;</span>$&#123;build.directory&#125;<span class="tag">&lt;/<span class="name">basedir</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 替换的文件所在目录规则 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">include</span>&gt;</span>$&#123;build.finalName&#125;/WEB-INF/views/*.html<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">include</span>&gt;</span>$&#123;build.finalName&#125;/WEB-INF/views/**/*.html<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">replacements</span>&gt;</span></span><br><span class="line">				<span class="comment">&lt;!-- 更改规则，在css/js文件末尾追加?v=时间戳，反斜杠表示字符转义 --&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">replacement</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">token</span>&gt;</span>\.css\&quot;<span class="tag">&lt;/<span class="name">token</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">value</span>&gt;</span>.css?v=$&#123;maven.build.timestamp&#125;\&quot;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">replacement</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">replacement</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">token</span>&gt;</span>\.css\&#x27;<span class="tag">&lt;/<span class="name">token</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">value</span>&gt;</span>.css?v=$&#123;maven.build.timestamp&#125;\&#x27;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">replacement</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">replacement</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">token</span>&gt;</span>\.js\&quot;<span class="tag">&lt;/<span class="name">token</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">value</span>&gt;</span>.js?v=$&#123;maven.build.timestamp&#125;\&quot;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">replacement</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">replacement</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">token</span>&gt;</span>\.js\&#x27;<span class="tag">&lt;/<span class="name">token</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">value</span>&gt;</span>.js?v=$&#123;maven.build.timestamp&#125;\&#x27;<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">replacement</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">replacements</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span> </span><br></pre></td></tr></table></figure>
-
-<h3 id="4-html中-css-x2F-js-文件引用规则"><a href="#4-html中-css-x2F-js-文件引用规则" class="headerlink" title="4.html中 css&#x2F;js 文件引用规则"></a>4.html中 css&#x2F;js 文件引用规则</h3><p>文件引用结尾处，必须是pom.xml文件中添加的规则：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;$&#123;resource!&#125;/js/xxx/xxx.js&quot;</span> type=<span class="string">&quot;text/javascript&quot;</span>&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;$&#123;resource!&#125;/css/xxx/xxx.css&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/48d6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/48d6/" class="post-title-link" itemprop="url">查看windows server服务器的重启日志记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-14 13:19:08" itemprop="dateCreated datePublished" datetime="2021-05-14T13:19:08+08:00">2021-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Problem/" itemprop="url" rel="index"><span itemprop="name">Problem</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>275</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>点击菜单栏左下角“开始”按钮，在右侧的菜单栏中点击“管理工具”选项，在弹出的右侧菜单栏中点击“事件查看器”选项。</li>
-</ol>
-<img src="/Users/linjian/Library/Application Support/typora-user-images/image-20210514132656150.png" alt="image-20210514132656150" style="zoom: 50%;" />
-
-<ol>
-<li><p>弹出的“事件查看器”界面右侧，左侧有“windows日志”选项，单击左侧“+”。</p>
-<img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210514132203607.png" alt="image-20210514132203607" style="zoom:50%;" />
-</li>
-<li><p>在展开的列表中选中“系统”这一选项可以看到系统产生的日志记录。</p>
-<img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210514132225205.png" alt="image-20210514132225205" style="zoom:50%;" />
-</li>
-<li><p>为了方便直接查找重启的日志，在右侧的菜单栏中点击“筛选当前日志…”。</p>
-<img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210514132241330.png" alt="image-20210514132241330" style="zoom:50%;" />
-</li>
-<li><p>在弹出的窗口中选择“筛选器”选项卡，并在“任务类别”这一选项框上方的框中输入“1074”的事件ID，接着点击下方的“确定”即可看到系统所有的重启日志记录。（注：“1074”为系统重启的事件ID）</p>
-<img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210514132301214.png" alt="image-20210514132301214" style="zoom:50%;" />
-
-<img src="/Users/linjian/Library/Application Support/typora-user-images/image-20210514132317909.png" alt="image-20210514132317909" style="zoom:50%;" />
-</li>
-<li><p>若要查看详细信息，双击该条目即可。</p>
-<img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210514132335162.png" alt="image-20210514132335162" style="zoom: 50%;" /></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/29/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/88/">88</a><a class="extend next" rel="next" href="/page/31/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/29/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/page/89/">89</a><a class="extend next" rel="next" href="/page/31/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -777,14 +731,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">439</span>
+          <span class="site-state-item-count">442</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">75</span>
+        <span class="site-state-item-count">76</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -826,12 +780,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">742k</span>
+    <span title="站点总字数">281k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:14</span>
+    <span title="站点阅读时长">17:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
