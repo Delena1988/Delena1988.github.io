@@ -188,6 +188,202 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6ae8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/6ae8/" class="post-title-link" itemprop="url">MySQL复制表结构和内容到另一张表</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-11 14:01:05" itemprop="dateCreated datePublished" datetime="2022-04-11T14:01:05+08:00">2022-04-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>283</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="复制表结构及数据到新表"><a href="#复制表结构及数据到新表" class="headerlink" title="复制表结构及数据到新表"></a>复制表结构及数据到新表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 新表</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> 旧表 </span><br></pre></td></tr></table></figure>
+
+<h3 id="只复制表结构到新表"><a href="#只复制表结构到新表" class="headerlink" title="只复制表结构到新表"></a>只复制表结构到新表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">table</span> 新表</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> 旧表 <span class="keyword">where</span> <span class="number">1</span> <span class="operator">=</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>即：让where条件不成立.</p>
+<p>方法二：（低版本的MySQL不支持，MySQL 4.0.25不支持，MySQL 5已经支持了）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 新表</span><br><span class="line"><span class="keyword">like</span> 旧表 </span><br></pre></td></tr></table></figure>
+
+<h3 id="复制旧表的数据到新表（假设两个表结构一样）"><a href="#复制旧表的数据到新表（假设两个表结构一样）" class="headerlink" title="复制旧表的数据到新表（假设两个表结构一样）"></a>复制旧表的数据到新表（假设两个表结构一样）</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 新表</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> 旧表 </span><br></pre></td></tr></table></figure>
+
+<h3 id="复制旧表的数据到新表（假设两个表结构不一样）"><a href="#复制旧表的数据到新表（假设两个表结构不一样）" class="headerlink" title="复制旧表的数据到新表（假设两个表结构不一样）"></a>复制旧表的数据到新表（假设两个表结构不一样）</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 新表(字段<span class="number">1</span>,字段<span class="number">2</span>,…….)</span><br><span class="line"><span class="keyword">select</span> 字段<span class="number">1</span>,字段<span class="number">2</span>,…… <span class="keyword">from</span> 旧表</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/5bc3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/5bc3/" class="post-title-link" itemprop="url">Linux安装Nginx</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-06 13:56:41" itemprop="dateCreated datePublished" datetime="2022-04-06T13:56:41+08:00">2022-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-07 13:52:00" itemprop="dateModified" datetime="2023-03-07T13:52:00+08:00">2023-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>762</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="1、安装所需环境"><a href="#1、安装所需环境" class="headerlink" title="1、安装所需环境"></a><strong>1、安装所需环境</strong></h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>安装gcc</span><br><span class="line">yum install gcc-c++</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>安装PCRE pcre-devel</span><br><span class="line">yum install -y pcre pcre-devel</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>安装zlib</span><br><span class="line">yum install -y zlib zlib-devel</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>安装Open SSL</span><br><span class="line">yum install -y openssl openssl-devel</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、创建nginx目录并下载安装包"><a href="#2、创建nginx目录并下载安装包" class="headerlink" title="2、创建nginx目录并下载安装包"></a><strong>2、创建nginx目录并下载安装包</strong></h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>进入usr/local目录</span><br><span class="line">cd <span class="regexp">/usr/</span>local</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>创建nginx目录</span><br><span class="line">mkdir nginx</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>进入nginx目录</span><br><span class="line">cd nginx</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>下载tar包</span><br><span class="line">wget http:<span class="regexp">//</span>nginx.org<span class="regexp">/download/</span>nginx-<span class="number">1.22</span>.<span class="number">1</span>.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>解压tar</span><br><span class="line">tar -xvf nginx-<span class="number">1.22</span>.<span class="number">1</span>.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、安装nginx"><a href="#3、安装nginx" class="headerlink" title="3、安装nginx"></a><strong>3、安装nginx</strong></h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>进入nginx目录</span><br><span class="line">cd <span class="regexp">/usr/</span>local<span class="regexp">/nginx/</span>nginx-<span class="number">1.22</span>.<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>执行命令</span><br><span class="line">./configure</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>执行make命令(要是执行不成功请检查最开始安装的四个有没有安装成功)</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>执行make install命令</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、启动nginx"><a href="#4、启动nginx" class="headerlink" title="4、启动nginx"></a><strong>4、启动nginx</strong></h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>进入<span class="regexp">/usr/</span>local<span class="regexp">/nginx/</span>sbin目录，输入./nginx即可启动nginx</span><br><span class="line">./nginx</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>关闭nginx</span><br><span class="line">.<span class="regexp">/nginx -s quit  或者 ./</span>nginx -s stop</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>重启nginx</span><br><span class="line">./nginx -s reload</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>查看nginx进程</span><br><span class="line">ps -ef|grep nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="5、设置开启自启动"><a href="#5、设置开启自启动" class="headerlink" title="5、设置开启自启动"></a><strong>5、设置开启自启动</strong></h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>编辑</span><br><span class="line">vim <span class="regexp">/etc/</span>rc.local</span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>最底部增加这一行</span><br><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/nginx/</span>sbin/nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、日志路径"><a href="#6、日志路径" class="headerlink" title="6、日志路径"></a>6、日志路径</h3><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<span class="keyword">var</span>/<span class="built_in">log</span>/nginx</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/d022/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -477,185 +673,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/ce45/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/ce45/" class="post-title-link" itemprop="url">Mac安装scala</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-24 14:44:58" itemprop="dateCreated datePublished" datetime="2022-02-24T14:44:58+08:00">2022-02-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>222</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="使用homebrew安装"><a href="#使用homebrew安装" class="headerlink" title="使用homebrew安装"></a>使用homebrew安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew install coursier/formulas/coursier</span><br><span class="line">$ cs setup</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://get-coursier.io/docs/cli-installation">https://get-coursier.io/docs/cli-installation</a></p>
-<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cala</span><br><span class="line">Welcome to Scala 3.1.1 (1.8.0_291, Java Java HotSpot(TM) 64-Bit Server VM).</span><br><span class="line">Type <span class="keyword">in</span> expressions <span class="keyword">for</span> evaluation. Or try :<span class="built_in">help</span>.</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1f79/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/1f79/" class="post-title-link" itemprop="url">Zookeeper数据查看工具ZooInspector</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-02-21 10:32:19" itemprop="dateCreated datePublished" datetime="2022-02-21T10:32:19+08:00">2022-02-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-15 10:26:23" itemprop="dateModified" datetime="2023-03-15T10:26:23+08:00">2023-03-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Zookeeper/" itemprop="url" rel="index"><span itemprop="name">Zookeeper</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>228</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="1、下载"><a href="#1、下载" class="headerlink" title="1、下载"></a>1、下载</h4><p><a target="_blank" rel="noopener" href="https://issues.apache.org/jira/secure/attachment/12436620/*ZooInspector*.zip%EF%BC%9B">https://issues.apache.org/jira/secure/attachment/12436620/*ZooInspector*.zip；</a></p>
-<h4 id="2、解压"><a href="#2、解压" class="headerlink" title="2、解压"></a>2、解压</h4><p> 进入目录ZooInspector\build，运行zookeeper-dev-ZooInspector.jar；</p>
-<p><img src="https://s2.loli.net/2022/02/21/6CaX38JPLiqUrjg.png" alt="image-20220221103419342"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar zookeeper-dev-ZooInspector.jar</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://s2.loli.net/2022/02/21/mUnsQZwhGKz8B4a.png" alt="image-20220221103434760"></p>
-<h4 id="3、点击左上角连接按钮，输入zk服务地址：ip或者主机名-2181"><a href="#3、点击左上角连接按钮，输入zk服务地址：ip或者主机名-2181" class="headerlink" title="3、点击左上角连接按钮，输入zk服务地址：ip或者主机名:2181"></a>3、点击左上角连接按钮，输入zk服务地址：ip或者主机名:2181</h4><p><img src="https://s2.loli.net/2022/02/21/orCpDEdhtLeZg7F.png" alt="image-20220221103449101"></p>
-<p> 点击OK，即可查看ZK节点信息</p>
-<p><img src="https://s2.loli.net/2022/02/21/Zvr72tBAaIDcl9o.png" alt="image-20220221103504135"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -725,7 +742,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">443</span>
+          <span class="site-state-item-count">445</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -774,12 +791,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">747k</span>
+    <span title="站点总字数">748k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:19</span>
+    <span title="站点阅读时长">11:20</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

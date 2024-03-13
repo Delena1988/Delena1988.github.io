@@ -188,6 +188,225 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6653/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/6653/" class="post-title-link" itemprop="url">同步工具Bifrost安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-17 15:14:48" itemprop="dateCreated datePublished" datetime="2022-11-17T15:14:48+08:00">2022-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bifrost/" itemprop="url" rel="index"><span itemprop="name">Bifrost</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>435</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>官方文档：<a target="_blank" rel="noopener" href="https://wiki.xbifrost.com/">https://wiki.xbifrost.com/</a></p>
+<h1 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h1><p><strong>下载地址：</strong> <a target="_blank" rel="noopener" href="https://github.com/brokercap/Bifrost/releases%EF%BC%88%E9%80%89%E6%8B%A9%E6%9C%80%E6%96%B0release%E7%89%88%E6%9C%AC%EF%BC%89">https://github.com/brokercap/Bifrost/releases（选择最新release版本）</a></p>
+<p>目前最新release版本为1.8.8</p>
+<h1 id="开始安装（Linux）"><a href="#开始安装（Linux）" class="headerlink" title="开始安装（Linux）"></a>开始安装（Linux）</h1><ol>
+<li>解压</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar <span class="operator">-</span>zxvf  bifrost_v1<span class="number">.8</span><span class="number">.8</span><span class="operator">-</span>release_Linux<span class="operator">-</span>amd64<span class="operator">-</span>bin.tar.gz</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>启动</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.<span class="operator">/</span>bin<span class="operator">/</span>Bifrost<span class="operator">-</span>server <span class="keyword">start</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="访问地址"><a href="#访问地址" class="headerlink" title="访问地址"></a>访问地址</h1><p><a target="_blank" rel="noopener" href="https://127.0.0.1:21036/">https://127.0.0.1:21036</a></p>
+<ul>
+<li><p>端口，默认21036</p>
+</li>
+<li><p>用户名&#x2F;密码是在 etc&#x2F;Bifrost.ini 配置文件中配置的，</p>
+<ol>
+<li><p>默认用户名 Bifrost</p>
+</li>
+<li><p>默认密码 Bifrost123</p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="配置文件路径"><a href="#配置文件路径" class="headerlink" title="配置文件路径"></a>配置文件路径</h1><p><code>/``bifrost_v1.8.8-release_Linux-amd64-bin/etc``/Bifrost.ini</code></p>
+<h1 id="日志路径"><a href="#日志路径" class="headerlink" title="日志路径"></a>日志路径</h1><p><code>/``bifrost_v1.8.8-release_Linux-amd64-bin/logs</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/dcea/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/dcea/" class="post-title-link" itemprop="url">DBeaver安装及使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-17 15:09:24" itemprop="dateCreated datePublished" datetime="2022-11-17T15:09:24+08:00">2022-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>179</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>ClickHouse客户端工具</p>
+<h1 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h1><p><strong>下载地址：</strong> <a target="_blank" rel="noopener" href="https://dbeaver.io/download/">https://dbeaver.io/download/</a></p>
+<h1 id="Windows安装"><a href="#Windows安装" class="headerlink" title="Windows安装"></a>Windows安装</h1><p>双击安装包exe、下一步、下一步即可，建议安装在非系统盘。</p>
+<h1 id="连接ClickHouse"><a href="#连接ClickHouse" class="headerlink" title="连接ClickHouse"></a>连接ClickHouse</h1><ol>
+<li><p>启动DBeaver</p>
+</li>
+<li><p>创建新连接</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/EerEYv.jpg"></p>
+</li>
+<li><p>选择clickhouse数据库</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/0V7iPF.jpg"></p>
+</li>
+<li><p>填写数据库连接信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/QhSnNu.jpg"></p>
+</li>
+<li><p>测试连接，提示未安装驱动</p>
+</li>
+</ol>
+<p>有外网可以直接点击下载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/EZ7jXu.jpg"></p>
+<p>没有外网，可以手动添加驱动</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/1m0Jke.jpg"></p>
+<ol start="6">
+<li>测试连接</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/qqy1M9.jpg"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/a6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -468,208 +687,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/8dd6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/8dd6/" class="post-title-link" itemprop="url">systemctl命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-14 13:44:17" itemprop="dateCreated datePublished" datetime="2022-11-14T13:44:17+08:00">2022-11-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>491</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="systemctl命令主要有两大功能"><a href="#systemctl命令主要有两大功能" class="headerlink" title="systemctl命令主要有两大功能"></a>systemctl命令主要有两大功能</h2><p>控制systemd系统<br>管理系统上运行的服务</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/8dd6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/5c55/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/5c55/" class="post-title-link" itemprop="url">Linux rpm安装</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-11 14:27:47" itemprop="dateCreated datePublished" datetime="2022-11-11T14:27:47+08:00">2022-11-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>846</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="rpm"><a href="#rpm" class="headerlink" title="rpm"></a>rpm</h1><p>    rpm软件包是Linux的各个发行版本中应用最为广泛的软件包格式之一，成为众多Linux发行版公认的软件包管理标准，最早由Red Hat这家公司开发。</p>
-<h1 id="RPM优点："><a href="#RPM优点：" class="headerlink" title="RPM优点："></a>RPM优点：</h1><ul>
-<li><p>rpm内包含已经编译过的程序于配置文件等数据，用户不需要重新编译；</p>
-</li>
-<li><p>rpm在被安装之前，会现检查系统的硬盘容量、操作系统版本等，可避免文件被错误安装；</p>
-</li>
-<li><p>rpm文件本身提供软件的版本信息、依赖属性检查、软件用途说明、软件所含文件等信息，便于了解软件；</p>
-</li>
-<li><p>rpm管理方式使用数据库记录rpm文件的相关参数，便于升级、删除、查询与验证</p>
-</li>
-<li><p>rpm这个软件管理器所处理的软件，是由软件提供者在特定的Linux平台上面将该软件编译完成并且打包好，用户只要拿到这个打包好的软件，然后将里面的文件放到应该要存放的目录，即完成安装。</p>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/5c55/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -739,7 +756,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">443</span>
+          <span class="site-state-item-count">445</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -788,12 +805,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">747k</span>
+    <span title="站点总字数">748k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:19</span>
+    <span title="站点阅读时长">11:20</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
