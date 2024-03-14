@@ -188,6 +188,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/c524/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/c524/" class="post-title-link" itemprop="url">Linux监控脚本</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-17 16:10:24" itemprop="dateCreated datePublished" datetime="2022-10-17T16:10:24+08:00">2022-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="磁盘监控"><a href="#磁盘监控" class="headerlink" title="磁盘监控"></a>磁盘监控</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#ip</span></span><br><span class="line">adr=`/usr/sbin/ip addr | grep <span class="string">&#x27;172.17&#x27;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | <span class="built_in">tail</span> -n 1`</span><br><span class="line"><span class="comment">#90%check</span></span><br><span class="line">/bin/df -h | grep <span class="string">&#x27;9[0-9]%&#x27;</span></span><br><span class="line"><span class="keyword">if</span> [ $? = 0 ];<span class="keyword">then</span></span><br><span class="line">    <span class="built_in">dir</span>=`/bin/df -h | grep <span class="string">&#x27;9[0-9]%&#x27;</span> | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span> | <span class="built_in">head</span> -n 1`</span><br><span class="line">    usg=`/bin/df -h | grep <span class="string">&#x27;9[0-9]%&#x27;</span> | awk <span class="string">&#x27;&#123;print $(NF-1)&#125;&#x27;</span> | <span class="built_in">head</span> -n 1`</span><br><span class="line">    curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> -d <span class="string">&#x27;&#123;&quot;msg_type&quot;:&quot;text&quot;,&quot;content&quot;:&#123;&quot;text&quot;:&quot;&#x27;</span>瑞金本地化云服服务器<span class="string">&#x27;\n&#x27;</span>DiskWarn<span class="string">&#x27;\n&#x27;</span>IP:<span class="variable">$&#123;adr&#125;</span><span class="string">&#x27;\n&#x27;</span>Directory:<span class="variable">$&#123;dir&#125;</span><span class="string">&#x27;\n&#x27;</span>Usage:<span class="variable">$&#123;usg&#125;</span><span class="string">&#x27;&quot;&#125;&#125;&#x27;</span> https://open.feishu.cn/open-apis/bot/v2/hook/f9e39c63-0bd9-4e54-a35e-2cb50931be56</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="comment">#100%check</span></span><br><span class="line">/bin/df -h | grep <span class="string">&#x27;100%&#x27;</span></span><br><span class="line"><span class="keyword">if</span> [ $? = 0 ];<span class="keyword">then</span></span><br><span class="line">    <span class="built_in">dir</span>=`/bin/df -h | grep <span class="string">&#x27;100%&#x27;</span> | awk <span class="string">&#x27;&#123;print $NF&#125;&#x27;</span> | <span class="built_in">head</span> -n 1`</span><br><span class="line">    usg=`/bin/df -h | grep <span class="string">&#x27;100%&#x27;</span> | awk <span class="string">&#x27;&#123;print $(NF-1)&#125;&#x27;</span> | <span class="built_in">head</span> -n 1`</span><br><span class="line">    curl -X POST -H <span class="string">&quot;Content-Type: application/json&quot;</span> -d <span class="string">&#x27;&#123;&quot;msg_type&quot;:&quot;text&quot;,&quot;content&quot;:&#123;&quot;text&quot;:&quot;&#x27;</span>瑞金本地化云服服务器<span class="string">&#x27;\n&#x27;</span>DiskWarn<span class="string">&#x27;\n&#x27;</span>IP:<span class="variable">$&#123;adr&#125;</span><span class="string">&#x27;\n&#x27;</span>Directory:<span class="variable">$&#123;dir&#125;</span><span class="string">&#x27;\n&#x27;</span>Usage:<span class="variable">$&#123;usg&#125;</span><span class="string">&#x27;&quot;&#125;&#125;&#x27;</span> https://open.feishu.cn/open-apis/bot/v2/hook/f9e39c63-0bd9-4e54-a35e-2cb50931be56</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/9bde/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -566,122 +655,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/7ae/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/7ae/" class="post-title-link" itemprop="url">GC (Allocation Failure)日志分析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-09-08 09:53:20" itemprop="dateCreated datePublished" datetime="2022-09-08T09:53:20+08:00">2022-09-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在分析gc日实例志之前，我们先通过一条《深入理解java虚拟机》一书中的一个例子gc日志来回顾一下gc日志的基本知识，下面是一条gc日志：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">33.125：[GC[DefNew: 3324k-&gt;152k(3712k), 0.0025925 secs] 3324k&gt;152k(11904k),0.0031680 secs]</span><br></pre></td></tr></table></figure>
-
-<p>从左至右，各个信息的意思为：</p>
-<ul>
-<li><p>33.125： 自虚拟机启动以来经过的秒数，单位为秒；</p>
-</li>
-<li><p>GC： 垃圾收集的停顿类型为不需要STW（Stop The World ）。如果是Full GC说明发生了STW。如果是Full GC (System)说明是调用System.gc()方法所触发的收集。</p>
-</li>
-<li><p>DefNew：表示GC发生的区域在新生代。这个名称和所使用的收集器密切相关。可以有Tenured、Perm、ParNew、PSYoungGen等等。其中hotspot虚拟机使用的是PSYoungGen代表新生代</p>
-</li>
-<li><p>3324k-&gt;152k(3712k)：GC前该区域（DefNew）已使用容量-&gt;GC后该区域已使用容量（该内存区域总容量）</p>
-</li>
-<li><p>0.0025925 secs：该内存区域（DefNew）GC所占用的时间。</p>
-</li>
-<li><p>3324k-&gt;152k(11904k)：GC前Java堆已使用容量-&gt;GC后Java堆已使用容量（Java堆总容量）</p>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/7ae/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/89/">89</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/90/">90</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -747,7 +724,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">445</span>
+          <span class="site-state-item-count">446</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
