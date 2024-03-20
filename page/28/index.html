@@ -188,6 +188,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a91c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/a91c/" class="post-title-link" itemprop="url">RPO与RTO</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-12-31 11:46:59" itemprop="dateCreated datePublished" datetime="2021-12-31T11:46:59+08:00">2021-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>607</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>RPO（Recovery Point Objective）：即数据恢复点目标，</strong>主要指的是业务系统所能容忍的数据丢失量，指灾难发生后，从IT系统宕机导致业务停顿之时开始，到IT系统恢复至可以支持各部门运作、恢复运营之时，此两点之间的时间段称为RTO，广道容灾备份系统RTO达到分钟级。</p>
+<p><strong>RTO（Recovery Time Objective）：即恢复时间目标，</strong>主要指的是所能容忍的业务停止服务的最长时间，也就是从灾难发生到业务系统恢复服务功能所需要的最短时间周期。</p>
+<p>指从系统和应用数据而言，要实现能够恢复至可以支持各部门业务运作，系统及生产数据应恢复到怎样的更新程度，这种更新程度可以是上一周的备份数据，也可以是上一次交易的实时数据。</p>
+<p>RPO针对的是数据丢失，而RTO针对的是服务丢失，二者没有必然的关联性。RTO和RPO的确定必须在进行风险分析和业务影响分析后根据不同的业务需求确定。对于不同企业的同一种业务，RTO和RPO的需求也会有所不同。</p>
+<p><img src="https://s2.loli.net/2021/12/31/ufIy6DrP84UbohT.png" alt="img"></p>
+<p>系统选择</p>
+<p>在选择容灾系统的构造时，还要建立多层次的广域网络故障切换机制。本地的高可用系统指在多个服务器运行一个或多种应用的情况下，应确保任意服务器出现任何故障时，其运行的应用不能中断，应用程序和系统应能迅速切换到其它服务器上运行，即本地系统集群和热备份。</p>
+<p>整的应用容灾，既要包含本地系统的安全机制、远程的数据复制机制，还应具有广域网范围的远程故障切换能力和故障诊断能力。</p>
+<p>也就是说，一旦故障发生，系统要有强大的故障诊断和切换策略制订机制，确保快速的反应和迅速的业务接管。实际上，广域网范围的高可用能力与本地系统的高可用能力应形成一个整体，实现多级的故障切换和恢复机制，确保系统在各个范围的可靠和安全。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/59af/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -228,7 +315,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>378</span>
+              <span>251</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -313,14 +400,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.8k</span>
+              <span>3.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>12 分钟</span>
             </span>
 
         </div>
@@ -454,14 +541,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.4k</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -639,7 +726,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>699</span>
+              <span>191</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -662,133 +749,6 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 取<span class="number">12</span>到<span class="number">24</span>的随机整数，包括<span class="number">12</span>到<span class="number">24</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">FLOOR</span>(<span class="number">12</span><span class="operator">+</span>(RAND()<span class="operator">*</span><span class="number">13</span>)); </span><br><span class="line"></span><br><span class="line"># 取<span class="number">0</span><span class="number">-24</span>之间的随机数，不够<span class="number">2</span>位的前补<span class="number">0</span></span><br><span class="line"><span class="keyword">SELECT</span> LPAD(<span class="built_in">FLOOR</span>(<span class="number">0</span> <span class="operator">+</span> (RAND() <span class="operator">*</span> <span class="number">23</span>)),<span class="number">2</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"># 给用户赋一个随机创建日期，年份为<span class="number">2015</span><span class="number">-2015</span></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(</span><br><span class="line">    <span class="built_in">FLOOR</span>(<span class="number">2015</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">1</span> )),</span><br><span class="line">    <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">    LPAD(<span class="built_in">FLOOR</span>(<span class="number">10</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">2</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">    <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">    LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">25</span> )),<span class="number">2</span>,<span class="number">0</span> )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 给用户赋一个随机创建时间，年份为<span class="number">2019</span></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(</span><br><span class="line">            <span class="built_in">FLOOR</span>(<span class="number">2019</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">1</span> )),</span><br><span class="line">            <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">0</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">12</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">25</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27; &#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">23</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27;:&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">59</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27;:&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">59</span> )),<span class="number">2</span>,<span class="number">0</span> ) </span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
 
 <h3 id="函数说明"><a href="#函数说明" class="headerlink" title="函数说明"></a>函数说明</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 可以在<span class="number">0</span>和<span class="number">1</span>之间产生一个随机数：</span><br><span class="line">RAND()</span><br><span class="line"></span><br><span class="line"># 向下取整</span><br><span class="line"><span class="built_in">FLOOR</span>(x) </span><br><span class="line"></span><br><span class="line"># 填充字符串左边</span><br><span class="line">LPAD(str,len,padstr)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a0b1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/a0b1/" class="post-title-link" itemprop="url">文档-《数据库设计说明书》</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-10-21 10:37:56" itemprop="dateCreated datePublished" datetime="2021-10-21T10:37:56+08:00">2021-10-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Document/" itemprop="url" rel="index"><span itemprop="name">Document</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>481</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="#_Toc455138579">第1章 引言	1</a></p>
-<p><a href="#_Toc455138580">1.1 标识	1</a></p>
-<p><a href="#_Toc455138581">1.2 数据库概述	1</a></p>
-<p><a href="#_Toc455138582">1.3 文档概述	1</a></p>
-<p><a href="#_Toc455138583">第2章 引用文件	2</a></p>
-<p><a href="#_Toc455138584">第3章 数据库级设计决策	3</a></p>
-<p><a href="#_Toc455138585">3.1 DBMS级设计策略	3</a></p>
-<p><a href="#_Toc455138586">3.2 应用级设计策略	3</a></p>
-<p><a href="#_Toc455138587">3.3 更新与维护设计策略	3</a></p>
-<p><a href="#_Toc455138588">第4章 数据库详细设计	3</a></p>
-<p><a href="#_Toc455138589">4.1 外部设计	3</a></p>
-<p><a href="#_Toc455138590">4.1.1 数据库用户名约定	3</a></p>
-<p><a href="#_Toc455138591">4.1.2 表命名约定	3</a></p>
-<p><a href="#_Toc455138592">4.1.3 视图命名约定	4</a></p>
-<p><a href="#_Toc455138593">4.1.4 视图注释约束	4</a></p>
-<p><a href="#_Toc455138594">4.1.5 系统字段的约定	4</a></p>
-<p><a href="#_Toc455138595">4.2 逻辑结构设计	6</a></p>
-<p><a href="#_Toc455138596">4.2.1 实体关系图	6</a></p>
-<p><a href="#_Toc455138597">4.2.2 关系模型描述	7</a></p>
-<p><a href="#_Toc455138598">4.2.3 数据视图描述	8</a></p>
-<p><a href="#_Toc455138599">4.2.4 数据库同义词描述	8</a></p>
-<p><a href="#_Toc455138600">4.2.5 数据库数据链路描述	9</a></p>
-<p><a href="#_Toc455138601">4.3 物理结构设计	9</a></p>
-<p><a href="#_Toc455138602">4.3.1 数据库物理设计总体说明	9</a></p>
-<p><a href="#_Toc455138603">4.3.2 数据库表空间的物理设计	9</a></p>
-<p><a href="#_Toc455138604">4.3.2.1数据库用户的物理设计	9</a></p>
-<p><a href="#_Toc455138605">4.3.3 数据库表的物理设计	9</a></p>
-<p><a href="#_Toc455138606">4.3.4 数据库索引的物理设计	10</a></p>
-<p><a href="#_Toc455138607">4.3.5 数据库普通回滚段、大回滚段的设计	10</a></p>
-<p><a href="#_Toc455138608">第5章 数据字典设计	11</a></p>
-<p><a href="#_Toc455138609">5.1 ****系统	11</a></p>
-<p><a href="#_Toc455138610">5.1.1 普通代码的数据字典	11</a></p>
-<p><a href="#_Toc455138611">5.1.2 程序级的数据字典	11</a></p>
-<p><a href="#_Toc455138612">第6章 安全保密设计	11</a></p>
-<p><a href="#_Toc455138613">6.1 用户标识与鉴别	12</a></p>
-<p><a href="#_Toc455138614">6.2 存取控制	12</a></p>
-<p><a href="#_Toc455138615">6.3 视图机制	13</a></p>
-<p><a href="#_Toc455138616">6.4 触发器机制	13</a></p>
-<p><a href="#_Toc455138617">6.5 审计	13</a></p>
-<p><a href="#_Toc455138618">第7章 需求的可追踪性	14</a></p>
 
       
     </div>
@@ -873,7 +833,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">446</span>
+          <span class="site-state-item-count">447</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -922,12 +882,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">748k</span>
+    <span title="站点总字数">282k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:20</span>
+    <span title="站点阅读时长">17:06</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

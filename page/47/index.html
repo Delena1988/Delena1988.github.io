@@ -188,6 +188,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/610c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/610c/" class="post-title-link" itemprop="url">MySQL多表关联删除</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-17 11:13:10" itemprop="dateCreated datePublished" datetime="2020-03-17T11:13:10+08:00">2020-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>75</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>t2和t3数据表中存有他t1表中数据的id</p>
+<p>选择删除t1表中的数据以及t2和t3表中相关（task_id）的数据</p>
+<p>SQL语句如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> t1, t2, t3</span><br><span class="line"><span class="keyword">FROM</span> t_satisfaction_followup_patients t1</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> t_hospital_followup_record t2 <span class="keyword">ON</span> t1.id <span class="operator">=</span> t2.relation_id</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> t_manage_call t3 <span class="keyword">ON</span> t1.id <span class="operator">=</span> t3.task_id</span><br><span class="line"><span class="keyword">WHERE</span> t1.id <span class="operator">=</span> <span class="string">&#x27;8aa5eeb2529d46d5962d561d3a9beedc&#x27;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/dd29/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -237,7 +328,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>474</span>
+              <span>143</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -339,14 +430,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>689</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -450,14 +541,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>363</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -545,7 +636,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>216</span>
+              <span>215</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -585,539 +676,6 @@
 <li>数据源配置</li>
 </ol>
 <p><img src="https://i.loli.net/2020/03/02/IEiuwUsVr2GZg3W.png" alt="2020-03-02-14-32-44-image.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/ebe4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/ebe4/" class="post-title-link" itemprop="url">2020-03</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-02 09:33:39" itemprop="dateCreated datePublished" datetime="2020-03-02T09:33:39+08:00">2020-03-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Daily/" itemprop="url" rel="index"><span itemprop="name">Daily</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="3-1"><a href="#3-1" class="headerlink" title="3.1"></a>3.1</h1><ol>
-<li><p>专科上线流程整理，广妇儿1型糖尿病上线准备（上线文档已完成）</p>
-</li>
-<li><p>广妇儿满意度–按患者统计卡（已优化，现场更新版本即可）</p>
-</li>
-</ol>
-<h1 id="3-2"><a href="#3-2" class="headerlink" title="3.2"></a>3.2</h1><ol>
-<li><p>3月份计划目标制定</p>
-<ul>
-<li><p>2.3.2b04–07 4个迭代（陈孝伟、毛子杰）</p>
-</li>
-<li><p>1型糖尿病广妇儿上线（林剑）</p>
-</li>
-<li><p>新冠专科专病（吴森、高翔）</p>
-</li>
-<li><p>专科专病知识库改造（高翔）</p>
-</li>
-<li><p>专科规则复诊提醒改造（高翔）</p>
-</li>
-<li><p>邵逸夫专病档案（金翔）</p>
-</li>
-<li><p>接口（徐贤、张成汉）</p>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-4"><a href="#3-4" class="headerlink" title="3.4"></a>3.4</h1><ol>
-<li><p>新冠专科流程讨论（确定改造方案，具体细节产品设计中）</p>
-</li>
-<li><p>南京鼓楼专科计划发送表单提交失败（bug，已修复）</p>
-</li>
-<li><p>省妇保日间手术手术记录同步问题处理（平台同步数据有延迟）</p>
-</li>
-<li><p>厦门医学院附属第二医院字典导入（已完成）</p>
-</li>
-<li><p>南京鼓楼随访小结，健康报告上线</p>
-</li>
-</ol>
-<h1 id="3-5"><a href="#3-5" class="headerlink" title="3.5"></a>3.5</h1><ol>
-<li><p>saas环境问题处理</p>
-</li>
-<li><p>台州中心院内健康数据没上传问题处理（接口服务启动顺序问题）已处理</p>
-</li>
-<li><p>南京鼓楼录音文件占用硬盘高，历史数据备份方案</p>
-</li>
-<li><p>省妇保日间手术任务拆分问题（接口未返回手术记录）</p>
-</li>
-<li><p>厦门医学院附属第二医院短信接口（已完成）</p>
-</li>
-</ol>
-<h1 id="3-6"><a href="#3-6" class="headerlink" title="3.6"></a>3.6</h1><ol>
-<li><p>绩效评分</p>
-</li>
-<li><p>广妇儿专科上线配合</p>
-</li>
-<li><p>南京鼓楼数据库卡，连接数不够用，修改配置扩大连接数</p>
-</li>
-<li><p>参加新冠专科会议，明确双方分工，确定双方需提供接口</p>
-</li>
-</ol>
-<h1 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h1><ol>
-<li><p>新冠专科宣讲</p>
-</li>
-<li><p>云端获取随访记录接口（代码已完成，查询数据时间字段没索引会超时）</p>
-</li>
-</ol>
-<h1 id="3-10"><a href="#3-10" class="headerlink" title="3.10"></a>3.10</h1><ol>
-<li><p>广妇儿短信平台手动筛选报错问题处理（已处理）</p>
-</li>
-<li><p>云端获取随访数据超时解决方案（未找到合理方案）</p>
-</li>
-<li><p>Mysql线程缓存配置优化</p>
-</li>
-<li><p>厦门中山满意度检验、检查来源互斥计划筛选问题（视图字段问题）</p>
-</li>
-<li><p>2.3.2b06宣讲</p>
-</li>
-</ol>
-<h1 id="3-11"><a href="#3-11" class="headerlink" title="3.11"></a>3.11</h1><ol>
-<li><p>港大深圳生殖医学中心需求讨论</p>
-<ul>
-<li><p>方案一：互创系统改造，根据业务场景调用随访接口推送</p>
-</li>
-<li><p>方案二：随访系统定时抓取数据加，按照不同业务添加到不同患者管理分组</p>
-</li>
-</ul>
-</li>
-<li><p>邵逸夫2.5.0需求、bug处理</p>
-</li>
-<li><p>本地模式宣教下载默认不使用317护（已发布）</p>
-</li>
-</ol>
-<h1 id="3-12"><a href="#3-12" class="headerlink" title="3.12"></a>3.12</h1><ol>
-<li><p>南京鼓楼健康报告、随访小结内网环境查看问题处理</p>
-</li>
-<li><p>随访2.5问题处理</p>
-</li>
-<li><p>邵逸夫2.5问题处理（需求、bug都已处理）</p>
-</li>
-<li><p>厦门大学附属第一医院风湿免疫科方案讨论</p>
-<ul>
-<li><p>嵌入电子病历系统</p>
-</li>
-<li><p>获取病史、检查、检验等信息，可以人工选择填充内容</p>
-</li>
-<li><p>评分计算</p>
-</li>
-<li><p>单个患者历史随访记录</p>
-</li>
-<li><p>导出所有患者数据</p>
-</li>
-</ul>
-</li>
-<li><p>新冠专科跟进</p>
-<ul>
-<li><p>高翔（动态拆分任务、随访状态更新）</p>
-</li>
-<li><p>吴森（2推送接口）</p>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-13"><a href="#3-13" class="headerlink" title="3.13"></a>3.13</h1><ol>
-<li><p>云端获取随访数据现场医院验证（分页接口有bug，已修复）</p>
-</li>
-<li><p>厦门中山二院满意度自动筛选问题（勾选了仅筛选有联系方式的患者，但是号码规则没勾选）</p>
-</li>
-<li><p>北京潞河先发微信，后发AI（未处理）</p>
-</li>
-<li><p>随访2.5.0问题处理</p>
-</li>
-<li><p>表单提交问题（已有补丁包）</p>
-</li>
-<li><p>Mysql表历史数据转移备份（通过sql脚本将历史数据备份到另一张表，主要问题是：随访有些表没有时间戳，另外如果建的长期的任务，比方说几年，这些任务可能会有影响）</p>
-</li>
-<li><p>新冠专科会议</p>
-</li>
-</ol>
-<h1 id="3-14"><a href="#3-14" class="headerlink" title="3.14"></a>3.14</h1><ol>
-<li><p>新冠专科和5楼对接</p>
-<ul>
-<li><p>excel导入模版已提供</p>
-</li>
-<li><p>修改后的接口文档已提供</p>
-</li>
-</ul>
-</li>
-<li><p>新冠专科提测时间确定（2.18）</p>
-</li>
-<li><p>ai发送方式优化方案</p>
-</li>
-<li><p>生产环境随访后台更新（test-v2.2.9）</p>
-</li>
-</ol>
-<p>跳转iframe postmsg触发</p>
-<p>检验数据推送增加F、H、I（接口名称修改）（随访信息）</p>
-<p>题目类型增加图片</p>
-<p>张静主任，曲院长（瑞金医院院长）牵头</p>
-<p>告知书</p>
-<p>excel导入量表</p>
-<p>如何启动、确定入组人数、上线时间节点</p>
-<h1 id="3-15"><a href="#3-15" class="headerlink" title="3.15"></a>3.15</h1><ol>
-<li><p>南京鼓楼表单发送附加宣教问题排查（手机号没传bug）</p>
-</li>
-<li><p>表单数据填充功能整理（发现一个bug和优化点）</p>
-</li>
-<li><p>2.3.2b07宣讲</p>
-</li>
-<li><p>api接口文档软件 – showdoc</p>
-</li>
-</ol>
-<h1 id="3-17"><a href="#3-17" class="headerlink" title="3.17"></a>3.17</h1><ol>
-<li><p>随访对外接口文档迁移到ShowDoc中 – 金翔</p>
-</li>
-<li><p>随访配置文件整理，并维护成文档 – 金翔</p>
-</li>
-<li><p>台州中心需求讨论</p>
-</li>
-<li><p>厦门第二附属医院录音错误数据删除（已处理）</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> t1, t2, t3</span><br><span class="line"><span class="keyword">FROM</span> t_satisfaction_followup_patients t1</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> t_hospital_followup_record t2 <span class="keyword">ON</span> t1.id <span class="operator">=</span> t2.relation_id</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> t_manage_call t3 <span class="keyword">ON</span> t1.id <span class="operator">=</span> t3.task_id</span><br><span class="line"><span class="keyword">WHERE</span> t1.id <span class="operator">=</span> <span class="string">&#x27;8aa5eeb2529d46d5962d561d3a9beedc&#x27;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>表单提交图片院内看不到（环境未配置）</p>
-</li>
-<li><p>发送方式（AI、APP&#x2F;微信、短信）需求梳理</p>
-<ul>
-<li><p>AI发送优先级可选（AI优先、AI补充）</p>
-</li>
-<li><p>发送方式选了AI，AI发送优先级必选，默认作为补充方式</p>
-</li>
-<li><p>发送状态</p>
-<ul>
-<li><p>发（微信&#x2F;短信，发送、回复、异常状态）</p>
-</li>
-<li><p>AI（AI发送、回复、异常状态）</p>
-</li>
-</ul>
-</li>
-<li><p>AI、短信会产生费用，默认发送方式选择微信，短信、AI不选，发送顺序微信、短信、AI</p>
-</li>
-</ul>
-</li>
-<li><p>专科随访健康档案宣讲</p>
-</li>
-</ol>
-<h1 id="3-18"><a href="#3-18" class="headerlink" title="3.18"></a>3.18</h1><ol>
-<li><p>南京鼓楼专科随访完成任务修改了计划随访时间bug（浙二个性化需求未复诊患者需要修改随访任务时间，前端未控制好）</p>
-</li>
-<li><p>专科随访健康档案梳理（代码分支2.5.0上开发，开发完成人工合并到迭代）</p>
-</li>
-<li><p>南京鼓楼发送任务患者未收到（没问题，手动发送有次数限制）</p>
-</li>
-<li><p>邵逸夫满意度表单子题选项有重复（历史bug，已修复，但是脏数据需要处理）</p>
-</li>
-<li><p>台州中心需求讨论（2个无需处理，2个统计需要个性化开发，统计具体需求待实施明确）</p>
-</li>
-</ol>
-<h1 id="3-19"><a href="#3-19" class="headerlink" title="3.19"></a>3.19</h1><ol>
-<li><p>专科随访健康档案导入、导出方案构思（邵逸夫提供导入、导出模版）</p>
-</li>
-<li><p>随访常见问题维护</p>
-</li>
-<li><p>专科随访档案表单改造 – 4天</p>
-<ul>
-<li><p>出生日期（不支持）</p>
-</li>
-<li><p>生物编号（生成规则）</p>
-</li>
-<li><p>上一题答案影响下一题目选项范围</p>
-</li>
-<li><p>表单查看、编辑切换</p>
-</li>
-</ul>
-</li>
-<li><p>丽水中医院宣教院内分配sql（已提供）</p>
-</li>
-<li><p>南京鼓楼满意度计划任务加载慢（明天处理，估计是sql效率问题）</p>
-</li>
-<li><p>北大深圳图片题院内看不到（bug，已处理）</p>
-</li>
-<li><p>现场问题处理机制</p>
-<ul>
-<li><p>实施直接找研发，有些bug已解决会造成重复处理</p>
-</li>
-<li><p>实施同时找多个研发看同一个问题，白白浪费人力</p>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-20"><a href="#3-20" class="headerlink" title="3.20"></a>3.20</h1><ol>
-<li><p>现场问题反馈流程初稿制定</p>
-</li>
-<li><p>南京鼓楼满意度计划任务加载慢（动态满意度相关表增加索引）</p>
-</li>
-<li><p>部门例会</p>
-</li>
-</ol>
-<p>健海：</p>
-<ol>
-<li><p>复诊提醒、肺功能检查提醒微信模版推送已修复</p>
-</li>
-<li><p>管理后宣教推送未收到。原因：注册绑定流程设计有问题。在健海这边登记之后推送宣教，亿联健还未建立绑定关系，推送的话找不到患者</p>
-<p>亿联健</p>
-</li>
-<li><p>微信模版消息推送接口返回有问题（没有收到也返回成功）</p>
-</li>
-<li><p>模版消息中的链接打不开</p>
-</li>
-</ol>
-<h1 id="3-23"><a href="#3-23" class="headerlink" title="3.23"></a>3.23</h1><ol>
-<li><p>鼓楼专科应支持升级至2.5，历史数据随同迁移</p>
-<ul>
-<li><p>南京鼓楼专科随访医生将要管理患者手动添加到患者管理分组中，2.5没有患者管理功能</p>
-</li>
-<li><p>南京鼓楼的患者还有个性化功能，例如健康报告、随访小结、导出表单记录、导出检验检查等</p>
-</li>
-</ul>
-</li>
-<li><p>广妇儿的个性化、接口的、数据迁移工作量评估下</p>
-<ul>
-<li><p>孕产妇、早发儿童、生殖医学中心自助建档</p>
-</li>
-<li><p>临床路径随访</p>
-</li>
-<li><p>患者管理（孕妇根据不同孕周进行分组）</p>
-</li>
-<li><p>患者档案诊间嵌入</p>
-</li>
-<li><p>医嘱宣教</p>
-</li>
-<li><p>表单、宣教发送接口</p>
-</li>
-<li><p>收案接口</p>
-</li>
-</ul>
-</li>
-<li><p>新冠专科生产环境部署，流程测试</p>
-</li>
-<li><p>北京潞河2.5问题处理</p>
-</li>
-</ol>
-<h1 id="3-24"><a href="#3-24" class="headerlink" title="3.24"></a>3.24</h1><ol>
-<li><p>2.5AI发送成功微信不发送问题 – 高翔</p>
-</li>
-<li><p>暨南大学医院网络方案沟通（信息科钟主任）</p>
-</li>
-<li><p>投诉表扬第三方嵌入页面PC端适配 – 张琳</p>
-</li>
-<li><p>疾病知识库、急救知识库、药品知识库第三方嵌入页面PC端适配 – 张琳</p>
-</li>
-<li><p>第三方嵌入投诉表扬页面接口文档编写</p>
-</li>
-<li><p>疾病知识库、急救知识库、药品知识库接口文档编写</p>
-</li>
-<li><p>现场问题处理流程</p>
-</li>
-</ol>
-<h1 id="3-25"><a href="#3-25" class="headerlink" title="3.25"></a>3.25</h1><ol>
-<li><p>广妇儿满意度表单提交失败（APP发送bug）– 高翔</p>
-</li>
-<li><p>辽中医职工满意度提交成功，院内未收到（数据单独处理）</p>
-</li>
-<li><p>随访规范制定并宣讲</p>
-</li>
-</ol>
-<h1 id="3-26"><a href="#3-26" class="headerlink" title="3.26"></a>3.26</h1><ol>
-<li><p>晨会，分迭代、专项两个小组进行</p>
-</li>
-<li><p>2.5项目问题跟进</p>
-</li>
-<li><p>中山六院最新就诊状态显示需求和医院沟通</p>
-<ul>
-<li><p>方案一：实时查询。实时性佳，需要新开接口保证效率，无法支持查询。</p>
-</li>
-<li><p>方案二：定时同步。时效性无法保证，随着随访管理人员的增多需要同步的数据量增大，可以支持查询。</p>
-</li>
-<li><p>会议议题变更，具体需求为：</p>
-<ul>
-<li><p>一键拨号，提供患者档案嵌入接口</p>
-</li>
-<li><p>呼入显示，提供号码维护接口</p>
-</li>
-<li><p>消息推送，提供第三方推送url接口</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>2.3.2b09宣讲</p>
-</li>
-<li><p>代码规范补充liquisebase模块</p>
-</li>
-</ol>
-<h1 id="3-27"><a href="#3-27" class="headerlink" title="3.27"></a>3.27</h1><ol>
-<li><p>Git commit message规范宣讲</p>
-</li>
-<li><p>b08  3.30下午验收会，b09  4.2下午验收会，b10  4.2宣讲</p>
-</li>
-<li><p>护士转科维护所属科室工作量大（多家医院反馈需求）</p>
-<ul>
-<li><p>和HIS&#x2F;OA系统对接</p>
-<ul>
-<li><p>职工入职自动开通账号。</p>
-</li>
-<li><p>职工离职自动注销账号。</p>
-</li>
-<li><p>职工转科自动修改所属科室。</p>
-</li>
-</ul>
-</li>
-<li><p>会有影响的功能</p>
-<ul>
-<li><p>数据查看权限</p>
-</li>
-<li><p>计划查看权限</p>
-</li>
-<li><p>任务锁定（各个模块）</p>
-</li>
-<li><p>计划的移交（各个模块）</p>
-</li>
-<li><p>满意度处理人</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="3-28"><a href="#3-28" class="headerlink" title="3.28"></a>3.28</h1><ol>
-<li><p>护士转科随访系统所属科室自动变更涉及模块、功能继续梳理</p>
-</li>
-<li><p>海南现代医院统计sql</p>
-</li>
-<li><p>新冠专科新需求讨论</p>
-</li>
-</ol>
-<h1 id="3-30"><a href="#3-30" class="headerlink" title="3.30"></a>3.30</h1><ol>
-<li><p>git hooks</p>
-</li>
-<li><p>2.3.2b08验收会</p>
-</li>
-<li><p>新冠专科改造方案讨论</p>
-</li>
-</ol>
-<h1 id="3-31"><a href="#3-31" class="headerlink" title="3.31"></a>3.31</h1><ol>
-<li><p>IBD专科验收会</p>
-</li>
-<li><p>新冠专科改造讨论</p>
-</li>
-<li><p>现场版本更新问题处理</p>
-</li>
-</ol>
-<h1 id="4-1"><a href="#4-1" class="headerlink" title="4.1"></a>4.1</h1><ol>
-<li><p>新冠专科患者注册流程宣讲、任务拆分</p>
-</li>
-<li><p>专科统计宣讲，4.11提测</p>
-</li>
-<li><p>邵逸夫满意度发送线程堵塞问题（发送数据量过大，回收控制发送、提交答案都控制导致锁表）</p>
-</li>
-<li><p>4月份任务分工</p>
-<ul>
-<li><p>新冠专科 – 吴森、高翔</p>
-</li>
-<li><p>病程迭代、专科 – 陈孝伟</p>
-</li>
-<li><p>专科患者档案导入、导出 – 金翔</p>
-</li>
-<li><p>AI辅助 – 高翔</p>
-</li>
-<li><p>健管功能 – 高翔、金翔</p>
-</li>
-<li><p>迭代 – 吴森、毛子杰</p>
-</li>
-</ul>
-</li>
-</ol>
-<h1 id="4-2"><a href="#4-2" class="headerlink" title="4.2"></a>4.2</h1><ol>
-<li><p>新冠专科医生流程宣讲（为了不影响患者端开发进度，宣讲延后）</p>
-</li>
-<li><p>慢病云部署方案评审</p>
-</li>
-<li><p>2.3.2b10宣讲</p>
-</li>
-<li><p>新冠专科患者端提测</p>
-</li>
-<li><p>邵逸夫满意度发送线程堵塞问题跟踪（发送占用资源太多，导致系统卡）</p>
-</li>
-</ol>
 
       
     </div>
@@ -1202,7 +760,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">446</span>
+          <span class="site-state-item-count">447</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1251,12 +809,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">748k</span>
+    <span title="站点总字数">282k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:20</span>
+    <span title="站点阅读时长">17:06</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

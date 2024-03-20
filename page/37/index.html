@@ -188,6 +188,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/165f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/165f/" class="post-title-link" itemprop="url">Windows下JAVA运行后，CPU使用率100&#37解决办法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-17 16:37:48" itemprop="dateCreated datePublished" datetime="2020-11-17T16:37:48+08:00">2020-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Problem/" itemprop="url" rel="index"><span itemprop="name">Problem</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>555</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>新版本项目打包的时候发现电脑特别卡，打开任务管理器发现CPU使用率达到100%，以为是电脑卡了，后来布到另一个电脑上，发现CPU仍然是100%…对不起我的电脑<br>放一下成功解决的步骤~</p>
+<h1 id="1-先下载个Process-Explorer"><a href="#1-先下载个Process-Explorer" class="headerlink" title="1. 先下载个Process Explorer"></a>1. 先下载个Process Explorer</h1><p>这个软件是可以查看进程的CPU占有率，任务管理器只能看到进程的CPU占有率，放个地址：<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/sysinternals/downloads/process-explorer">https://docs.microsoft.com/zh-cn/sysinternals/downloads/process-explorer</a></p>
+<h1 id="2-打开任务管理器"><a href="#2-打开任务管理器" class="headerlink" title="2. 打开任务管理器"></a>2. 打开任务管理器</h1><p>打开任务管理器，找到java，右键点击【转到详细信息】，或者直接到详细信息里找java，查看java对应的PID。（这是win10下的，win7可以点击【查看】- &gt; 【选择列】然后点击PID）<br><img src="https://www.pianshen.com/images/926/1866f2b5eeca33231f424674d1cfe116.png" alt="在这里插入图片描述"><br><img src="https://www.pianshen.com/images/530/cc234391711911be3d2fca1359e0e922.png" alt="在这里插入图片描述"></p>
+<h1 id="3-管理员打开cmd"><a href="#3-管理员打开cmd" class="headerlink" title="3. 管理员打开cmd"></a>3. 管理员打开cmd</h1><p>输入命令： <strong>jstack [PID] &gt; c:&#x2F;cdf.log</strong><br>或<br><strong>jstack -1 [PID] &gt; c:&#x2F;[pid].stack</strong><br>后面是文件名，可以自定义<br><img src="https://www.pianshen.com/images/509/0db2877d0414caf6b61db186b4031785.png" alt="在这里插入图片描述"><br><img src="https://www.pianshen.com/images/735/946183fc6ab010d677a483bb38b46967.png" alt="在这里插入图片描述"><br>C盘文件夹：<br><img src="https://www.pianshen.com/images/939/acfab0617cc3559f8372fba0ea03151b.png" alt="在这里插入图片描述"><br>这个是把java进程的信息导出来到文件里，方便后面操作来定位异常代码。<br>ps: 有的博客的命令是 <em><strong>jstack -1 12580 &gt; +文件</strong></em>，我加上-1后会无法导出或导出文件是0KB，去掉-1就好了。<br><img src="https://www.pianshen.com/images/197/564e3097f670b77d171851b748cc314d.png" alt="在这里插入图片描述"></p>
+<h1 id="4-把下载的Process-Explorer解压并运行"><a href="#4-把下载的Process-Explorer解压并运行" class="headerlink" title="4. 把下载的Process Explorer解压并运行"></a>4. 把下载的Process Explorer解压并运行</h1><p>解压后可以直接运行。运行后找到java，右键点击【Properties…】,然后点击【Threads】<br><img src="https://www.pianshen.com/images/99/cc7b3431bead4dae37d23f9544084fc3.png" alt="在这里插入图片描述"><br><img src="https://www.pianshen.com/images/740/ec8210592588da8984143af9f41502b4.png" alt="在这里插入图片描述"><br>找到CPU使用率高的线程，记住TID，然后打开电脑上的计算机：<br><img src="https://www.pianshen.com/images/224/b1b068fea481025aee3bc65ce3b2f588.png" alt="在这里插入图片描述"><br><img src="https://www.pianshen.com/images/259/9a5bace01a4d00ef4ba1da42e08d1bb3.png" alt="在这里插入图片描述"><br>输入刚刚的线程号：1156<br><img src="https://www.pianshen.com/images/294/1ac6167ea5c7b7fdb7826a6d821b4846.png" alt="在这里插入图片描述"><br>找到他对应的十六进制是：484</p>
+<h1 id="5-打开之前导出的进程文件，输入刚刚转换的十六进制数"><a href="#5-打开之前导出的进程文件，输入刚刚转换的十六进制数" class="headerlink" title="5. 打开之前导出的进程文件，输入刚刚转换的十六进制数"></a>5. 打开之前导出的进程文件，输入刚刚转换的十六进制数</h1><p><img src="https://www.pianshen.com/images/718/4ec6b0c18b2cf74a6b2d8c2712c0635e.png" alt="在这里插入图片描述"><br>可以定位到异常的部分（我的之前改过了，正常应该是定位到哪个文件下的哪一行。。。），然后去把bug改掉就好了~</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/5311/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -237,7 +330,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>371</span>
+              <span>103</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -347,7 +440,7 @@
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>8 分钟</span>
             </span>
 
         </div>
@@ -1537,7 +1630,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1625,14 +1718,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -1908,97 +2001,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/4e45/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/4e45/" class="post-title-link" itemprop="url">MySQL数据库备份与还原</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-28 16:03:04" itemprop="dateCreated datePublished" datetime="2020-10-28T16:03:04+08:00">2020-10-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>431</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h1><p>使用 mysqldump 备份数据库</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份所有的数据库</span></span><br><span class="line">mysqldump -u root -p --all-databases &gt; bak.sql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份指定的数据库db1、db2以及db3</span></span><br><span class="line">mysqldump -u root -p --databases db1 db2 db3 &gt; bak.sql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份db数据库，当仅备份一个数据库时，--databases可以省略</span></span><br><span class="line"><span class="comment"># 两者之间的差别在于不使用 --databases 选项，则备份输出信息中不会包含CREATE DATABASE或USE语句。不使用 --databases 选项备份的数据文件，在后期进行数据还原操作时，如果该数据库不存在，必须先创建该数据库。</span></span><br><span class="line">mysqldump -u root -p db4 &gt; bak.sql</span><br><span class="line">mysqldump -u root -p --databases db4 &gt; bak.sql</span><br></pre></td></tr></table></figure>
-
-<h1 id="还原"><a href="#还原" class="headerlink" title="还原"></a>还原</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p &lt; bak.sql</span><br><span class="line"></span><br><span class="line">mysql -u root -p db4 &lt; bak.sq1</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2068,7 +2070,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">446</span>
+          <span class="site-state-item-count">447</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2117,12 +2119,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">748k</span>
+    <span title="站点总字数">282k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:20</span>
+    <span title="站点阅读时长">17:06</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

@@ -188,6 +188,300 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1012/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/1012/" class="post-title-link" itemprop="url">Maven 如何强制重新下载项目依赖项？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-01 17:27:42" itemprop="dateCreated datePublished" datetime="2022-06-01T17:27:42+08:00">2022-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Maven/" itemprop="url" rel="index"><span itemprop="name">Maven</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>969</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://maven.apache.org/plugins/maven-dependency-plugin/purge-local-repository-mojo.html">https://maven.apache.org/plugins/maven-dependency-plugin/purge-local-repository-mojo.html</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-dependency-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">id</span>&gt;</span>purge-local-repository<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">phase</span>&gt;</span>process-sources<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">goal</span>&gt;</span>purge-local-repository<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">include</span>&gt;</span>cn.joinhealth.celina:paas-common<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Full name</strong>:</p>
+<p>org.apache.maven.plugins:maven-dependency-plugin:3.3.0:purge-local-repository</p>
+<p><strong>Description</strong>:</p>
+<p>When run on a project, remove the project dependencies from the local repository, and optionally re-resolve them. Outside of a project, remove the manually given dependencies.</p>
+<p><strong>Attributes</strong>:</p>
+<ul>
+<li>The goal is thread-safe and supports parallel builds.</li>
+<li>Since version: <code>2.0</code>.</li>
+</ul>
+<h3 id="Optional-Parameters"><a href="#Optional-Parameters" class="headerlink" title="Optional Parameters"></a>Optional Parameters</h3><table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Type</th>
+<th align="left">Since</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;actTransitively&gt;</code></td>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>2.0</code></td>
+<td align="left">Whether this mojo should act on all transitive dependencies. Default value is true. <strong>Default value is</strong>: <code>true</code>. <strong>User property is</strong>: <code>actTransitively</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;exclude&gt;</code></td>
+<td align="left"><code>String</code></td>
+<td align="left"><code>2.0</code></td>
+<td align="left">Comma-separated list of groupId:artifactId entries, which should be used to exclude artifacts from deletion&#x2F;refresh. This is a command-line alternative to the <code>excludes</code> parameter, since List parameters are not currently compatible with CLI specification. <strong>User property is</strong>: <code>exclude</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;excludes&gt;</code></td>
+<td align="left"><code>List</code></td>
+<td align="left"><code>2.0</code></td>
+<td align="left">The list of dependencies in the form of groupId:artifactId which should NOT be deleted&#x2F;refreshed.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;include&gt;</code></td>
+<td align="left"><code>String</code></td>
+<td align="left"><code>2.6</code></td>
+<td align="left">Comma-separated list of groupId:artifactId entries, which should be used to include artifacts for deletion&#x2F;refresh. This is a command-line alternative to the <code>includes</code> parameter, since List parameters are not currently compatible with CLI specification. <strong>User property is</strong>: <code>include</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;includes&gt;</code></td>
+<td align="left"><code>List</code></td>
+<td align="left"><code>2.6</code></td>
+<td align="left">The list of dependencies in the form of groupId:artifactId which should BE deleted&#x2F;refreshed.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;manualInclude&gt;</code></td>
+<td align="left"><code>String</code></td>
+<td align="left"><code>2.6</code></td>
+<td align="left">Comma-separated list of groupId:artifactId entries, which should be used to manually include artifacts for deletion. This is a command-line alternative to the <code>manualIncludes</code> parameter, since List parameters are not currently compatible with CLI specification. <strong>User property is</strong>: <code>manualInclude</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;manualIncludes&gt;</code></td>
+<td align="left"><code>List</code></td>
+<td align="left"><code>2.6</code></td>
+<td align="left">The list of dependencies in the form of groupId:artifactId which should BE deleted&#x2F;purged from the local repository. Note that using this parameter will deactivate the normal process for purging the current project dependency tree. If this parameter is used, only the included artifacts will be purged. The manualIncludes parameter should not be used in combination with the includes&#x2F;excludes parameters.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;reResolve&gt;</code></td>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>2.0</code></td>
+<td align="left">Whether to re-resolve the artifacts once they have been deleted from the local repository. If you are running this mojo from the command-line, you may want to disable this. By default, artifacts will be re-resolved. <strong>Default value is</strong>: <code>true</code>. <strong>User property is</strong>: <code>reResolve</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;resolutionFuzziness&gt;</code></td>
+<td align="left"><code>String</code></td>
+<td align="left"><code>2.0</code></td>
+<td align="left">Determines how liberally the plugin will delete an artifact from the local repository. Values are: <strong>file</strong> - Eliminate only the artifact’s file.<strong>version</strong> <em>(default)</em> - Eliminate all files associated with the version of the artifact.<strong>artifactId</strong> - Eliminate all files associated with the artifact’s artifactId.<strong>groupId</strong> - Eliminate all files associated with the artifact’s groupId. <strong>Default value is</strong>: <code>version</code>. <strong>User property is</strong>: <code>resolutionFuzziness</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;skip&gt;</code></td>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>2.7</code></td>
+<td align="left">Skip plugin execution completely. <strong>Default value is</strong>: <code>false</code>. <strong>User property is</strong>: <code>skip</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;snapshotsOnly&gt;</code></td>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>2.4</code></td>
+<td align="left">Whether to purge only snapshot artifacts. <strong>Default value is</strong>: <code>false</code>. <strong>User property is</strong>: <code>snapshotsOnly</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;verbose&gt;</code></td>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>2.0</code></td>
+<td align="left">Whether this plugin should output verbose messages. Default is false. <strong>Default value is</strong>: <code>false</code>. <strong>User property is</strong>: <code>verbose</code>.</td>
+</tr>
+</tbody></table>
+<h3 id="Parameter-Details"><a href="#Parameter-Details" class="headerlink" title="Parameter Details"></a>Parameter Details</h3><h4 id=""><a href="#" class="headerlink" title=""></a><strong><actTransitively></strong></h4><p>Whether this mojo should act on all transitive dependencies. Default value is true.</p>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Since</strong>: <code>2.0</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>actTransitively</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr>
+<h4 id="-1"><a href="#-1" class="headerlink" title=""></a><strong><exclude></strong></h4><p>Comma-separated list of groupId:artifactId entries, which should be used to exclude artifacts from deletion&#x2F;refresh. This is a command-line alternative to the <code>excludes</code> parameter, since List parameters are not currently compatible with CLI specification.</p>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Since</strong>: <code>2.0</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>exclude</code></li>
+</ul>
+<hr>
+<h4 id="-2"><a href="#-2" class="headerlink" title=""></a><strong><excludes></strong></h4><p>The list of dependencies in the form of groupId:artifactId which should NOT be deleted&#x2F;refreshed.</p>
+<ul>
+<li><strong>Type</strong>: <code>java.util.List</code></li>
+<li><strong>Since</strong>: <code>2.0</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+</ul>
+<hr>
+<h4 id="-3"><a href="#-3" class="headerlink" title=""></a><strong><include></strong></h4><p>Comma-separated list of groupId:artifactId entries, which should be used to include artifacts for deletion&#x2F;refresh. This is a command-line alternative to the <code>includes</code> parameter, since List parameters are not currently compatible with CLI specification.</p>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Since</strong>: <code>2.6</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>include</code></li>
+</ul>
+<hr>
+<h4 id="-4"><a href="#-4" class="headerlink" title=""></a><strong><includes></strong></h4><p>The list of dependencies in the form of groupId:artifactId which should BE deleted&#x2F;refreshed.</p>
+<ul>
+<li><strong>Type</strong>: <code>java.util.List</code></li>
+<li><strong>Since</strong>: <code>2.6</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+</ul>
+<hr>
+<h4 id="-5"><a href="#-5" class="headerlink" title=""></a><strong><manualInclude></strong></h4><p>Comma-separated list of groupId:artifactId entries, which should be used to manually include artifacts for deletion. This is a command-line alternative to the <code>manualIncludes</code> parameter, since List parameters are not currently compatible with CLI specification.</p>
+<ul>
+<li><strong>Type</strong>: <code>java.lang.String</code></li>
+<li><strong>Since</strong>: <code>2.6</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>manualInclude</code></li>
+</ul>
+<hr>
+<h4 id="-6"><a href="#-6" class="headerlink" title=""></a><strong><manualIncludes></strong></h4><p>The list of dependencies in the form of groupId:artifactId which should BE deleted&#x2F;purged from the local repository. Note that using this parameter will deactivate the normal process for purging the current project dependency tree. If this parameter is used, only the included artifacts will be purged. The manualIncludes parameter should not be used in combination with the includes&#x2F;excludes parameters.</p>
+<ul>
+<li><strong>Type</strong>: <code>java.util.List</code></li>
+<li><strong>Since</strong>: <code>2.6</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+</ul>
+<hr>
+<h4 id="-7"><a href="#-7" class="headerlink" title=""></a><strong><reResolve></strong></h4><p>Whether to re-resolve the artifacts once they have been deleted from the local repository. If you are running this mojo from the command-line, you may want to disable this. By default, artifacts will be re-resolved.</p>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Since</strong>: <code>2.0</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>reResolve</code></li>
+<li><strong>Default</strong>: <code>true</code></li>
+</ul>
+<hr>
+<h4 id="-8"><a href="#-8" class="headerlink" title=""></a><strong><resolutionFuzziness></strong></h4><p>Determines how liberally the plugin will delete an artifact from the local repository. Values are:</p>
+<ul>
+<li><p><strong>file</strong> - Eliminate only the artifact’s file.</p>
+</li>
+<li><p><strong>version</strong> <em>(default)</em> - Eliminate all files associated with the version of the artifact.</p>
+</li>
+<li><p><strong>artifactId</strong> - Eliminate all files associated with the artifact’s artifactId.</p>
+</li>
+<li><p><strong>groupId</strong> - Eliminate all files associated with the artifact’s groupId.</p>
+</li>
+<li><p><strong>Type</strong>: <code>java.lang.String</code></p>
+</li>
+<li><p><strong>Since</strong>: <code>2.0</code></p>
+</li>
+<li><p><strong>Required</strong>: <code>No</code></p>
+</li>
+<li><p><strong>User Property</strong>: <code>resolutionFuzziness</code></p>
+</li>
+<li><p><strong>Default</strong>: <code>version</code></p>
+</li>
+</ul>
+<hr>
+<h4 id="-9"><a href="#-9" class="headerlink" title=""></a><strong><skip></strong></h4><p>Skip plugin execution completely.</p>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Since</strong>: <code>2.7</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>skip</code></li>
+<li><strong>Default</strong>: <code>false</code></li>
+</ul>
+<hr>
+<h4 id="-10"><a href="#-10" class="headerlink" title=""></a><strong><snapshotsOnly></strong></h4><p>Whether to purge only snapshot artifacts.</p>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Since</strong>: <code>2.4</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>snapshotsOnly</code></li>
+<li><strong>Default</strong>: <code>false</code></li>
+</ul>
+<hr>
+<h4 id="-11"><a href="#-11" class="headerlink" title=""></a><strong><verbose></strong></h4><p>Whether this plugin should output verbose messages. Default is false.</p>
+<ul>
+<li><strong>Type</strong>: <code>boolean</code></li>
+<li><strong>Since</strong>: <code>2.0</code></li>
+<li><strong>Required</strong>: <code>No</code></li>
+<li><strong>User Property</strong>: <code>verbose</code></li>
+<li><strong>Default</strong>: <code>false</code></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/c3ca/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -237,7 +531,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>802</span>
+              <span>191</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -323,7 +617,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>169</span>
+              <span>21</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -403,14 +697,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>246</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -497,14 +791,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.9k</span>
+              <span>642</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -527,96 +821,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/c12d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/c12d/" class="post-title-link" itemprop="url">The POM for com.alibaba:druid:jar:1.2.6 is invalid, transitive d</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-04-25 10:03:23" itemprop="dateCreated datePublished" datetime="2022-04-25T10:03:23+08:00">2022-04-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Problem/" itemprop="url" rel="index"><span itemprop="name">Problem</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>28</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这种情况一般是因为编码问题导致出错</p>
-<p>进入设置,修改下列配置</p>
-<p><img src="https://s2.loli.net/2022/04/25/3eHzoZWslcKFhJD.png" alt="image-20220425100742100"></p>
-
       
     </div>
 
@@ -700,7 +904,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">446</span>
+          <span class="site-state-item-count">447</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -749,12 +953,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">748k</span>
+    <span title="站点总字数">282k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:20</span>
+    <span title="站点阅读时长">17:06</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
