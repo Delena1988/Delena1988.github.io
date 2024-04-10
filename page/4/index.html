@@ -188,6 +188,132 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6670/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/6670/" class="post-title-link" itemprop="url">Python虚拟环境</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-30 15:21:22" itemprop="dateCreated datePublished" datetime="2023-11-30T15:21:22+08:00">2023-11-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-19 09:05:40" itemprop="dateModified" datetime="2023-12-19T09:05:40+08:00">2023-12-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一-虚拟环境基础知识"><a href="#一-虚拟环境基础知识" class="headerlink" title="一 虚拟环境基础知识"></a>一 虚拟环境基础知识</h2><p>Python在开发人员中大受欢迎，最大的原因之一是它广泛且不断扩大的第三方包选择。虚拟环境可以为每个项目创建单独的隔离环境，达到分离不同项目的依赖关系的目的。</p>
+<p>Python有针对不同应用程序的各种模块和包。在我们的项目开发中，可能需要一些三方库，那么就需要安装这个库，而另一个项目可能不需要任何其他第三方包，或者是需要其中某些三方包的其他的版本。当不同的Python项目需要相同插件的竞争或不兼容版本时，就会出现问题，导致程序莫名的异常。</p>
+<p>另外开发用的电脑，可能同时安装了Python2和Python3，而Python2和Python3又有更多的小版本号，而有些现成的项目可能开发比较早，只支持用Python2编译，而有些则必须要Python3才行，这样如果没有隔离，则也会导致程序无法运行。</p>
+<p>因此，虚拟环境此时能够发挥作用，为不同的Python安装版本、或不同的项目创建单独的隔离环境，每个项目可以从其特定的环境中存储和检索包，使用特定的Python版本。</p>
+<h2 id="二-如何使用虚拟环境"><a href="#二-如何使用虚拟环境" class="headerlink" title="二 如何使用虚拟环境"></a>二 如何使用虚拟环境</h2><p>这里通过具体操作执行进行示例说明。</p>
+<h2 id="2-1-安装virtualenv"><a href="#2-1-安装virtualenv" class="headerlink" title="2.1 安装virtualenv"></a>2.1 安装virtualenv</h2><p>要创建虚拟环境，需要先安装一个名为virtualenv的模块。首先要确保在计算机上安装了pip。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 如果计算机上没有安装pip，需使用以下命令先安装pip，不同的操作系统命令会有差异:</span><br><span class="line">sudo apt-get install python-pip</span><br><span class="line"></span><br><span class="line"># 然后通过pip来安装virtualenv，安装后可以检查下virtualenv的版本:</span><br><span class="line">pip install virtualenv</span><br><span class="line">virtualenv --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-创建虚拟环境并激活"><a href="#2-2-创建虚拟环境并激活" class="headerlink" title="2.2 创建虚拟环境并激活"></a>2.2 创建虚拟环境并激活</h2><p>成功安装virtualenv之后，可以使用以下命令创建一个特定名称的虚拟环境:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 创建特定名称的虚拟环境,myvenv可以换成任意你喜欢的名字都行</span><br><span class="line">virtualenv myvenv</span><br><span class="line"># 执行以上命令会创建myvenv的文件夹，包含运行Python项目所需的所有可执行文件</span><br><span class="line"></span><br><span class="line"># 如果要指定Python版本，可以通过下面指令来创建虚拟环境:</span><br><span class="line">python2.7 virtualenv myvenv    # 创建使用Python2.7的虚拟环境</span><br><span class="line"># 也可以通过下面的命令来创建虚拟环境，效果和上面的一样的</span><br><span class="line">python3 -m venv myvenv         # 创建使用Python3的虚拟环境</span><br><span class="line"></span><br><span class="line"># 在创建好虚拟环境后，还需要用如下命令启用，激活进入特定的隔离环境</span><br><span class="line">source venv/bin/activate</span><br><span class="line"># 如果是在Windows系统下，上面的激活命令略有差异：</span><br><span class="line">venv/Scripts/activate</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/vQgJEK.jpg"></p>
+<p>成功激活进入虚拟环境后，如下图所示，会在命令行前面看到有(.venv)的标志：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/Byzfqv.jpg"></p>
+<p>成功创建并激活了虚拟环境后，就可以安装项目所需的依赖项和需求，而不会干扰到其他项目了。</p>
+<h2 id="2-3-退出虚拟环境"><a href="#2-3-退出虚拟环境" class="headerlink" title="2.3 退出虚拟环境"></a>2.3 退出虚拟环境</h2><p>一旦完成了当前项目的工作，可以返回到系统默认环境，只需要使用deactivate命令即可退出。</p>
+<h2 id="三-虚拟环境的工作原理"><a href="#三-虚拟环境的工作原理" class="headerlink" title="三 虚拟环境的工作原理"></a>三 虚拟环境的工作原理</h2><p>如果没有使用虚拟环境时，Python的第三方包都会被pip安装到Python安装路径的site-packages目录下。当使用虚拟环境时，按照前面的“python3 -m venv myvenv”等方式创建虚拟环境后，可以查看当前目录，会看到几个文件：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/6wOG7D.jpg"></p>
+<ul>
+<li>bin目录：python3、pip3等可执行文件，其实就是是软链接到Python系统目录(或者是复制的副本)的</li>
+<li>lib&#x2F;python3.10&#x2F;site-packages：用于该虚拟环境下安装的三方包的存储目录的</li>
+</ul>
+<p>所以，通过venv，会将系统的Python软链接到venv的环境下，当用source命令激活虚拟环境时，就会启用该venv下面的python和pip了，同时过程中安装的三方包都是放在venv&#x2F;lib&#x2F;pythonx.x&#x2F;site-packages下面的，这样系统的Python环境是不会受到任何影响的。</p>
+<h2 id="四-虚拟环境的更多用法"><a href="#四-虚拟环境的更多用法" class="headerlink" title="四 虚拟环境的更多用法"></a>四 虚拟环境的更多用法</h2><h2 id="4-1-三方包依赖需求生成与重新安装"><a href="#4-1-三方包依赖需求生成与重新安装" class="headerlink" title="4.1 三方包依赖需求生成与重新安装"></a>4.1 三方包依赖需求生成与重新安装</h2><p>如前所述，在创建一个新的虚拟环境后，pip和setuptools包会被软链接（或复制）到虚拟环境下，接下来可以安装在环境中使用的任何其他包。对于具有复杂需求的项目，在项目的根目录中最好能保留一个requirements.txt的文件，这个文件列出了项目的三方包依赖的需求。这样，如果需要重新创建虚拟环境，可以使用pip install -r requirements.txt命令重新安装所有需要的包。</p>
+<p>在项目的虚拟环境中安装完所需的库后，可使用pip list查看当前所有已安装的库，然后可以通过运行以下命令生成一个文本文件，列出所有项目依赖项：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>那么在其他计算机上重新搭建这个项目的环境时，则可以快速通过如下命令，一次将所有依赖的三方包安装齐全：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-虚拟环境更新升级"><a href="#4-2-虚拟环境更新升级" class="headerlink" title="4.2 虚拟环境更新升级"></a>4.2 虚拟环境更新升级</h2><p>虚拟环境中的pip和setuptools副本是该虚拟环境的本地副本，需要独立地进行更新和维护。所以会遇到某些虚拟环境中pip过时的警告，而在其他虚拟环境中则不会，pip必须在每个虚拟环境中分别更新才行。</p>
+<p>因此当升级系统上的Python运行时时，使用该版本的Python的虚拟环境是不会自动升级的，这样设计也是合理的，因为无意中升级到新Python版本可能会破坏它们的三方包依赖。</p>
+<p>具体的虚拟环境更新升级操作如下：</p>
+<p>Python小版本升级：</p>
+<p>如果已经升级了一个现有的Python小版本，比如从Python 3.9.5到Python 3.9.7，那么可以在项目目录下通过如下方式升级虚拟环境(不要提前激活虚拟环境，否则可能导致升级失败)：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m venv myvenv --upgrade</span><br></pre></td></tr></table></figure>
+
+<p>Python大版本升级：</p>
+<p>如果已经安装了一个主要的新版本的Python，比如已经有了Python 3.8，现在将安装Python 3.9，那么就不要用上面的升级方式了，而是重新创建一个新的虚拟环境，专门使用新的Python大版本。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/64ac/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -541,149 +667,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/b5e3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/b5e3/" class="post-title-link" itemprop="url">正则表达式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-08-29 11:00:48" itemprop="dateCreated datePublished" datetime="2023-08-29T11:00:48+08:00">2023-08-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-18 16:21:22" itemprop="dateModified" datetime="2023-10-18T16:21:22+08:00">2023-10-18</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>767</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/bGmv91.jpg"></p>
-<h2 id="正则表达式元字符和特性"><a href="#正则表达式元字符和特性" class="headerlink" title="正则表达式元字符和特性"></a>正则表达式元字符和特性</h2><h3 id="字符匹配"><a href="#字符匹配" class="headerlink" title="字符匹配"></a>字符匹配</h3><ul>
-<li>普通字符：普通字符按照字面意义进行匹配，例如匹配字母 “a” 将匹配到文本中的 “a” 字符。</li>
-<li>元字符：元字符具有特殊的含义，例如 <code>\d</code> 匹配任意数字字符，<code>\w</code> 匹配任意字母数字字符，等价于 <code>[A-Za-z0-9_]</code> ，<code>.</code> 匹配任意字符（除了换行符）等。</li>
-</ul>
-<h3 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h3><ul>
-<li><code>*</code>：匹配前面的模式零次或多次。</li>
-<li><code>+</code>：匹配前面的模式一次或多次。</li>
-<li><code>?</code>：匹配前面的模式零次或一次。</li>
-<li><code>&#123;n&#125;</code>：匹配前面的模式恰好 n 次。</li>
-<li><code>&#123;n,&#125;</code>：匹配前面的模式至少 n 次。</li>
-<li><code>&#123;n,m&#125;</code>：匹配前面的模式至少 n 次且不超过 m 次。</li>
-</ul>
-<h3 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h3><ul>
-<li><code>[ ]</code>：匹配括号内的任意一个字符。例如，<code>[abc]</code> 匹配字符 “a”、”b” 或 “c”。</li>
-<li><code>[^ ]</code>：匹配除了括号内的字符以外的任意一个字符。例如，<code>[^abc]</code> 匹配除了字符 “a”、”b” 或 “c” 以外的任意字符。</li>
-</ul>
-<h3 id="边界匹配"><a href="#边界匹配" class="headerlink" title="边界匹配"></a>边界匹配</h3><ul>
-<li><code>^</code>：匹配字符串的开头。</li>
-<li><code>$</code>：匹配字符串的结尾。</li>
-<li><code>\b</code>：匹配单词边界。</li>
-<li><code>\B</code>：匹配非单词边界。</li>
-</ul>
-<h3 id="分组和捕获"><a href="#分组和捕获" class="headerlink" title="分组和捕获"></a>分组和捕获</h3><ul>
-<li><code>( )</code>：用于分组和捕获子表达式。</li>
-<li><code>(?: )</code>：用于分组但不捕获子表达式。</li>
-</ul>
-<h3 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h3><ul>
-<li><code>\</code>：转义字符，用于匹配特殊字符本身。</li>
-<li><code>.</code>：匹配任意字符（除了换行符）。</li>
-<li><code>|</code>：用于指定多个模式的选择。</li>
-</ul>
-<h3 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h3><p>标记也称为修饰符，正则表达式的标记用于指定额外的匹配策略。</p>
-<p>标记不写在正则表达式里，标记位于表达式之外，格式如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/pattern/flags</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>修饰符</th>
-<th>含义</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>i</td>
-<td>ignore - 不区分大小写</td>
-<td>将匹配设置为不区分大小写，搜索时不区分大小写: A 和 a 没有区别。</td>
-</tr>
-<tr>
-<td>g</td>
-<td>global - 全局匹配</td>
-<td>查找所有的匹配项。</td>
-</tr>
-<tr>
-<td>m</td>
-<td>multi line - 多行匹配</td>
-<td>使边界字符 ^ 和 $ 匹配每一行的开头和结尾，记住是多行，而不是整个字符串的开头和结尾。</td>
-</tr>
-<tr>
-<td>s</td>
-<td>特殊字符圆点 . 中包含换行符 \n</td>
-<td>默认情况下的圆点 . 是匹配除换行符 \n 之外的任何字符，加上 s 修饰符之后, . 中包含换行符 \n。</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -753,7 +736,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">449</span>
+          <span class="site-state-item-count">450</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -802,12 +785,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">749k</span>
+    <span title="站点总字数">751k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:21</span>
+    <span title="站点阅读时长">11:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

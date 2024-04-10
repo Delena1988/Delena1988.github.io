@@ -188,6 +188,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1b25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/1b25/" class="post-title-link" itemprop="url">MySQL自定义排序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-11 10:36:17" itemprop="dateCreated datePublished" datetime="2020-03-11T10:36:17+08:00">2020-03-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在 SQL 查询中可能有时需要使用 ASC 或 DESC 或使用特殊排序字段才能完成的特定顺序. MySQL 有一个 ORDER BY FIELD 函数可以用来做这个.  </p>
+<h1 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h1><p>本文中的示例数据使用我的示例 <a target="_blank" rel="noopener" href="https://www.electrictoolbox.com/mysql-example-table/">fruit</a> 表. 这是一个有点简单的表, 但它可以用来很好地说明这篇文章中的观点.</p>
+<h1 id="按特定字段值排序"><a href="#按特定字段值排序" class="headerlink" title="按特定字段值排序"></a>按特定字段值排序</h1><p>fruit 表有一个 name 字段, 具有以下特定的值: 苹果(Apple), 香蕉(Banana), 橘子(Orange), 梨(Pear). 每个特定的值都有一系列的品种.</p>
+<p>比方说, 为了论证的缘故, 我们要按香蕉, 苹果, 梨, 橘子等特定的顺序排列数据, 然后再按品种排序. 使用普通的 ORDER BY 子句不可能这样做, 因为这个字段的升序或降序排序不起作用. 我们要么需要某种形式的排序列或进行其他选择.</p>
+<p>在 ORDER BY 子句中使用 FIELD 函数可以实现这一点. 它的工作方式是指定要排序的列, 然后按顺序排序它们的值. 例如:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> fruit</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> FIELD(name, <span class="string">&#x27;Banana&#x27;</span>, <span class="string">&#x27;Apple&#x27;</span>, <span class="string">&#x27;Pear&#x27;</span>, <span class="string">&#x27;Orange&#x27;</span>), variety;</span><br></pre></td></tr></table></figure>
+
+<p>来自示例表的结果数据如下所示:</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">+----------+--------+---------------------+</span><br><span class="line">|<span class="string"> fruit_id </span>|<span class="string"> name   </span>|<span class="string"> variety             </span>|</span><br><span class="line">+----------+--------+---------------------+</span><br><span class="line">|<span class="string">       11 </span>|<span class="string"> Banana </span>|<span class="string"> Burro               </span>|</span><br><span class="line">|<span class="string">       12 </span>|<span class="string"> Banana </span>|<span class="string"> Cavendish           </span>|</span><br><span class="line">|<span class="string">       10 </span>|<span class="string"> Banana </span>|<span class="string"> Plantain            </span>|</span><br><span class="line">|<span class="string">        6 </span>|<span class="string"> Apple  </span>|<span class="string"> Cox&#x27;s Orange Pippin </span>|</span><br><span class="line">|<span class="string">        7 </span>|<span class="string"> Apple  </span>|<span class="string"> Granny Smith        </span>|</span><br><span class="line">|<span class="string">        1 </span>|<span class="string"> Apple  </span>|<span class="string"> Red Delicious       </span>|</span><br><span class="line">|<span class="string">        8 </span>|<span class="string"> Pear   </span>|<span class="string"> Anjou               </span>|</span><br><span class="line">|<span class="string">        4 </span>|<span class="string"> Pear   </span>|<span class="string"> Bartlett            </span>|</span><br><span class="line">|<span class="string">        2 </span>|<span class="string"> Pear   </span>|<span class="string"> Comice              </span>|</span><br><span class="line">|<span class="string">        5 </span>|<span class="string"> Orange </span>|<span class="string"> Blood               </span>|</span><br><span class="line">|<span class="string">        3 </span>|<span class="string"> Orange </span>|<span class="string"> Navel               </span>|</span><br><span class="line">|<span class="string">        9 </span>|<span class="string"> Orange </span>|<span class="string"> Valencia            </span>|</span><br><span class="line">+----------+--------+---------------------+</span><br></pre></td></tr></table></figure>
+
+<h1 id="疑难杂症"><a href="#疑难杂症" class="headerlink" title="疑难杂症"></a>疑难杂症</h1><p>使用此功能时有一个小小的疑难杂症. 列中不在 FIELD 函数中的任何值将在指定的值之前或多或少随机出现. 例如, 只指定苹果和香蕉:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> fruit</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> FIELD(name, <span class="string">&#x27;Banana&#x27;</span>, <span class="string">&#x27;Apple&#x27;</span>) <span class="keyword">DESC</span>, variety;</span><br></pre></td></tr></table></figure>
+
+<p>这导致:</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">+----------+--------+---------------------+</span><br><span class="line">|<span class="string"> fruit_id </span>|<span class="string"> name   </span>|<span class="string"> variety             </span>|</span><br><span class="line">+----------+--------+---------------------+</span><br><span class="line">|<span class="string">        6 </span>|<span class="string"> Apple  </span>|<span class="string"> Cox&#x27;s Orange Pippin </span>|</span><br><span class="line">|<span class="string">        7 </span>|<span class="string"> Apple  </span>|<span class="string"> Granny Smith        </span>|</span><br><span class="line">|<span class="string">        1 </span>|<span class="string"> Apple  </span>|<span class="string"> Red Delicious       </span>|</span><br><span class="line">|<span class="string">       11 </span>|<span class="string"> Banana </span>|<span class="string"> Burro               </span>|</span><br><span class="line">|<span class="string">       12 </span>|<span class="string"> Banana </span>|<span class="string"> Cavendish           </span>|</span><br><span class="line">|<span class="string">       10 </span>|<span class="string"> Banana </span>|<span class="string"> Plantain            </span>|</span><br><span class="line">|<span class="string">        8 </span>|<span class="string"> Pear   </span>|<span class="string"> Anjou               </span>|</span><br><span class="line">|<span class="string">        4 </span>|<span class="string"> Pear   </span>|<span class="string"> Bartlett            </span>|</span><br><span class="line">|<span class="string">        5 </span>|<span class="string"> Orange </span>|<span class="string"> Blood               </span>|</span><br><span class="line">|<span class="string">        2 </span>|<span class="string"> Pear   </span>|<span class="string"> Comice              </span>|</span><br><span class="line">|<span class="string">        3 </span>|<span class="string"> Orange </span>|<span class="string"> Navel               </span>|</span><br><span class="line">|<span class="string">        9 </span>|<span class="string"> Orange </span>|<span class="string"> Valencia            </span>|</span><br><span class="line">+----------+--------+---------------------+</span><br></pre></td></tr></table></figure>
+
+<h1 id="解决问题的方法"><a href="#解决问题的方法" class="headerlink" title="解决问题的方法"></a>解决问题的方法</h1><p>虽然通常只有在确切的列已知的情况下才使用此函数, 但解决方法是颠倒指定字段的顺序并按降序对其排序, 然后在同一个字段上进行第二次排序.</p>
+<p>下面的例子, 不管它看起来如何，实际上按照香蕉, 苹果, 然后按照升序排列:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> fruit</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> FIELD(name, <span class="string">&#x27;Apple&#x27;</span>, <span class="string">&#x27;Banana&#x27;</span>) <span class="keyword">DESC</span>, name, variety;</span><br></pre></td></tr></table></figure>
+
+<p>这导致:</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">+----------+--------+---------------------+</span><br><span class="line">|<span class="string"> fruit_id </span>|<span class="string"> name   </span>|<span class="string"> variety             </span>|</span><br><span class="line">+----------+--------+---------------------+</span><br><span class="line">|<span class="string">       11 </span>|<span class="string"> Banana </span>|<span class="string"> Burro               </span>|</span><br><span class="line">|<span class="string">       12 </span>|<span class="string"> Banana </span>|<span class="string"> Cavendish           </span>|</span><br><span class="line">|<span class="string">       10 </span>|<span class="string"> Banana </span>|<span class="string"> Plantain            </span>|</span><br><span class="line">|<span class="string">        6 </span>|<span class="string"> Apple  </span>|<span class="string"> Cox&#x27;s Orange Pippin </span>|</span><br><span class="line">|<span class="string">        7 </span>|<span class="string"> Apple  </span>|<span class="string"> Granny Smith        </span>|</span><br><span class="line">|<span class="string">        1 </span>|<span class="string"> Apple  </span>|<span class="string"> Red Delicious       </span>|</span><br><span class="line">|<span class="string">        5 </span>|<span class="string"> Orange </span>|<span class="string"> Blood               </span>|</span><br><span class="line">|<span class="string">        3 </span>|<span class="string"> Orange </span>|<span class="string"> Navel               </span>|</span><br><span class="line">|<span class="string">        9 </span>|<span class="string"> Orange </span>|<span class="string"> Valencia            </span>|</span><br><span class="line">|<span class="string">        8 </span>|<span class="string"> Pear   </span>|<span class="string"> Anjou               </span>|</span><br><span class="line">|<span class="string">        4 </span>|<span class="string"> Pear   </span>|<span class="string"> Bartlett            </span>|</span><br><span class="line">|<span class="string">        2 </span>|<span class="string"> Pear   </span>|<span class="string"> Comice              </span>|</span><br><span class="line">+----------+--------+---------------------+</span><br></pre></td></tr></table></figure>
+
+<p>如果一组特定的行需要显示在结果集中的其他行之前, 这可能是一个有用的解决方案, 但是当使用 ASC 或 DESC 排序顺序时, 通常不会出现在第一行.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/11e7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1013,101 +1124,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/d2b/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/d2b/" class="post-title-link" itemprop="url">Java实现验证码的产生</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-21 16:04:18" itemprop="dateCreated datePublished" datetime="2020-02-21T16:04:18+08:00">2020-02-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>大家都知道为了防止我们的网站被有些人和黑客恶意攻击，比如我们网站的注册页面，如果我们在用户注册的时候不加上一个验证码框的话，别人就可以写一个脚本对你的网站进行恶意的注册，比如每分钟对你的网站进行n次的注册，那么你的网站就会被攻击而崩溃。当我们增加了验证码之后，别人再写脚本的时候就必须先识别你的验证码，而要识别图片验证码中的内容，却不是那么的容易，这样就能够有效的防止我们的网站被恶意的注册攻击。废话不多说，直接上代码。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/d2b/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1177,7 +1193,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">449</span>
+          <span class="site-state-item-count">450</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1226,12 +1242,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">749k</span>
+    <span title="站点总字数">751k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:21</span>
+    <span title="站点阅读时长">11:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

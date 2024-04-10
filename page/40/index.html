@@ -188,6 +188,133 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/cdfd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/cdfd/" class="post-title-link" itemprop="url">VisualVM远程监控JVM</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-08 16:20:24" itemprop="dateCreated datePublished" datetime="2020-09-08T16:20:24+08:00">2020-09-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>VisualVM在Java 8中是JDK自带的一个图形化工具，项目主页 <a target="_blank" rel="noopener" href="https://visualvm.github.io/index.html">VisualVM</a>，在后续版本中可能会从JDK移除。</p>
+<p>VisualVM可以监控Java进程的CPU与内存占用情况，可以监控Java进程内的各个线程的执行情况，还可以与MAT工具一样用来分析堆转储快照。</p>
+<h1 id="Mac-VisualVM路径"><a href="#Mac-VisualVM路径" class="headerlink" title="Mac VisualVM路径"></a>Mac VisualVM路径</h1><p><code>/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands</code></p>
+<h1 id="监控远程Tomcat进程"><a href="#监控远程Tomcat进程" class="headerlink" title="监控远程Tomcat进程"></a>监控远程Tomcat进程</h1><p>监控远程主机上的Tomcat进程，需要在Tomcat的catalina.sh文件中加入参数：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">JAVA_OPTS</span>=<span class="string">&quot;$JAVA_OPTS -Dcom.sum.management.jmxremote -Dcom.sun.management.jmxremote.port=9004 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.net.preferIPV4Stack=true -Djava.rmi.server.hostname=x.x.x.x&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-Dcom.sum.management.jmxremote: 启用JMX远程连接</li>
+<li>-Dcom.sun.management.jmxremote.port&#x3D;9004: 设置JMX连接端口</li>
+<li>-Dcom.sun.management.jmxremote.authenticate: 是否开启用户名密码认证</li>
+<li>-Dcom.sun.management.jmxremote.ssl: 是否使用SSL连接</li>
+<li>-Djava.net.preferIPV4Stack: 优先使用IPV4</li>
+<li>-Djava.rmi.server.hostname: 设置JMX主机IP</li>
+</ul>
+<p>打开VisualVM，文件 -&gt; 添加JMX连接，输入刚才设置的IP和端口号：</p>
+<img src="https://i.loli.net/2020/09/08/yEL8rasMIXfge4S.png" alt="image-20200908162617992" style="zoom: 67%;" />
+
+<h1 id="通过jstatd启动RMI服务"><a href="#通过jstatd启动RMI服务" class="headerlink" title="通过jstatd启动RMI服务"></a>通过jstatd启动RMI服务</h1><ol>
+<li>文件路径**$JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;security&#x2F;java.policy**，在文件末位的<code> &#125;;</code> 前添加</li>
+</ol>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">permission</span> <span class="string">java.security.AllPermission;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在被监控机器启动</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="variable">$JAVA_HOME</span>/bin</span><br><span class="line">./jstatd -J-Djava.security.policy=all.policy &amp;</span><br></pre></td></tr></table></figure>
+
+<p>​	启动后会开启注册端口1099和一个随机的连接端口，注册端口也可通过-p参数指定，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./jstatd -J-Djava.security.policy=all.policy -p 10003 &amp;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>设置防火墙</p>
+<p>除了把1099添加到防火墙规则外，还需要找到另外一个随机端口，也加入到规则中<br>执行<br>netstat -anp | grep *jstatd</p>
+</li>
+<li><p>测试</p>
+<p>启动VisualVM，因为在配置JMX时已经添加过服务器节点，如果配置正确，通常VisualVM会自动检测到jstatd连接并添加节点</p>
+<p>如果没有自动添加，可以检查端口是否能连通并尝试手动添加连接</p>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2020/09/08/lyMPhCRDqsLdAuv.png" alt="image-20200908163214196"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/90d3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -991,103 +1118,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/57ba/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/57ba/" class="post-title-link" itemprop="url">Nginx代理后,获取request的ip</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-24 17:02:25" itemprop="dateCreated datePublished" datetime="2020-08-24T17:02:25+08:00">2020-08-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>应用程序部署上线,一般都会用nginx之类的来进行反向代理,而不是直接访问tomcat之类的容器.</p>
-<p>这时候如果用平时的获取ip的代码,就只会获取到nginx所在服务器的ip, 就失去了本身的意义.</p>
-<p>今天就来配置下 nginx+tomcat 后,  程序获取ip和 tomcat的访问日志localhost_access_log 获取ip. </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/57ba/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1157,7 +1187,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">449</span>
+          <span class="site-state-item-count">450</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1206,12 +1236,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">749k</span>
+    <span title="站点总字数">751k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:21</span>
+    <span title="站点阅读时长">11:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

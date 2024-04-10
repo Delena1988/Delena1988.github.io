@@ -188,6 +188,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/edc1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/edc1/" class="post-title-link" itemprop="url">Fastjson对日期的序列化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-11 16:10:41" itemprop="dateCreated datePublished" datetime="2020-05-11T16:10:41+08:00">2020-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>197</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>fastjson默认对日期格式序列化，默认是使用时间戳</p>
+<h1 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JSONField</span> (format=<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>)  </span><br><span class="line"><span class="keyword">public</span> Date birthday;  </span><br></pre></td></tr></table></figure>
+
+<h1 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON.toJSONStringWithDateFormat(Object, dateformat, SerializerFeature.WriteDateUseDateFormat)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/3eac/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -828,101 +919,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/b0dd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/b0dd/" class="post-title-link" itemprop="url">编译OpenJDK8</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-30 09:01:55" itemprop="dateCreated datePublished" datetime="2020-04-30T09:01:55+08:00">2020-04-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>138</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="下载openJDK源码"><a href="#下载openJDK源码" class="headerlink" title="下载openJDK源码"></a>下载openJDK源码</h1><p>openJDK项目地址：<a target="_blank" rel="noopener" href="http://hg.openjdk.java.net/">http://hg.openjdk.java.net/</a></p>
-<h3 id="点击jdk8u60下面的jdk链接"><a href="#点击jdk8u60下面的jdk链接" class="headerlink" title="点击jdk8u60下面的jdk链接"></a>点击jdk8u60下面的jdk链接</h3><p><img src="https://i.loli.net/2020/04/30/davR2yMhpAuYVe6.png" alt="davR2yMhpAuYVe6"></p>
-<p><img src="https://i.loli.net/2020/04/30/P3tKMvZzSmXn2Rr.png" alt="P3tKMvZzSmXn2Rr"></p>
-<h3 id="点击”browse”链接，如下图所示"><a href="#点击”browse”链接，如下图所示" class="headerlink" title="点击”browse”链接，如下图所示"></a>点击”browse”链接，如下图所示</h3><p><img src="https://i.loli.net/2020/04/30/6LXbSE5BQkV7cCl.png" alt="6LXbSE5BQkV7cCl"></p>
-<h3 id="点击下图中的”zip”链接"><a href="#点击下图中的”zip”链接" class="headerlink" title="点击下图中的”zip”链接"></a>点击下图中的”zip”链接</h3><p><img src="https://i.loli.net/2020/04/30/uE4bVXGoihq1AJH.png" alt="uE4bVXGoihq1AJH"></p>
-<h2 id="解压下载得到的zip压缩包"><a href="#解压下载得到的zip压缩包" class="headerlink" title="解压下载得到的zip压缩包"></a>解压下载得到的zip压缩包</h2><p><img src="https://i.loli.net/2020/04/30/KaXLkBsOte1Mrqb.png" alt="KaXLkBsOte1Mrqb"></p>
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>操作流程按照  <a target="_blank" rel="noopener" href="http://hg.openjdk.java.net/jdk8/jdk8/raw-file/tip/README-builds.html#macosx">README-builds.html</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -992,7 +988,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">449</span>
+          <span class="site-state-item-count">450</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1041,12 +1037,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">749k</span>
+    <span title="站点总字数">751k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:21</span>
+    <span title="站点阅读时长">11:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

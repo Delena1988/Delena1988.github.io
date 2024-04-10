@@ -188,6 +188,104 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/21d5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/21d5/" class="post-title-link" itemprop="url">MongoDB客户端工具使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-28 13:59:56" itemprop="dateCreated datePublished" datetime="2021-05-28T13:59:56+08:00">2021-05-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>655</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p>客户端工具 <em>NoSQLBooster</em> <em>for</em> <em>MongoDB</em></p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://nosqlbooster.com/downloads">https://nosqlbooster.com/downloads</a></p>
+<h1 id="连接MongoDB"><a href="#连接MongoDB" class="headerlink" title="连接MongoDB"></a>连接MongoDB</h1><p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210528140542513.png" alt="image-20210528140542513"></p>
+<h1 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h1><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>可以打开SQL脚本执行窗口，如下图在runSQLQuery里可以写sql进行查询操作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210528141106685.png" alt="image-20210528141106685"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="property">visitInfo</span>.<span class="title function_">find</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;visitDate&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;$gte&#x27;</span>: <span class="string">&#x27;2019-01-01 00:00:00&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;empiId&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;$ne&#x27;</span>: <span class="literal">null</span>,</span><br><span class="line">        <span class="string">&#x27;$ne&#x27;</span>: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">    .<span class="title function_">projection</span>(&#123;&#125;)</span><br><span class="line">    .<span class="title function_">sort</span>(&#123; <span class="attr">_id</span>: -<span class="number">1</span> &#125;)</span><br><span class="line">    .<span class="title function_">limit</span>(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="property">visitInfo</span>.<span class="title function_">updateMany</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;outhospSerialNo&#x27;</span>: <span class="string">&#x27;1696222&#x27;</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="attr">$set</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;idNumber&#x27;</span>: <span class="string">&#x27;330225198810260359&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="property">visitInfo</span>.<span class="title function_">remove</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;outhospSerialNo&#x27;</span>: <span class="string">&#x27;1696222&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/55ef/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -598,116 +696,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/48d6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/48d6/" class="post-title-link" itemprop="url">查看windows server服务器的重启日志记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-14 13:19:08" itemprop="dateCreated datePublished" datetime="2021-05-14T13:19:08+08:00">2021-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Problem/" itemprop="url" rel="index"><span itemprop="name">Problem</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>275</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>点击菜单栏左下角“开始”按钮，在右侧的菜单栏中点击“管理工具”选项，在弹出的右侧菜单栏中点击“事件查看器”选项。</li>
-</ol>
-<img src="/Users/linjian/Library/Application Support/typora-user-images/image-20210514132656150.png" alt="image-20210514132656150" style="zoom: 50%;" />
-
-<ol>
-<li><p>弹出的“事件查看器”界面右侧，左侧有“windows日志”选项，单击左侧“+”。</p>
-<img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210514132203607.png" alt="image-20210514132203607" style="zoom:50%;" />
-</li>
-<li><p>在展开的列表中选中“系统”这一选项可以看到系统产生的日志记录。</p>
-<img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210514132225205.png" alt="image-20210514132225205" style="zoom:50%;" />
-</li>
-<li><p>为了方便直接查找重启的日志，在右侧的菜单栏中点击“筛选当前日志…”。</p>
-<img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210514132241330.png" alt="image-20210514132241330" style="zoom:50%;" />
-</li>
-<li><p>在弹出的窗口中选择“筛选器”选项卡，并在“任务类别”这一选项框上方的框中输入“1074”的事件ID，接着点击下方的“确定”即可看到系统所有的重启日志记录。（注：“1074”为系统重启的事件ID）</p>
-<img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210514132301214.png" alt="image-20210514132301214" style="zoom:50%;" />
-
-<img src="/Users/linjian/Library/Application Support/typora-user-images/image-20210514132317909.png" alt="image-20210514132317909" style="zoom:50%;" />
-</li>
-<li><p>若要查看详细信息，双击该条目即可。</p>
-<img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210514132335162.png" alt="image-20210514132335162" style="zoom: 50%;" /></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -777,7 +765,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">449</span>
+          <span class="site-state-item-count">450</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -826,12 +814,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">749k</span>
+    <span title="站点总字数">751k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:21</span>
+    <span title="站点阅读时长">11:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

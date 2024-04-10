@@ -188,6 +188,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/8a30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/8a30/" class="post-title-link" itemprop="url">常用的Nvidia查询命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-21 09:15:51 / 修改时间：16:16:59" itemprop="dateCreated datePublished" datetime="2023-12-21T09:15:51+08:00">2023-12-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><code>nvidia-smi</code>: 显示当前系统上Nvidia GPU的状态，包括设备的使用情况、显存使用情况、功耗等信息。使用该命令可以查看GPU的状态，例如GPU的使用率、显存占用率、功耗等信息，以及GPU的温度、风扇转速等参数。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/IrZ85N.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/FiiKhw.jpg"></p>
+<ol start="4">
+<li><code>nvidia-smi -l 1</code>:间隔1秒刷新GPU信息</li>
+<li><code>nvidia-smi -l</code>:间隔几秒刷新GPU信息</li>
+<li><code>nvidia-smi -L</code>: 显示当前系统上所有Nvidia GPU设备的信息。使用该命令可以查看当前系统上所有的Nvidia GPU设备的信息，包括设备的名称、索引、总显存大小等。</li>
+<li></li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/EFo9u9.jpg"></p>
+<ol start="9">
+<li><code>nvidia-smi dmon</code>: 显示GPU设备的显存使用情况和GPU的繁忙度。使用该命令可以实时监测GPU的显存使用情况和GPU的繁忙度，并以文本形式输出。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/4guTgE.jpg"></p>
+<ol start="11">
+<li><p><code>nvidia-smi -q</code>: 显示GPU的详细信息，包括硬件规格、驱动版本、显存信息、功耗管理、温度控制、GPU拓扑结构等信息。使用该命令可以了解GPU的硬件配置、驱动版本、显存大小、功耗管理策略、温度控制策略等信息，以及GPU的连接关系、拓扑结构等信息。</p>
+</li>
+<li><p><code>nvidia-smi -i [device_index] -q</code>: 显示指定GPU设备的详细信息。使用该命令可以查看指定GPU设备的详细信息，例如该设备的硬件规格、驱动版本、显存信息、功耗管理、温度控制等信息。</p>
+</li>
+<li><p><code>nvidia-smi --query-gpu=name,temperature.gpu,utilization.gpu,memory.total,memory.used,memory.free --format=csv</code>: 显示当前系统上所有Nvidia GPU设备的使用情况，并输出到CSV文件中，方便后续分析。使用该命令可以显示当前系统上所有Nvidia GPU设备的使用情况，例如GPU的温度、利用率、显存使用情况等信息，并将信息输出到CSV文件中，方便后续分析。</p>
+</li>
+<li><p><code>nvidia-settings</code>: 显示GPU设备的详细配置信息，包括显卡型号、GPU核心时钟、内存时钟、电压等信息。使用该命令可以配置GPU设备的参数，例如GPU的核心时钟、内存时钟、电压等参数。</p>
+</li>
+<li><p><code>nvidia-smi -i [device_index] -e 0x20</code>: 显示指定GPU设备的ECC错误日志。使用该命令可以查看指定GPU设备的ECC错误日志，以帮助排查硬件问题。</p>
+</li>
+<li><p><code>nvidia-smi topo -m</code>: 显示GPU拓扑结构和连接关系，可用于识别GPU间连接的带宽和延迟等信息。使用该命令可以了解GPU设备之间的连接关系和拓扑结构，以及GPU设备之间的带宽和延迟等信息。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/6889/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -568,132 +679,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6670/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/6670/" class="post-title-link" itemprop="url">Python虚拟环境</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-11-30 15:21:22" itemprop="dateCreated datePublished" datetime="2023-11-30T15:21:22+08:00">2023-11-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-19 09:05:40" itemprop="dateModified" datetime="2023-12-19T09:05:40+08:00">2023-12-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一-虚拟环境基础知识"><a href="#一-虚拟环境基础知识" class="headerlink" title="一 虚拟环境基础知识"></a>一 虚拟环境基础知识</h2><p>Python在开发人员中大受欢迎，最大的原因之一是它广泛且不断扩大的第三方包选择。虚拟环境可以为每个项目创建单独的隔离环境，达到分离不同项目的依赖关系的目的。</p>
-<p>Python有针对不同应用程序的各种模块和包。在我们的项目开发中，可能需要一些三方库，那么就需要安装这个库，而另一个项目可能不需要任何其他第三方包，或者是需要其中某些三方包的其他的版本。当不同的Python项目需要相同插件的竞争或不兼容版本时，就会出现问题，导致程序莫名的异常。</p>
-<p>另外开发用的电脑，可能同时安装了Python2和Python3，而Python2和Python3又有更多的小版本号，而有些现成的项目可能开发比较早，只支持用Python2编译，而有些则必须要Python3才行，这样如果没有隔离，则也会导致程序无法运行。</p>
-<p>因此，虚拟环境此时能够发挥作用，为不同的Python安装版本、或不同的项目创建单独的隔离环境，每个项目可以从其特定的环境中存储和检索包，使用特定的Python版本。</p>
-<h2 id="二-如何使用虚拟环境"><a href="#二-如何使用虚拟环境" class="headerlink" title="二 如何使用虚拟环境"></a>二 如何使用虚拟环境</h2><p>这里通过具体操作执行进行示例说明。</p>
-<h2 id="2-1-安装virtualenv"><a href="#2-1-安装virtualenv" class="headerlink" title="2.1 安装virtualenv"></a>2.1 安装virtualenv</h2><p>要创建虚拟环境，需要先安装一个名为virtualenv的模块。首先要确保在计算机上安装了pip。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 如果计算机上没有安装pip，需使用以下命令先安装pip，不同的操作系统命令会有差异:</span><br><span class="line">sudo apt-get install python-pip</span><br><span class="line"></span><br><span class="line"># 然后通过pip来安装virtualenv，安装后可以检查下virtualenv的版本:</span><br><span class="line">pip install virtualenv</span><br><span class="line">virtualenv --version</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-2-创建虚拟环境并激活"><a href="#2-2-创建虚拟环境并激活" class="headerlink" title="2.2 创建虚拟环境并激活"></a>2.2 创建虚拟环境并激活</h2><p>成功安装virtualenv之后，可以使用以下命令创建一个特定名称的虚拟环境:</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 创建特定名称的虚拟环境,myvenv可以换成任意你喜欢的名字都行</span><br><span class="line">virtualenv myvenv</span><br><span class="line"># 执行以上命令会创建myvenv的文件夹，包含运行Python项目所需的所有可执行文件</span><br><span class="line"></span><br><span class="line"># 如果要指定Python版本，可以通过下面指令来创建虚拟环境:</span><br><span class="line">python2.7 virtualenv myvenv    # 创建使用Python2.7的虚拟环境</span><br><span class="line"># 也可以通过下面的命令来创建虚拟环境，效果和上面的一样的</span><br><span class="line">python3 -m venv myvenv         # 创建使用Python3的虚拟环境</span><br><span class="line"></span><br><span class="line"># 在创建好虚拟环境后，还需要用如下命令启用，激活进入特定的隔离环境</span><br><span class="line">source venv/bin/activate</span><br><span class="line"># 如果是在Windows系统下，上面的激活命令略有差异：</span><br><span class="line">venv/Scripts/activate</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/vQgJEK.jpg"></p>
-<p>成功激活进入虚拟环境后，如下图所示，会在命令行前面看到有(.venv)的标志：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/Byzfqv.jpg"></p>
-<p>成功创建并激活了虚拟环境后，就可以安装项目所需的依赖项和需求，而不会干扰到其他项目了。</p>
-<h2 id="2-3-退出虚拟环境"><a href="#2-3-退出虚拟环境" class="headerlink" title="2.3 退出虚拟环境"></a>2.3 退出虚拟环境</h2><p>一旦完成了当前项目的工作，可以返回到系统默认环境，只需要使用deactivate命令即可退出。</p>
-<h2 id="三-虚拟环境的工作原理"><a href="#三-虚拟环境的工作原理" class="headerlink" title="三 虚拟环境的工作原理"></a>三 虚拟环境的工作原理</h2><p>如果没有使用虚拟环境时，Python的第三方包都会被pip安装到Python安装路径的site-packages目录下。当使用虚拟环境时，按照前面的“python3 -m venv myvenv”等方式创建虚拟环境后，可以查看当前目录，会看到几个文件：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/6wOG7D.jpg"></p>
-<ul>
-<li>bin目录：python3、pip3等可执行文件，其实就是是软链接到Python系统目录(或者是复制的副本)的</li>
-<li>lib&#x2F;python3.10&#x2F;site-packages：用于该虚拟环境下安装的三方包的存储目录的</li>
-</ul>
-<p>所以，通过venv，会将系统的Python软链接到venv的环境下，当用source命令激活虚拟环境时，就会启用该venv下面的python和pip了，同时过程中安装的三方包都是放在venv&#x2F;lib&#x2F;pythonx.x&#x2F;site-packages下面的，这样系统的Python环境是不会受到任何影响的。</p>
-<h2 id="四-虚拟环境的更多用法"><a href="#四-虚拟环境的更多用法" class="headerlink" title="四 虚拟环境的更多用法"></a>四 虚拟环境的更多用法</h2><h2 id="4-1-三方包依赖需求生成与重新安装"><a href="#4-1-三方包依赖需求生成与重新安装" class="headerlink" title="4.1 三方包依赖需求生成与重新安装"></a>4.1 三方包依赖需求生成与重新安装</h2><p>如前所述，在创建一个新的虚拟环境后，pip和setuptools包会被软链接（或复制）到虚拟环境下，接下来可以安装在环境中使用的任何其他包。对于具有复杂需求的项目，在项目的根目录中最好能保留一个requirements.txt的文件，这个文件列出了项目的三方包依赖的需求。这样，如果需要重新创建虚拟环境，可以使用pip install -r requirements.txt命令重新安装所有需要的包。</p>
-<p>在项目的虚拟环境中安装完所需的库后，可使用pip list查看当前所有已安装的库，然后可以通过运行以下命令生成一个文本文件，列出所有项目依赖项：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
-
-<p>那么在其他计算机上重新搭建这个项目的环境时，则可以快速通过如下命令，一次将所有依赖的三方包安装齐全：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-2-虚拟环境更新升级"><a href="#4-2-虚拟环境更新升级" class="headerlink" title="4.2 虚拟环境更新升级"></a>4.2 虚拟环境更新升级</h2><p>虚拟环境中的pip和setuptools副本是该虚拟环境的本地副本，需要独立地进行更新和维护。所以会遇到某些虚拟环境中pip过时的警告，而在其他虚拟环境中则不会，pip必须在每个虚拟环境中分别更新才行。</p>
-<p>因此当升级系统上的Python运行时时，使用该版本的Python的虚拟环境是不会自动升级的，这样设计也是合理的，因为无意中升级到新Python版本可能会破坏它们的三方包依赖。</p>
-<p>具体的虚拟环境更新升级操作如下：</p>
-<p>Python小版本升级：</p>
-<p>如果已经升级了一个现有的Python小版本，比如从Python 3.9.5到Python 3.9.7，那么可以在项目目录下通过如下方式升级虚拟环境(不要提前激活虚拟环境，否则可能导致升级失败)：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m venv myvenv --upgrade</span><br></pre></td></tr></table></figure>
-
-<p>Python大版本升级：</p>
-<p>如果已经安装了一个主要的新版本的Python，比如已经有了Python 3.8，现在将安装Python 3.9，那么就不要用上面的升级方式了，而是重新创建一个新的虚拟环境，专门使用新的Python大版本。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -763,7 +748,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">449</span>
+          <span class="site-state-item-count">450</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -812,12 +797,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">749k</span>
+    <span title="站点总字数">751k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:21</span>
+    <span title="站点阅读时长">11:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
