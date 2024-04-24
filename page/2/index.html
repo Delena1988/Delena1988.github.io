@@ -188,6 +188,184 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/67de/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/67de/" class="post-title-link" itemprop="url">Linux批量替换文件内容的三种方法(PERL,SED,SHELL)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-28 10:02:22 / 修改时间：10:10:26" itemprop="dateCreated datePublished" datetime="2024-03-28T10:02:22+08:00">2024-03-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>82</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="方法一-perl"><a href="#方法一-perl" class="headerlink" title="方法一: perl"></a>方法一: perl</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name <span class="string">&#x27;要查找的文件名&#x27;</span> | xargs perl -pi -e <span class="string">&#x27;s|被替换的字符串|替换后的字符串|g&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="方法二-sed"><a href="#方法二-sed" class="headerlink" title="方法二: sed"></a>方法二: sed</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&quot;s/原字符串/新字符串/g&quot;</span> `grep 原字符串 -rl 所在目录`</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法三-shell"><a href="#方法三-shell" class="headerlink" title="方法三: shell"></a>方法三: shell</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;abc&quot;</span> * -R | awk -F: <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">uniq</span> | xargs sed -i <span class="string">&#x27;s/abc/abcde/g&#x27;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/ec7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/ec7/" class="post-title-link" itemprop="url">Linux离线安装字体</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-20 09:14:11 / 修改时间：09:16:39" itemprop="dateCreated datePublished" datetime="2024-03-20T09:14:11+08:00">2024-03-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>187</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在Linux系统中，离线安装字体通常涉及到以下几个步骤：</p>
+<ol>
+<li><p>从互联网上找到你需要的字体文件（通常是<code>.ttf</code>或<code>.otf</code>格式）。</p>
+</li>
+<li><p>将字体文件复制到Linux系统中的字体目录下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以root权限复制Arial和Courier字体到全局字体目录</span></span><br><span class="line">sudo <span class="built_in">cp</span> Arial*.ttf /usr/share/fonts/</span><br><span class="line">sudo <span class="built_in">cp</span> Courier*.ttf /usr/share/fonts/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者，如果你不想全局安装，可以复制到用户级字体目录</span></span><br><span class="line"><span class="built_in">cp</span> Arial*.ttf &amp;<span class="comment">#126;/.local/share/fonts/</span></span><br><span class="line"><span class="built_in">cp</span> Courier*.ttf &amp;<span class="comment">#126;/.local/share/fonts/</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>刷新系统字体缓存。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用fc-cache命令刷新字体缓存</span></span><br><span class="line">sudo fc-cache -fv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者，如果你不想全局安装，确保使用用户级的字体配置</span></span><br><span class="line">fc-cache -fv</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/a774/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -440,192 +618,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/ba29/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/ba29/" class="post-title-link" itemprop="url">MySQL慢SQL</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-01-16 14:42:22" itemprop="dateCreated datePublished" datetime="2024-01-16T14:42:22+08:00">2024-01-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-17 09:23:13" itemprop="dateModified" datetime="2024-01-17T09:23:13+08:00">2024-01-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>450</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="查询慢SQL是否开启"><a href="#查询慢SQL是否开启" class="headerlink" title="查询慢SQL是否开启"></a>查询慢SQL是否开启</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%slow_query_log%&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/QStx3g.jpg"></p>
-<h1 id="开启慢SQL"><a href="#开启慢SQL" class="headerlink" title="开启慢SQL"></a>开启慢SQL</h1><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[mysqld]</span></span><br><span class="line"><span class="comment">## 开启慢查询日志，开启后将会记录执行时间超过 long_query_time 参数值的 SQL 语句（ 一般临时开启即可 ）</span></span><br><span class="line"><span class="attr">slow_query_log</span> = <span class="string">ON</span></span><br><span class="line"><span class="comment">## 定义执行时间超过多少秒为慢查询，默认 10s</span></span><br><span class="line"><span class="attr">long_query_time</span> = <span class="string">5</span></span><br><span class="line"><span class="comment">## 定义慢查询日志存放位置</span></span><br><span class="line"><span class="attr">slow_query_log_file</span> = <span class="string">/data/mysql/logs/slow.log</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="mysqldumpslow"><a href="#mysqldumpslow" class="headerlink" title="mysqldumpslow"></a>mysqldumpslow</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@crc-uat-oa-mysql bin]<span class="comment"># ./mysqldumpslow  --help</span></span><br><span class="line">Usage: mysqldumpslow [ OPTS... ] [ LOGS... ]</span><br><span class="line"></span><br><span class="line">Parse and summarize the MySQL slow query <span class="built_in">log</span>. Options are</span><br><span class="line"></span><br><span class="line">  --verbose    verbose</span><br><span class="line">  --debug      调试</span><br><span class="line">  --<span class="built_in">help</span>       帮助文档</span><br><span class="line">  -v           verbose</span><br><span class="line">  -d           调试</span><br><span class="line">  <span class="comment"># 表示按何种方式排序</span></span><br><span class="line">  -s ORDER     what to <span class="built_in">sort</span> by (al, at, ar, c, l, r, t), <span class="string">&#x27;at&#x27;</span> is default</span><br><span class="line">                al: 平均 锁定时间</span><br><span class="line">                ar: 平均 返回记录</span><br><span class="line">                at: 平均 查询时间</span><br><span class="line">                 c:   访问次数</span><br><span class="line">                 l:   锁定时间</span><br><span class="line">                 r:  返回记录</span><br><span class="line">                 t:  查询时间</span><br><span class="line">  -r           颠倒排序顺序（最大的最后一个而不是第一个）</span><br><span class="line">  -t NUM       返回前面多少条数据</span><br><span class="line">  -a           don<span class="string">&#x27;t abstract all numbers to N and strings to &#x27;</span>S<span class="string">&#x27;</span></span><br><span class="line"><span class="string">  -n NUM       abstract numbers with at least n digits within names</span></span><br><span class="line"><span class="string">  -g PATTERN   后面搭配一个正则匹配模式，大小写不敏感。</span></span><br><span class="line"><span class="string">  -h HOSTNAME  数据库服务器的主机名 for *-slow.log 文件,默认是 &#x27;</span>*<span class="string">&#x27;, 表示匹配所有 </span></span><br><span class="line"><span class="string">  -i NAME      服务器实例的名称（如果使用mysql.server启动脚本</span></span><br><span class="line"><span class="string">  -l           不要从总时间中减去锁定时间</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 得到返回记录集最多的10 个SQL</span></span><br><span class="line">./mysqldumpslow -s r -t 10 /data/mysql/logs/slow.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 得到访问次数最多的10 个SQL</span></span><br><span class="line">./mysqldumpslow -s c -t 10 /data/mysql/logs/slow.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 得到按照时间排序的前10 条里面含有左连接的查询语句</span></span><br><span class="line">./mysqldumpslow -s t -t 10 -g <span class="string">&quot;left join&quot;</span> /data/mysql/logs/slow.log</span><br><span class="line"></span><br><span class="line"><span class="comment"># 另外建议在使用这些命令时结合| 和more 使用，否则有可能出现爆屏情况</span></span><br><span class="line">./mysqldumpslow -s r -t 10 /data/mysql/logs/slow.log | more</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/b1a1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/b1a1/" class="post-title-link" itemprop="url">AI相关概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-21 14:03:26" itemprop="dateCreated datePublished" datetime="2023-12-21T14:03:26+08:00">2023-12-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-23 11:16:36" itemprop="dateModified" datetime="2023-12-23T11:16:36+08:00">2023-12-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>558</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="LangChain"><a href="#LangChain" class="headerlink" title="LangChain"></a><a target="_blank" rel="noopener" href="https://www.langchain.com/">LangChain</a></h1><p>    LangChain 是一个高级框架，旨在简化在复杂系统中构建语言模型应用的过程。它基于自然语言处理（NLP）技术，并将其与链式推理结合，从而允许开发者创建可以进行多步信息处理的应用程序。这种框架支持多种语言模型和API，让开发人员能够链接不同的语言服务，例如翻译、摘要、问题回答等，以构建出更加智能和多功能的语言处理工具。LangChain的设计哲学强调的是模块化和可插拔性，从而支持快速迭代和灵活性。</p>
-<p>    通俗点说：想象一下有一座大型的语言工厂，里面有许多不同的机器，每个机器都能做一项专门的事情，比如有的能帮你写作，有的能帮你解答问题，还有的能帮你把一种语言翻译成另一种语言。LangChain就像是管理这座工厂的操作系统，它帮助人们把这些机器连接起来，让它们协同工作，从而完成各种复杂的任务。这样，开发者就能更容易地使用这些强大的语言机器，创造出各种各样的应用程序，帮助我们解决生活中的问题。</p>
-<h1 id="ModelScope"><a href="#ModelScope" class="headerlink" title="ModelScope"></a><a target="_blank" rel="noopener" href="https://modelscope.cn/">ModelScope</a></h1><p>    ModelScope旨在打造下一代开源的模型即服务共享平台，为泛AI开发者提供灵活、易用、低成本的一站式模型服务产品，让模型应用更简单！</p>
-<h1 id="Streamlit"><a href="#Streamlit" class="headerlink" title="Streamlit"></a><a target="_blank" rel="noopener" href="https://streamlit.io/">Streamlit</a></h1><p>    Streamlit 是一个用于构建数据科学和机器学习应用程序的开源 Python 库。它旨在使开发人员能够以简单快速的方式构建交互式应用程序，无需繁琐的前端开发。Streamlit 提供了一组简单的 API，可用于创建具有数据探索、可视化和交互功能的应用程序。只需要通过简单的 Python 脚本就可以创建一个 Web 应用程序。可以利用 Streamlit 的丰富组件库来构建用户界面，例如文本框、滑块、下拉菜单和按钮，以及可视化组件，例如图表和地图。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -695,7 +687,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">451</span>
+          <span class="site-state-item-count">453</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -749,7 +741,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:11</span>
+    <span title="站点阅读时长">17:13</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

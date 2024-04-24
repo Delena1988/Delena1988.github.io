@@ -188,6 +188,224 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6890/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/6890/" class="post-title-link" itemprop="url">MySQL随机取时间</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-23 18:53:14" itemprop="dateCreated datePublished" datetime="2021-11-23T18:53:14+08:00">2021-11-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>191</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="随机生成日期、时间"><a href="#随机生成日期、时间" class="headerlink" title="随机生成日期、时间"></a>随机生成日期、时间</h3><p>用mysql自带函数生成随机日期&#x2F;时间</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 取<span class="number">12</span>到<span class="number">24</span>的随机整数，包括<span class="number">12</span>到<span class="number">24</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">FLOOR</span>(<span class="number">12</span><span class="operator">+</span>(RAND()<span class="operator">*</span><span class="number">13</span>)); </span><br><span class="line"></span><br><span class="line"># 取<span class="number">0</span><span class="number">-24</span>之间的随机数，不够<span class="number">2</span>位的前补<span class="number">0</span></span><br><span class="line"><span class="keyword">SELECT</span> LPAD(<span class="built_in">FLOOR</span>(<span class="number">0</span> <span class="operator">+</span> (RAND() <span class="operator">*</span> <span class="number">23</span>)),<span class="number">2</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"># 给用户赋一个随机创建日期，年份为<span class="number">2015</span><span class="number">-2015</span></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(</span><br><span class="line">    <span class="built_in">FLOOR</span>(<span class="number">2015</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">1</span> )),</span><br><span class="line">    <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">    LPAD(<span class="built_in">FLOOR</span>(<span class="number">10</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">2</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">    <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">    LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">25</span> )),<span class="number">2</span>,<span class="number">0</span> )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"># 给用户赋一个随机创建时间，年份为<span class="number">2019</span></span><br><span class="line"><span class="keyword">SELECT</span> CONCAT(</span><br><span class="line">            <span class="built_in">FLOOR</span>(<span class="number">2019</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">1</span> )),</span><br><span class="line">            <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">0</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">12</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27;-&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">25</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27; &#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">23</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27;:&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">59</span> )),<span class="number">2</span>,<span class="number">0</span> ),</span><br><span class="line">            <span class="string">&#x27;:&#x27;</span>,</span><br><span class="line">            LPAD(<span class="built_in">FLOOR</span>(<span class="number">1</span> <span class="operator">+</span> ( RAND() <span class="operator">*</span> <span class="number">59</span> )),<span class="number">2</span>,<span class="number">0</span> ) </span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数说明"><a href="#函数说明" class="headerlink" title="函数说明"></a>函数说明</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 可以在<span class="number">0</span>和<span class="number">1</span>之间产生一个随机数：</span><br><span class="line">RAND()</span><br><span class="line"></span><br><span class="line"># 向下取整</span><br><span class="line"><span class="built_in">FLOOR</span>(x) </span><br><span class="line"></span><br><span class="line"># 填充字符串左边</span><br><span class="line">LPAD(str,len,padstr)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a0b1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/a0b1/" class="post-title-link" itemprop="url">文档-《数据库设计说明书》</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-21 10:37:56" itemprop="dateCreated datePublished" datetime="2021-10-21T10:37:56+08:00">2021-10-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Document/" itemprop="url" rel="index"><span itemprop="name">Document</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>356</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="#_Toc455138579">第1章 引言	1</a></p>
+<p><a href="#_Toc455138580">1.1 标识	1</a></p>
+<p><a href="#_Toc455138581">1.2 数据库概述	1</a></p>
+<p><a href="#_Toc455138582">1.3 文档概述	1</a></p>
+<p><a href="#_Toc455138583">第2章 引用文件	2</a></p>
+<p><a href="#_Toc455138584">第3章 数据库级设计决策	3</a></p>
+<p><a href="#_Toc455138585">3.1 DBMS级设计策略	3</a></p>
+<p><a href="#_Toc455138586">3.2 应用级设计策略	3</a></p>
+<p><a href="#_Toc455138587">3.3 更新与维护设计策略	3</a></p>
+<p><a href="#_Toc455138588">第4章 数据库详细设计	3</a></p>
+<p><a href="#_Toc455138589">4.1 外部设计	3</a></p>
+<p><a href="#_Toc455138590">4.1.1 数据库用户名约定	3</a></p>
+<p><a href="#_Toc455138591">4.1.2 表命名约定	3</a></p>
+<p><a href="#_Toc455138592">4.1.3 视图命名约定	4</a></p>
+<p><a href="#_Toc455138593">4.1.4 视图注释约束	4</a></p>
+<p><a href="#_Toc455138594">4.1.5 系统字段的约定	4</a></p>
+<p><a href="#_Toc455138595">4.2 逻辑结构设计	6</a></p>
+<p><a href="#_Toc455138596">4.2.1 实体关系图	6</a></p>
+<p><a href="#_Toc455138597">4.2.2 关系模型描述	7</a></p>
+<p><a href="#_Toc455138598">4.2.3 数据视图描述	8</a></p>
+<p><a href="#_Toc455138599">4.2.4 数据库同义词描述	8</a></p>
+<p><a href="#_Toc455138600">4.2.5 数据库数据链路描述	9</a></p>
+<p><a href="#_Toc455138601">4.3 物理结构设计	9</a></p>
+<p><a href="#_Toc455138602">4.3.1 数据库物理设计总体说明	9</a></p>
+<p><a href="#_Toc455138603">4.3.2 数据库表空间的物理设计	9</a></p>
+<p><a href="#_Toc455138604">4.3.2.1数据库用户的物理设计	9</a></p>
+<p><a href="#_Toc455138605">4.3.3 数据库表的物理设计	9</a></p>
+<p><a href="#_Toc455138606">4.3.4 数据库索引的物理设计	10</a></p>
+<p><a href="#_Toc455138607">4.3.5 数据库普通回滚段、大回滚段的设计	10</a></p>
+<p><a href="#_Toc455138608">第5章 数据字典设计	11</a></p>
+<p><a href="#_Toc455138609">5.1 ****系统	11</a></p>
+<p><a href="#_Toc455138610">5.1.1 普通代码的数据字典	11</a></p>
+<p><a href="#_Toc455138611">5.1.2 程序级的数据字典	11</a></p>
+<p><a href="#_Toc455138612">第6章 安全保密设计	11</a></p>
+<p><a href="#_Toc455138613">6.1 用户标识与鉴别	12</a></p>
+<p><a href="#_Toc455138614">6.2 存取控制	12</a></p>
+<p><a href="#_Toc455138615">6.3 视图机制	13</a></p>
+<p><a href="#_Toc455138616">6.4 触发器机制	13</a></p>
+<p><a href="#_Toc455138617">6.5 审计	13</a></p>
+<p><a href="#_Toc455138618">第7章 需求的可追踪性	14</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/eca/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -686,283 +904,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/8c4f/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/8c4f/" class="post-title-link" itemprop="url">FreeSWITCH权威指南（一）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-11 11:19:13" itemprop="dateCreated datePublished" datetime="2021-08-11T11:19:13+08:00">2021-08-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-22 18:07:34" itemprop="dateModified" datetime="2023-03-22T18:07:34+08:00">2023-03-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FreeSWITCH/" itemprop="url" rel="index"><span itemprop="name">FreeSWITCH</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>517</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="名词"><a href="#名词" class="headerlink" title="名词"></a>名词</h1><table>
-<thead>
-<tr>
-<th>简称</th>
-<th>全称</th>
-<th>释义</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>VoIP</td>
-<td>Voice over IP</td>
-<td>承载于IP网上的语音通信</td>
-<td></td>
-</tr>
-<tr>
-<td>VoLTE</td>
-<td>Voice over LTE</td>
-<td>LTE网络直传</td>
-<td>LTE网络环境下的VoIP业务</td>
-</tr>
-<tr>
-<td>LTE</td>
-<td>Long Term Evolution</td>
-<td>长期演进技术</td>
-<td>电信中用于手机及数据终端的高速无线通讯标准</td>
-</tr>
-<tr>
-<td>SIP</td>
-<td>Session Initiation Protocol</td>
-<td>会话初始协议</td>
-<td>IP电话信令协议</td>
-</tr>
-<tr>
-<td>PSTN</td>
-<td>Public Switched Telephone Network</td>
-<td>公共交换电话网</td>
-<td>我们日常打电话所使用的电话网络</td>
-</tr>
-<tr>
-<td>PCM</td>
-<td>Pulse Code Modulation</td>
-<td>脉冲编码调制</td>
-<td>是一种通用的将模拟信号转换成以0，1表示的数字信号方法</td>
-</tr>
-<tr>
-<td>RTP</td>
-<td>Real-time Transport Protocol</td>
-<td>实时传输协议</td>
-<td></td>
-</tr>
-<tr>
-<td>IMS</td>
-<td>IP Multimedia Subsystem</td>
-<td>IP多媒体子系统</td>
-<td>基于IP网提供语音及多媒体业务的网络体系架构</td>
-</tr>
-<tr>
-<td>HLR</td>
-<td>Home Location Register</td>
-<td>归属位置寄存器</td>
-<td></td>
-</tr>
-<tr>
-<td>VLR</td>
-<td>Visitor Location Register</td>
-<td>拜访位置寄存器</td>
-<td></td>
-</tr>
-<tr>
-<td>MSC</td>
-<td>Mobile Switch Center</td>
-<td>移动交换中心</td>
-<td></td>
-</tr>
-<tr>
-<td>PBX</td>
-<td>Private Branch e Xchange</td>
-<td>专用小交换机</td>
-<td></td>
-</tr>
-<tr>
-<td>CTI</td>
-<td>Computer Telephony Integration</td>
-<td>计算机电话集成</td>
-<td></td>
-</tr>
-</tbody></table>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/8c4f/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e1c4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/e1c4/" class="post-title-link" itemprop="url">FreeSWITCH常用命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-08-09 18:32:38" itemprop="dateCreated datePublished" datetime="2021-08-09T18:32:38+08:00">2021-08-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-17 09:22:29" itemprop="dateModified" datetime="2023-03-17T09:22:29+08:00">2023-03-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/FreeSWITCH/" itemprop="url" rel="index"><span itemprop="name">FreeSWITCH</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>267</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="freeswitch常用命令"><a href="#freeswitch常用命令" class="headerlink" title="freeswitch常用命令"></a>freeswitch常用命令</h1><h3 id="Linux环境"><a href="#Linux环境" class="headerlink" title="Linux环境"></a>Linux环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动</span></span><br><span class="line">freeswitch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动并后台运行</span></span><br><span class="line">freeswitch -nc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入客户端</span></span><br><span class="line">fs_cli</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出客户端：</span></span><br><span class="line">/exit， /bye, /quit Ctrl+D</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止：</span></span><br><span class="line">freeswitch -stop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看freeswitch的端口情况：</span></span><br><span class="line">netstat -anp|grep freeswitch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前注册的用户数量：</span></span><br><span class="line">sofia status profile internal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看坐席是否注册 （1001为分机号）</span></span><br><span class="line">sofia status profile internal reg 1001</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用fs_cli进行呼叫,其中&amp;echo会把听到的声音返回给发出者：</span></span><br><span class="line">originate user/1001 &amp;<span class="built_in">echo</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查询网关状态: sofia status profile <span class="built_in">local</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/e1c4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1032,7 +973,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">451</span>
+          <span class="site-state-item-count">453</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1086,7 +1027,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:11</span>
+    <span title="站点阅读时长">17:13</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
