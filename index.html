@@ -188,6 +188,685 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/62c0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/62c0/" class="post-title-link" itemprop="url">MySQL调优-7-多表查询、子查询、order by、group by、分页优化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-29 15:14:17 / 修改时间：15:34:20" itemprop="dateCreated datePublished" datetime="2024-04-29T15:14:17+08:00">2024-04-29</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/872b/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/872b/" class="post-title-link" itemprop="url">MySQL调优-8-其他查询优化策略</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-29 15:13:35 / 修改时间：15:50:27" itemprop="dateCreated datePublished" datetime="2024-04-29T15:13:35+08:00">2024-04-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="EXISTS-和-IN-的区分"><a href="#EXISTS-和-IN-的区分" class="headerlink" title="EXISTS 和 IN 的区分"></a>EXISTS 和 IN 的区分</h1><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>    不太理解哪种情况应该使用EXISTS，哪种情况应该使用IN。选择的标准是看能否使用表的索引吗？</p>
+<h3 id="回答"><a href="#回答" class="headerlink" title="回答"></a>回答</h3><p>    索引是个前提，其实选择与否还是要看表的大小。你可以将选择的标准理解为<em>小表驱动大表</em>。在这种方式下的效率是最高的。</p>
+<p>    比如下面这样：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> A <span class="keyword">where</span> cc <span class="keyword">IN</span> (<span class="keyword">select</span> cc <span class="keyword">from</span> B)</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> A <span class="keyword">where</span> <span class="keyword">EXISTS</span> (<span class="keyword">select</span> cc <span class="keyword">from</span> B <span class="keyword">where</span> B.cc <span class="operator">=</span> A.cc)</span><br></pre></td></tr></table></figure>
+
+<p>当A小于B时，用EXISTS。因为EXISTS的实现，相当于外表循环，实现的逻辑类似于：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i in A</span><br><span class="line">    <span class="keyword">for</span> j in B</span><br><span class="line">        <span class="keyword">if</span> j.cc == i.cc then ...</span><br></pre></td></tr></table></figure>
+
+<p>当B小于A时用IN，因为实现的逻辑类似于：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i in B</span><br><span class="line">    <span class="keyword">for</span> j in A</span><br><span class="line">        <span class="keyword">if</span> j.cc == i.cc then ...</span><br></pre></td></tr></table></figure>
+
+<p>哪个表小就用哪个表来驱动，A表小就用EXISTS，B表小就用IN。</p>
+<ul>
+<li><p>in是把外表和内表作<strong>hash连接</strong></p>
+</li>
+<li><p>而exists是对外表作loop循环，每次loop循环再对内表进行查询，<strong>关联子查询</strong></p>
+</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>如果查询的两张表大小相当，那么用in和exists差别不大；</p>
+</li>
+<li><p>如果两个表中一个较小一个较大，则<mark>子查询表大（内表大）的用exists</mark>；</p>
+</li>
+<li><p>如果两个表中一个较小一个较大，<mark>自查询表小（内表小）的用in</mark>。</p>
+</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/872b/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6c2f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/6c2f/" class="post-title-link" itemprop="url">MySQL全面优化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-29 10:34:45 / 修改时间：15:34:20" itemprop="dateCreated datePublished" datetime="2024-04-29T10:34:45+08:00">2024-04-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>12 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在进行MySQL的优化之前，必须要了解的就是MySQL的查询过程，很多查询优化工作实际上就是遵循一些原则，让MySQL的优化器能够按照预想的合理方式运行而已。</p>
+<p><img src="https://justhealth.feishu.cn/space/api/box/stream/download/asynccode/?code=MjMzNDQ0OTZkZTljNGE3NTU1OTIwMjZkYWFmMTk4OGNfbHFJTnhucXRuUGM2djJVNTk1WWFZN3FycGVBWmgzQ29fVG9rZW46Ym94Y24yeDlHaVo3S1RxTGs2dTlVTFk1Qk5kXzE3MTQzNTgwNTY6MTcxNDM2MTY1Nl9WNA"></p>
+<p>图-MySQL查询过程</p>
+<p>一、优化的哲学</p>
+<p>注：优化有风险，涉足需谨慎</p>
+<p>1、优化可能带来的问题</p>
+<p>1、优化不总是对一个单纯的环境进行，还很可能是一个复杂的已投产的系统；</p>
+<p>2、优化手段本来就有很大的风险，只不过你没能力意识到和预见到；</p>
+<p>3、任何的技术可以解决一个问题，但必然存在带来一个问题的风险；</p>
+<p>4、对于优化来说解决问题而带来的问题，控制在可接受的范围内才是有成果；</p>
+<p>5、保持现状或出现更差的情况都是失败！</p>
+<p>2、优化的需求</p>
+<p>1、稳定性和业务可持续性，通常比性能更重要；</p>
+<p>2、优化不可避免涉及到变更，变更就有风险；</p>
+<p>3、优化使性能变好，维持和变差是等概率事件；</p>
+<p>4、切记优化，应该是各部门协同，共同参与的工作，任何单一部门都不能对数据库进行优化！</p>
+<p>所以优化工作，是由业务需要驱使的！</p>
+<p>3、优化由谁参与</p>
+<p>在进行数据库优化时，应由数据库管理员、业务部门代表、应用程序架构师、应用程序设计人员、应用程序开发人员、硬件及系统管理员、存储管理员等，业务相关人员共同参与。</p>
+<p>二、优化思路</p>
+<p>1、优化什么</p>
+<p>在数据库优化上有两个主要方面：即安全与性能。</p>
+<ul>
+<li><p>安全-&gt;数据可持续性；</p>
+</li>
+<li><p>性能-&gt;数据的高性能访问。</p>
+</li>
+</ul>
+<p>2、优化的范围有哪些</p>
+<p>存储、主机和操作系统方面：</p>
+<ul>
+<li><p>主机架构稳定性；</p>
+</li>
+<li><p>I&#x2F;O规划及配置；</p>
+</li>
+<li><p>Swap交换分区；</p>
+</li>
+<li><p>OS内核参数和网络问题。</p>
+</li>
+</ul>
+<p>应用程序方面：</p>
+<ul>
+<li><p>应用程序稳定性；</p>
+</li>
+<li><p>SQL语句性能；</p>
+</li>
+<li><p>串行访问资源；</p>
+</li>
+<li><p>性能欠佳会话管理；</p>
+</li>
+<li><p>这个应用适不适合用MySQL。</p>
+</li>
+</ul>
+<p>数据库优化方面：</p>
+<ul>
+<li><p>内存；</p>
+</li>
+<li><p>数据库结构（物理&amp;逻辑）；</p>
+</li>
+<li><p>实例配置；</p>
+</li>
+</ul>
+<p>说明：不管是设计系统、定位问题还是优化，都可以按照这个顺序执行。</p>
+<p>3、优化维度</p>
+<p>数据库优化维度有四个：</p>
+<p>硬件、系统配置、数据库表结构、SQL及索引。</p>
+<p><img src="https://justhealth.feishu.cn/space/api/box/stream/download/asynccode/?code=M2U2OTRlNTU1MDkyMWEzNWM1NTg1NmU5MTkzYjcyOWVfV0k5ZUVjazFxdEpKN3RTZUlLTlozV1RzM3E1VGdSMkJfVG9rZW46Ym94Y25SRzBEQXhYb3ZtcFBkWHhNa3ozMFFlXzE3MTQzNTgwNTY6MTcxNDM2MTY1Nl9WNA"></p>
+<p>优化选择：</p>
+<p>优化成本：硬件&gt;系统配置&gt;数据库表结构&gt;SQL及索引；</p>
+<p>优化效果：硬件&lt;系统配置&lt;数据库表结构&lt;SQL及索引；</p>
+<p>三、优化工具有啥？</p>
+<p>1、数据库层面</p>
+<p>检查问题常用工具：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1）MySQL</span><br><span class="line">2）msyqladmin：MySQL客户端，可进行管理操作</span><br><span class="line">3）mysqlshow：功能强大的查看shell命令</span><br><span class="line">4）show [SESSION | GLOBAL] variables：查看数据库参数信息</span><br><span class="line">5）SHOW [SESSION | GLOBAL] STATUS：查看数据库的状态信息</span><br><span class="line">6）information_schema：获取元数据的方法</span><br><span class="line">7）SHOW ENGINE INNODB STATUS：Innodb引擎的所有状态</span><br><span class="line">8）SHOW PROCESSLIST：查看当前所有连接session状态</span><br><span class="line">9）explain：获取查询语句的执行计划</span><br><span class="line">10）show index：查看表的索引信息</span><br><span class="line">11）slow-log：记录慢查询语句</span><br><span class="line">12）mysqldumpslow：分析slowlog文件的</span><br></pre></td></tr></table></figure>
+
+<p>不常用但好用的工具：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1）Zabbix：监控主机、系统、数据库（部署zabbix监控平台）</span><br><span class="line">2）pt-query-digest：分析慢日志</span><br><span class="line">3）MySQL slap：分析慢日志</span><br><span class="line">4）sysbench：压力测试工具</span><br><span class="line">5）MySQL profiling：统计数据库整体状态工具    </span><br><span class="line">6）Performance Schema：MySQL性能状态统计的数据</span><br><span class="line">7）workbench：管理、备份、监控、分析、优化工具（比较费资源）</span><br></pre></td></tr></table></figure>
+
+<p>关于Zabbix参考：</p>
+<p><a href="https://link.zhihu.com/?target=http://www.cnblogs.com/clsn/p/7885990.html">http://www.cnblogs.com/clsn/p/7885990.html</a></p>
+<p>2、数据库层面问题解决思路</p>
+<p>一般应急调优的思路：针对突然的业务办理卡顿，无法进行正常的业务处理，需要立马解决的场景。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1）show processlist；</span><br><span class="line">2）explain  select id ,name from stu where name=&#x27;clsn&#x27;; # ALL  id name age  sex；</span><br><span class="line">select id,name from stu  where id=2-1 函数 结果集&gt;30；show index from table；</span><br><span class="line">3）通过执行计划判断，索引问题（有没有、合不合理）或者语句本身问题；</span><br><span class="line">4）show status  like &#x27;%lock%&#x27;;    # 查询锁状态</span><br><span class="line">kill SESSION_ID;   # 杀掉有问题的session。</span><br></pre></td></tr></table></figure>
+
+<p>常规调优思路：针对业务周期性的卡顿，例如在每天10-11点业务特别慢，但是还能够使用，过了这段时间就好了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1）查看slowlog，分析slowlog，分析出查询慢的语句；</span><br><span class="line">2）按照一定优先级，一个一个排查所有慢语句；</span><br><span class="line">3）分析top SQL，进行explain调试，查看语句执行时间；</span><br><span class="line">4）调整索引或语句本身。</span><br></pre></td></tr></table></figure>
+
+<p>3、系统层面</p>
+<p>Cpu方面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmstat、sar top、htop、nmon、mpstat；</span><br></pre></td></tr></table></figure>
+
+<p>内存：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free、ps-aux；</span><br></pre></td></tr></table></figure>
+
+<p>IO设备（磁盘、网络）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iostat、ss、netstat、iptraf、iftop、lsof；</span><br></pre></td></tr></table></figure>
+
+<p>vmstat命令说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1）Procs：r显示有多少进程正在等待CPU时间。b显示处于不可中断的休眠的进程数量。在等待I/O。</span><br><span class="line">2）Memory：swpd显示被交换到磁盘的数据块的数量。未被使用的数据块，用户缓冲数据块，用于操作系统的数据块的数量。</span><br><span class="line">3）Swap：操作系统每秒从磁盘上交换到内存和从内存交换到磁盘的数据块的数量。s1和s0最好是0。</span><br><span class="line">4）Io：每秒从设备中读入b1的写入到设备b0的数据块的数量。反映了磁盘I/O。</span><br><span class="line">5）System：显示了每秒发生中断的数量（in）和上下文交换（cs）的数量。</span><br><span class="line">6）Cpu：显示用于运行用户代码，系统代码，空闲，等待I/O的Cpu时间。</span><br></pre></td></tr></table></figure>
+
+<p>iostat命令说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">实例命令：iostat -dk 1 5</span><br><span class="line">　　　　   iostat -d -k -x 5 （查看设备使用率（%util）和响应时间（await））</span><br><span class="line">1）tps：该设备每秒的传输次数。“一次传输”意思是“一次I/O请求”。多个逻辑请求可能会被合并为“一次I/O请求”。</span><br><span class="line">2）iops ：硬件出厂的时候，厂家定义的一个每秒最大的IO次数</span><br><span class="line">3）&quot;一次传输&quot;请求的大小是未知的。</span><br><span class="line">4）kB_read/s：每秒从设备（drive expressed）读取的数据量；</span><br><span class="line">5）KB_wrtn/s：每秒向设备（drive expressed）写入的数据量；</span><br><span class="line">6）kB_read：读取的总数据量；</span><br><span class="line">7）kB_wrtn：写入的总数量数据量；这些单位都为Kilobytes。</span><br></pre></td></tr></table></figure>
+
+<p>4、系统层面问题解决办法</p>
+<p>你认为到底负载高好，还是低好呢？在实际的生产中，一般认为Cpu只要不超过90%都没什么问题。</p>
+<p>当然不排除下面这些特殊情况：</p>
+<p>Cpu负载高，IO负载低：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1）内存不够；</span><br><span class="line"></span><br><span class="line">2）磁盘性能差；</span><br><span class="line">3）SQL问题---&gt;去数据库层，进一步排查SQL 问题；</span><br><span class="line">4）IO出问题了（磁盘到临界了、raid设计不好、raid降级、锁、在单位时间内tps过高）；</span><br><span class="line">5）tps过高：大量的小数据IO、大量的全表扫描。</span><br></pre></td></tr></table></figure>
+
+<p>IO负载高，Cpu负载低：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1）大量小的IO写操作：</span><br><span class="line">autocommit，产生大量小IO；IO/PS，磁盘的一个定值，硬件出厂的时候，厂家定义的一个每秒最大的IO次数。</span><br><span class="line">2）大量大的IO 写操作：SQL问题的几率比较大</span><br></pre></td></tr></table></figure>
+
+<p>IO和cpu负载都很高：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">硬件不够了或SQL存在问题。</span><br></pre></td></tr></table></figure>
+
+<p>四、基础优化</p>
+<p>1、优化思路</p>
+<p>定位问题点吮吸：硬件–&gt;系统–&gt;应用–&gt;数据库–&gt;架构（高可用、读写分离、分库分表）。</p>
+<p>处理方向：明确优化目标、性能和安全的折中、防患未然。</p>
+<p>2、硬件优化</p>
+<p>主机方面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">根据数据库类型，主机CPU选择、内存容量选择、磁盘选择：</span><br><span class="line">1）平衡内存和磁盘资源；</span><br><span class="line">2）随机的I/O和顺序的I/O；</span><br><span class="line">3）主机 RAID卡的BBU（Battery Backup Unit）关闭。</span><br></pre></td></tr></table></figure>
+
+<p>CPU的选择：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CPU的两个关键因素：核数、主频</span><br><span class="line">根据不同的业务类型进行选择：</span><br><span class="line">1）CPU密集型：计算比较多，OLTP - 主频很高的cpu、核数还要多</span><br><span class="line">2）IO密集型：查询比较，OLAP - 核数要多，主频不一定高的</span><br></pre></td></tr></table></figure>
+
+<p>内存的选择：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OLAP类型数据库，需要更多内存，和数据获取量级有关。</span><br><span class="line">OLTP类型数据一般内存是Cpu核心数量的2倍到4倍，没有最佳实践。</span><br></pre></td></tr></table></figure>
+
+<p>存储方面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1）根据存储数据种类的不同，选择不同的存储设备；</span><br><span class="line">2）配置合理的RAID级别（raid5、raid10、热备盘）；</span><br><span class="line">3）对与操作系统来讲，不需要太特殊的选择，最好做好冗余（raid1）（ssd、sas、sata）。</span><br><span class="line">4）raid卡：</span><br><span class="line">      主机raid卡选择：</span><br><span class="line">          实现操作系统磁盘的冗余（raid1）；</span><br><span class="line">          平衡内存和磁盘资源；</span><br><span class="line">          随机的I/O和顺序的I/O；</span><br><span class="line">          主机raid卡的BBU（Battery Backup Unit）要关闭。</span><br></pre></td></tr></table></figure>
+
+<p>网络设备方面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用流量支持更高的网络设备（交换机、路由器、网线、网卡、HBA卡）</span><br></pre></td></tr></table></figure>
+
+<p>注意：以上这些规划应该在初始设计系统时就应该考虑好。</p>
+<p>3、服务器硬件优化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1）物理状态灯</span><br><span class="line">2）自带管理设备：远程控制卡（FENCE设备：ipmi ilo idarc）、开关机、硬件监控。</span><br><span class="line">3）第三方的监控软件、设备（snmp、agent）对物理设施进行监控。</span><br><span class="line">4）存储设备：自带的监控平台。EMC2（hp收购了）、 日立（hds）、IBM低端OEM hds、高端存储是自己技术，华为存储。</span><br></pre></td></tr></table></figure>
+
+<p>4、系统优化</p>
+<p>Cpu：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基本不需要调整，在硬件选择方面下功夫即可。</span><br></pre></td></tr></table></figure>
+
+<p>内存：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">基本不需要调整，在硬件选择方面下功夫即可。</span><br></pre></td></tr></table></figure>
+
+<p>SWAP：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MySQL尽量避免使用swap。</span><br><span class="line">阿里云的服务器中默认swap为0。</span><br></pre></td></tr></table></figure>
+
+<p>IO ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">raid、no lvm、ext4或xfs、ssd、IO调度策略。</span><br></pre></td></tr></table></figure>
+
+<p>Swap调整(不使用swap分区)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/proc/sys/vm/swappiness的内容改成0（临时），/etc/sysctl. conf上添加vm.swappiness=0（永久）</span><br></pre></td></tr></table></figure>
+
+<p>这个参数决定了Linux是倾向于使用swap，还是倾向于释放文件系统cache。在内存紧张的情况下，数值越低越倾向于释放文件系统cache。</p>
+<p>当然，这个参数只能减少使用swap的概率，并不能避免Linux使用swap。</p>
+<p>修改MySQL的配置参数innodb_flush_ method，开启O_DIRECT模式：</p>
+<p>这种情况下，InnoDB的buffer pool会直接绕过文件系统cache来访问磁盘，但是redo log依旧会使用文件系统cache。</p>
+<p>值得注意的是，Redo log是覆写模式的，即使使用了文件系统的cache，也不会占用太多。</p>
+<p>IO调度策略：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#echo deadline&gt;/sys/block/sda/queue/scheduler   临时修改为deadline</span><br></pre></td></tr></table></figure>
+
+<p>永久修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /boot/grub/grub.conf</span><br><span class="line">更改到如下内容:</span><br><span class="line">kernel /boot/vmlinuz-2.6.18-8.el5 ro root=LABEL=/ elevator=deadline rhgb quiet</span><br></pre></td></tr></table></figure>
+
+<p>5、系统参数调整</p>
+<p>Linux系统内核参数优化：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim/etc/sysctl.conf</span><br><span class="line">net.ipv4.ip_local_port_range = 1024 65535：# 用户端口范围</span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 4096 </span><br><span class="line">net.ipv4.tcp_fin_timeout = 30 </span><br><span class="line">fs.file-max=65535：# 系统最大文件句柄，控制的是能打开文件最大数量  </span><br></pre></td></tr></table></figure>
+
+<p>用户限制参数（MySQL可以不设置以下配置）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim/etc/security/limits.conf </span><br><span class="line">* soft nproc 65535</span><br><span class="line">* hard nproc 65535</span><br><span class="line">* soft nofile 65535</span><br><span class="line">* hard nofile 65535</span><br></pre></td></tr></table></figure>
+
+<p>6、应用优化</p>
+<p>业务应用和数据库应用独立；</p>
+<p>防火墙：iptables、selinux等其他无用服务（关闭）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --level 23456 acpid off</span><br><span class="line">   chkconfig --level 23456 anacron off</span><br><span class="line">   chkconfig --level 23456 autofs off</span><br><span class="line">   chkconfig --level 23456 avahi-daemon off</span><br><span class="line">   chkconfig --level 23456 bluetooth off</span><br><span class="line">   chkconfig --level 23456 cups off</span><br><span class="line">   chkconfig --level 23456 firstboot off</span><br><span class="line">   chkconfig --level 23456 haldaemon off</span><br><span class="line">   chkconfig --level 23456 hplip off</span><br><span class="line">   chkconfig --level 23456 ip6tables off</span><br><span class="line">   chkconfig --level 23456 iptables  off</span><br><span class="line">   chkconfig --level 23456 isdn off</span><br><span class="line">   chkconfig --level 23456 pcscd off</span><br><span class="line">   chkconfig --level 23456 sendmail  off</span><br><span class="line">   chkconfig --level 23456 yum-updatesd  off</span><br></pre></td></tr></table></figure>
+
+<p>安装图形界面的服务器不要启动图形界面runlevel 3。</p>
+<p>另外，思考将来我们的业务是否真的需要MySQL，还是使用其他种类的数据库。用数据库的最高境界就是不用数据库。</p>
+<p>五、数据库优化</p>
+<p>五、数据库优化</p>
+<p>SQL优化方向：执行计划、索引、SQL改写。</p>
+<p>架构优化方向：高可用架构、高性能架构、分库分表。</p>
+<p>1、数据库参数优化</p>
+<p>调整</p>
+<p>实例整体（高级优化，扩展）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">thread_concurrency：# 并发线程数量个数</span><br><span class="line">sort_buffer_size：# 排序缓存</span><br><span class="line">read_buffer_size：# 顺序读取缓存</span><br><span class="line">read_rnd_buffer_size：# 随机读取缓存</span><br><span class="line">key_buffer_size：# 索引缓存</span><br><span class="line">thread_cache_size：# (1G—&gt;8, 2G—&gt;16, 3G—&gt;32, &gt;3G—&gt;64)</span><br></pre></td></tr></table></figure>
+
+<p>连接层（基础优化）</p>
+<p>设置合理的连接客户和连接方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">max_connections           # 最大连接数，看交易笔数设置    </span><br><span class="line">max_connect_errors        # 最大错误连接数，能大则大</span><br><span class="line">connect_timeout           # 连接超时</span><br><span class="line">max_user_connections      # 最大用户连接数</span><br><span class="line">skip-name-resolve         # 跳过域名解析</span><br><span class="line">wait_timeout              # 等待超时</span><br><span class="line">back_log                  # 可以在堆栈中的连接数量</span><br></pre></td></tr></table></figure>
+
+<p>SQL层（基础优化）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">query_cache_size：查询缓存  &gt;&gt;&gt;  OLAP类型数据库,需要重点加大此内存缓存，但是一般不会超过GB。</span><br><span class="line">对于经常被修改的数据，缓存会立马失效。</span><br><span class="line">我们可以实用内存数据库（redis、memecache），替代他的功能。</span><br></pre></td></tr></table></figure>
+
+<p>2、存储引擎层（innodb基础优化参数）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">default-storage-engine</span><br><span class="line">innodb_buffer_pool_size       # 没有固定大小，50%测试值，看看情况再微调。但是尽量设置不要超过物理内存70%</span><br><span class="line">innodb_file_per_table=(1,0)</span><br><span class="line">innodb_flush_log_at_trx_commit=(0,1,2) # 1是最安全的，0是性能最高，2折中</span><br><span class="line">binlog_sync</span><br><span class="line">Innodb_flush_method=(O_DIRECT, fdatasync)</span><br><span class="line">innodb_log_buffer_size           # 100M以下</span><br><span class="line">innodb_log_file_size               # 100M 以下</span><br><span class="line">innodb_log_files_in_group       # 5个成员以下,一般2-3个够用（iblogfile0-N）</span><br><span class="line">innodb_max_dirty_pages_pct   # 达到百分之75的时候刷写 内存脏页到磁盘。</span><br><span class="line">log_bin</span><br><span class="line">max_binlog_cache_size                     # 可以不设置</span><br><span class="line">max_binlog_size                               # 可以不设置</span><br><span class="line">innodb_additional_mem_pool_size     #小于2G内存的机器，推荐值是20M。32G内存以上100M</span><br></pre></td></tr></table></figure>
+
+<p>参考</p>
+<p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/zishengY/p/6892345.html">https://www.cnblogs.com/zishengY/p/6892345.html</a></p>
+<p><a href="https://link.zhihu.com/?target=https://www.jianshu.com/p/d7665192aaaf">https://www.jianshu.com/p/d7665192a</a></p>
+<p>原文地址：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/71865659">https://zhuanlan.zhihu.com/p/71865659</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e7cf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/e7cf/" class="post-title-link" itemprop="url">MySQL调优-explain</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-24 15:30:29" itemprop="dateCreated datePublished" datetime="2024-04-24T15:30:29+08:00">2024-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-29 15:34:20" itemprop="dateModified" datetime="2024-04-29T15:34:20+08:00">2024-04-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>940</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="explain能做什么"><a href="#explain能做什么" class="headerlink" title="explain能做什么"></a>explain能做什么</h1><ul>
+<li><p>表的读取顺序</p>
+</li>
+<li><p>数据读取操作的操作类型</p>
+</li>
+<li><p>哪些索引可以使用</p>
+</li>
+<li><p>哪些索引被实际使用</p>
+</li>
+<li><p>表之间的引用</p>
+</li>
+<li><p>每张表有多少行被优化器查询</p>
+</li>
+</ul>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain <span class="keyword">select</span> select_options</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/A8M1CV.jpg"></p>
+<p>explain语句输出的各列作用如下</p>
+<table>
+<thead>
+<tr>
+<th>列名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>在一个大的查询语句中每个select关键字都对应一个唯一id</td>
+</tr>
+<tr>
+<td>select_type</td>
+<td>select关键字对应的那个查询类型</td>
+</tr>
+<tr>
+<td>table</td>
+<td>表名</td>
+</tr>
+<tr>
+<td>partitions</td>
+<td>匹配到的分区信息</td>
+</tr>
+<tr>
+<td>type</td>
+<td>针对单表的访问方法</td>
+</tr>
+<tr>
+<td>possible_keys</td>
+<td>可能用到的索引</td>
+</tr>
+<tr>
+<td>key</td>
+<td>实际上使用的索引</td>
+</tr>
+<tr>
+<td>key_len</td>
+<td>实际上使用到的索引长度</td>
+</tr>
+<tr>
+<td>ref</td>
+<td>当使用索引列等值查询时，与索引列进行等值匹配的对象信息</td>
+</tr>
+<tr>
+<td>rows</td>
+<td>预估的需要读取的记录条数</td>
+</tr>
+<tr>
+<td>filtered</td>
+<td>某个表经过搜索条件过滤后剩余记录条数的百分比</td>
+</tr>
+<tr>
+<td>Extra</td>
+<td>一些额外的信息</td>
+</tr>
+</tbody></table>
+<h3 id="select-type"><a href="#select-type" class="headerlink" title="select_type"></a>select_type</h3><p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/Zyyu4n.jpg"></p>
+<h3 id="type"><a href="#type" class="headerlink" title="type"></a>type</h3><p><strong>重要指标</strong></p>
+<p>The <code>type</code> column of <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/explain.html" title="13.8.2 EXPLAIN Statement"><code>EXPLAIN</code></a> output describes how tables are joined。</p>
+<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><p>结果值从最好到最坏依次是: system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL</p>
+<p>SQL性能优化的目标：至少要达到range级别，要求是ref级别，最好是const级别（阿里巴巴开发手册要求）</p>
+<h4 id="system"><a href="#system" class="headerlink" title="system"></a>system</h4><ul>
+<li>当表中<code>只有一条记录</code>并且该表使用的存储引擎的统计数据是精确的，比如MyISAM、Memory，那么对该表的访问方法就是<code>system</code></li>
+</ul>
+<h4 id="const"><a href="#const" class="headerlink" title="const"></a>const</h4><ul>
+<li>当我们根据主键或者唯一二级索引列与常数进行等值匹配时，对单表的访问方法就是<code>const</code></li>
+</ul>
+<h4 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h4><ul>
+<li>当通过普通的二级索引列与常量进行等值匹配时来查询某个表，那么对该表的访问方法就可能是<code>ref</code></li>
+</ul>
+<h4 id="eq-ref"><a href="#eq-ref" class="headerlink" title="eq_ref"></a>eq_ref</h4><ul>
+<li>在连接查询时，如果被驱动表是通过主键或者唯一二级索引列等值匹配的方式进行访问的（如果该主键或者唯一二级索引是联合索引的话，所有的索引列都必须进行等值比较），则 对该被驱动表的访问方法就是<code>eq_ref</code></li>
+</ul>
+<h4 id="ref-or-null"><a href="#ref-or-null" class="headerlink" title="ref_or_null"></a>ref_or_null</h4><ul>
+<li>当对普通二级索引进行等值匹配查询，该索引列的值也可以是<code>NULL</code>值时，那么对该表的访问方法就可能是<code>ref_or_null</code></li>
+</ul>
+<h4 id="index-merge"><a href="#index-merge" class="headerlink" title="index_merge"></a>index_merge</h4><ul>
+<li>单表访问方法时在某些场景下可以使用<code>Intersection</code>、<code>Union</code>、Sort-Union&#96;这三种索引合并的方式来执行查询</li>
+</ul>
+<h4 id="unique-subquery"><a href="#unique-subquery" class="headerlink" title="unique_subquery"></a>unique_subquery</h4><ul>
+<li><code>unique_subquery</code>是针对在一些包含<code>IN</code>子查询的查询语句中，如果查询优化器决定将<code>IN</code>子查询转换为<code>EXISTS</code>子查询，而且子查询可以使用到主键进行等值匹配的话，那么该子查询执行计划的<code>type</code>列的值就是<code>unique_subquery</code></li>
+</ul>
+<h4 id="range"><a href="#range" class="headerlink" title="range"></a>range</h4><ul>
+<li>如果使用索引获取某些<code>范围区间</code>的记录，那么就可能使用到<code>range</code>访问方法</li>
+</ul>
+<h4 id="index"><a href="#index" class="headerlink" title="index"></a>index</h4><ul>
+<li>当我们可以使用索引覆盖，但需要扫描全部的索引记录时，该表的访问方法就是<code>index</code></li>
+</ul>
+<h4 id="ALL"><a href="#ALL" class="headerlink" title="ALL"></a>ALL</h4><ul>
+<li>最熟悉的全表扫描</li>
+</ul>
+<h3 id="possible-keys和key"><a href="#possible-keys和key" class="headerlink" title="possible_keys和key"></a>possible_keys和key</h3><p>可能用到的索引 和 实际上使用的索引</p>
+<h3 id="key-len"><a href="#key-len" class="headerlink" title="key_len"></a>key_len</h3><p>帮你检查<code>是否充分的利用上了索引</code>，<code>值越大越好</code>,主要针对于联合索引，有一定的参考意义。</p>
+<h3 id="ref-1"><a href="#ref-1" class="headerlink" title="ref"></a>ref</h3><ul>
+<li>当使用索引列等值查询时，与索引列进行等值匹配的对象信息。</li>
+<li>比如只是一个常数或者是某个列。</li>
+</ul>
+<h3 id="rows"><a href="#rows" class="headerlink" title="rows"></a>rows</h3><p>预估的需要读取的记录条数,值越小越好</p>
+<h3 id="filtered"><a href="#filtered" class="headerlink" title="filtered"></a>filtered</h3><p>某个表经过搜索条件过滤后剩余记录条数的百分比</p>
+<h3 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h3><p>额外信息</p>
+<h1 id="官网"><a href="#官网" class="headerlink" title="官网"></a>官网</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/explain-output.html">https://dev.mysql.com/doc/refman/5.7/en/explain-output.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/explain-output.html">MySQL :: MySQL 8.0 Reference Manual :: 10.8.2 EXPLAIN Output Format</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/3fb8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -202,7 +881,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/3fb8/" class="post-title-link" itemprop="url">MySQL调优-配置文件</a>
+            <a href="/posts/3fb8/" class="post-title-link" itemprop="url">MySQL调优-1-配置文件</a>
         </h2>
 
         <div class="post-meta">
@@ -213,7 +892,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-04-24 15:28:42 / 修改时间：15:29:30" itemprop="dateCreated datePublished" datetime="2024-04-24T15:28:42+08:00">2024-04-24</time>
+              <time title="创建时间：2024-04-24 15:28:42 / 修改时间：15:31:00" itemprop="dateCreated datePublished" datetime="2024-04-24T15:28:42+08:00">2024-04-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,538 +929,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="my-ini配置如下"><a href="#my-ini配置如下" class="headerlink" title="my.ini配置如下"></a>my.ini配置如下</h1><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mysql]</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置mysql客户端默认字符集 </span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8</span><br><span class="line"></span><br><span class="line"><span class="section">[mysqld]</span> </span><br><span class="line"><span class="comment">#设置3306端口 </span></span><br><span class="line"><span class="attr">port</span> = <span class="number">3306</span> </span><br><span class="line"> </span><br><span class="line"><span class="comment">#允许最大连接数 </span></span><br><span class="line"><span class="attr">max_connections</span>=<span class="number">3000</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#服务端使用的字符集默认为8比特编码的latin1字符集 </span></span><br><span class="line"><span class="attr">character-set-server</span>=utf8</span><br><span class="line"> </span><br><span class="line"><span class="comment">#创建新表时将使用的默认存储引擎</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=INNODB</span><br><span class="line"></span><br><span class="line"><span class="comment">#建议2G以上，可根据服务器内存适当调整</span></span><br><span class="line"><span class="attr">innodb_buffer_pool_size</span>=<span class="number">40</span>G</span><br><span class="line"></span><br><span class="line"><span class="comment">#服务器有几个CPU就设置为几，建议用默认设置，一般为8.</span></span><br><span class="line"><span class="attr">innodb_thread_concurrency</span>=<span class="number">16</span></span><br><span class="line"></span><br><span class="line"><span class="attr">innodb_buffer_pool_instances</span>=<span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#thread_cache_size的值可以设置为8*内存大小,假如服务器内存是8G,那么可以设置为64</span></span><br><span class="line"><span class="attr">thread_cache_size</span>=<span class="number">256</span></span><br><span class="line"></span><br><span class="line"><span class="attr">tmp_table_size</span>=<span class="number">3</span>G</span><br><span class="line"><span class="attr">max_heap_table_size</span>=<span class="number">6</span>G</span><br><span class="line"></span><br><span class="line"><span class="attr">query_cache_size</span>=<span class="number">1</span>G</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">sql_mode</span>=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</span><br><span class="line">  </span><br><span class="line"><span class="attr">basedir</span>=D:\MySQL56\MySQL\mysql-<span class="number">5.6</span>.<span class="number">49</span>-winx64 </span><br><span class="line">  </span><br><span class="line"><span class="attr">datadir</span>=D:\MySQL56\MySQL\mysql-<span class="number">5.6</span>.<span class="number">49</span>-winx64\data </span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启慢查询</span></span><br><span class="line"><span class="attr">slow_query_log</span>=<span class="literal">ON</span></span><br><span class="line"><span class="attr">long_query_time</span>=<span class="number">5</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/aee8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/aee8/" class="post-title-link" itemprop="url">MySQL调优-查看系统性能参数</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-04-10 15:28:59 / 修改时间：15:38:08" itemprop="dateCreated datePublished" datetime="2024-04-10T15:28:59+08:00">2024-04-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>216</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在MySQL中，可以使用<strong>SHOW STATUS</strong>语句查询一些MySQL数据库服务器的性能参数、执行频率。</p>
-<p>SHOW STATUS语法如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> [<span class="keyword">GLOBAL</span><span class="operator">|</span>SESSION] STATUS <span class="keyword">LIKE</span> <span class="string">&#x27;参数&#x27;</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/aee8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/36a5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/36a5/" class="post-title-link" itemprop="url">MySQL调优--show processlist</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-04-10 11:06:09 / 修改时间：14:00:25" itemprop="dateCreated datePublished" datetime="2024-04-10T11:06:09+08:00">2024-04-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>422</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="show-processlist"><a href="#show-processlist" class="headerlink" title="show processlist"></a>show processlist</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念:"></a>概念:</h3><ul>
-<li>show processlist命令可以查看当前MySQL实例的连接情况，</li>
-<li>用于观察是否有大量的连接处于非正常状态。用法非常简单，直接使用就行</li>
-</ul>
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><blockquote>
-<h4 id="show-processlist-1"><a href="#show-processlist-1" class="headerlink" title="show processlist"></a>show processlist</h4></blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/e5Wgef.jpg"></p>
-<h3 id="字段的含义"><a href="#字段的含义" class="headerlink" title="字段的含义"></a>字段的含义</h3><table>
-<thead>
-<tr>
-<th>字段</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>连接标识符</td>
-</tr>
-<tr>
-<td>User</td>
-<td>当前用户</td>
-</tr>
-<tr>
-<td>Host</td>
-<td>操作的主机，指客户端</td>
-</tr>
-<tr>
-<td>db</td>
-<td>默认数据库（如果已选择）；否则为NULL</td>
-</tr>
-<tr>
-<td>Command</td>
-<td>线程正在执行的命令类型</td>
-</tr>
-<tr>
-<td>Time</td>
-<td>线程处于其当前状态的持续时间（以秒为单位）</td>
-</tr>
-<tr>
-<td>Size</td>
-<td>指示线程正在执行的操作，事件或状态</td>
-</tr>
-<tr>
-<td>Info</td>
-<td>线程正在执行的语句，如果未执行任何语句，则为NULL。<br/>该语句可能是发送到服务器的那条语句，或者是最内部的语句（如果该语句执行其他语句，比如存储过程中的select语句）</td>
-</tr>
-</tbody></table>
-<h3 id="Command字段，对应的状态"><a href="#Command字段，对应的状态" class="headerlink" title="Command字段，对应的状态"></a>Command字段，对应的状态</h3><ul>
-<li><p>sleep：正在等待客户端发送新的请求</p>
-</li>
-<li><p>query：正在执行查询或者正在将结果发送给客户端</p>
-</li>
-<li><p>locked：在MySQL服务层，线程正在等待表锁</p>
-</li>
-<li><p>analyzing and statistics：线程正在收集存储引擎的统计信息，并生成查询的执行计划</p>
-</li>
-<li><p>copying to tmp table：线程正在执行查询，并且将其结果集都复制到一个临时表中</p>
-</li>
-<li><p>sorting result：正在对结果集进行排序</p>
-</li>
-<li><p>sending data：线程可能在多个状态之间传送数据，或者在生成结果集或者向客户端返回数据</p>
-</li>
-</ul>
-<h3 id="show-full-processlist"><a href="#show-full-processlist" class="headerlink" title="show full processlist"></a>show full processlist</h3><ul>
-<li>show processlist命令默认Info字段最多显示每条语句的前100个字符，如果想完全显示，可以使用show full processlist</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/818b/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/818b/" class="post-title-link" itemprop="url">MySQL调优--show profiles</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-04-10 10:01:32 / 修改时间：11:06:21" itemprop="dateCreated datePublished" datetime="2024-04-10T10:01:32+08:00">2024-04-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>834</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>Show Profile官方文档地址：<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/show-profile.html">https://dev.mysql.com/doc/refman/5.7/en/show-profile.html</a></p>
-</blockquote>
-<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 查看是否开启</span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%profiling%&#x27;</span>;</span><br><span class="line"># 开启</span><br><span class="line"><span class="keyword">set</span> profiling <span class="operator">=</span> <span class="number">1</span></span><br><span class="line"># 查看<span class="keyword">SQL</span>执行时间</span><br><span class="line"><span class="keyword">show</span> profiles;</span><br><span class="line"># 查看记录中第一条<span class="keyword">SQL</span>详细时间</span><br><span class="line"><span class="keyword">show</span> profile <span class="keyword">for</span> query <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="开始分析"><a href="#开始分析" class="headerlink" title="开始分析"></a>开始分析</h1><ol>
-<li><p>先执行要分析的SQL：<code>select * from t_manage_user tmu ;</code></p>
-</li>
-<li><p>执行<code>show profiles;</code>，会出现以下结果</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/vaU0Pv.jpg"></p>
-</li>
-<li><p>分析某一条SQL语法</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> profile <span class="keyword">all</span> <span class="keyword">for</span> query <span class="number">38</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/BtXyNL.jpg"></p>
-</li>
-<li><p>show profile返回结果字段含义</p>
-<ul>
-<li>Status ： sql 语句执行的状态</li>
-<li>Duration: sql 执行过程中每一个步骤的耗时</li>
-<li>CPU_user: 当前用户占有的 cpu</li>
-<li>CPU_system: 系统占有的 cpu</li>
-<li>Block_ops_in : I&#x2F;O 输入</li>
-<li>Block_ops_out : I&#x2F;O 输出</li>
-</ul>
-</li>
-</ol>
-<h1 id="Status出现以下情况的建议"><a href="#Status出现以下情况的建议" class="headerlink" title="Status出现以下情况的建议"></a>Status出现以下情况的建议</h1><ul>
-<li><p>converting HEAP to MyISAM：查询结果太大，内存不够，数据往磁盘上搬了。</p>
-</li>
-<li><p>Creating tmp table：创建临时表。先拷贝数据到临时表，用完后再删除临时表。</p>
-</li>
-<li><p>Copy to tmp table on disk：把内存中临时表复制到磁盘上，警惕！</p>
-</li>
-<li><p>locked。</p>
-</li>
-</ul>
-<p>如果在show profile诊断结果中出现以上4条结果中的任何一条，则SQL语句需要优化！！！</p>
-<blockquote>
-<p><strong>System lock</strong></p>
-</blockquote>
-<ul>
-<li>确认是由于哪个锁引起的，通常是因为MySQL或InnoDB内核级的锁引起的。</li>
-<li>建议：如果耗时较大再关注即可，一般情况下都还好</li>
-</ul>
-<blockquote>
-<p><strong>Sending data</strong></p>
-</blockquote>
-<ul>
-<li><p>解释：从server端发送数据到客户端，也有可能是接收存储引擎层返回的数据，再发送给客户端，数据量很大时尤其经常能看见。</p>
-</li>
-<li><p>备注：Sending Data不是网络发送，是从硬盘读取，发送到网络是Writing to net</p>
-</li>
-<li><p>建议：通过索引或加上LIMIT，减少需要扫描并且发送给客户端的数据量</p>
-</li>
-</ul>
-<blockquote>
-<p><strong>Sorting result</strong></p>
-</blockquote>
-<ul>
-<li>正在对结果进行排序，类似Creating sort index，不过是正常表，而不是在内存表中进行排序。</li>
-<li>建议：创建适当的索引</li>
-</ul>
-<blockquote>
-<p><strong>Table lock</strong></p>
-</blockquote>
-<ul>
-<li>表级锁，没什么好说的，要么是因为MyISAM引擎表级锁，要么是其他情况显式锁表</li>
-</ul>
-<blockquote>
-<p><strong>create sort index</strong></p>
-</blockquote>
-<ul>
-<li>当前的SELECT中需要用到临时表在进行ORDER BY排序</li>
-<li>建议：创建适当的索引</li>
-</ul>
-<blockquote>
-<p><strong>Creating tmp table</strong></p>
-</blockquote>
-<ul>
-<li>创建临时表。先拷贝数据到临时表，用完后再删除临时表。消耗内存，数据来回拷贝删除，消耗时间</li>
-<li>建议：优化索引</li>
-</ul>
-<blockquote>
-<p><strong>converting HEAP to MyISAM</strong></p>
-</blockquote>
-<ul>
-<li>查询结果太大，内存不够，数据往磁盘上搬了。</li>
-<li>建议：优化索引，可以调整max_heap_table_size</li>
-</ul>
-<blockquote>
-<p><strong>Copying to tmp table on disk</strong></p>
-</blockquote>
-<ul>
-<li>把内存中临时表复制到磁盘上，危险！！！</li>
-<li>建议：优化索引，可以调整tmp_table_size参数，增大内存临时表大小</li>
-</ul>
-<h1 id="show-profile-语法"><a href="#show-profile-语法" class="headerlink" title="show  profile 语法"></a>show  profile 语法</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> profile type1,type2… <span class="keyword">for</span> query Query_ID</span><br></pre></td></tr></table></figure>
-
-<h3 id="show-profile-type-选项"><a href="#show-profile-type-选项" class="headerlink" title="show profile type 选项"></a>show profile type 选项</h3><ul>
-<li><p>all：显示所有的性能开销信息</p>
-</li>
-<li><p>block io：显示块 IO 相关的开销信息</p>
-</li>
-<li><p>context switches: 上下文切换相关开销</p>
-</li>
-<li><p>cpu：显示 CPU 相关的信息</p>
-</li>
-<li><p>ipc：显示发送和接收相关的开销信息</p>
-</li>
-<li><p>memory：显示内存相关的开销信息</p>
-</li>
-<li><p>page faults：显示页面错误相关开销信息</p>
-</li>
-<li><p>source：显示和 Source_function、Source_file、Source_line 相关的开销信息</p>
-</li>
-<li><p>swaps：显示交换次数的相关信息</p>
-</li>
-</ul>
-<blockquote>
-<p>Show Profile语句已经弃用，并将在以后版本中移除，建议使用 Performance Schema<br>Performance Schema文档：<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/performance-schema-query-profiling.html">https://dev.mysql.com/doc/refman/5.7/en/performance-schema-query-profiling.html</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/e10/" class="post-title-link" itemprop="url">Nacos配置@Value类型转换问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-04-07 11:23:59 / 修改时间：11:34:18" itemprop="dateCreated datePublished" datetime="2024-04-07T11:23:59+08:00">2024-04-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nacos/" itemprop="url" rel="index"><span itemprop="name">Nacos</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>45</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>nacos配置如下</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sdt:</span></span><br><span class="line">  <span class="attr">areaCode:</span> <span class="number">0574</span></span><br></pre></td></tr></table></figure>
-
-<p>注入后</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;$&#123;sdt.areaCode&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String areaCode;</span><br></pre></td></tr></table></figure>
-
-<p>会有<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2&spm=1001.2101.3001.7020">类型转换</a>为浮点型:  574.0</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>nacos中的值加单引号</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sdt:</span></span><br><span class="line">  <span class="attr">areaCode:</span> <span class="string">&#x27;0574&#x27;</span></span><br></pre></td></tr></table></figure>
+          <h1 id="my-ini配置如下"><a href="#my-ini配置如下" class="headerlink" title="my.ini配置如下"></a>my.ini配置如下</h1><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mysql]</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置mysql客户端默认字符集 </span></span><br><span class="line"><span class="attr">default-character-set</span>=utf8</span><br><span class="line"></span><br><span class="line"><span class="section">[mysqld]</span> </span><br><span class="line"><span class="comment">#设置3306端口 </span></span><br><span class="line"><span class="attr">port</span> = <span class="number">3306</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">#允许最大连接数 </span></span><br><span class="line"><span class="attr">max_connections</span>=<span class="number">3000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#服务端使用的字符集默认为8比特编码的latin1字符集 </span></span><br><span class="line"><span class="attr">character-set-server</span>=utf8</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建新表时将使用的默认存储引擎</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=INNODB</span><br><span class="line"></span><br><span class="line"><span class="comment">#建议2G以上，可根据服务器内存适当调整</span></span><br><span class="line"><span class="attr">innodb_buffer_pool_size</span>=<span class="number">40</span>G</span><br><span class="line"></span><br><span class="line"><span class="comment">#服务器有几个CPU就设置为几，建议用默认设置，一般为8.</span></span><br><span class="line"><span class="attr">innodb_thread_concurrency</span>=<span class="number">16</span></span><br><span class="line"></span><br><span class="line"><span class="attr">innodb_buffer_pool_instances</span>=<span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#thread_cache_size的值可以设置为8*内存大小,假如服务器内存是8G,那么可以设置为64</span></span><br><span class="line"><span class="attr">thread_cache_size</span>=<span class="number">256</span></span><br><span class="line"></span><br><span class="line"><span class="attr">tmp_table_size</span>=<span class="number">3</span>G</span><br><span class="line"><span class="attr">max_heap_table_size</span>=<span class="number">6</span>G</span><br><span class="line"></span><br><span class="line"><span class="attr">query_cache_size</span>=<span class="number">1</span>G</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="attr">sql_mode</span>=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</span><br><span class="line"></span><br><span class="line"><span class="attr">basedir</span>=D:\MySQL56\MySQL\mysql-<span class="number">5.6</span>.<span class="number">49</span>-winx64 </span><br><span class="line"></span><br><span class="line"><span class="attr">datadir</span>=D:\MySQL56\MySQL\mysql-<span class="number">5.6</span>.<span class="number">49</span>-winx64\data </span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启慢查询</span></span><br><span class="line"><span class="attr">slow_query_log</span>=<span class="literal">ON</span></span><br><span class="line"><span class="attr">long_query_time</span>=<span class="number">5</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -800,7 +948,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/91/">91</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -866,7 +1014,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">453</span>
+          <span class="site-state-item-count">457</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -915,12 +1063,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">284k</span>
+    <span title="站点总字数">290k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:13</span>
+    <span title="站点阅读时长">17:33</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

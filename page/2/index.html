@@ -188,6 +188,555 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/aee8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/aee8/" class="post-title-link" itemprop="url">MySQL调优-2-查看系统性能参数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-10 15:28:59" itemprop="dateCreated datePublished" datetime="2024-04-10T15:28:59+08:00">2024-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-24 15:31:20" itemprop="dateModified" datetime="2024-04-24T15:31:20+08:00">2024-04-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>216</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在MySQL中，可以使用<strong>SHOW STATUS</strong>语句查询一些MySQL数据库服务器的性能参数、执行频率。</p>
+<p>SHOW STATUS语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> [<span class="keyword">GLOBAL</span><span class="operator">|</span>SESSION] STATUS <span class="keyword">LIKE</span> <span class="string">&#x27;参数&#x27;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/aee8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/36a5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/36a5/" class="post-title-link" itemprop="url">MySQL调优-5-show processlist</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-10 11:06:09" itemprop="dateCreated datePublished" datetime="2024-04-10T11:06:09+08:00">2024-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-24 15:32:32" itemprop="dateModified" datetime="2024-04-24T15:32:32+08:00">2024-04-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>422</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="show-processlist"><a href="#show-processlist" class="headerlink" title="show processlist"></a>show processlist</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念:"></a>概念:</h3><ul>
+<li>show processlist命令可以查看当前MySQL实例的连接情况，</li>
+<li>用于观察是否有大量的连接处于非正常状态。用法非常简单，直接使用就行</li>
+</ul>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><blockquote>
+<h4 id="show-processlist-1"><a href="#show-processlist-1" class="headerlink" title="show processlist"></a>show processlist</h4></blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/e5Wgef.jpg"></p>
+<h3 id="字段的含义"><a href="#字段的含义" class="headerlink" title="字段的含义"></a>字段的含义</h3><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>连接标识符</td>
+</tr>
+<tr>
+<td>User</td>
+<td>当前用户</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>操作的主机，指客户端</td>
+</tr>
+<tr>
+<td>db</td>
+<td>默认数据库（如果已选择）；否则为NULL</td>
+</tr>
+<tr>
+<td>Command</td>
+<td>线程正在执行的命令类型</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>线程处于其当前状态的持续时间（以秒为单位）</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>指示线程正在执行的操作，事件或状态</td>
+</tr>
+<tr>
+<td>Info</td>
+<td>线程正在执行的语句，如果未执行任何语句，则为NULL。<br/>该语句可能是发送到服务器的那条语句，或者是最内部的语句（如果该语句执行其他语句，比如存储过程中的select语句）</td>
+</tr>
+</tbody></table>
+<h3 id="Command字段，对应的状态"><a href="#Command字段，对应的状态" class="headerlink" title="Command字段，对应的状态"></a>Command字段，对应的状态</h3><ul>
+<li><p>sleep：正在等待客户端发送新的请求</p>
+</li>
+<li><p>query：正在执行查询或者正在将结果发送给客户端</p>
+</li>
+<li><p>locked：在MySQL服务层，线程正在等待表锁</p>
+</li>
+<li><p>analyzing and statistics：线程正在收集存储引擎的统计信息，并生成查询的执行计划</p>
+</li>
+<li><p>copying to tmp table：线程正在执行查询，并且将其结果集都复制到一个临时表中</p>
+</li>
+<li><p>sorting result：正在对结果集进行排序</p>
+</li>
+<li><p>sending data：线程可能在多个状态之间传送数据，或者在生成结果集或者向客户端返回数据</p>
+</li>
+</ul>
+<h3 id="show-full-processlist"><a href="#show-full-processlist" class="headerlink" title="show full processlist"></a>show full processlist</h3><ul>
+<li>show processlist命令默认Info字段最多显示每条语句的前100个字符，如果想完全显示，可以使用show full processlist</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/818b/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/818b/" class="post-title-link" itemprop="url">MySQL调优-4-show profiles</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-04-10 10:01:32" itemprop="dateCreated datePublished" datetime="2024-04-10T10:01:32+08:00">2024-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-04-24 15:31:54" itemprop="dateModified" datetime="2024-04-24T15:31:54+08:00">2024-04-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>834</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>Show Profile官方文档地址：<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/show-profile.html">https://dev.mysql.com/doc/refman/5.7/en/show-profile.html</a></p>
+</blockquote>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 查看是否开启</span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%profiling%&#x27;</span>;</span><br><span class="line"># 开启</span><br><span class="line"><span class="keyword">set</span> profiling <span class="operator">=</span> <span class="number">1</span></span><br><span class="line"># 查看<span class="keyword">SQL</span>执行时间</span><br><span class="line"><span class="keyword">show</span> profiles;</span><br><span class="line"># 查看记录中第一条<span class="keyword">SQL</span>详细时间</span><br><span class="line"><span class="keyword">show</span> profile <span class="keyword">for</span> query <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="开始分析"><a href="#开始分析" class="headerlink" title="开始分析"></a>开始分析</h1><ol>
+<li><p>先执行要分析的SQL：<code>select * from t_manage_user tmu ;</code></p>
+</li>
+<li><p>执行<code>show profiles;</code>，会出现以下结果</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/vaU0Pv.jpg"></p>
+</li>
+<li><p>分析某一条SQL语法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> profile <span class="keyword">all</span> <span class="keyword">for</span> query <span class="number">38</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/BtXyNL.jpg"></p>
+</li>
+<li><p>show profile返回结果字段含义</p>
+<ul>
+<li>Status ： sql 语句执行的状态</li>
+<li>Duration: sql 执行过程中每一个步骤的耗时</li>
+<li>CPU_user: 当前用户占有的 cpu</li>
+<li>CPU_system: 系统占有的 cpu</li>
+<li>Block_ops_in : I&#x2F;O 输入</li>
+<li>Block_ops_out : I&#x2F;O 输出</li>
+</ul>
+</li>
+</ol>
+<h1 id="Status出现以下情况的建议"><a href="#Status出现以下情况的建议" class="headerlink" title="Status出现以下情况的建议"></a>Status出现以下情况的建议</h1><ul>
+<li><p>converting HEAP to MyISAM：查询结果太大，内存不够，数据往磁盘上搬了。</p>
+</li>
+<li><p>Creating tmp table：创建临时表。先拷贝数据到临时表，用完后再删除临时表。</p>
+</li>
+<li><p>Copy to tmp table on disk：把内存中临时表复制到磁盘上，警惕！</p>
+</li>
+<li><p>locked。</p>
+</li>
+</ul>
+<p>如果在show profile诊断结果中出现以上4条结果中的任何一条，则SQL语句需要优化！！！</p>
+<blockquote>
+<p><strong>System lock</strong></p>
+</blockquote>
+<ul>
+<li>确认是由于哪个锁引起的，通常是因为MySQL或InnoDB内核级的锁引起的。</li>
+<li>建议：如果耗时较大再关注即可，一般情况下都还好</li>
+</ul>
+<blockquote>
+<p><strong>Sending data</strong></p>
+</blockquote>
+<ul>
+<li><p>解释：从server端发送数据到客户端，也有可能是接收存储引擎层返回的数据，再发送给客户端，数据量很大时尤其经常能看见。</p>
+</li>
+<li><p>备注：Sending Data不是网络发送，是从硬盘读取，发送到网络是Writing to net</p>
+</li>
+<li><p>建议：通过索引或加上LIMIT，减少需要扫描并且发送给客户端的数据量</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Sorting result</strong></p>
+</blockquote>
+<ul>
+<li>正在对结果进行排序，类似Creating sort index，不过是正常表，而不是在内存表中进行排序。</li>
+<li>建议：创建适当的索引</li>
+</ul>
+<blockquote>
+<p><strong>Table lock</strong></p>
+</blockquote>
+<ul>
+<li>表级锁，没什么好说的，要么是因为MyISAM引擎表级锁，要么是其他情况显式锁表</li>
+</ul>
+<blockquote>
+<p><strong>create sort index</strong></p>
+</blockquote>
+<ul>
+<li>当前的SELECT中需要用到临时表在进行ORDER BY排序</li>
+<li>建议：创建适当的索引</li>
+</ul>
+<blockquote>
+<p><strong>Creating tmp table</strong></p>
+</blockquote>
+<ul>
+<li>创建临时表。先拷贝数据到临时表，用完后再删除临时表。消耗内存，数据来回拷贝删除，消耗时间</li>
+<li>建议：优化索引</li>
+</ul>
+<blockquote>
+<p><strong>converting HEAP to MyISAM</strong></p>
+</blockquote>
+<ul>
+<li>查询结果太大，内存不够，数据往磁盘上搬了。</li>
+<li>建议：优化索引，可以调整max_heap_table_size</li>
+</ul>
+<blockquote>
+<p><strong>Copying to tmp table on disk</strong></p>
+</blockquote>
+<ul>
+<li>把内存中临时表复制到磁盘上，危险！！！</li>
+<li>建议：优化索引，可以调整tmp_table_size参数，增大内存临时表大小</li>
+</ul>
+<h1 id="show-profile-语法"><a href="#show-profile-语法" class="headerlink" title="show  profile 语法"></a>show  profile 语法</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> profile type1,type2… <span class="keyword">for</span> query Query_ID</span><br></pre></td></tr></table></figure>
+
+<h3 id="show-profile-type-选项"><a href="#show-profile-type-选项" class="headerlink" title="show profile type 选项"></a>show profile type 选项</h3><ul>
+<li><p>all：显示所有的性能开销信息</p>
+</li>
+<li><p>block io：显示块 IO 相关的开销信息</p>
+</li>
+<li><p>context switches: 上下文切换相关开销</p>
+</li>
+<li><p>cpu：显示 CPU 相关的信息</p>
+</li>
+<li><p>ipc：显示发送和接收相关的开销信息</p>
+</li>
+<li><p>memory：显示内存相关的开销信息</p>
+</li>
+<li><p>page faults：显示页面错误相关开销信息</p>
+</li>
+<li><p>source：显示和 Source_function、Source_file、Source_line 相关的开销信息</p>
+</li>
+<li><p>swaps：显示交换次数的相关信息</p>
+</li>
+</ul>
+<blockquote>
+<p>Show Profile语句已经弃用，并将在以后版本中移除，建议使用 Performance Schema<br>Performance Schema文档：<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/performance-schema-query-profiling.html">https://dev.mysql.com/doc/refman/5.7/en/performance-schema-query-profiling.html</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/e10/" class="post-title-link" itemprop="url">Nacos配置@Value类型转换问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-04-07 11:23:59 / 修改时间：11:34:18" itemprop="dateCreated datePublished" datetime="2024-04-07T11:23:59+08:00">2024-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nacos/" itemprop="url" rel="index"><span itemprop="name">Nacos</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>45</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>nacos配置如下</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sdt:</span></span><br><span class="line">  <span class="attr">areaCode:</span> <span class="number">0574</span></span><br></pre></td></tr></table></figure>
+
+<p>注入后</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;$&#123;sdt.areaCode&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String areaCode;</span><br></pre></td></tr></table></figure>
+
+<p>会有<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2&spm=1001.2101.3001.7020">类型转换</a>为浮点型:  574.0</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>nacos中的值加单引号</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sdt:</span></span><br><span class="line">  <span class="attr">areaCode:</span> <span class="string">&#x27;0574&#x27;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/67de/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -270,358 +819,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/ec7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/ec7/" class="post-title-link" itemprop="url">Linux离线安装字体</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-03-20 09:14:11 / 修改时间：09:16:39" itemprop="dateCreated datePublished" datetime="2024-03-20T09:14:11+08:00">2024-03-20</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>187</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在Linux系统中，离线安装字体通常涉及到以下几个步骤：</p>
-<ol>
-<li><p>从互联网上找到你需要的字体文件（通常是<code>.ttf</code>或<code>.otf</code>格式）。</p>
-</li>
-<li><p>将字体文件复制到Linux系统中的字体目录下。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以root权限复制Arial和Courier字体到全局字体目录</span></span><br><span class="line">sudo <span class="built_in">cp</span> Arial*.ttf /usr/share/fonts/</span><br><span class="line">sudo <span class="built_in">cp</span> Courier*.ttf /usr/share/fonts/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者，如果你不想全局安装，可以复制到用户级字体目录</span></span><br><span class="line"><span class="built_in">cp</span> Arial*.ttf &amp;<span class="comment">#126;/.local/share/fonts/</span></span><br><span class="line"><span class="built_in">cp</span> Courier*.ttf &amp;<span class="comment">#126;/.local/share/fonts/</span></span><br></pre></td></tr></table></figure>
-
-</li>
-<li><p>刷新系统字体缓存。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用fc-cache命令刷新字体缓存</span></span><br><span class="line">sudo fc-cache -fv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者，如果你不想全局安装，确保使用用户级的字体配置</span></span><br><span class="line">fc-cache -fv</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a774/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/a774/" class="post-title-link" itemprop="url">MemoryAnalyse打开hprof文件报错:An internal error occurred during: Parsing heap dump from</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-03-14 17:22:51" itemprop="dateCreated datePublished" datetime="2024-03-14T17:22:51+08:00">2024-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-20 09:16:39" itemprop="dateModified" datetime="2024-03-20T09:16:39+08:00">2024-03-20</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>60</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>MemoryAnalyzer打开hprof文件报错An internal error occurred during: “Parsing heap dump from</p>
-<p>如图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/0hRV4l.jpg"></p>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>当你导出的dump文件的大小大于你配置的1024m，就会报上述错误。</p>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>修改MemoryAnalyzer.ini中的-Xmx大小</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/q1fUBi.jpg"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/P3y0lV.jpg"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a6c1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/a6c1/" class="post-title-link" itemprop="url">Tomcat内存泄漏存入dump文件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-03-13 14:52:21 / 修改时间：15:04:10" itemprop="dateCreated datePublished" datetime="2024-03-13T14:52:21+08:00">2024-03-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tomcat/" itemprop="url" rel="index"><span itemprop="name">Tomcat</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>245</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>    很多Tomcat进程退出（或者进程假死），都是由于频繁的抛出OutOfMemeoryError导致的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/a6c1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/830f/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/830f/" class="post-title-link" itemprop="url">区块链</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-01-25 15:54:06" itemprop="dateCreated datePublished" datetime="2024-01-25T15:54:06+08:00">2024-01-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-03-13 15:02:31" itemprop="dateModified" datetime="2024-03-13T15:02:31+08:00">2024-03-13</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>472</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>区块链是去中心化系统中用来实现并确保系统完备性的工具。</p>
-<h1 id="拜占庭将军问题"><a href="#拜占庭将军问题" class="headerlink" title="拜占庭将军问题"></a>拜占庭将军问题</h1><p>拜占庭将军问题是一个协议问题，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B8%9D%E5%9B%BD/475514?fromModule=lemma_inlink">拜占庭帝国</a>军队的将军们必须全体一致的决定是否攻击某一支敌军。问题是这些将军在地理上是分隔开来的，并且将军中存在叛徒。叛徒可以任意行动以达到以下目标：欺骗某些将军采取进攻行动；促成一个不是所有将军都同意的决定，如当将军们不希望进攻时促成进攻行动；或者迷惑某些将军，使他们无法做出决定。如果叛徒达到了这些目的之一，则任何攻击行动的结果都是注定要失败的，只有完全达成一致的努力才能获得胜利。</p>
-<p>拜占庭假设是对现实世界的模型化，由于硬件错误、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E6%8B%A5%E5%A1%9E/717895?fromModule=lemma_inlink">网络拥塞</a>或断开以及遭到<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%81%B6%E6%84%8F%E6%94%BB%E5%87%BB/0?fromModule=lemma_inlink">恶意攻击</a>，计算机和网络可能出现不可预料的行为。</p>
-<h1 id="双花问题"><a href="#双花问题" class="headerlink" title="双花问题"></a>双花问题</h1><p>双花问题是指在数字货币系统中，特别是加密货币如<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=%E6%AF%94%E7%89%B9%E5%B8%81&rsv_idx=2&tn=baiduhome_pg&usm=4&ie=utf-8&rsv_pq=9f565de900401d03&oq=%E5%8F%8C%E8%8A%B1%E9%97%AE%E9%A2%98&rsv_t=29d0Yj3hwBwSTNnmTra39gqr9qKvMrpVOwOP+UpBjPAu1v+1stA4S9qD5V7nVg3mcOQY&sa=re_dqa_zy&icon=1">比特币<em></em></a>中，可能会出现的一种欺诈行为。具体来说，当一个人尝试使用同一份数字货币（例如同一笔比特币）进行多次交易时，这种现象称为双花。由于数字货币是基于<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=%E5%88%86%E5%B8%83%E5%BC%8F%E8%B4%A6%E6%9C%AC%E6%8A%80%E6%9C%AF&rsv_idx=2&tn=baiduhome_pg&usm=4&ie=utf-8&rsv_pq=9f565de900401d03&oq=%E5%8F%8C%E8%8A%B1%E9%97%AE%E9%A2%98&rsv_t=969eprQThJrvmWQNK5r+scsG7+i+MEpgF+BteXslxqr9Gv3//Semxrz7DnvuoQ/lTgge&sa=re_dqa_zy&icon=1">分布式账本技术<em></em></a>的，交易需要通过网络中的节点共识来确认，而不是传统金融体系那样的集中式方式。因此，如果有人尝试使用同一笔数字货币进行多次交易，可能会导致节点间的共识矛盾，使得这些交易无法得到确认或者产生错误的结果。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/91/">91</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -687,7 +888,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">453</span>
+          <span class="site-state-item-count">457</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -736,12 +937,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">284k</span>
+    <span title="站点总字数">290k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:13</span>
+    <span title="站点阅读时长">17:33</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

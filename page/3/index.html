@@ -188,6 +188,354 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/ec7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/ec7/" class="post-title-link" itemprop="url">Linux离线安装字体</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-20 09:14:11 / 修改时间：09:16:39" itemprop="dateCreated datePublished" datetime="2024-03-20T09:14:11+08:00">2024-03-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>187</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在Linux系统中，离线安装字体通常涉及到以下几个步骤：</p>
+<ol>
+<li><p>从互联网上找到你需要的字体文件（通常是<code>.ttf</code>或<code>.otf</code>格式）。</p>
+</li>
+<li><p>将字体文件复制到Linux系统中的字体目录下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以root权限复制Arial和Courier字体到全局字体目录</span></span><br><span class="line">sudo <span class="built_in">cp</span> Arial*.ttf /usr/share/fonts/</span><br><span class="line">sudo <span class="built_in">cp</span> Courier*.ttf /usr/share/fonts/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者，如果你不想全局安装，可以复制到用户级字体目录</span></span><br><span class="line"><span class="built_in">cp</span> Arial*.ttf &amp;<span class="comment">#126;/.local/share/fonts/</span></span><br><span class="line"><span class="built_in">cp</span> Courier*.ttf &amp;<span class="comment">#126;/.local/share/fonts/</span></span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>刷新系统字体缓存。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用fc-cache命令刷新字体缓存</span></span><br><span class="line">sudo fc-cache -fv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者，如果你不想全局安装，确保使用用户级的字体配置</span></span><br><span class="line">fc-cache -fv</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a774/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/a774/" class="post-title-link" itemprop="url">MemoryAnalyse打开hprof文件报错:An internal error occurred during: Parsing heap dump from</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-03-14 17:22:51" itemprop="dateCreated datePublished" datetime="2024-03-14T17:22:51+08:00">2024-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-03-20 09:16:39" itemprop="dateModified" datetime="2024-03-20T09:16:39+08:00">2024-03-20</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>60</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>MemoryAnalyzer打开hprof文件报错An internal error occurred during: “Parsing heap dump from</p>
+<p>如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/0hRV4l.jpg"></p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>当你导出的dump文件的大小大于你配置的1024m，就会报上述错误。</p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>修改MemoryAnalyzer.ini中的-Xmx大小</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/q1fUBi.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/P3y0lV.jpg"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/a6c1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/a6c1/" class="post-title-link" itemprop="url">Tomcat内存泄漏存入dump文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-03-13 14:52:21 / 修改时间：15:04:10" itemprop="dateCreated datePublished" datetime="2024-03-13T14:52:21+08:00">2024-03-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tomcat/" itemprop="url" rel="index"><span itemprop="name">Tomcat</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>245</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>    很多Tomcat进程退出（或者进程假死），都是由于频繁的抛出OutOfMemeoryError导致的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/a6c1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/830f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/830f/" class="post-title-link" itemprop="url">区块链</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-25 15:54:06" itemprop="dateCreated datePublished" datetime="2024-01-25T15:54:06+08:00">2024-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-03-13 15:02:31" itemprop="dateModified" datetime="2024-03-13T15:02:31+08:00">2024-03-13</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>472</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>区块链是去中心化系统中用来实现并确保系统完备性的工具。</p>
+<h1 id="拜占庭将军问题"><a href="#拜占庭将军问题" class="headerlink" title="拜占庭将军问题"></a>拜占庭将军问题</h1><p>拜占庭将军问题是一个协议问题，<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B8%9D%E5%9B%BD/475514?fromModule=lemma_inlink">拜占庭帝国</a>军队的将军们必须全体一致的决定是否攻击某一支敌军。问题是这些将军在地理上是分隔开来的，并且将军中存在叛徒。叛徒可以任意行动以达到以下目标：欺骗某些将军采取进攻行动；促成一个不是所有将军都同意的决定，如当将军们不希望进攻时促成进攻行动；或者迷惑某些将军，使他们无法做出决定。如果叛徒达到了这些目的之一，则任何攻击行动的结果都是注定要失败的，只有完全达成一致的努力才能获得胜利。</p>
+<p>拜占庭假设是对现实世界的模型化，由于硬件错误、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E6%8B%A5%E5%A1%9E/717895?fromModule=lemma_inlink">网络拥塞</a>或断开以及遭到<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%81%B6%E6%84%8F%E6%94%BB%E5%87%BB/0?fromModule=lemma_inlink">恶意攻击</a>，计算机和网络可能出现不可预料的行为。</p>
+<h1 id="双花问题"><a href="#双花问题" class="headerlink" title="双花问题"></a>双花问题</h1><p>双花问题是指在数字货币系统中，特别是加密货币如<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=%E6%AF%94%E7%89%B9%E5%B8%81&rsv_idx=2&tn=baiduhome_pg&usm=4&ie=utf-8&rsv_pq=9f565de900401d03&oq=%E5%8F%8C%E8%8A%B1%E9%97%AE%E9%A2%98&rsv_t=29d0Yj3hwBwSTNnmTra39gqr9qKvMrpVOwOP+UpBjPAu1v+1stA4S9qD5V7nVg3mcOQY&sa=re_dqa_zy&icon=1">比特币<em></em></a>中，可能会出现的一种欺诈行为。具体来说，当一个人尝试使用同一份数字货币（例如同一笔比特币）进行多次交易时，这种现象称为双花。由于数字货币是基于<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=%E5%88%86%E5%B8%83%E5%BC%8F%E8%B4%A6%E6%9C%AC%E6%8A%80%E6%9C%AF&rsv_idx=2&tn=baiduhome_pg&usm=4&ie=utf-8&rsv_pq=9f565de900401d03&oq=%E5%8F%8C%E8%8A%B1%E9%97%AE%E9%A2%98&rsv_t=969eprQThJrvmWQNK5r+scsG7+i+MEpgF+BteXslxqr9Gv3//Semxrz7DnvuoQ/lTgge&sa=re_dqa_zy&icon=1">分布式账本技术<em></em></a>的，交易需要通过网络中的节点共识来确认，而不是传统金融体系那样的集中式方式。因此，如果有人尝试使用同一笔数字货币进行多次交易，可能会导致节点间的共识矛盾，使得这些交易无法得到确认或者产生错误的结果。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/ba29/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -202,7 +550,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/ba29/" class="post-title-link" itemprop="url">MySQL调优-慢SQL</a>
+            <a href="/posts/ba29/" class="post-title-link" itemprop="url">MySQL调优-3-慢SQL</a>
         </h2>
 
         <div class="post-meta">
@@ -219,7 +567,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-18 09:57:02" itemprop="dateModified" datetime="2024-04-18T09:57:02+08:00">2024-04-18</time>
+                <time title="修改时间：2024-04-24 15:31:36" itemprop="dateModified" datetime="2024-04-24T15:31:36+08:00">2024-04-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -279,386 +627,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/b1a1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/b1a1/" class="post-title-link" itemprop="url">AI相关概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-21 14:03:26" itemprop="dateCreated datePublished" datetime="2023-12-21T14:03:26+08:00">2023-12-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-23 11:16:36" itemprop="dateModified" datetime="2023-12-23T11:16:36+08:00">2023-12-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>558</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="LangChain"><a href="#LangChain" class="headerlink" title="LangChain"></a><a target="_blank" rel="noopener" href="https://www.langchain.com/">LangChain</a></h1><p>    LangChain 是一个高级框架，旨在简化在复杂系统中构建语言模型应用的过程。它基于自然语言处理（NLP）技术，并将其与链式推理结合，从而允许开发者创建可以进行多步信息处理的应用程序。这种框架支持多种语言模型和API，让开发人员能够链接不同的语言服务，例如翻译、摘要、问题回答等，以构建出更加智能和多功能的语言处理工具。LangChain的设计哲学强调的是模块化和可插拔性，从而支持快速迭代和灵活性。</p>
-<p>    通俗点说：想象一下有一座大型的语言工厂，里面有许多不同的机器，每个机器都能做一项专门的事情，比如有的能帮你写作，有的能帮你解答问题，还有的能帮你把一种语言翻译成另一种语言。LangChain就像是管理这座工厂的操作系统，它帮助人们把这些机器连接起来，让它们协同工作，从而完成各种复杂的任务。这样，开发者就能更容易地使用这些强大的语言机器，创造出各种各样的应用程序，帮助我们解决生活中的问题。</p>
-<h1 id="ModelScope"><a href="#ModelScope" class="headerlink" title="ModelScope"></a><a target="_blank" rel="noopener" href="https://modelscope.cn/">ModelScope</a></h1><p>    ModelScope旨在打造下一代开源的模型即服务共享平台，为泛AI开发者提供灵活、易用、低成本的一站式模型服务产品，让模型应用更简单！</p>
-<h1 id="Streamlit"><a href="#Streamlit" class="headerlink" title="Streamlit"></a><a target="_blank" rel="noopener" href="https://streamlit.io/">Streamlit</a></h1><p>    Streamlit 是一个用于构建数据科学和机器学习应用程序的开源 Python 库。它旨在使开发人员能够以简单快速的方式构建交互式应用程序，无需繁琐的前端开发。Streamlit 提供了一组简单的 API，可用于创建具有数据探索、可视化和交互功能的应用程序。只需要通过简单的 Python 脚本就可以创建一个 Web 应用程序。可以利用 Streamlit 的丰富组件库来构建用户界面，例如文本框、滑块、下拉菜单和按钮，以及可视化组件，例如图表和地图。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/14b/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/14b/" class="post-title-link" itemprop="url">AI专业术语</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-21 14:03:19 / 修改时间：16:16:50" itemprop="dateCreated datePublished" datetime="2023-12-21T14:03:19+08:00">2023-12-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="LLM模型"><a href="#LLM模型" class="headerlink" title="LLM模型"></a>LLM模型</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/622518771">什么是LLM大语言模型？Large Language Model，从量变到质变</a></p>
-<p>大语言模型（英文：Large Language Model，缩写LLM），也称大型语言模型，是一种人工智能模型，旨在理解和生成人类语言。它们在大量的文本数据上进行训练，可以执行广泛的任务，包括文本总结、翻译、情感分析等等。LLM的特点是规模庞大，包含数十亿的参数，帮助它们学习语言数据中的复杂模式。这些模型通常基于深度学习架构，如转化器，这有助于它们在各种NLP任务上取得令人印象深刻的表现。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/14b/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/8a30/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/8a30/" class="post-title-link" itemprop="url">常用的Nvidia查询命令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-21 09:15:51 / 修改时间：16:16:59" itemprop="dateCreated datePublished" datetime="2023-12-21T09:15:51+08:00">2023-12-21</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>677</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><code>nvidia-smi</code>: 显示当前系统上Nvidia GPU的状态，包括设备的使用情况、显存使用情况、功耗等信息。使用该命令可以查看GPU的状态，例如GPU的使用率、显存占用率、功耗等信息，以及GPU的温度、风扇转速等参数。</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/IrZ85N.jpg"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/FiiKhw.jpg"></p>
-<ol start="4">
-<li><code>nvidia-smi -l 1</code>:间隔1秒刷新GPU信息</li>
-<li><code>nvidia-smi -l</code>:间隔几秒刷新GPU信息</li>
-<li><code>nvidia-smi -L</code>: 显示当前系统上所有Nvidia GPU设备的信息。使用该命令可以查看当前系统上所有的Nvidia GPU设备的信息，包括设备的名称、索引、总显存大小等。</li>
-<li></li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/EFo9u9.jpg"></p>
-<ol start="9">
-<li><code>nvidia-smi dmon</code>: 显示GPU设备的显存使用情况和GPU的繁忙度。使用该命令可以实时监测GPU的显存使用情况和GPU的繁忙度，并以文本形式输出。</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/4guTgE.jpg"></p>
-<ol start="11">
-<li><p><code>nvidia-smi -q</code>: 显示GPU的详细信息，包括硬件规格、驱动版本、显存信息、功耗管理、温度控制、GPU拓扑结构等信息。使用该命令可以了解GPU的硬件配置、驱动版本、显存大小、功耗管理策略、温度控制策略等信息，以及GPU的连接关系、拓扑结构等信息。</p>
-</li>
-<li><p><code>nvidia-smi -i [device_index] -q</code>: 显示指定GPU设备的详细信息。使用该命令可以查看指定GPU设备的详细信息，例如该设备的硬件规格、驱动版本、显存信息、功耗管理、温度控制等信息。</p>
-</li>
-<li><p><code>nvidia-smi --query-gpu=name,temperature.gpu,utilization.gpu,memory.total,memory.used,memory.free --format=csv</code>: 显示当前系统上所有Nvidia GPU设备的使用情况，并输出到CSV文件中，方便后续分析。使用该命令可以显示当前系统上所有Nvidia GPU设备的使用情况，例如GPU的温度、利用率、显存使用情况等信息，并将信息输出到CSV文件中，方便后续分析。</p>
-</li>
-<li><p><code>nvidia-settings</code>: 显示GPU设备的详细配置信息，包括显卡型号、GPU核心时钟、内存时钟、电压等信息。使用该命令可以配置GPU设备的参数，例如GPU的核心时钟、内存时钟、电压等参数。</p>
-</li>
-<li><p><code>nvidia-smi -i [device_index] -e 0x20</code>: 显示指定GPU设备的ECC错误日志。使用该命令可以查看指定GPU设备的ECC错误日志，以帮助排查硬件问题。</p>
-</li>
-<li><p><code>nvidia-smi topo -m</code>: 显示GPU拓扑结构和连接关系，可用于识别GPU间连接的带宽和延迟等信息。使用该命令可以了解GPU设备之间的连接关系和拓扑结构，以及GPU设备之间的带宽和延迟等信息。</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/6889/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/6889/" class="post-title-link" itemprop="url">MongoDB数据备份与恢复</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-19 09:03:01 / 修改时间：09:05:40" itemprop="dateCreated datePublished" datetime="2023-12-19T09:03:01+08:00">2023-12-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>16</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodump --db mydb --out mydb_backup</span><br></pre></td></tr></table></figure>
-
-<h1 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongorestore --db mydb mydb_backup/mydb</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/91/">91</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/92/">92</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -724,7 +696,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">453</span>
+          <span class="site-state-item-count">457</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -773,12 +745,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">284k</span>
+    <span title="站点总字数">290k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:13</span>
+    <span title="站点阅读时长">17:33</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
