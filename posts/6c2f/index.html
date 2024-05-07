@@ -22,21 +22,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="在进行MySQL的优化之前，必须要了解的就是MySQL的查询过程，很多查询优化工作实际上就是遵循一些原则，让MySQL的优化器能够按照预想的合理方式运行而已。  图-MySQL查询过程 一、优化的哲学 注：优化有风险，涉足需谨慎 1、优化可能带来的问题 1、优化不总是对一个单纯的环境进行，还很可能是一个复杂的已投产的系统； 2、优化手段本来就有很大的风险，只不过你没能力意识到和预见到； 3、任何的">
+  <meta name="description" content="在进行MySQL的优化之前，必须要了解的就是MySQL的查询过程，很多查询优化工作实际上就是遵循一些原则，让MySQL的优化器能够按照预想的合理方式运行而已。                                                                      图-MySQL查询过程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL全面优化">
 <meta property="og:url" content="http://example.com/posts/6c2f/index.html">
 <meta property="og:site_name" content="Jlin&#39;s Blog">
-<meta property="og:description" content="在进行MySQL的优化之前，必须要了解的就是MySQL的查询过程，很多查询优化工作实际上就是遵循一些原则，让MySQL的优化器能够按照预想的合理方式运行而已。  图-MySQL查询过程 一、优化的哲学 注：优化有风险，涉足需谨慎 1、优化可能带来的问题 1、优化不总是对一个单纯的环境进行，还很可能是一个复杂的已投产的系统； 2、优化手段本来就有很大的风险，只不过你没能力意识到和预见到； 3、任何的">
+<meta property="og:description" content="在进行MySQL的优化之前，必须要了解的就是MySQL的查询过程，很多查询优化工作实际上就是遵循一些原则，让MySQL的优化器能够按照预想的合理方式运行而已。                                                                      图-MySQL查询过程">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://justhealth.feishu.cn/space/api/box/stream/download/asynccode/?code=MjMzNDQ0OTZkZTljNGE3NTU1OTIwMjZkYWFmMTk4OGNfbHFJTnhucXRuUGM2djJVNTk1WWFZN3FycGVBWmgzQ29fVG9rZW46Ym94Y24yeDlHaVo3S1RxTGs2dTlVTFk1Qk5kXzE3MTQzNTgwNTY6MTcxNDM2MTY1Nl9WNA">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/khem5O.png">
 <meta property="og:image" content="https://justhealth.feishu.cn/space/api/box/stream/download/asynccode/?code=M2U2OTRlNTU1MDkyMWEzNWM1NTg1NmU5MTkzYjcyOWVfV0k5ZUVjazFxdEpKN3RTZUlLTlozV1RzM3E1VGdSMkJfVG9rZW46Ym94Y25SRzBEQXhYb3ZtcFBkWHhNa3ozMFFlXzE3MTQzNTgwNTY6MTcxNDM2MTY1Nl9WNA">
 <meta property="article:published_time" content="2024-04-29T02:34:45.000Z">
-<meta property="article:modified_time" content="2024-04-29T07:34:20.192Z">
+<meta property="article:modified_time" content="2024-05-07T06:41:18.673Z">
 <meta property="article:author" content="林剑">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://justhealth.feishu.cn/space/api/box/stream/download/asynccode/?code=MjMzNDQ0OTZkZTljNGE3NTU1OTIwMjZkYWFmMTk4OGNfbHFJTnhucXRuUGM2djJVNTk1WWFZN3FycGVBWmgzQ29fVG9rZW46Ym94Y24yeDlHaVo3S1RxTGs2dTlVTFk1Qk5kXzE3MTQzNTgwNTY6MTcxNDM2MTY1Nl9WNA">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/khem5O.png">
 
 <link rel="canonical" href="http://example.com/posts/6c2f/">
 
@@ -217,10 +217,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-29 10:34:45 / 修改时间：15:34:20" itemprop="dateCreated datePublished" datetime="2024-04-29T10:34:45+08:00">2024-04-29</time>
+              <time title="创建时间：2024-04-29 10:34:45" itemprop="dateCreated datePublished" datetime="2024-04-29T10:34:45+08:00">2024-04-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-07 14:41:18" itemprop="dateModified" datetime="2024-05-07T14:41:18+08:00">2024-05-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -237,14 +243,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.7k</span>
+              <span>3.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>12 分钟</span>
             </span>
 
         </div>
@@ -257,8 +263,10 @@
 
       
         <p>在进行MySQL的优化之前，必须要了解的就是MySQL的查询过程，很多查询优化工作实际上就是遵循一些原则，让MySQL的优化器能够按照预想的合理方式运行而已。</p>
-<p><img src="https://justhealth.feishu.cn/space/api/box/stream/download/asynccode/?code=MjMzNDQ0OTZkZTljNGE3NTU1OTIwMjZkYWFmMTk4OGNfbHFJTnhucXRuUGM2djJVNTk1WWFZN3FycGVBWmgzQ29fVG9rZW46Ym94Y24yeDlHaVo3S1RxTGs2dTlVTFk1Qk5kXzE3MTQzNTgwNTY6MTcxNDM2MTY1Nl9WNA"></p>
-<p>图-MySQL查询过程</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/khem5O.png"></p>
+<p>                                                                    图-MySQL查询过程</p>
+<span id="more"></span>
+
 <p>一、优化的哲学</p>
 <p>注：优化有风险，涉足需谨慎</p>
 <p>1、优化可能带来的问题</p>
@@ -604,12 +612,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">765k</span>
+    <span title="站点总字数">291k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:36</span>
+    <span title="站点阅读时长">17:38</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
