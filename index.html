@@ -211,9 +211,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-29 15:14:17 / 修改时间：15:34:20" itemprop="dateCreated datePublished" datetime="2024-04-29T15:14:17+08:00">2024-04-29</time>
+              <time title="创建时间：2024-04-29 15:14:17" itemprop="dateCreated datePublished" datetime="2024-04-29T15:14:17+08:00">2024-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-07 14:37:17" itemprop="dateModified" datetime="2024-05-07T14:37:17+08:00">2024-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
             </span>
 
           <br>
@@ -222,14 +237,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -241,7 +256,90 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="多表查询优化"><a href="#多表查询优化" class="headerlink" title="多表查询优化"></a>多表查询优化</h1><h3 id="驱动表理论"><a href="#驱动表理论" class="headerlink" title="驱动表理论"></a>驱动表理论</h3><ol>
+<li><p>外连接</p>
+<blockquote>
+<p>左外连接：一般来说：坐表为驱动表，右表为被驱动表</p>
+</blockquote>
+</li>
+<li><p>内连接</p>
+<blockquote>
+<p>对于内连接来讲，如果表的连接条件中只能有一个字段有索引，则有<mark>索引</mark>的字段所在表会被作为<mark>被驱动表</mark>出现</p>
+</blockquote>
+<blockquote>
+<p>对于内连接来讲，在两个表的连接条件<mark>都存在索引</mark>的情况下，会选择小表作为驱动表。以<mark>小表驱动大表</mark></p>
+</blockquote>
+</li>
+</ol>
+<h3 id="join语句原理"><a href="#join语句原理" class="headerlink" title="join语句原理"></a>join语句原理</h3><ol>
+<li>整体效率比较：INLJ &gt; BNLJ &gt; SNLJ</li>
+</ol>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">SNLJ</span><span class="punctuation">(</span><span class="variable">Simple</span><span class="operator">-</span><span class="built_in">Nest</span><span class="operator">-</span><span class="variable">Loop</span><span class="operator">-</span><span class="built_in">Join</span><span class="punctuation">)</span></span><br><span class="line">  最朴素的<span class="built_in">Join</span>查询方式，执行流程就是：从<span class="variable">t1</span>中取出一条数据，拿这条数据的<span class="variable">a</span>字段与<span class="variable">t2</span>中比较，找到目标行返回，重复次操作。这样的时间复杂度是最高的，<span class="built_in">O</span><span class="punctuation">(</span><span class="built_in">N</span><span class="operator">*</span><span class="variable">M</span><span class="punctuation">)</span></span><br><span class="line"><span class="variable">INLJ</span><span class="punctuation">(</span><span class="variable">Index</span><span class="operator">-</span><span class="built_in">Nest</span><span class="operator">-</span><span class="variable">Loop</span><span class="operator">-</span><span class="built_in">Join</span><span class="punctuation">)</span></span><br><span class="line">  加入索引，也就是优化了拿<span class="variable">t1</span>的数据去匹配<span class="variable">t2</span>的操作，时间复杂度<span class="built_in">O</span><span class="punctuation">(</span><span class="variable">n</span><span class="operator">*</span><span class="variable">logm</span><span class="punctuation">)</span></span><br><span class="line"><span class="variable">BNLJ</span><span class="punctuation">(</span><span class="built_in">Block</span><span class="operator">-</span><span class="built_in">Nest</span><span class="operator">-</span><span class="variable">Loop</span><span class="operator">-</span><span class="built_in">Join</span><span class="punctuation">)</span></span><br><span class="line">  一整块数据拿出来，匹配速度快了，但是需要更多的内存空间</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>永远用小结果集驱动大结果集（其本质就是减少外层循环的数据数量）</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 推荐</span><br><span class="line"><span class="keyword">select</span> t1.b, t2.<span class="operator">*</span> <span class="keyword">from</span> t1 straight_join t2 <span class="keyword">on</span> (t1.b <span class="operator">=</span> t2.b) <span class="keyword">where</span> t2.id <span class="operator">&lt;=</span> <span class="number">100</span></span><br><span class="line"># 不推荐</span><br><span class="line"><span class="keyword">select</span> t1.b, t2.<span class="operator">*</span> <span class="keyword">from</span> t2 straight_join t1 <span class="keyword">on</span> (t1.b <span class="operator">=</span> t2.b) <span class="keyword">where</span> t2.id <span class="operator">&lt;=</span> <span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>为被驱动表匹配的条件增加索引（减少内层表的循环匹配次数）</p>
+</li>
+<li><p>增大join buffer size的大小（一次缓存的数据越多，那么内层包扫表次数就越少）</p>
+</li>
+<li><p>减少驱动表不必要的字段查询（字段越少，join buffer所缓存的数据就越多）</p>
+</li>
+</ol>
+<h1 id="子查询优化"><a href="#子查询优化" class="headerlink" title="子查询优化"></a>子查询优化</h1><h3 id="子查询效率不高原因"><a href="#子查询效率不高原因" class="headerlink" title="子查询效率不高原因"></a>子查询效率不高原因</h3><ol>
+<li><p>执行子查询时，MySQL需要为内层查询语句的查询结果<mark>建立一个临时表</mark>，然后外层查询语句从临时表中查询记录。查询完毕后，再<mark>撤销这些临时表</mark>。这样会消耗过多的CPU和IO资源，产生大量的慢查询。</p>
+</li>
+<li><p>子查询的结果集存储的临时表，不论是内存临时表还是磁盘临时表都<mark>不会存在索引</mark>，所以查询性能会受到一定的影响。</p>
+</li>
+<li><p>对于返回结果集比较大的子查询，其对查询性能的影响也就越大。</p>
+</li>
+</ol>
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>在MySQL中，可以使用<mark>JOIN查询代替子查询，性能会更好</mark></p>
+<blockquote>
+<p>在MySQL中，使用连接（JOIN）查询来替代子查询，不需要建立临时表，其查询速度比子查询要快，如果查询中使用索引的话，性能会更好。</p>
+</blockquote>
+<blockquote>
+<p>尽量不要使用NOT IN 或者NOT EXISTS，用LEFT JOIN xxx ON xx WHERE xx IS NULL 替代</p>
+</blockquote>
+<h1 id="ORDER-BY-优化"><a href="#ORDER-BY-优化" class="headerlink" title="ORDER BY 优化"></a>ORDER BY 优化</h1><p>在MySQL中，支持两种排序方式，分别是<mark>FileSort</mark>和<mark>Index</mark>排序</p>
+<ul>
+<li><p>Index排序中，索引可以保证数据的有序性，不需要再进行排序，<mark>效率更高</mark>。</p>
+</li>
+<li><p>FileSort排序则一般在<mark>内存中</mark>进行排序，占用<mark>CPU较多</mark>。如果待排序结果较大，会产生临时文件I&#x2F;O到磁盘进行排序的情况，效率较低。</p>
+</li>
+</ul>
+<h3 id="优化建议"><a href="#优化建议" class="headerlink" title="优化建议"></a>优化建议</h3><ol>
+<li><p>SQL中，可以在WHERE子句和ORDER BY子句中使用索引，目的是在WHERE子句中<mark>避免全表扫描</mark>，在ORDER BY子句<mark>避免使用FileSort排序</mark>。当然，某些情况下扫描全表，或者FileSort排序不一定比索引慢。但总的来说，我们还是要避免，以提高查询效率。</p>
+</li>
+<li><p>尽量使用Index完成ORDER BY排序。如果WHERE 和ORDER BY后面是相同的列就使用单索引列；如果不同就使用联合索引。</p>
+</li>
+<li><p>无法使用Index时，需要对FileSort方式进行调优。</p>
+</li>
+</ol>
+<h1 id="GROUP-BY-优化"><a href="#GROUP-BY-优化" class="headerlink" title="GROUP BY 优化"></a>GROUP BY 优化</h1><ul>
+<li><p>group by 使用索引的原则几乎跟order by一致，group by即使没有过滤条件用到索引，也可以直接使用索引。</p>
+</li>
+<li><p>group by 先排序再分组，遵照索引建的最佳左前缀法则。</p>
+</li>
+<li><p>当无法使用索引列，增大max_length_for_sort_data和sort_buffer_size参数的设置。</p>
+</li>
+<li><p>where效率高于having，能写在where的限定条件就不要写在having中了。</p>
+</li>
+<li><p>减少使用order by，和业务沟通能不排序就不排序，或将排序放到程序端去做。order by、group by、distinct这些语句较为耗费CPU，数据库的CPU资源是极其宝贵的。</p>
+</li>
+<li><p>包含order by、group by、distinct这些查询的语句，where条件过滤出来的结果集请保持在1000行以内，否则SQL会很慢。</p>
+</li>
+</ul>
+<h1 id="分页查询优化"><a href="#分页查询优化" class="headerlink" title="分页查询优化"></a>分页查询优化</h1><p>一般分页查询中，通过创建覆盖索引能够比较好的提高性能。一个常见又非常头疼的问题就是limit 2000000, 10，此时需要MySQL排序前2000010记录，仅返回2000000 - 2000010的记录，其他记录丢弃，查询排序的代价非常高。</p>
+<h3 id="优化思路1"><a href="#优化思路1" class="headerlink" title="优化思路1"></a>优化思路1</h3><p>在索引上完成排序分页操作，最后根据主键关联回原表查询所需要的其他列内容。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student t, (<span class="keyword">select</span> id <span class="keyword">from</span> student <span class="keyword">order</span> <span class="keyword">by</span> id limit <span class="number">2000000</span>, <span class="number">10</span>) a</span><br><span class="line"><span class="keyword">where</span> t.id <span class="operator">=</span> a.id</span><br></pre></td></tr></table></figure>
+
+<h3 id="优化思路2"><a href="#优化思路2" class="headerlink" title="优化思路2"></a>优化思路2</h3><p>该方案适用于主键自增的表，可以把limit查询转换成某个位置的查询。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student <span class="keyword">where</span> id <span class="operator">&gt;</span> <span class="number">2000000</span> limit <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -283,10 +381,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-29 15:13:35 / 修改时间：15:50:27" itemprop="dateCreated datePublished" datetime="2024-04-29T15:13:35+08:00">2024-04-29</time>
+              <time title="创建时间：2024-04-29 15:13:35" itemprop="dateCreated datePublished" datetime="2024-04-29T15:13:35+08:00">2024-04-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-05-06 11:24:13" itemprop="dateModified" datetime="2024-05-06T11:24:13+08:00">2024-05-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -303,14 +407,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -417,14 +521,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.4k</span>
+              <span>6.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>12 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -707,14 +811,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>940</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -910,7 +1014,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>195</span>
+              <span>739</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1063,12 +1167,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">290k</span>
+    <span title="站点总字数">765k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:33</span>
+    <span title="站点阅读时长">11:36</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
