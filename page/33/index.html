@@ -188,6 +188,101 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/fec0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/fec0/" class="post-title-link" itemprop="url">MySQL 中文转拼音码</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-07-06 13:53:35" itemprop="dateCreated datePublished" datetime="2021-07-06T13:53:35+08:00">2021-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>194</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>需要根据中文生成拼音码首拼</p>
+<h3 id="FUNCTION-firstPinyin"><a href="#FUNCTION-firstPinyin" class="headerlink" title="FUNCTION firstPinyin"></a>FUNCTION firstPinyin</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> `firstPinyin`(P_NAME <span class="type">VARCHAR</span>(<span class="number">255</span>)) <span class="keyword">RETURNS</span> <span class="type">varchar</span>(<span class="number">255</span>) CHARSET utf8</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">DECLARE</span> V_RETURN <span class="type">VARCHAR</span>(<span class="number">255</span>);</span><br><span class="line">    <span class="keyword">SET</span> V_RETURN <span class="operator">=</span> ELT(<span class="type">INTERVAL</span>(CONV(HEX(<span class="keyword">left</span>(<span class="keyword">CONVERT</span>(P_NAME <span class="keyword">USING</span> gbk),<span class="number">1</span>)),<span class="number">16</span>,<span class="number">10</span>),</span><br><span class="line">        <span class="number">0xB0A1</span>,<span class="number">0xB0C5</span>,<span class="number">0xB2C1</span>,<span class="number">0xB4EE</span>,<span class="number">0xB6EA</span>,<span class="number">0xB7A2</span>,<span class="number">0xB8C1</span>,<span class="number">0xB9FE</span>,<span class="number">0xBBF7</span>,</span><br><span class="line">        <span class="number">0xBFA6</span>,<span class="number">0xC0AC</span>,<span class="number">0xC2E8</span>,<span class="number">0xC4C3</span>,<span class="number">0xC5B6</span>,<span class="number">0xC5BE</span>,<span class="number">0xC6DA</span>,<span class="number">0xC8BB</span>,</span><br><span class="line">        <span class="number">0xC8F6</span>,<span class="number">0xCBFA</span>,<span class="number">0xCDDA</span>,<span class="number">0xCEF4</span>,<span class="number">0xD1B9</span>,<span class="number">0xD4D1</span>),   </span><br><span class="line">    <span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>,<span class="string">&#x27;C&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="string">&#x27;E&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="string">&#x27;G&#x27;</span>,<span class="string">&#x27;H&#x27;</span>,<span class="string">&#x27;J&#x27;</span>,<span class="string">&#x27;K&#x27;</span>,<span class="string">&#x27;L&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="string">&#x27;N&#x27;</span>,<span class="string">&#x27;O&#x27;</span>,<span class="string">&#x27;P&#x27;</span>,<span class="string">&#x27;Q&#x27;</span>,<span class="string">&#x27;R&#x27;</span>,<span class="string">&#x27;S&#x27;</span>,<span class="string">&#x27;T&#x27;</span>,<span class="string">&#x27;W&#x27;</span>,<span class="string">&#x27;X&#x27;</span>,<span class="string">&#x27;Y&#x27;</span>,<span class="string">&#x27;Z&#x27;</span>);</span><br><span class="line">    <span class="keyword">RETURN</span> V_RETURN;</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="FUNCTION-pinyin"><a href="#FUNCTION-pinyin" class="headerlink" title="FUNCTION pinyin"></a>FUNCTION pinyin</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">FUNCTION</span> `pinyin`(P_NAME <span class="type">VARCHAR</span>(<span class="number">255</span>)) <span class="keyword">RETURNS</span> <span class="type">varchar</span>(<span class="number">255</span>) CHARSET utf8</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">DECLARE</span> V_COMPARE <span class="type">VARCHAR</span>(<span class="number">255</span>);</span><br><span class="line">    <span class="keyword">DECLARE</span> V_RETURN <span class="type">VARCHAR</span>(<span class="number">255</span>);</span><br><span class="line">    <span class="keyword">DECLARE</span> I <span class="type">INT</span>;</span><br><span class="line">    <span class="keyword">SET</span> I <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">SET</span> V_RETURN <span class="operator">=</span> <span class="string">&#x27;&#x27;</span>; </span><br><span class="line">    while I <span class="operator">&lt;</span> LENGTH(P_NAME) do</span><br><span class="line">        <span class="keyword">SET</span> V_COMPARE <span class="operator">=</span> SUBSTR(P_NAME, I, <span class="number">1</span>);</span><br><span class="line">        IF (V_COMPARE <span class="operator">!=</span> <span class="string">&#x27;&#x27;</span> <span class="keyword">and</span> V_COMPARE <span class="operator">!=</span> <span class="string">&#x27;(&#x27;</span> <span class="keyword">and</span> V_COMPARE <span class="operator">!=</span> <span class="string">&#x27;)&#x27;</span> <span class="keyword">and</span> V_COMPARE <span class="operator">!=</span> <span class="string">&#x27;,&#x27;</span> <span class="keyword">and</span> V_COMPARE <span class="operator">!=</span> <span class="string">&#x27;、&#x27;</span><span class="keyword">and</span> V_COMPARE <span class="operator">!=</span> <span class="string">&#x27;?&#x27;</span> <span class="keyword">and</span> V_COMPARE <span class="operator">!=</span> <span class="string">&#x27;（&#x27;</span> <span class="keyword">and</span> V_COMPARE <span class="operator">!=</span> <span class="string">&#x27;）&#x27;</span> <span class="keyword">and</span> V_COMPARE <span class="operator">!=</span> <span class="string">&#x27;？&#x27;</span>) <span class="keyword">THEN</span></span><br><span class="line">            #<span class="keyword">SET</span> V_RETURN <span class="operator">=</span> CONCAT(V_RETURN, <span class="string">&#x27;,&#x27;</span>, V_COMPARE);</span><br><span class="line">            <span class="keyword">SET</span> V_RETURN <span class="operator">=</span> CONCAT(V_RETURN, firstPinyin(V_COMPARE));</span><br><span class="line">            #<span class="keyword">SET</span> V_RETURN <span class="operator">=</span> fristPinyin(V_COMPARE);</span><br><span class="line">        <span class="keyword">END</span> IF;</span><br><span class="line">        <span class="keyword">SET</span> I <span class="operator">=</span> I <span class="operator">+</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">end</span> while;</span><br><span class="line">    IF (ISNULL(V_RETURN) <span class="keyword">or</span> V_RETURN <span class="operator">=</span> <span class="string">&#x27;&#x27;</span>) <span class="keyword">THEN</span></span><br><span class="line">        <span class="keyword">SET</span> V_RETURN <span class="operator">=</span> P_NAME;</span><br><span class="line">    <span class="keyword">END</span> IF;</span><br><span class="line">    <span class="keyword">RETURN</span> V_RETURN;</span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> pinyin(&quot;青霉素&quot;) <span class="keyword">from</span> dual</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2021/07/06/tv4BGZERlgTkdcr.png" alt="image-20210706140236991"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/posts/e121/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -237,7 +332,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>123</span>
+              <span>22</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -332,7 +427,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>426</span>
+              <span>139</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -429,7 +524,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>658</span>
+              <span>233</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -530,7 +625,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>655</span>
+              <span>92</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -560,99 +655,6 @@
 
 <h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="property">visitInfo</span>.<span class="title function_">remove</span>(&#123;</span><br><span class="line">    <span class="string">&#x27;outhospSerialNo&#x27;</span>: <span class="string">&#x27;1696222&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/55ef/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="林剑">
-      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jlin's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/55ef/" class="post-title-link" itemprop="url">Mac下安装Nginx</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-26 18:53:45" itemprop="dateCreated datePublished" datetime="2021-05-26T18:53:45+08:00">2021-05-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-01 18:29:33" itemprop="dateModified" datetime="2023-03-01T18:29:33+08:00">2023-03-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>222</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h1><p>使用homebrew安装</p>
-<h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 更新brew</span></span><br><span class="line">brew update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询要安装的软件是否存在</span></span><br><span class="line">brew search nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看报信息</span></span><br><span class="line">brew info nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">brew install nginx</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Delena1988/Pic@main/uPic/image-20210526185833956.png" alt="image-20210526185833956"></p>
-<h1 id="nginx路径"><a href="#nginx路径" class="headerlink" title="nginx路径"></a>nginx路径</h1><p>配置文件路径 &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;</p>
-<p>安装路径 &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;nginx</p>
 
       
     </div>
@@ -737,14 +739,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">458</span>
+          <span class="site-state-item-count">459</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-count">78</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -786,12 +788,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">766k</span>
+    <span title="站点总字数">291k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">11:36</span>
+    <span title="站点阅读时长">17:40</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
