@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="现象1234567891011121314151617181920025-11-07 13:58:40.051 ERROR [celina-data-center,,] 34880 --- [isson-netty-1-6] o.redisson.client.handler.CommandsQueue  : Exception occured. Channel: [id: 0xdd6f0878,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis远程主机强迫关闭了一个现有的连接">
+<meta property="og:url" content="http://example.com/posts/3f2f/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="现象1234567891011121314151617181920025-11-07 13:58:40.051 ERROR [celina-data-center,,] 34880 --- [isson-netty-1-6] o.redisson.client.handler.CommandsQueue  : Exception occured. Channel: [id: 0xdd6f0878,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-11T03:18:53.000Z">
+<meta property="article:modified_time" content="2025-11-11T03:21:02.803Z">
+<meta property="article:author" content="林剑">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/3f2f/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Redis远程主机强迫关闭了一个现有的连接 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/3f2f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis远程主机强迫关闭了一个现有的连接
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-11-11 11:18:53 / 修改时间：11:21:02" itemprop="dateCreated datePublished" datetime="2025-11-11T11:18:53+08:00">2025-11-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">025-11-07 13:58:40.051 ERROR [celina-data-center,,] 34880 --- [isson-netty-1-6] o.redisson.client.handler.CommandsQueue  : Exception occured. Channel: [id: 0xdd6f0878, L:/192.168.10.182:60652 - R:dmz-zjj.lanniuh.com/172.16.16.33:7073]</span><br><span class="line"></span><br><span class="line">java.io.IOException: 远程主机强迫关闭了一个现有的连接。</span><br><span class="line">	at sun.nio.ch.SocketDispatcher.read0(Native Method)</span><br><span class="line">	at sun.nio.ch.SocketDispatcher.read(SocketDispatcher.java:43)</span><br><span class="line">	at sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:223)</span><br><span class="line">	at sun.nio.ch.IOUtil.read(IOUtil.java:192)</span><br><span class="line">	at sun.nio.ch.SocketChannelImpl.read(SocketChannelImpl.java:379)</span><br><span class="line">	at io.netty.buffer.PooledByteBuf.setBytes(PooledByteBuf.java:258)</span><br><span class="line">	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1132)</span><br><span class="line">	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:350)</span><br><span class="line">	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:151)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:722)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:658)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:584)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:496)</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:986)</span><br><span class="line">	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)</span><br><span class="line">	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:750)</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>日志中出现的 <code>java.io.IOException: 远程主机强迫关闭了一个现有的连接</code> 错误，通常意味着 Redisson 客户端与 Redis 服务器之间的网络连接被<strong>远程端（Redis 服务器或中间网络设备）主动关闭</strong>。以下是具体原因分析和解决方法：</p>
+<h3 id="一、核心原因分析"><a href="#一、核心原因分析" class="headerlink" title="一、核心原因分析"></a><strong>一、核心原因分析</strong></h3><p>该错误的本质是：Redisson 客户端与 Redis 服务器的 TCP 连接被强行终止（非正常断开），可能的触发点包括：</p>
+<ol>
+<li><strong>Redis 服务器主动关闭连接</strong>：<ul>
+<li>Redis 配置了 <code>timeout</code> 参数（默认 0，即永不超时），若设置了非零值（如 300 秒），当连接空闲时间超过该值时，服务器会主动关闭连接。</li>
+<li>Redis 服务器内存不足、重启、宕机或被杀死进程，导致连接中断。</li>
+</ul>
+</li>
+<li><strong>中间网络设备干预</strong>：<ul>
+<li>防火墙、负载均衡器（如 Nginx、F5）或网关配置了<strong>连接超时策略</strong>，当连接空闲时间超过阈值（如 60 秒），会主动切断连接。</li>
+<li>网络波动、丢包严重，导致 TCP 连接被底层协议判定为无效而关闭。</li>
+</ul>
+</li>
+<li><strong>Redisson 客户端配置不当</strong>：<ul>
+<li>客户端未配置<strong>心跳检测</strong>，无法维持长连接，被服务器或网络设备判定为 “死连接” 而关闭。</li>
+<li>客户端与服务器之间的 <code>keepalive</code> 机制未启用，TCP 层无法检测连接有效性。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、解决方法（按优先级排序）"><a href="#二、解决方法（按优先级排序）" class="headerlink" title="二、解决方法（按优先级排序）"></a><strong>二、解决方法（按优先级排序）</strong></h3><h4 id="1-检查并调整-Redis-服务器的超时配置"><a href="#1-检查并调整-Redis-服务器的超时配置" class="headerlink" title="1. 检查并调整 Redis 服务器的超时配置"></a>1. <strong>检查并调整 Redis 服务器的超时配置</strong></h4><ul>
+<li><p>登录 Redis 服务器，执行以下命令查看 <code>timeout</code> 配置：</p>
+<p>bash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli config get <span class="built_in">timeout</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>若 <code>timeout</code> 不为 0（如 <code>300</code> 秒），建议临时改为 <code>0</code>（关闭超时），观察是否还会出现连接关闭：</p>
+<p>bash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli config <span class="built_in">set</span> <span class="built_in">timeout</span> 0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>若需长期生效，修改 Redis 配置文件（<code>redis.conf</code>）：</p>
+<p>conf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timeout 0  # 禁用连接超时（默认值）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意：<code>timeout 0</code> 表示 Redis 不会主动关闭空闲连接，适合长连接场景（如 Redisson 客户端）。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-排查中间网络设备的超时策略"><a href="#2-排查中间网络设备的超时策略" class="headerlink" title="2. 排查中间网络设备的超时策略"></a>2. <strong>排查中间网络设备的超时策略</strong></h4><ul>
+<li>联系运维团队，检查防火墙、负载均衡器、网关的配置：<ul>
+<li>例如，Nginx 反向代理 Redis 时，若配置了 <code>proxy_timeout 60s</code>，会导致 60 秒空闲后断开连接，需延长该值（如 <code>3600s</code>）或禁用。</li>
+<li>云服务器的安全组、网络 ACL 可能有类似的 “连接超时” 限制，需调整为适合业务的时长（建议至少 300 秒以上）。</li>
+</ul>
+</li>
+<li>若无法修改网络设备配置，可通过<strong>客户端主动发送心跳</strong>维持连接（见步骤 3）。</li>
+</ul>
+<h4 id="3-配置-Redisson-客户端的心跳与重连机制"><a href="#3-配置-Redisson-客户端的心跳与重连机制" class="headerlink" title="3. 配置 Redisson 客户端的心跳与重连机制"></a>3. <strong>配置 Redisson 客户端的心跳与重连机制</strong></h4><p>Redisson 提供了连接检测和自动重连功能，需在客户端配置中启用：</p>
+<p>java</p>
+<p>运行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Redisson 配置示例（Spring Boot 可在 application.yml 中配置）</span></span><br><span class="line"><span class="type">Config</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Config</span>();</span><br><span class="line">config.useSingleServer()</span><br><span class="line">      .setAddress(<span class="string">&quot;redis://dmz-zjj.lanniuh.com:7073&quot;</span>)  <span class="comment">// Redis 地址</span></span><br><span class="line">      .setConnectionMinimumIdleSize(<span class="number">5</span>)  <span class="comment">// 保持最小空闲连接数，避免频繁创建/关闭</span></span><br><span class="line">      .setIdleConnectionTimeout(<span class="number">10000</span>)  <span class="comment">// 空闲连接超时时间（毫秒），建议小于网络超时</span></span><br><span class="line">      .setPingConnectionInterval(<span class="number">30000</span>)  <span class="comment">// 定期发送 PING 心跳（毫秒），如 30 秒一次，防止连接被判定为空闲</span></span><br><span class="line">      .setReconnectionTimeout(<span class="number">3000</span>)  <span class="comment">// 重连超时时间</span></span><br><span class="line">      .setRetryAttempts(<span class="number">3</span>)  <span class="comment">// 重试次数</span></span><br><span class="line">      .setRetryInterval(<span class="number">1000</span>);  <span class="comment">// 重试间隔（毫秒）</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>关键参数说明</strong>：<ul>
+<li><code>pingConnectionInterval</code>：定期发送 PING 命令（如 30 秒一次），确保连接被服务器和网络设备视为 “活跃”，避免被超时关闭。</li>
+<li><code>idleConnectionTimeout</code>：客户端主动关闭空闲超过该时间的连接，需小于网络设备的超时时间（如网络超时 60 秒，则设为 50 秒）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-启用-TCP-层的-keepalive-机制"><a href="#4-启用-TCP-层的-keepalive-机制" class="headerlink" title="4. 启用 TCP 层的 keepalive 机制"></a>4. <strong>启用 TCP 层的 keepalive 机制</strong></h4><p>通过操作系统配置 TCP 保活机制，底层检测并维持连接：</p>
+<ul>
+<li><p><strong>Linux 服务器（客户端所在机器）</strong>：</p>
+<p>bash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 临时生效</span></span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/tcp_keepalive_time  <span class="comment"># 连接空闲多久后发送第一个保活包（秒，默认 7200）</span></span><br><span class="line"><span class="built_in">echo</span> 5 &gt; /proc/sys/net/ipv4/tcp_keepalive_intvl  <span class="comment"># 保活包重发间隔（秒，默认 75）</span></span><br><span class="line"><span class="built_in">echo</span> 3 &gt; /proc/sys/net/ipv4/tcp_keepalive_probes  <span class="comment"># 未收到响应时，重试发送保活包的次数（默认 9）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 长期生效（修改 /etc/sysctl.conf）</span></span><br><span class="line">net.ipv4.tcp_keepalive_time = 600</span><br><span class="line">net.ipv4.tcp_keepalive_intvl = 10</span><br><span class="line">net.ipv4.tcp_keepalive_probes = 3</span><br><span class="line"><span class="comment"># 生效配置</span></span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+
+<p>建议将 <code>tcp_keepalive_time</code> 设为 600 秒（10 分钟），确保在网络超时前触发保活检测。</p>
+</li>
+</ul>
+<h4 id="5-检查-Redis-服务器稳定性"><a href="#5-检查-Redis-服务器稳定性" class="headerlink" title="5. 检查 Redis 服务器稳定性"></a>5. <strong>检查 Redis 服务器稳定性</strong></h4><ul>
+<li><p>查看 Redis 服务器日志（通常在 <code>redis.conf</code> 中配置的 <code>logfile</code> 路径），确认是否有内存溢出（<code>OOM</code>）、崩溃重启等记录。</p>
+</li>
+<li><p>监控 Redis 服务器的资源使用：</p>
+<p>bash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看内存使用</span></span><br><span class="line">redis-cli info memory | grep used_memory_human</span><br><span class="line"><span class="comment"># 查看连接数</span></span><br><span class="line">redis-cli info clients | grep connected_clients</span><br></pre></td></tr></table></figure>
+
+<p>若服务器频繁重启或内存不足，需扩容资源或优化 Redis 内存配置（如 <code>maxmemory-policy</code>）。</p>
+</li>
+</ul>
+<h3 id="三、临时排查手段"><a href="#三、临时排查手段" class="headerlink" title="三、临时排查手段"></a><strong>三、临时排查手段</strong></h3><ol>
+<li><p><strong>抓包分析</strong>：在客户端机器使用 <code>tcpdump</code> 抓取与 Redis 服务器的通信包，确认连接关闭的发起方（客户端 &#x2F; 服务器 &#x2F; 中间设备）：</p>
+<p>bash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i any host 172.16.16.33 and port 7073 -w redis_packet.pcap</span><br></pre></td></tr></table></figure>
+
+<p>通过 Wireshark 分析 <code>pcap</code> 文件，若看到 <code>FIN</code> 或 <code>RST</code> 包来自服务器 IP，则说明服务器主动关闭。</p>
+</li>
+<li><p><strong>测试连接稳定性</strong>：使用 <code>telnet</code> 或 <code>nc</code> 模拟长连接，观察是否会被断开：</p>
+<p>bash</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">telnet 172.16.16.33 7073</span><br><span class="line"><span class="comment"># 保持连接，观察是否会自动断开</span></span><br></pre></td></tr></table></figure>
+
+<p>若一段时间后断开，说明网络层或服务器有超时策略。</p>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>该错误的核心解决思路是：<strong>通过心跳机制维持连接活跃性 + 调整服务器 &#x2F; 网络的超时配置 + 启用自动重连</strong>。优先检查 Redis 的 <code>timeout</code> 配置和网络设备的超时策略，再通过 Redisson 的 <code>pingConnectionInterval</code> 发送心跳，基本可解决大部分 “远程主机关闭连接” 问题。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/bc9d/" rel="prev" title="Windows服务器后台启动jar包">
+      <i class="fa fa-chevron-left"></i> Windows服务器后台启动jar包
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">一、核心原因分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%88%E6%8C%89%E4%BC%98%E5%85%88%E7%BA%A7%E6%8E%92%E5%BA%8F%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">二、解决方法（按优先级排序）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A3%80%E6%9F%A5%E5%B9%B6%E8%B0%83%E6%95%B4-Redis-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E8%B6%85%E6%97%B6%E9%85%8D%E7%BD%AE"><span class="nav-number">3.1.</span> <span class="nav-text">1. 检查并调整 Redis 服务器的超时配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%8E%92%E6%9F%A5%E4%B8%AD%E9%97%B4%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E7%9A%84%E8%B6%85%E6%97%B6%E7%AD%96%E7%95%A5"><span class="nav-number">3.2.</span> <span class="nav-text">2. 排查中间网络设备的超时策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE-Redisson-%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%BF%83%E8%B7%B3%E4%B8%8E%E9%87%8D%E8%BF%9E%E6%9C%BA%E5%88%B6"><span class="nav-number">3.3.</span> <span class="nav-text">3. 配置 Redisson 客户端的心跳与重连机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%90%AF%E7%94%A8-TCP-%E5%B1%82%E7%9A%84-keepalive-%E6%9C%BA%E5%88%B6"><span class="nav-number">3.4.</span> <span class="nav-text">4. 启用 TCP 层的 keepalive 机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%A3%80%E6%9F%A5-Redis-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">3.5.</span> <span class="nav-text">5. 检查 Redis 服务器稳定性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%B4%E6%97%B6%E6%8E%92%E6%9F%A5%E6%89%8B%E6%AE%B5"><span class="nav-number">4.</span> <span class="nav-text">三、临时排查手段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">460</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">78</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">293k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:45</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
