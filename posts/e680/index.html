@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="将短信发送的异步回调接口改为同步接口，核心思路是：发起短信请求后，在后端服务内阻塞等待回调通知，直到超时或收到明确结果。以下是具体实现方案、代码示例和注意事项。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将异步接口转成同步接口">
+<meta property="og:url" content="http://example.com/posts/e680/index.html">
+<meta property="og:site_name" content="Jlin&#39;s Blog">
+<meta property="og:description" content="将短信发送的异步回调接口改为同步接口，核心思路是：发起短信请求后，在后端服务内阻塞等待回调通知，直到超时或收到明确结果。以下是具体实现方案、代码示例和注意事项。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-25T09:03:38.000Z">
+<meta property="article:modified_time" content="2025-11-25T09:05:13.352Z">
+<meta property="article:author" content="林剑">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/posts/e680/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>将异步接口转成同步接口 | Jlin's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jlin's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">林剑的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/e680/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林剑">
+      <meta itemprop="description" content="一生两人，三餐四季，尝天下珍馐，与君相伴至白首">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jlin's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          将异步接口转成同步接口
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-11-25 17:03:38 / 修改时间：17:05:13" itemprop="dateCreated datePublished" datetime="2025-11-25T17:03:38+08:00">2025-11-25</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>将短信发送的异步回调接口改为同步接口，核心思路是：<strong>发起短信请求后，在后端服务内阻塞等待回调通知，直到超时或收到明确结果</strong>。以下是具体实现方案、代码示例和注意事项。</p>
+<span id="more"></span>
+
+<h3 id="一、核心原理"><a href="#一、核心原理" class="headerlink" title="一、核心原理"></a>一、核心原理</h3><ol>
+<li><strong>异步转同步的核心</strong>：用「阻塞等待 + 回调通知」替代直接返回。发起短信后，主线程阻塞，直到收到回调（成功 &#x2F; 失败）或超时。</li>
+<li><strong>关键依赖</strong>：需要一个「线程安全的临时存储」（如 Redis、内存缓存）和「阻塞工具」（如 <code>CountDownLatch</code>、<code>FutureTask</code>）。</li>
+<li><strong>流程拆解</strong>：<ul>
+<li>生成唯一请求 ID（如 UUID），作为短信发送的唯一标识。</li>
+<li>发起短信请求时，将请求 ID 与阻塞工具关联，存入临时存储。</li>
+<li>主线程阻塞等待结果。</li>
+<li>短信平台回调时，根据请求 ID 找到对应的阻塞工具，唤醒主线程并返回结果。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、方案选择（按推荐优先级排序）"><a href="#二、方案选择（按推荐优先级排序）" class="headerlink" title="二、方案选择（按推荐优先级排序）"></a>二、方案选择（按推荐优先级排序）</h3><h4 id="方案-1：Redis-CountDownLatch（分布式场景首选）"><a href="#方案-1：Redis-CountDownLatch（分布式场景首选）" class="headerlink" title="方案 1：Redis + CountDownLatch（分布式场景首选）"></a>方案 1：Redis + CountDownLatch（分布式场景首选）</h4><ul>
+<li><strong>适用场景</strong>：微服务、多实例部署（需跨进程共享状态）。</li>
+<li><strong>优势</strong>：分布式兼容、高可用、支持超时控制。</li>
+<li><strong>依赖</strong>：Redis（存储请求状态）、Spring Boot（示例用，其他框架同理）。</li>
+</ul>
+<h4 id="方案-2：内存缓存-FutureTask（单实例场景）"><a href="#方案-2：内存缓存-FutureTask（单实例场景）" class="headerlink" title="方案 2：内存缓存 + FutureTask（单实例场景）"></a>方案 2：内存缓存 + FutureTask（单实例场景）</h4><ul>
+<li><strong>适用场景</strong>：单服务实例、低并发（无需跨进程）。</li>
+<li><strong>优势</strong>：无外部依赖、性能高。</li>
+<li><strong>劣势</strong>：服务重启后状态丢失，不支持分布式。</li>
+</ul>
+<h3 id="三、方案-1：Redis-CountDownLatch（分布式场景）"><a href="#三、方案-1：Redis-CountDownLatch（分布式场景）" class="headerlink" title="三、方案 1：Redis + CountDownLatch（分布式场景）"></a>三、方案 1：Redis + CountDownLatch（分布式场景）</h3><h4 id="1-架构设计"><a href="#1-架构设计" class="headerlink" title="1. 架构设计"></a>1. 架构设计</h4><table>
+<thead>
+<tr>
+<th>组件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>业务服务</td>
+<td>发起短信请求、阻塞等待、接收回调</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>存储请求状态（等待 &#x2F; 成功 &#x2F; 失败）、阻塞标识</td>
+</tr>
+<tr>
+<td>短信平台</td>
+<td>发送短信、触发回调</td>
+</tr>
+<tr>
+<td>CountDownLatch</td>
+<td>主线程阻塞工具（计数为 1，回调后减 1）</td>
+</tr>
+</tbody></table>
+<h4 id="2-核心步骤"><a href="#2-核心步骤" class="headerlink" title="2. 核心步骤"></a>2. 核心步骤</h4><h5 id="步骤-1：生成唯一请求-ID"><a href="#步骤-1：生成唯一请求-ID" class="headerlink" title="步骤 1：生成唯一请求 ID"></a>步骤 1：生成唯一请求 ID</h5><p>用 UUID 作为短信请求的唯一标识，贯穿整个流程。</p>
+<h5 id="步骤-2：发起短信请求并阻塞"><a href="#步骤-2：发起短信请求并阻塞" class="headerlink" title="步骤 2：发起短信请求并阻塞"></a>步骤 2：发起短信请求并阻塞</h5><ul>
+<li>调用短信平台 API，传入请求 ID（作为回调参数）。</li>
+<li>用 <code>CountDownLatch</code> 阻塞主线程，等待回调通知。</li>
+<li>同时设置 Redis 键值对，记录请求状态（如 <code>sms:status:&#123;requestId&#125;</code> &#x3D; “WAITING”）。</li>
+</ul>
+<h5 id="步骤-3：处理短信平台回调"><a href="#步骤-3：处理短信平台回调" class="headerlink" title="步骤 3：处理短信平台回调"></a>步骤 3：处理短信平台回调</h5><ul>
+<li>短信平台触发回调接口，携带请求 ID 和送达状态（成功 &#x2F; 失败）。</li>
+<li>回调接口更新 Redis 状态（如 <code>sms:status:&#123;requestId&#125;</code> &#x3D; “SUCCESS”）。</li>
+<li>调用 <code>CountDownLatch.countDown()</code>，唤醒阻塞的主线程。</li>
+</ul>
+<h5 id="步骤-4：主线程获取结果"><a href="#步骤-4：主线程获取结果" class="headerlink" title="步骤 4：主线程获取结果"></a>步骤 4：主线程获取结果</h5><ul>
+<li>主线程被唤醒后，从 Redis 读取最终状态，返回给前端。</li>
+<li>超时未收到回调时，返回 “短信发送中，请稍后查询” 或 “发送超时”。</li>
+</ul>
+<h4 id="3-代码实现（Spring-Boot-示例）"><a href="#3-代码实现（Spring-Boot-示例）" class="headerlink" title="3. 代码实现（Spring Boot 示例）"></a>3. 代码实现（Spring Boot 示例）</h4><h5 id="3-1-依赖配置（pom-xml）"><a href="#3-1-依赖配置（pom-xml）" class="headerlink" title="3.1 依赖配置（pom.xml）"></a>3.1 依赖配置（pom.xml）</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Redis 依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 短信 SDK（以阿里云为例） --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.aliyun<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>dysmsapi20170525<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.24<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-2-Redis-配置（application-yml）"><a href="#3-2-Redis-配置（application-yml）" class="headerlink" title="3.2 Redis 配置（application.yml）"></a>3.2 Redis 配置（application.yml）</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">your-redis-password</span></span><br><span class="line">    <span class="attr">timeout:</span> <span class="number">3000</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-3-核心服务类（SmsService）"><a href="#3-3-核心服务类（SmsService）" class="headerlink" title="3.3 核心服务类（SmsService）"></a>3.3 核心服务类（SmsService）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"><span class="keyword">import</span> com.aliyun.dysmsapi20170525.Client;</span><br><span class="line"><span class="keyword">import</span> com.aliyun.dysmsapi20170525.models.SendSmsRequest;</span><br><span class="line"><span class="keyword">import</span> com.aliyun.teaopenapi.models.Config;</span><br><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmsService</span> &#123;</span><br><span class="line">    <span class="comment">// Redis 过期时间（需大于短信平台回调超时时间，如 60 秒）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">REDIS_EXPIRE_SECONDS</span> <span class="operator">=</span> <span class="number">60</span>;</span><br><span class="line">    <span class="comment">// 阻塞超时时间（如 30 秒，避免无限阻塞）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">BLOCK_TIMEOUT_SECONDS</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> StringRedisTemplate redisTemplate;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Client smsClient; <span class="comment">// 阿里云短信客户端（初始化见下文）</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**     * 同步发送短信（阻塞等待结果）     * <span class="doctag">@param</span> phone 手机号     * <span class="doctag">@param</span> templateCode 模板编码     * <span class="doctag">@param</span> templateParam 模板参数（JSON 格式）     * <span class="doctag">@return</span> 发送结果（SUCCESS/FAIL/TIMEOUT）     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sendSmsSync</span><span class="params">(String phone, String templateCode, String templateParam)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 生成唯一请求 ID</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">requestId</span> <span class="operator">=</span> UUID.randomUUID().toString().replace(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">statusKey</span> <span class="operator">=</span> <span class="string">&quot;sms:status:&quot;</span> + requestId;</span><br><span class="line">        <span class="type">String</span> <span class="variable">latchKey</span> <span class="operator">=</span> <span class="string">&quot;sms:latch:&quot;</span> + requestId;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 2. 初始化 CountDownLatch（计数 1）</span></span><br><span class="line">            <span class="type">CountDownLatch</span> <span class="variable">latch</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CountDownLatch</span>(<span class="number">1</span>);</span><br><span class="line">            <span class="comment">// 3. 存入 Redis（状态：等待，阻塞工具）</span></span><br><span class="line">            redisTemplate.opsForValue().set(statusKey, <span class="string">&quot;WAITING&quot;</span>, REDIS_EXPIRE_SECONDS, TimeUnit.SECONDS);</span><br><span class="line">            redisTemplate.opsForValue().set(latchKey, latch.toString(), REDIS_EXPIRE_SECONDS, TimeUnit.SECONDS); <span class="comment">// 实际项目中需序列化存储</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 4. 发起短信请求（传入 requestId 作为回调参数）</span></span><br><span class="line">            <span class="type">SendSmsRequest</span> <span class="variable">smsRequest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SendSmsRequest</span>()</span><br><span class="line">                    .setPhoneNumbers(phone)</span><br><span class="line">                    .setTemplateCode(templateCode)</span><br><span class="line">                    .setTemplateParam(templateParam)</span><br><span class="line">                    .setOutId(requestId); <span class="comment">// 短信平台回调时会返回该参数</span></span><br><span class="line">            smsClient.sendSms(smsRequest);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 5. 阻塞等待回调（超时时间 30 秒）</span></span><br><span class="line">            <span class="type">boolean</span> <span class="variable">isSuccess</span> <span class="operator">=</span> latch.await(BLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);</span><br><span class="line">            <span class="keyword">if</span> (!isSuccess) &#123;</span><br><span class="line">                <span class="comment">// 超时未收到回调</span></span><br><span class="line">                redisTemplate.opsForValue().set(statusKey, <span class="string">&quot;TIMEOUT&quot;</span>, REDIS_EXPIRE_SECONDS, TimeUnit.SECONDS);</span><br><span class="line">                <span class="keyword">return</span> <span class="string">&quot;TIMEOUT&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 6. 从 Redis 获取最终状态</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">finalStatus</span> <span class="operator">=</span> redisTemplate.opsForValue().get(statusKey);</span><br><span class="line">            <span class="keyword">return</span> finalStatus != <span class="literal">null</span> ? finalStatus : <span class="string">&quot;UNKNOWN&quot;</span>;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// 异常处理（如短信平台调用失败）</span></span><br><span class="line">            redisTemplate.opsForValue().set(statusKey, <span class="string">&quot;FAIL&quot;</span>, REDIS_EXPIRE_SECONDS, TimeUnit.SECONDS);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;FAIL&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">// 7. 清理 Redis 键（可选，避免占用空间）</span></span><br><span class="line">            redisTemplate.delete(statusKey);</span><br><span class="line">            redisTemplate.delete(latchKey);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**     * 短信平台回调接口（需暴露给外网）     * <span class="doctag">@param</span> requestId 唯一请求 ID     * <span class="doctag">@param</span> status 送达状态（SUCCESS/FAIL）     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleSmsCallback</span><span class="params">(String requestId, String status)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">statusKey</span> <span class="operator">=</span> <span class="string">&quot;sms:status:&quot;</span> + requestId;</span><br><span class="line">        <span class="type">String</span> <span class="variable">latchKey</span> <span class="operator">=</span> <span class="string">&quot;sms:latch:&quot;</span> + requestId;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 1. 更新 Redis 状态</span></span><br><span class="line">            redisTemplate.opsForValue().set(statusKey, status, REDIS_EXPIRE_SECONDS, TimeUnit.SECONDS);</span><br><span class="line">            <span class="comment">// 2. 获取 CountDownLatch 并唤醒主线程</span></span><br><span class="line">            <span class="type">CountDownLatch</span> <span class="variable">latch</span> <span class="operator">=</span> (CountDownLatch) redisTemplate.opsForValue().get(latchKey); <span class="comment">// 实际项目中需反序列化</span></span><br><span class="line">            <span class="keyword">if</span> (latch != <span class="literal">null</span>) &#123;</span><br><span class="line">                latch.countDown();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// 回调异常处理（如日志记录）</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**     * 初始化阿里云短信客户端（示例）     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Client <span class="title function_">createSmsClient</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">Config</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Config</span>()</span><br><span class="line">                .setAccessKeyId(<span class="string">&quot;your-access-key-id&quot;</span>)</span><br><span class="line">                .setAccessKeySecret(<span class="string">&quot;your-access-key-secret&quot;</span>);</span><br><span class="line">        config.endpoint = <span class="string">&quot;dysmsapi.aliyuncs.com&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Client</span>(config);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-4-控制器（暴露接口）"><a href="#3-4-控制器（暴露接口）" class="headerlink" title="3.4 控制器（暴露接口）"></a>3.4 控制器（暴露接口）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/sms&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmsController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SmsService smsService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**     * 同步发送短信接口（供前端调用）     */</span></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/send&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sendSms</span><span class="params">(<span class="meta">@RequestParam</span> String phone,</span></span><br><span class="line"><span class="params">                          <span class="meta">@RequestParam</span> String templateCode,</span></span><br><span class="line"><span class="params">                          <span class="meta">@RequestParam</span> String templateParam)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> smsService.sendSmsSync(phone, templateCode, templateParam);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**     * 短信平台回调接口（需配置到短信平台）     */</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/callback&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">handleCallback</span><span class="params">(<span class="meta">@RequestParam</span> String outId, // 对应发送时的 outId（requestId）</span></span><br><span class="line"><span class="params">                                 <span class="meta">@RequestParam</span> String status)</span> &#123; <span class="comment">// 短信平台返回的状态（如 DELIVERED/SUCCESS）</span></span><br><span class="line">        <span class="comment">// 转换状态（根据短信平台文档映射）</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">finalStatus</span> <span class="operator">=</span> <span class="string">&quot;DELIVERED&quot;</span>.equals(status) ? <span class="string">&quot;SUCCESS&quot;</span> : <span class="string">&quot;FAIL&quot;</span>;</span><br><span class="line">        smsService.handleSmsCallback(outId, finalStatus);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、方案-2：内存缓存-FutureTask（单实例场景）"><a href="#四、方案-2：内存缓存-FutureTask（单实例场景）" class="headerlink" title="四、方案 2：内存缓存 + FutureTask（单实例场景）"></a>四、方案 2：内存缓存 + FutureTask（单实例场景）</h3><h4 id="1-核心思路"><a href="#1-核心思路" class="headerlink" title="1. 核心思路"></a>1. 核心思路</h4><p>用 <code>ConcurrentHashMap</code> 存储 <code>FutureTask</code>（线程安全的异步任务结果），发起短信后阻塞等待 <code>FutureTask</code> 的结果，回调时设置结果并唤醒线程。</p>
+<h4 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2. 代码实现"></a>2. 代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmsService</span> &#123;</span><br><span class="line">    <span class="comment">// 线程安全的内存缓存（存储 requestId -&gt; FutureTask）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, FutureTask&lt;String&gt;&gt; taskCache = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// 线程池（处理短信发送异步任务，可选）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">ExecutorService</span> <span class="variable">executor</span> <span class="operator">=</span> Executors.newFixedThreadPool(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**     * 同步发送短信     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sendSmsSync</span><span class="params">(String phone, String templateCode, String templateParam)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">requestId</span> <span class="operator">=</span> UUID.randomUUID().toString();</span><br><span class="line">        <span class="comment">// 创建 FutureTask（用于存储结果和阻塞）</span></span><br><span class="line">        FutureTask&lt;String&gt; futureTask = <span class="keyword">new</span> <span class="title class_">FutureTask</span>&lt;&gt;(() -&gt; &#123;</span><br><span class="line">            <span class="comment">// 这里是耗时操作（发起短信请求），实际可放在线程池执行</span></span><br><span class="line">            sendSmsAsync(phone, templateCode, templateParam, requestId);</span><br><span class="line">            <span class="comment">// 阻塞等待回调设置结果（无超时，需在回调中唤醒）</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 存入缓存</span></span><br><span class="line">        taskCache.put(requestId, futureTask);</span><br><span class="line">        <span class="comment">// 提交任务（或直接执行）</span></span><br><span class="line">        executor.submit(futureTask);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 阻塞等待结果（超时时间 30 秒）</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> futureTask.get(<span class="number">30</span>, TimeUnit.SECONDS);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (TimeoutException e) &#123;</span><br><span class="line">            taskCache.remove(requestId);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;TIMEOUT&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**     * 异步发起短信请求（实际调用短信平台）     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">sendSmsAsync</span><span class="params">(String phone, String templateCode, String templateParam, String requestId)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 调用短信平台 API（传入 requestId 作为回调参数）</span></span><br><span class="line">            <span class="comment">// 示例：smsClient.sendSms(...)</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// 异常时设置失败结果</span></span><br><span class="line">            FutureTask&lt;String&gt; futureTask = taskCache.get(requestId);</span><br><span class="line">            <span class="keyword">if</span> (futureTask != <span class="literal">null</span> &amp;&amp; !futureTask.isDone()) &#123;</span><br><span class="line">                futureTask.setException(e);</span><br><span class="line">            &#125;</span><br><span class="line">            taskCache.remove(requestId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**     * 回调接口处理     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleSmsCallback</span><span class="params">(String requestId, String status)</span> &#123;</span><br><span class="line">        FutureTask&lt;String&gt; futureTask = taskCache.get(requestId);</span><br><span class="line">        <span class="keyword">if</span> (futureTask != <span class="literal">null</span> &amp;&amp; !futureTask.isDone()) &#123;</span><br><span class="line">            <span class="comment">// 设置结果（唤醒阻塞的主线程）</span></span><br><span class="line">            futureTask.set(status);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 清理缓存</span></span><br><span class="line">        taskCache.remove(requestId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、关键注意事项"><a href="#五、关键注意事项" class="headerlink" title="五、关键注意事项"></a>五、关键注意事项</h3><ol>
+<li><strong>超时控制</strong>：必须设置阻塞超时（如 30 秒），避免主线程无限阻塞导致服务雪崩。</li>
+<li><strong>幂等性处理</strong>：短信平台可能重复回调（如网络重试），需确保回调接口幂等（多次调用不影响结果）。</li>
+<li><strong>分布式场景</strong>：单实例方案不支持多服务部署（缓存无法共享），必须用 Redis 等分布式存储。</li>
+<li><strong>异常处理</strong>：<ul>
+<li>短信平台调用失败（如参数错误、余额不足）：直接返回失败，无需阻塞。</li>
+<li>回调接口异常（如 Redis 宕机）：记录日志，后续通过定时任务查询短信状态（补偿机制）。</li>
+</ul>
+</li>
+<li><strong>性能优化</strong>：<ul>
+<li>高并发场景下，阻塞线程会占用资源，建议控制并发数（如用 <code>Semaphore</code> 限流）。</li>
+<li>Redis 操作尽量用 <code>pipeline</code> 或批量命令，减少网络开销。</li>
+</ul>
+</li>
+<li><strong>状态补偿</strong>：对于超时的请求，可通过定时任务查询短信平台的最终状态（如调用短信平台的 “查询短信状态” API），避免结果丢失。</li>
+</ol>
+<h3 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h3><ul>
+<li><strong>分布式场景</strong>：优先选择「Redis + CountDownLatch」，支持高可用和跨进程共享。</li>
+<li><strong>单实例场景</strong>：用「内存缓存 + FutureTask」，简单高效但不支持分布式。</li>
+<li><strong>核心保障</strong>：超时控制、幂等性、异常补偿是确保系统稳定的关键。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/3f2f/" rel="prev" title="Redis远程主机强迫关闭了一个现有的连接">
+      <i class="fa fa-chevron-left"></i> Redis远程主机强迫关闭了一个现有的连接
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">一、核心原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%96%B9%E6%A1%88%E9%80%89%E6%8B%A9%EF%BC%88%E6%8C%89%E6%8E%A8%E8%8D%90%E4%BC%98%E5%85%88%E7%BA%A7%E6%8E%92%E5%BA%8F%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">二、方案选择（按推荐优先级排序）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%A1%88-1%EF%BC%9ARedis-CountDownLatch%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E5%9C%BA%E6%99%AF%E9%A6%96%E9%80%89%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">方案 1：Redis + CountDownLatch（分布式场景首选）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%A1%88-2%EF%BC%9A%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98-FutureTask%EF%BC%88%E5%8D%95%E5%AE%9E%E4%BE%8B%E5%9C%BA%E6%99%AF%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">方案 2：内存缓存 + FutureTask（单实例场景）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%96%B9%E6%A1%88-1%EF%BC%9ARedis-CountDownLatch%EF%BC%88%E5%88%86%E5%B8%83%E5%BC%8F%E5%9C%BA%E6%99%AF%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">三、方案 1：Redis + CountDownLatch（分布式场景）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.1.</span> <span class="nav-text">1. 架构设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.2.</span> <span class="nav-text">2. 核心步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-1%EF%BC%9A%E7%94%9F%E6%88%90%E5%94%AF%E4%B8%80%E8%AF%B7%E6%B1%82-ID"><span class="nav-number">3.2.1.</span> <span class="nav-text">步骤 1：生成唯一请求 ID</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-2%EF%BC%9A%E5%8F%91%E8%B5%B7%E7%9F%AD%E4%BF%A1%E8%AF%B7%E6%B1%82%E5%B9%B6%E9%98%BB%E5%A1%9E"><span class="nav-number">3.2.2.</span> <span class="nav-text">步骤 2：发起短信请求并阻塞</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-3%EF%BC%9A%E5%A4%84%E7%90%86%E7%9F%AD%E4%BF%A1%E5%B9%B3%E5%8F%B0%E5%9B%9E%E8%B0%83"><span class="nav-number">3.2.3.</span> <span class="nav-text">步骤 3：处理短信平台回调</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-4%EF%BC%9A%E4%B8%BB%E7%BA%BF%E7%A8%8B%E8%8E%B7%E5%8F%96%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.4.</span> <span class="nav-text">步骤 4：主线程获取结果</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%88Spring-Boot-%E7%A4%BA%E4%BE%8B%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">3. 代码实现（Spring Boot 示例）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-%E4%BE%9D%E8%B5%96%E9%85%8D%E7%BD%AE%EF%BC%88pom-xml%EF%BC%89"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.1 依赖配置（pom.xml）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-Redis-%E9%85%8D%E7%BD%AE%EF%BC%88application-yml%EF%BC%89"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.2 Redis 配置（application.yml）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-%E6%A0%B8%E5%BF%83%E6%9C%8D%E5%8A%A1%E7%B1%BB%EF%BC%88SmsService%EF%BC%89"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.3 核心服务类（SmsService）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%88%E6%9A%B4%E9%9C%B2%E6%8E%A5%E5%8F%A3%EF%BC%89"><span class="nav-number">3.3.4.</span> <span class="nav-text">3.4 控制器（暴露接口）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%96%B9%E6%A1%88-2%EF%BC%9A%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98-FutureTask%EF%BC%88%E5%8D%95%E5%AE%9E%E4%BE%8B%E5%9C%BA%E6%99%AF%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">四、方案 2：内存缓存 + FutureTask（单实例场景）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A0%B8%E5%BF%83%E6%80%9D%E8%B7%AF"><span class="nav-number">4.1.</span> <span class="nav-text">1. 核心思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.2.</span> <span class="nav-text">2. 代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%85%B3%E9%94%AE%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">5.</span> <span class="nav-text">五、关键注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">六、总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林剑</p>
+  <div class="site-description" itemprop="description">一生两人，三餐四季，尝天下珍馐，与君相伴至白首</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">461</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">78</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林剑</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">295k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:53</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
